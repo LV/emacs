@@ -7,9 +7,9 @@
 
 (setq visible-bell t)               ; Set up the visible bell
 
-(set-face-attribute 'default nil :font "Inconsolata" :height 280)
+(set-face-attribute 'default nil :font "Inconsolata" :height 200)
 
-(load-theme 'tango-dark)
+(load-theme 'misterioso)
 
 ;; Initalize package sources
 (require 'package)
