@@ -13,8 +13,6 @@
     (set-face-attribute 'default nil :font font :height 200)
     (set-face-attribute 'default nil :family alternate-font :height 128 :weight 'normal :width 'normal)))
 
-(load-theme 'misterioso)
-
 ;; Initalize package sources
 (require 'package)
 
@@ -43,6 +41,9 @@
                 shell-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(use-package doom-themes)
+(load-theme 'doom-acario-dark t)
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
