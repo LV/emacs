@@ -85,6 +85,12 @@
   :config
   (ivy-mode 1))
 
+;; NOTE: The first time you load this configuration into a new machine,
+;; you'll need to run the following command interactively so that the
+;; mode line icons display correctly:
+;;     `M-x all-the-icons-install-fonts`
+(use-package all-the-icons)
+
 ;; Specifies what the keyboard shortcut of a typed command is (if any)
 ;; Ex: `M-x ^kill-buffer` --> "kill-buffer (C-x k)"
 (use-package ivy-rich
@@ -127,7 +133,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(doom-modeline use-package evil counsel)))
+ '(package-selected-packages '(all-the-icons doom-modeline use-package evil counsel)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
