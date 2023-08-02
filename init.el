@@ -1,4 +1,4 @@
-(setq inhibit-startup-message t)    ; Disabale st artup page
+(setq inhibit-startup-message t)    ; Disable startup page
 
 (scroll-bar-mode -1)                ; Disable visible scrollbar
 (tool-bar-mode -1)                  ; Disable tooltips
