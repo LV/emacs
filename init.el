@@ -72,6 +72,11 @@
   :config
   (ivy-mode 1))
 
+;; Specifies what the keyboard shortcut of a typed command is (if any)
+;; Ex: `M-x ^kill-buffer` --> "kill-buffer (C-x k)"
+(use-package ivy-rich
+  :init (ivy-rich-mode 1))
+
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
