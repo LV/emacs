@@ -7,7 +7,11 @@
 
 (setq visible-bell t)               ; Set up the visible bell
 
-(set-face-attribute 'default nil :font "Inconsolata" :height 200)
+(let ((font "Inconsolata")
+      (alternate-font "Courier New"))
+  (if (find-font (font-spec :name font))
+    (set-face-attribute 'default nil :font font :height 200)
+    (set-face-attribute 'default nil :family alternate-font :height 128 :weight 'normal :width 'normal)))
 
 (load-theme 'misterioso)
 
