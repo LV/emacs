@@ -1,1 +1,1 @@
-; My Emacs config
+(setq inhibit-startup-message t)
