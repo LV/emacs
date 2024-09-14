@@ -37,8 +37,15 @@
 
 ;; Vim Mode
 (use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1))
 
-;; Git Porcelain
-(use-package magit)
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
