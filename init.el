@@ -15,6 +15,8 @@
 
 (load-theme 'tango-dark)
 
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
+
 ;; Initialize package sources
 (require 'package)    ; Brings in the package management functions into the environment
 
