@@ -36,8 +36,9 @@
 (setq use-package-always-ensure t)
 
 ;; Vim Mode
-(unless (package-installed-p 'evil)
-  (package-install 'evil))
+(use-package evil
+  :config
+  (evil-mode 1))
 
-(require 'evil)
-(evil-mode 1)
+;; Git Porcelain
+(use-package magit)
