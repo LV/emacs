@@ -11,6 +11,8 @@
                         ;   (e.g. backspacing on the first line of the document, down arrow on last line, etc)
                         ; On MacOS, this makes a large caution triangle which can be very annoying, so perhaps disable if using Mac
 
+(global-display-line-numbers-mode t)  ; Enable line numbers
+
 (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 180)
 
 (load-theme 'tango-dark)
