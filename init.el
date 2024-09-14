@@ -12,3 +12,5 @@
                         ; On MacOS, this makes a large caution triangle which can be very annoying, so perhaps disable if using Mac
 
 (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 180)
+
+(load-theme 'tango-dark)
