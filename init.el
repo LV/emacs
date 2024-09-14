@@ -68,3 +68,9 @@
                ("C-d" . ivy-reverse-i-search-kill)))
   :config
   (ivy-mode 1))
+
+;; Modeline
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1)
+  :custom (doom-modeline-height 15))
