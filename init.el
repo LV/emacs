@@ -2,3 +2,4 @@
 
 (scroll-bar-mode -1) ; Disable visible scrollbar
 (tool-bar-mode -1)   ; Disable toolbar
+(tooltip-mode -1)    ; Disable tooltips
