@@ -24,6 +24,7 @@
 (load-theme 'tango-dark)
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
+(global-set-key (kbd "C-M-j") 'counsel-switch-buffer)    ; Prompt menu to switch buffer
 
 ;; Initialize package sources
 (require 'package)    ; Brings in the package management functions into the environment
@@ -123,3 +124,32 @@
 ;; NOTE: The first time you load this config onto a new machine, you'll need to run the following:
 ;; M-x all-the-icons-install-fonts
 (use-package all-the-icons)
+
+(use-package general
+  :config
+  (general-evil-setup t)
+
+  (general-create-definer rune/leader-keys
+			  :keymaps '(normal insert visual emacs)
+			  :prefix "SPC"
+			  :global-prefix "C-SPC"))
+(rune/leader-keys
+ "s"  '(swiper :which-key "swiper")
+ "t"  '(:ignore t :which-key "toggles")
+ "tt" '(counsel-load-theme :which-key "choose theme"))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("4990532659bb6a285fee01ede3dfa1b1bdf302c5c3c8de9fad9b6bc63a9252f7" "f64189544da6f16bab285747d04a92bd57c7e7813d8c24c30f382f087d460a33" "8b148cf8154d34917dfc794b5d0fe65f21e9155977a36a5985f89c09a9669aa0" "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69" "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19" "13096a9a6e75c7330c1bc500f30a8f4407bd618431c94aeab55c9855731a95e1" default))
+ '(package-selected-packages
+   '(general doom-themes helpful counsel swiper rainbow-delimiters doom-modeline ivy evil-collection evil)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
