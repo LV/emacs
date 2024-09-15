@@ -94,7 +94,8 @@
   :init (doom-modeline-mode 1)
   :custom (doom-modeline-height 15))
 
-(use-package doom-themes)
+(use-package doom-themes
+  :init (load-theme 'doom-Iosvkem t))
 
 ;; Colorizes parenthesis and braces
 (use-package rainbow-delimiters
