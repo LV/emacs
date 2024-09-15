@@ -163,7 +163,12 @@
   "bs" '(counsel-switch-buffer :which-key "switch")
   "be" '(eval-buffer :which-key "evaluate")
   "f"  '(:ignore f :which-key "file")
-  "fe" '(counsel-find-file :which-key "explorer"))
+  "fe" '(counsel-find-file :which-key "explorer")
+  "w"  '(:ignore w :which-key "window")
+  "wh" '(evil-window-left  :which-key "move left")
+  "wj" '(evil-window-down  :which-key "move down")
+  "wk" '(evil-window-up    :which-key "move up")
+  "wl" '(evil-window-right :which-key "move right"))
 
 (define-key evil-normal-state-map (kbd "/") 'swiper)
 (define-key evil-visual-state-map (kbd "/") 'swiper)
