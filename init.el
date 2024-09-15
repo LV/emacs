@@ -129,14 +129,18 @@
   :config
   (general-evil-setup t)
 
-  (general-create-definer rune/leader-keys
-			  :keymaps '(normal insert visual emacs)
-			  :prefix "SPC"
-			  :global-prefix "C-SPC"))
-(rune/leader-keys
- "s"  '(swiper :which-key "swiper")
- "t"  '(:ignore t :which-key "toggles")
- "tt" '(counsel-load-theme :which-key "choose theme"))
+  (general-create-definer lv/leader-keys
+    :states '(normal visual)
+    :keymaps 'override
+    :prefix "SPC"
+    :global-prefix "C-SPC"))
+(lv/leader-keys
+ "b"  '(:ignore b :which-key "buffer")
+ "bb" '(counsel-switch-buffer :which-key "switch")
+ "be" '(eval-buffer :which-key "evaluate")
+ "f"  '(:ignore f :which-key "file")
+ "fe" '(counsel-find-file :which-key "explorer")
+ "s"  '(swiper :which-key "swiper"))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
