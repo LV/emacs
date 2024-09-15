@@ -11,6 +11,7 @@
                         ;   (e.g. backspacing on the first line of the document, down arrow on last line, etc)
                         ; On MacOS, this makes a large caution triangle which can be very annoying, so perhaps disable if using Mac
 
+(setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode t)  ; Enable line numbers
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
@@ -80,7 +81,14 @@
   :after ivy
   :bind (("C-s" . swiper)))
 
-;; Modeline
+(use-package counsel
+  :after ivy
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x b" . counsel-ibuffer)
+	 ("C-x C-f" . counsel-find-file)
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history)))
+
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
