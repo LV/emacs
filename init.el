@@ -24,7 +24,6 @@
 (load-theme 'tango-dark)
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
-(global-set-key (kbd "C-M-j") 'counsel-switch-buffer)    ; Prompt menu to switch buffer
 
 ;; Initialize package sources
 (require 'package)    ; Brings in the package management functions into the environment
@@ -139,8 +138,10 @@
  "bb" '(counsel-switch-buffer :which-key "switch")
  "be" '(eval-buffer :which-key "evaluate")
  "f"  '(:ignore f :which-key "file")
- "fe" '(counsel-find-file :which-key "explorer")
- "s"  '(swiper :which-key "swiper"))
+ "fe" '(counsel-find-file :which-key "explorer"))
+
+(define-key evil-normal-state-map (kbd "/") 'swiper)
+(define-key evil-visual-state-map (kbd "/") 'swiper)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
