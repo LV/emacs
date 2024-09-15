@@ -162,7 +162,6 @@
   "h"  '(:ignore h :which-key "help")
   "hf" '(counsel-describe-function :which-key "function")
   "hv" '(counsel-describe-variable :which-key "variable")
-  "p"  '(:ignore p :which-key "project")
   "w"  '(:ignore w :which-key "window")
   "wh" '(evil-window-left   :which-key "move left")
   "wj" '(evil-window-down   :which-key "move down")
@@ -171,19 +170,9 @@
   "ws" '(evil-window-split  :which-key "split horizontally")
   "wv" '(evil-window-vsplit :which-key "split vertically"))
 
-;; Additional intelligence for project logic
-(use-package projectile
-  :diminish projectile-mode
-  :config (projectile-mode)
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :init
-  ; (when (file-directory=p "~/Dev")
-  ;   (setq projectile-project-search-path '("~/Dev")))
-  (setq projectile-switch-project-action #'projectile-dired))
-
 ;; Potential packages to consider
 ; - hydra; perform repetitive keybindings much easier
+; - projectile; Additional intelligence for project logic
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -193,7 +182,7 @@
  '(custom-safe-themes
    '("4990532659bb6a285fee01ede3dfa1b1bdf302c5c3c8de9fad9b6bc63a9252f7" "f64189544da6f16bab285747d04a92bd57c7e7813d8c24c30f382f087d460a33" "8b148cf8154d34917dfc794b5d0fe65f21e9155977a36a5985f89c09a9669aa0" "014cb63097fc7dbda3edf53eb09802237961cbb4c9e9abd705f23b86511b0a69" "b5fd9c7429d52190235f2383e47d340d7ff769f141cd8f9e7a4629a81abc6b19" "13096a9a6e75c7330c1bc500f30a8f4407bd618431c94aeab55c9855731a95e1" default))
  '(package-selected-packages
-   '(projectile general doom-themes helpful counsel swiper rainbow-delimiters doom-modeline ivy evil-collection evil)))
+   '(general doom-themes helpful counsel swiper rainbow-delimiters doom-modeline ivy evil-collection evil)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
