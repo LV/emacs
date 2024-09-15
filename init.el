@@ -89,7 +89,7 @@
   :init (which-key-mode)
   :diminish which-key-mode
   :config
-  (setq which-key-idle-delay 0.3))
+  (setq which-key-idle-delay 0.3)) ; seconds
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
