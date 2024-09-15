@@ -91,10 +91,12 @@
   :config
   (ivy-mode 1))
 
+;; Search inside of an existing buffer
 (use-package swiper
   :after ivy
   :bind (("C-s" . swiper)))
 
+;; Additional completion functions based on ivy
 (use-package counsel
   :after ivy
   :bind (("M-x" . counsel-M-x)
@@ -103,11 +105,13 @@
 	 :map minibuffer-local-map
 	 ("C-r" . 'counsel-minibuffer-history)))
 
+;; Information bar at the bottom
 (use-package doom-modeline
   :ensure t
   :init (doom-modeline-mode 1)
   :custom (doom-modeline-height 15))
 
+;; Themes for Emacs
 (use-package doom-themes
   :init (load-theme 'doom-Iosvkem t))
 
@@ -138,6 +142,7 @@
 ;; M-x all-the-icons-install-fonts
 (use-package all-the-icons)
 
+;; Setup keybindings with a leader key
 (use-package general
   :config
   (general-evil-setup t)
@@ -162,6 +167,8 @@
   "ws" '(evil-window-split  :which-key "split horizontally")
   "wv" '(evil-window-vsplit :which-key "split vertically"))
 
+;; Potential packages to consider
+; - hydra; perform repetitive keybindings much easier
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
