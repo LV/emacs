@@ -94,6 +94,8 @@
   :init (doom-modeline-mode 1)
   :custom (doom-modeline-height 15))
 
+(use-package doom-themes)
+
 ;; Colorizes parenthesis and braces
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
