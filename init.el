@@ -160,7 +160,7 @@
 (lv/leader-keys
   ":"  '(counsel-M-x :which-key "M-x")
   "b"  '(:ignore b :which-key "buffer")
-  "bb" '(counsel-switch-buffer :which-key "switch")
+  "bs" '(counsel-switch-buffer :which-key "switch")
   "be" '(eval-buffer :which-key "evaluate")
   "f"  '(:ignore f :which-key "file")
   "fe" '(counsel-find-file :which-key "explorer"))
