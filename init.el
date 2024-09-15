@@ -171,7 +171,9 @@
 
 ;; Potential packages to consider
 ; - hydra; perform repetitive keybindings much easier
+  ; See Emacs From Scratch #3
 ; - projectile; Additional intelligence for project logic
+  ; See Emacs From Scratch #4
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
