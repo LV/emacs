@@ -134,11 +134,12 @@
     :prefix "SPC"
     :global-prefix "C-SPC"))
 (lv/leader-keys
- "b"  '(:ignore b :which-key "buffer")
- "bb" '(counsel-switch-buffer :which-key "switch")
- "be" '(eval-buffer :which-key "evaluate")
- "f"  '(:ignore f :which-key "file")
- "fe" '(counsel-find-file :which-key "explorer"))
+  ":"  '(counsel-M-x :which-key "M-x")
+  "b"  '(:ignore b :which-key "buffer")
+  "bb" '(counsel-switch-buffer :which-key "switch")
+  "be" '(eval-buffer :which-key "evaluate")
+  "f"  '(:ignore f :which-key "file")
+  "fe" '(counsel-find-file :which-key "explorer"))
 
 (define-key evil-normal-state-map (kbd "/") 'swiper)
 (define-key evil-visual-state-map (kbd "/") 'swiper)
