@@ -12,6 +12,11 @@
                         ; On MacOS, this makes a large caution triangle which can be very annoying, so perhaps disable if using Mac
 
 (global-display-line-numbers-mode t)  ; Enable line numbers
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 180)
 
