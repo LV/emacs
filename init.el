@@ -74,7 +74,10 @@
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
-  (evil-set-initial-state 'dashboard-mode 'normal))
+  (evil-set-initial-state 'dashboard-mode 'normal)
+
+  (define-key evil-normal-state-map (kbd "/") 'swiper)
+  (define-key evil-visual-state-map (kbd "/") 'swiper))
 
 (use-package evil-collection
   :after evil
@@ -171,9 +174,6 @@
   "wl" '(evil-window-right  :which-key "move right")
   "ws" '(evil-window-split  :which-key "split horizontally")
   "wv" '(evil-window-vsplit :which-key "split vertically"))
-
-(define-key evil-normal-state-map (kbd "/") 'swiper)
-(define-key evil-visual-state-map (kbd "/") 'swiper)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
