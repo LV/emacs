@@ -175,6 +175,8 @@
 ; - projectile; Additional intelligence for project logic
   ; See Emacs From Scratch #4
 
+(use-package forge)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
