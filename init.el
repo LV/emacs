@@ -75,13 +75,7 @@
 ;; Completion framework
 (use-package ivy
   :diminish
-  :bind (("C-s" . swiper)
-         (:map ivy-minibuffer-map
-	       ("TAB" . ivy-alt-done)
-               ("C-l" . ivy-alt-done)
-               ("C-j" . ivy-next-line)
-               ("C-k" . ivy-previous-line))
-         (:map ivy-switch-buffer-map
+  :bind ((:map ivy-switch-buffer-map
                ("C-k" . ivy-previous-line)
                ("C-l" . ivy-done)
                ("C-d" . ivy-switch-buffer-kill))
@@ -93,17 +87,11 @@
 
 ;; Search inside of an existing buffer
 (use-package swiper
-  :after ivy
-  :bind (("C-s" . swiper)))
+  :after ivy)
 
 ;; Additional completion functions based on ivy
 (use-package counsel
-  :after ivy
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)
-	 :map minibuffer-local-map
-	 ("C-r" . 'counsel-minibuffer-history)))
+  :after ivy)
 
 ;; Information bar at the bottom
 (use-package doom-modeline
@@ -157,6 +145,7 @@
   "b"  '(:ignore b :which-key "buffer")
   "bs" '(counsel-switch-buffer :which-key "switch")
   "be" '(eval-buffer           :which-key "evaluate")
+  ; "bi" '(counsel-ibuffer       :which-key "ibuffer")
   "f"  '(:ignore f :which-key "file")
   "fe" '(counsel-find-file :which-key "explorer")
   "h"  '(:ignore h :which-key "help")
