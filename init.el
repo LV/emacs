@@ -171,9 +171,12 @@
 
 ;; Potential packages to consider
 ; - hydra; perform repetitive keybindings much easier
-  ; See Emacs From Scratch #3
+;     See Emacs From Scratch #3
 ; - projectile; Additional intelligence for project logic
-  ; See Emacs From Scratch #4
+;     See Emacs From Scratch #4
+
+;; TODO Continue with the Emacs from Scratch series
+;    Finish the magit section
 
 (use-package forge)
 
