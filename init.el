@@ -29,8 +29,8 @@
 (require 'package)    ; Brings in the package management functions into the environment
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
+			 ("org"   . "https://orgmode.org/elpa/")
+			 ("elpa"  . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)  ; Initialize the package system and prepares it to be used
 (unless package-archive-contents  ; refresh contents only if packages don't exist
