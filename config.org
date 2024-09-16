@@ -25,7 +25,7 @@
 		  eshell-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-  (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 180)
+  (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 150)
 
   (load-theme 'tango-dark)
 
