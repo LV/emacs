@@ -135,7 +135,11 @@
   ;; NOTE: The first time you load this config onto a new machine, you'll need to run the following:
   ;; M-x all-the-icons-install-fonts
   (use-package all-the-icons)
+#+END_SRC
 
+** Keybindings
+
+#+BEGIN_SRC emacs-lisp
   ;; Setup keybindings with a leader key
   (use-package general
     :config
@@ -146,26 +150,27 @@
       :keymaps 'override
       :prefix "SPC"
       :global-prefix "C-SPC"))
+
   (lv/leader-keys
-    ":"  '(counsel-M-x :which-key "M-x")
-    "b"  '(:ignore b :which-key "buffer")
-    "bs" '(counsel-switch-buffer :which-key "switch")
-    "be" '(eval-buffer           :which-key "evaluate")
-    ; "bi" '(counsel-ibuffer       :which-key "ibuffer")
-    "f"  '(:ignore f :which-key "file")
-    "fe" '(counsel-find-file :which-key "explorer")
-    "g"  '(:ignore g :which-key "git")
-    "gg" '(magit-status :which-key "status")
-    "h"  '(:ignore h :which-key "help")
+    ":"  '(counsel-M-x               :which-key "M-x")
+    "b"  '(:ignore b                 :which-key "buffer")
+    "bs" '(counsel-switch-buffer     :which-key "switch")
+    "be" '(eval-buffer               :which-key "evaluate")
+    ; "bi" '(counsel-ibuffer           :which-key "ibuffer")
+    "f"  '(:ignore f                 :which-key "file")
+    "fe" '(counsel-find-file         :which-key "explorer")
+    "g"  '(:ignore g                 :which-key "git")
+    "gg" '(magit-status              :which-key "status")
+    "h"  '(:ignore h                 :which-key "help")
     "hf" '(counsel-describe-function :which-key "function")
     "hv" '(counsel-describe-variable :which-key "variable")
-    "w"  '(:ignore w :which-key "window")
-    "wh" '(evil-window-left   :which-key "move left")
-    "wj" '(evil-window-down   :which-key "move down")
-    "wk" '(evil-window-up     :which-key "move up")
-    "wl" '(evil-window-right  :which-key "move right")
-    "ws" '(evil-window-split  :which-key "split horizontally")
-    "wv" '(evil-window-vsplit :which-key "split vertically"))
+    "w"  '(:ignore w                 :which-key "window")
+    "wh" '(evil-window-left          :which-key "move left")
+    "wj" '(evil-window-down          :which-key "move down")
+    "wk" '(evil-window-up            :which-key "move up")
+    "wl" '(evil-window-right         :which-key "move right")
+    "ws" '(evil-window-split         :which-key "split horizontally")
+    "wv" '(evil-window-vsplit        :which-key "split vertically"))
 #+END_SRC
 
 ** Git
