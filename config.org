@@ -1,3 +1,7 @@
+#+TITLE: LV's Emacs Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t)
 
