@@ -181,6 +181,10 @@
   (use-package forge)
 #+END_SRC
 
+*** TODO
+- [ ] Make ~<escape>~ key abort (give it the same behavior as ~C-g~) in =magit=
+
+** org-mode
 #+BEGIN_SRC emacs-lisp
   ;; Potential packages to consider
   ; - hydra; perform repetitive keybindings much easier
@@ -192,3 +196,10 @@
   ;    Finish the magit section
   (use-package org)
 #+END_SRC
+
+
+*** TODO
+- [ ] [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][Beautify]]
+- [ ] Add keybindings
+  - Thinking of doing ~<leader> o~
+- [ ] Once cursor is in a link, expand the code to show the ~\[\[link\]\[name\]\]~
