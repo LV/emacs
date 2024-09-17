@@ -19,6 +19,20 @@ You must install the following
   - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
 - [[https://edwardtufte.github.io/et-book/][ET Book]]
 
+  Evaluate the following commands in Emacs
+#+BEGIN_SRC
+  (all-the-icons-install-fonts)
+  (nerd-fonts-install-fonts)
+#+END_SRC
+
+**** Troubleshooting
+***** Windows
+On Windows, you may encounter the fonts not installing and appearing when you launch Emacs
+
+1. Run those commands, you will be prompted to download them into a folder. Create a new folder and download the fonts (by launching these two commands) into this folder.
+2. Manually open each of those fonts in Windows Explorer and install the fonts by clicking on them and installing them.
+
+** Configuration
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t)
 
