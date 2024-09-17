@@ -375,8 +375,6 @@ Automatically render $LaTeX$ fragments in an org document
 #+end_src
 
 *** TODO
-- [ ] Add keybindings
-  - Thinking of doing ~<leader> o~
 - [ ] Once cursor is in a link, expand the code to show the ~\[\[link\]\[name\]\]~
   - Same for everything else, I want ~~~, ~/~, and ~$~ chars to show up when the cursor is inside and in insert mode
     - Same also applies for headings, I want to see the ~*~ chars
