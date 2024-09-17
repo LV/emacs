@@ -54,3 +54,4 @@ forge-database.sqlite
 config.el
 eln-cache/
 custom.el
+ltximg/
