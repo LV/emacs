@@ -367,3 +367,5 @@ Automatically render $LaTeX$ fragments in an org document
     - Same also applies for headings, I want to see the ~*~ chars
 - Make indentation for org documents 2 spaces long
   - Fix indentations inside of code blocks (make them respect the languages inside of the code blocks
+- Make org-mode render fully before being able to edit it
+  - Fixes bug where code-blocks would not render as such until both its ~#+BEGIN_SRC~ and ~#END_SRC~ tags are encountered
