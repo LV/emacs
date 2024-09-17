@@ -28,10 +28,7 @@ You *must* do the following to get the configuration to fully work
 
 **** Troubleshooting
 ***** Windows
-On Windows, you may encounter the fonts not installing and appearing when you launch Emacs
-
-1. Run those commands, you will be prompted to download them into a folder. Create a new folder and download the fonts (by launching these two commands) into this folder.
-2. Manually open each of those fonts in Windows Explorer and install the fonts by clicking on them and installing them.
+Don't use Windows (and if you do, use WSL)
 
 ** Configuration
 #+BEGIN_SRC emacs-lisp
