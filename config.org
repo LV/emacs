@@ -307,14 +307,6 @@ Setting format to empty string ~" "~ gives you top padding. Changing the header 
 #+END_SRC
 
 **** Bullet points
-***** org-bullets
-=org-bullets= replaces headline markers with different unicode bullets
-#+BEGIN_SRC emacs-lisp
-  (use-package org-bullets
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-#+END_SRC
-
 ***** Actual bullet points
 Replace the ~-~ symbol with ~•~
 #+BEGIN_SRC emacs-lisp
@@ -326,11 +318,9 @@ Replace the ~-~ symbol with ~•~
 **** Other tweaks
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t
-        org-bullets-bullet-list '(" ") ;; no bullets, needs org-bullets package
-        org-ellipsis "  " ;; folding symbol
+        org-ellipsis "  " ; folding symbol
         org-pretty-entities t
-        org-hide-emphasis-markers t
-        ;; show actually italicized text instead of /italicized text/
+        org-hide-emphasis-markers nil
         org-agenda-block-separator ""
         org-fontify-whole-heading-line t
         org-fontify-done-headline t
