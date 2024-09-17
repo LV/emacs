@@ -283,7 +283,7 @@ Setting format to empty string ~" "~ gives you top padding. Changing the header 
   (lambda () (progn
     (setq left-margin-width 2)
     (setq right-margin-width 2)
-    (set--window-buffer nil (current-buffer))))
+    (set-window-buffer nil (current-buffer))))
 #+END_SRC
 
 **** Bullet points
