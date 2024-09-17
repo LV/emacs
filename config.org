@@ -363,6 +363,17 @@ Automatically render $LaTeX$ fragments in an org document
   (add-hook 'org-mode-hook (lambda () (hl-line-mode -1)))
 #+END_SRC
 
+**** Hacks
+***** Render the entire document before editing
+#+begin_src emacs-lisp
+  (defun lv-org-render-before-editing () "Render whole Org buffer before editing"
+    (read-only-mode 1)   ; Make the buffer temporarily read-only
+    (font-lock-ensure)   ; Ensure the whole buffer is rendered
+    (read-only-mode -1)) ; Allow editing again
+
+  (add-hook 'org-mode-hook 'lv-org-render-before-editing)
+#+end_src
+
 *** TODO
 - [ ] Add keybindings
   - Thinking of doing ~<leader> o~
@@ -371,5 +382,3 @@ Automatically render $LaTeX$ fragments in an org document
     - Same also applies for headings, I want to see the ~*~ chars
 - Make indentation for org documents 2 spaces long
   - Fix indentations inside of code blocks (make them respect the languages inside of the code blocks
-- Make org-mode render fully before being able to edit it
-  - Fixes bug where code-blocks would not render as such until both its ~#+BEGIN_SRC~ and ~#END_SRC~ tags are encountered
