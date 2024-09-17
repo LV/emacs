@@ -3,16 +3,17 @@
 #+PROPERTY: header-args :tangle yes
 
 ** Pre-requisites
-You must install the following
+You *must* do the following to get the configuration to fully work
 *** Programs
 - Latex
-  - On MacOS, I am using ~mactex-no-gui~
-    - Already includes ~dvipng~
-  - On Linux, try (TODO: verify this is true)
-    - ~texlive-science~ for scientific formulas
-    - ~texlive-science~ for diagrams
-    - ~texlive-bibtex~ for extra bibliography
-- ~dvipng~
+  - On MacOS:
+#+BEGIN_SRC bash :tangle no
+  brew install --cask mactex-no-gui
+#+END_SRC
+    - On Linux:
+#+BEGIN_SRC bash :tangle no
+  sudo apt-get install texlive-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended dvipng
+#+END_SRC
 
 *** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Costs money)
@@ -20,7 +21,7 @@ You must install the following
 - [[https://edwardtufte.github.io/et-book/][ET Book]]
 
   Evaluate the following commands in Emacs
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp :tangle no
   (all-the-icons-install-fonts)
   (nerd-fonts-install-fonts)
 #+END_SRC
