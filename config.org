@@ -16,7 +16,7 @@ You *must* do the following to get the configuration to fully work
 #+END_SRC
 
 *** Fonts
-- [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Costs money)
+- [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
   - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
 - [[https://edwardtufte.github.io/et-book/][ET Book]]
 
@@ -211,9 +211,6 @@ Don't use Windows (and if you do, use WSL)
     "wv" '(evil-window-vsplit            :which-key "split vertically"))
 #+END_SRC
 
-#+begin_src 
-#+end_src
-
 ** Git
 #+BEGIN_SRC emacs-lisp
   ;; Git porcelain
@@ -340,7 +337,7 @@ Replace the ~-~ symbol with ~•~
         org-fontify-quote-and-verse-blocks t)
 #+END_SRC
 
-Automatically render $LaTeX$ fragments in an org document
+***** Automatically render $LaTeX$ fragments
 #+BEGIN_SRC emacs-lisp
   (defun my/org-latex-preview-auto ()
     "Automatically refresh LaTeX fragments in the current buffer."
@@ -365,14 +362,14 @@ Automatically render $LaTeX$ fragments in an org document
 
 **** Hacks
 ***** Render the entire document before editing
-#+begin_src emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (defun lv-org-render-before-editing () "Render whole Org buffer before editing"
     (read-only-mode 1)   ; Make the buffer temporarily read-only
     (font-lock-ensure)   ; Ensure the whole buffer is rendered
     (read-only-mode -1)) ; Allow editing again
 
   (add-hook 'org-mode-hook 'lv-org-render-before-editing)
-#+end_src
+#+END_SRC
 
 *** TODO
 - [ ] Once cursor is in a link, expand the code to show the ~\[\[link\]\[name\]\]~
