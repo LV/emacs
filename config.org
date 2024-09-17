@@ -224,26 +224,27 @@ Use the [[https://edwardtufte.github.io/et-book/][EtBembo]] font
     ;; Set default variable-pitch font to EtBembo
     (set-face-attribute 'variable-pitch nil :family "EtBembo" :height 1.2)
 
-    ;; Customize Org mode faces
-    (custom-theme-set-faces
-     'user
-     ;; Org headings with EtBembo
-     `(org-level-1          ((t (,@variable-tuple :weight bold :height 1.75))))
-     `(org-level-2          ((t (,@variable-tuple :weight bold :height 1.5))))
-     `(org-level-3          ((t (,@variable-tuple :weight bold :height 1.25))))
-     `(org-level-4          ((t (,@variable-tuple :weight bold :height 1.1))))
-     `(org-level-5          ((t (,@variable-tuple :weight bold))))
-     `(org-level-6          ((t (,@variable-tuple :weight bold))))
-     `(org-level-7          ((t (,@variable-tuple :weight bold))))
-     `(org-level-8          ((t (,@variable-tuple :weight bold))))
-     `(org-document-title   ((t (,@variable-tuple :weight bold :height 2.0 :underline nil))))
+    ;; Set the font for Org headings, preserving other properties
+    (dolist (face '((org-level-1 1.75)
+                    (org-level-2 1.5)
+                    (org-level-3 1.25)
+                    (org-level-4 1.1)
+                    (org-level-5 1.0)
+                    (org-level-6 1.0)
+                    (org-level-7 1.0)
+                    (org-level-8 1.0)))
+      (set-face-attribute (car face) nil :family "EtBembo" :height (nth 1 face) :weight 'bold))
 
-     ;; Set code-related faces to use the code font (PragmataPro Mono Liga)
-     `(org-block            ((t (,@code-font))))
-     `(org-block-begin-line ((t (,@code-font))))
-     `(org-block-end-line   ((t (,@code-font))))
-     `(org-code             ((t (,@code-font))))
-     `(org-verbatim         ((t (,@code-font))))))  ; handles ~code~ and =verbatim=
+    ;; Set the document title face
+    (set-face-attribute 'org-document-title nil :family "EtBembo" :height 2.0 :weight 'bold)
+
+    ;; Set the font for code-related faces to use PragmataPro Mono Liga
+    (set-face-attribute 'org-block nil            :family "PragmataPro Mono Liga" :height 0.9)
+    (set-face-attribute 'org-block-begin-line nil :family "PragmataPro Mono Liga" :height 0.9)
+    (set-face-attribute 'org-block-end-line nil   :family "PragmataPro Mono Liga" :height 0.9)
+    (set-face-attribute 'org-code nil             :family "PragmataPro Mono Liga" :height 0.9)
+    (set-face-attribute 'org-verbatim nil         :family "PragmataPro Mono Liga" :height 0.9))
+
 
   (add-hook 'org-mode-hook 'variable-pitch-mode)
 #+END_SRC
