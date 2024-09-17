@@ -181,31 +181,38 @@ Don't use Windows (and if you do, use WSL)
       :global-prefix "C-SPC"))
 
   (lv/leader-keys
-    ":"  '(counsel-M-x               :which-key "M-x")
+    ":"  '(counsel-M-x                   :which-key "M-x")
 
-    "b"  '(:ignore b                 :which-key "buffer")
-    "bs" '(counsel-switch-buffer     :which-key "switch")
-    "be" '(eval-buffer               :which-key "evaluate")
-    ; "bi" '(counsel-ibuffer           :which-key "ibuffer")
+    "b"  '(:ignore b                     :which-key "buffer")
+    "bs" '(counsel-switch-buffer         :which-key "switch")
+    "be" '(eval-buffer                   :which-key "evaluate")
+    ; "bi" '(counsel-ibuffer               :which-key "ibuffer")
 
-    "f"  '(:ignore f                 :which-key "file")
-    "ff" '(counsel-find-file         :which-key "find")
+    "f"  '(:ignore f                     :which-key "file")
+    "ff" '(counsel-find-file             :which-key "find")
 
-    "g"  '(:ignore g                 :which-key "git")
-    "gg" '(magit-status              :which-key "status")
+    "g"  '(:ignore g                     :which-key "git")
+    "gg" '(magit-status                  :which-key "status")
 
-    "h"  '(:ignore h                 :which-key "help")
-    "hf" '(counsel-describe-function :which-key "function")
-    "hv" '(counsel-describe-variable :which-key "variable")
+    "h"  '(:ignore h                     :which-key "help")
+    "hf" '(counsel-describe-function     :which-key "function")
+    "hv" '(counsel-describe-variable     :which-key "variable")
 
-    "w"  '(:ignore w                 :which-key "window")
-    "wh" '(evil-window-left          :which-key "move left")
-    "wj" '(evil-window-down          :which-key "move down")
-    "wk" '(evil-window-up            :which-key "move up")
-    "wl" '(evil-window-right         :which-key "move right")
-    "ws" '(evil-window-split         :which-key "split horizontally")
-    "wv" '(evil-window-vsplit        :which-key "split vertically"))
+    "o"  '(:ignore o                     :which-key "org")
+    ; "oi" '(:ignore oi :which-key "insert")
+    "oi" '(org-insert-structure-template :which-key "insert")
+
+    "w"  '(:ignore w                     :which-key "window")
+    "wh" '(evil-window-left              :which-key "move left")
+    "wj" '(evil-window-down              :which-key "move down")
+    "wk" '(evil-window-up                :which-key "move up")
+    "wl" '(evil-window-right             :which-key "move right")
+    "ws" '(evil-window-split             :which-key "split horizontally")
+    "wv" '(evil-window-vsplit            :which-key "split vertically"))
 #+END_SRC
+
+#+begin_src 
+#+end_src
 
 ** Git
 #+BEGIN_SRC emacs-lisp
