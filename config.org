@@ -18,7 +18,6 @@ You *must* do the following to get the configuration to fully work
 *** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
   - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
-- [[https://edwardtufte.github.io/et-book/][ET Book]]
 
   Evaluate the following commands in Emacs
 #+BEGIN_SRC emacs-lisp :tangle no
@@ -26,23 +25,23 @@ You *must* do the following to get the configuration to fully work
   (nerd-fonts-install-fonts)
 #+END_SRC
 
-**** Troubleshooting
-***** Windows
+*** Troubleshooting
+**** Windows
 Don't use Windows (and if you do, use WSL)
 
-** Configuration
-*** Changing Emacs defaults
+** Changing Emacs defaults
+*** Editor
 **** Startup message
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t)
 #+END_SRC
-**** Backup files
+*** Backup files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
 #+BEGIN_SRC emacs-lisp
   (setq make-backup-files nil)
 #+END_SRC
 
-**** Rest of the config
+*** Rest of the config
 This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config
 #+BEGIN_SRC emacs-lisp
   (scroll-bar-mode -1)    ; Disable visible scrollbar
@@ -178,7 +177,6 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 #+END_SRC
 
 ** Keybindings
-
 #+BEGIN_SRC emacs-lisp
   ;; Setup keybindings with a leader key
   (use-package general
@@ -240,14 +238,6 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 
 ** Org-mode
 #+BEGIN_SRC emacs-lisp
-  ;; Potential packages to consider
-  ; - hydra; perform repetitive keybindings much easier
-  ;     See Emacs From Scratch #3
-  ; - projectile; Additional intelligence for project logic
-  ;     See Emacs From Scratch #4
-
-  ;; TODO Continue with the Emacs from Scratch series
-  ;    Finish the magit section
   (use-package org)
 #+END_SRC
 
