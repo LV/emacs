@@ -2,9 +2,9 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-** Pre-requisites
+* Pre-requisites
 You *must* do the following to get the configuration to fully work
-*** Programs
+** Programs
 - Latex
   - On MacOS:
 #+BEGIN_SRC bash :tangle no
@@ -15,7 +15,7 @@ You *must* do the following to get the configuration to fully work
   sudo apt-get install texlive-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended dvipng
 #+END_SRC
 
-*** Fonts
+** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
   - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
 
@@ -25,23 +25,52 @@ You *must* do the following to get the configuration to fully work
   (nerd-fonts-install-fonts)
 #+END_SRC
 
-*** Troubleshooting
+** Troubleshooting
 **** Windows
 Don't use Windows (and if you do, use WSL)
 
-** Changing Emacs defaults
-*** Editor
-**** Startup message
+* Editor
+** Startup Message
+Start Emacs with a blank buffer instead of the welcome message
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t)
 #+END_SRC
-*** Backup files
+
+** Line Numbers
+*** Relative Line Numbers
+Better for using Vim commands
+#+BEGIN_SRC emacs-lisp
+  (setq display-line-numbers-type 'relative)
+#+END_SRC
+
+*** Enable Line Numbers
+#+BEGIN_SRC emacs-lisp
+  (global-display-line-numbers-mode t)
+#+END_SRC
+
+**** Exceptions
+For some modes, line numbers add noise
+#+BEGIN_SRC emacs-lisp
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+END_SRC
+
+*** Column Number Mode
+Displays the horizontal char position
+#+BEGIN_SRC emacs-lisp
+  (setq column-number-mode t)
+#+END_SRC
+
+* Changing Emacs defaults
+** Backup files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
 #+BEGIN_SRC emacs-lisp
   (setq make-backup-files nil)
 #+END_SRC
 
-*** Rest of the config
+** Rest of the config
 This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config
 #+BEGIN_SRC emacs-lisp
   (scroll-bar-mode -1)    ; Disable visible scrollbar
@@ -54,15 +83,6 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
   (setq visible-bell nil) ; If true, replaces sound bell for visual cue when performing action that can't be done
                           ;   (e.g. backspacing on the first line of the document, down arrow on last line, etc)
                           ; On MacOS, this makes a large caution triangle which can be very annoying, so perhaps disable if using Mac
-
-  (setq display-line-numbers-type 'relative)
-  (global-display-line-numbers-mode t)  ; Enable line numbers
-  (setq column-number-mode t) ; Enable column char number
-  ;; Disable line numbers for some modes
-  (dolist (mode '(org-mode-hook
-                  term-mode-hook
-                  eshell-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
   (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 150)
 
@@ -176,7 +196,7 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
   (use-package all-the-icons)
 #+END_SRC
 
-** Keybindings
+* Keybindings
 #+BEGIN_SRC emacs-lisp
   ;; Setup keybindings with a leader key
   (use-package general
@@ -220,6 +240,7 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
     "wv" '(evil-window-vsplit            :which-key "split vertically"))
 #+END_SRC
 
+* Modules
 ** Git
 #+BEGIN_SRC emacs-lisp
   ;; Git porcelain
@@ -241,20 +262,27 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
   (use-package org)
 #+END_SRC
 
-*** Padding
-**** Line Spacing
+*** Editor
+**** Visibility
+***** Leading Stars
+I like seeing all the stars so I know which indentation level we're at
+#+BEGIN_SRC emacs-lisp
+#+END_SRC
+
+**** Padding
+***** Line Spacing
 Per buffer line spacing can be set using the variable ~line-spacing~. Something like ~0.1~ goes well here.
 #+BEGIN_SRC emacs-lisp
   (setq-default line-spacing 0.1)
 #+END_SRC
 
-**** Top Padding
+***** Top Padding
 Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing
 #+BEGIN_SRC emacs-lisp
   (setq header-line-format " ")
 #+END_SRC
 
-**** Side Padding
+***** Side Padding
 #+BEGIN_SRC emacs-lisp
   (lambda () (progn
     (setq left-margin-width 2)
@@ -321,3 +349,4 @@ Replace the ~-~ symbol with ~•~
     - Same also applies for headings, I want to see the ~*~ chars
 - Make indentation for org documents 2 spaces long
   - Fix indentations inside of code blocks (make them respect the languages inside of the code blocks
+    
