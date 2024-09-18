@@ -31,9 +31,20 @@ You *must* do the following to get the configuration to fully work
 Don't use Windows (and if you do, use WSL)
 
 ** Configuration
+*** Changing Emacs defaults
+**** Startup message
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t)
+#+END_SRC
+**** Backup files
+Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
+#+BEGIN_SRC emacs-lisp
+  (setq make-backup-files nil)
+#+END_SRC
 
+**** Rest of the config
+This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config
+#+BEGIN_SRC emacs-lisp
   (scroll-bar-mode -1)    ; Disable visible scrollbar
   (tool-bar-mode -1)      ; Disable toolbar
   (tooltip-mode -1)       ; Disable tooltips
