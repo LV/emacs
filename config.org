@@ -238,7 +238,7 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 *** TODO
 - [ ] Make ~<escape>~ key abort (give it the same behavior as ~C-g~) in =magit=
 
-** org-mode
+** Org-mode
 #+BEGIN_SRC emacs-lisp
   ;; Potential packages to consider
   ; - hydra; perform repetitive keybindings much easier
@@ -251,65 +251,20 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
   (use-package org)
 #+END_SRC
 
-*** Beautifying Org-mode
-Special thanks to [[https://zzamboni.org/post/beautifying-org-mode-in-emacs/][zzamboni]]'s and [[https://lepisma.xyz/2017/10/28/ricing-org-mode/][lepisma]]'s blog posts on beautifying org-mode
-
-**** Setting ~variable-pitch~ font
-Use the [[https://edwardtufte.github.io/et-book/][EtBembo]] font
-#+BEGIN_SRC emacs-lisp
-  ; (set-face-attribute 'variable-pitch nil :family "EtBembo" :height 1.2)
-  (let* ((variable-tuple
-          (cond ((x-list-fonts "ETBembo")               '(:font "ETBembo"))
-                ((x-list-fonts "PragmataPro Mono Liga") '(:font "PragmataPro Mono Liga"))
-                ((x-list-fonts "Source Sans Pro")       '(:font "Source Sans Pro"))
-                ((x-list-fonts "Lucida Grande")         '(:font "Lucida Grande"))
-                ((x-list-fonts "Verdana")               '(:font "Verdana"))
-                ((x-family-fonts "Sans Serif")          '(:family "Sans Serif"))
-                (nil (warn "Cannot find a Sans Serif Font. Install PragmataPro Mono Liga."))))
-         (code-font '(:font "PragmataPro Mono Liga")))
-
-    ;; Set default variable-pitch font to EtBembo
-    (set-face-attribute 'variable-pitch nil :family "EtBembo" :height 1.2)
-
-    ;; Set the font for Org headings, preserving other properties
-    (dolist (face '((org-level-1 1.75)
-                    (org-level-2 1.5)
-                    (org-level-3 1.25)
-                    (org-level-4 1.1)
-                    (org-level-5 1.0)
-                    (org-level-6 1.0)
-                    (org-level-7 1.0)
-                    (org-level-8 1.0)))
-      (set-face-attribute (car face) nil :family "EtBembo" :height (nth 1 face) :weight 'bold))
-
-    ;; Set the document title face
-    (set-face-attribute 'org-document-title nil :family "EtBembo" :height 2.0 :weight 'bold)
-
-    ;; Set the font for code-related faces to use PragmataPro Mono Liga
-    (set-face-attribute 'org-block nil            :family "PragmataPro Mono Liga" :height 0.9)
-    (set-face-attribute 'org-block-begin-line nil :family "PragmataPro Mono Liga" :height 0.9)
-    (set-face-attribute 'org-block-end-line nil   :family "PragmataPro Mono Liga" :height 0.9)
-    (set-face-attribute 'org-code nil             :family "PragmataPro Mono Liga" :height 0.9)
-    (set-face-attribute 'org-verbatim nil         :family "PragmataPro Mono Liga" :height 0.9))
-
-
-  (add-hook 'org-mode-hook 'variable-pitch-mode)
-#+END_SRC
-
-**** Padding
-***** Line Spacing
+*** Padding
+**** Line Spacing
 Per buffer line spacing can be set using the variable ~line-spacing~. Something like ~0.1~ goes well here.
 #+BEGIN_SRC emacs-lisp
   (setq-default line-spacing 0.1)
 #+END_SRC
 
-***** Top Padding
+**** Top Padding
 Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing
 #+BEGIN_SRC emacs-lisp
   (setq header-line-format " ")
 #+END_SRC
 
-***** Side Padding
+**** Side Padding
 #+BEGIN_SRC emacs-lisp
   (lambda () (progn
     (setq left-margin-width 2)
@@ -317,8 +272,7 @@ Setting format to empty string ~" "~ gives you top padding. Changing the header 
     (set-window-buffer nil (current-buffer))))
 #+END_SRC
 
-**** Bullet points
-***** Actual bullet points
+*** Bullet points
 Replace the ~-~ symbol with ~•~
 #+BEGIN_SRC emacs-lisp
   (font-lock-add-keywords 'org-mode
@@ -326,7 +280,7 @@ Replace the ~-~ symbol with ~•~
                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 #+END_SRC
 
-**** Other tweaks
+*** Other tweaks
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t
         org-ellipsis "  " ; folding symbol
@@ -338,7 +292,7 @@ Replace the ~-~ symbol with ~•~
         org-fontify-quote-and-verse-blocks t)
 #+END_SRC
 
-***** Automatically render $LaTeX$ fragments
+**** Automatically render $LaTeX$ fragments
 #+BEGIN_SRC emacs-lisp
   (defun my/org-latex-preview-auto ()
     "Automatically refresh LaTeX fragments in the current buffer."
@@ -356,12 +310,12 @@ Replace the ~-~ symbol with ~•~
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 #+END_SRC
 
-***** Disable ~hl-line-mode~
+**** Disable ~hl-line-mode~
   #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook (lambda () (hl-line-mode -1)))
 #+END_SRC
 
-***** Render the entire document before editing
+**** Render the entire document before editing
 #+BEGIN_SRC emacs-lisp
   (defun lv-org-render-before-editing () "Render whole Org buffer before editing"
     (read-only-mode 1)   ; Make the buffer temporarily read-only
