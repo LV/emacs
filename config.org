@@ -345,12 +345,11 @@ Replace the ~-~ symbol with ~•~
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 #+END_SRC
 
-  Disable ~hl-line-mode~
+***** Disable ~hl-line-mode~
   #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook (lambda () (hl-line-mode -1)))
 #+END_SRC
 
-**** Hacks
 ***** Render the entire document before editing
 #+BEGIN_SRC emacs-lisp
   (defun lv-org-render-before-editing () "Render whole Org buffer before editing"
