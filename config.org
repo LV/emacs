@@ -267,6 +267,7 @@ The Meta key (=M-x=) is used to evaluate commands
   (lv/leader-keys
     "o"  '(:ignore o                     :which-key "org")
     ; "oi" '(:ignore oi :which-key "insert")
+    "oe" '(org-edit-special              :which-key "edit special")
     "oi" '(org-insert-structure-template :which-key "insert"))
 #+END_SRC
 
@@ -305,13 +306,21 @@ The Meta key (=M-x=) is used to evaluate commands
 #+END_SRC
 
 *** Editor
-**** Visibility
+**** Text Visibility
 ***** Leading Stars
 I like seeing all the stars so I know which indentation level we're at
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook
     (lambda ()
     (setq-local org-hide-leading-stars nil)))
+#+END_SRC
+
+***** Bullet points
+Replace the ~-~ symbol with ~•~
+#+BEGIN_SRC emacs-lisp
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 #+END_SRC
 
 **** Padding
@@ -335,12 +344,36 @@ Setting format to empty string ~" "~ gives you top padding. Changing the header 
     (set-window-buffer nil (current-buffer))))
 #+END_SRC
 
-*** Bullet points
-Replace the ~-~ symbol with ~•~
+**** Code blocks
+When editing source code blocks in org-mode, you will encounter many difficulties in getting the indentation right. This is due to the conflicts of org-mode's indentation with the one you're trying to do for your code (minor mode).
+
+When you're in major mode (i.e. normal code editing in its own buffer), you will not experience these issues.
+
+Thus, the best way to edit such code is through ~(org-edit-special)~ (which can be invoked using ={SPC o e}=. This will open the code block in its own buffer and you'll be able to have the full normal coding experience you're used to.
+
+However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Emacs bindings, and we want to do it the Vim way through ~:w~, ~:wq~, or ~:q~ (~:q!~ works too)
 #+BEGIN_SRC emacs-lisp
-  (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+  (defun lv/org-edit-src-save-only ()
+    "Save changes in the special edit buffer without exiting."
+    (interactive)
+    (when (org-src-edit-buffer-p)
+      (org-edit-src-save)))  ; Save changes without exiting
+
+  (defun lv/org-edit-src-exit-save ()
+    "Save changes and exit the special edit buffer."
+    (interactive)
+    (org-edit-src-exit))  ; Save and exit
+
+  (defun lv/org-edit-src-abort ()
+    "Abort the special edit without saving."
+    (interactive)
+    (org-edit-src-abort))  ; Exit without saving
+
+  (with-eval-after-load 'evil
+    ;; Define custom Ex commands for Org source editing
+    (evil-ex-define-cmd "w[rite]" 'lv/org-edit-src-save-only)  ; `:w` saves without exiting
+    (evil-ex-define-cmd "wq"      'lv/org-edit-src-exit-save)  ; `:wq` saves and exits
+    (evil-ex-define-cmd "q[uit]"  'lv/org-edit-src-abort))     ; `:q` aborts without saving
 #+END_SRC
 
 *** Other tweaks
