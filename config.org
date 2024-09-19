@@ -3,7 +3,8 @@
 #+PROPERTY: header-args :tangle yes
 
 * Pre-requisites
-You *must* do the following to get the configuration to fully work
+You *must* do the following to get the configuration to fully work.
+
 ** Programs
 *** Latex
 **** MacOS:
@@ -20,7 +21,8 @@ You *must* do the following to get the configuration to fully work
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
   - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
 
-  Evaluate the following commands in Emacs
+  Evaluate the following commands in Emacs.
+
 #+BEGIN_SRC emacs-lisp :tangle no
   (all-the-icons-install-fonts)
   (nerd-fonts-install-fonts)
@@ -28,18 +30,20 @@ You *must* do the following to get the configuration to fully work
 
 ** Troubleshooting
 **** Windows
-Don't use Windows (and if you do, use WSL)
+Don't use Windows (and if you do, use WSL).
 
 * Editor
 ** Startup Message
-Start Emacs with a blank buffer instead of the welcome message
+Start Emacs with a blank buffer instead of the welcome message.
+
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t)
 #+END_SRC
 
 ** Line Numbers
 *** Relative Line Numbers
-Better for using Vim commands
+Better for using Vim commands.
+
 #+BEGIN_SRC emacs-lisp
   (setq display-line-numbers-type 'relative)
 #+END_SRC
@@ -50,7 +54,8 @@ Better for using Vim commands
 #+END_SRC
 
 **** Exceptions
-For some modes, line numbers add noise
+For some modes, line numbers add noise.
+
 #+BEGIN_SRC emacs-lisp
   (dolist (mode '(org-mode-hook
                   term-mode-hook
@@ -60,14 +65,16 @@ For some modes, line numbers add noise
 #+END_SRC
 
 *** Column Number Mode
-Displays the horizontal char position
+Displays the horizontal char position.
+
 #+BEGIN_SRC emacs-lisp
   (setq column-number-mode t)
 #+END_SRC
 
 
 ** Text Wrapping
-I hate scrolling horizontally
+I hate scrolling horizontally.
+
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook 'visual-line-mode)
 #+END_SRC
@@ -84,12 +91,14 @@ I hate scrolling horizontally
 * Behaviors
 ** Backup files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
+
 #+BEGIN_SRC emacs-lisp
   (setq make-backup-files nil)
 #+END_SRC
 
 ** Rest of the config
-This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config
+This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config.
+
 #+BEGIN_SRC emacs-lisp
   (scroll-bar-mode -1)    ; Disable visible scrollbar
   (tool-bar-mode -1)      ; Disable toolbar
@@ -215,7 +224,8 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 
 * Keybindings
 ** Leader Key
-I like to use keybindings by pressing a leader key, which I map as the spacebar
+I like to use keybindings by pressing a leader key, which I map as the spacebar.
+
 #+BEGIN_SRC emacs-lisp
   ;; Setup keybindings with a leader key
   (use-package general
@@ -230,7 +240,8 @@ I like to use keybindings by pressing a leader key, which I map as the spacebar
 #+END_SRC
 
 ** =M-x=
-The Meta key (=M-x=) is used to evaluate commands
+The Meta key (=M-x=) is used to evaluate commands.
+
 #+BEGIN_SRC emacs-lisp
   (lv/leader-keys
     ":"  '(counsel-M-x :which-key "M-x"))
@@ -313,21 +324,41 @@ The Meta key (=M-x=) is used to evaluate commands
 #+END_SRC
 
 *** Editor
-**** Text Visibility
-***** Leading Stars
-I like seeing all the stars so I know which indentation level we're at
+**** Text
+***** Show Leading Stars in Headers
+I like seeing all the stars so I know which indentation level we're at.
+
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook
             (lambda ()
               (setq-local org-hide-leading-stars nil)))
 #+END_SRC
 
-***** Bullet points
-Replace the ~-~ symbol with ~•~
+***** Bullet Points
+Replace the ~-~ symbol with ~•~.
+
 #+BEGIN_SRC emacs-lisp
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+#+END_SRC
+
+***** Automatically Render $LaTeX$ Fragments
+#+BEGIN_SRC emacs-lisp
+  (defun lv/org-latex-preview-auto ()
+    "Automatically refresh LaTeX fragments in the current buffer."
+    (when (derived-mode-p 'org-mode)
+      (org-latex-preview '(16))))
+
+  ;; Add hooks to automatically render LaTeX
+  (add-hook 'org-mode-hook 'lv/org-latex-preview-auto)
+  (add-hook 'after-save-hook 'lv/org-latex-preview-auto)
+  (add-hook 'after-change-functions
+            (lambda (_beg _end _len)
+              (lv/org-latex-preview-auto)))
+
+  ;; Scale LaTeX font
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 #+END_SRC
 
 **** Padding
@@ -359,7 +390,8 @@ When you're in major mode (i.e. normal code editing in its own buffer), you will
 
 Thus, the best way to edit such code is through ~(org-edit-special)~ (which can be invoked using ={SPC o e}=. This will open the code block in its own buffer and you'll be able to have the full normal coding experience you're used to.
 
-However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Emacs bindings, and we want to do it the Vim way through ~:w~, ~:wq~, or ~:q~ (~:q!~ works too)
+However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Emacs bindings, and we want to do it the Vim way through ~:w~, ~:wq~, or ~:q~ (~:q!~ works too).
+
 #+BEGIN_SRC emacs-lisp
   (defun lv/org-edit-src-save-only ()
     "Save changes in the special edit buffer without exiting."
@@ -411,25 +443,10 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
         org-fontify-quote-and-verse-blocks t)
 #+END_SRC
 
-**** Automatically render $LaTeX$ fragments
-#+BEGIN_SRC emacs-lisp
-  (defun lv/org-latex-preview-auto ()
-    "Automatically refresh LaTeX fragments in the current buffer."
-    (when (derived-mode-p 'org-mode)
-      (org-latex-preview '(16))))
-
-  ;; Add hooks to automatically render LaTeX
-  (add-hook 'org-mode-hook 'lv/org-latex-preview-auto)
-  (add-hook 'after-save-hook 'lv/org-latex-preview-auto)
-  (add-hook 'after-change-functions
-            (lambda (_beg _end _len)
-              (lv/org-latex-preview-auto)))
-
-  ;; Scale LaTeX font
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-#+END_SRC
 
 **** Disable ~hl-line-mode~
+Disables highlighting the line where the cursor is currently on.
+
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook
             (lambda ()
@@ -440,6 +457,7 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
 There's a bug where if you jump to any part of a document, code blocks will not be rendered until both its ~#+BEGIN_SRC~ and ~#+END_SRC~ tags are encountered.
 
 By rendering the entire document, code blocks will appear as they should, new code blocks will not have this problem since as you write them, you will 'encounter' it.
+
 #+BEGIN_SRC emacs-lisp
   (defun lv-org-render-before-editing () "Render whole Org buffer before editing"
     (read-only-mode 1)   ; Make the buffer temporarily read-only
@@ -450,6 +468,5 @@ By rendering the entire document, code blocks will appear as they should, new co
 #+END_SRC
 
 *** TODO
-- [ ] Once cursor is in a link, expand the code to show the ~\[\[link\]\[name\]\]~
-- Make indentation for org documents 2 spaces long
-  - Fix indentations inside of code blocks (make them respect the languages inside of the code blocks
+- Once cursor is in a link, expand the code to show the ~\[\[link\]\[name\]\]~
+- Indentations (Evil's =SHIFT >= and =SHIFT <=) on headings should change the number of stars, not the actual indentation of the text
