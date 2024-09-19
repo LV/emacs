@@ -65,6 +65,12 @@ Displays the horizontal char position
 #+END_SRC
 
 
+** Text Wrapping
+I hate scrolling horizontally
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'text-mode-hook 'visual-line-mode)
+#+END_SRC
+
 ** Font
 #+BEGIN_SRC emacs-lisp
   (cond
