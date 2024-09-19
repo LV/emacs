@@ -265,11 +265,12 @@ The Meta key (=M-x=) is used to evaluate commands.
 ** File
 #+BEGIN_SRC emacs-lisp
   (lv/leader-keys
-    "f"  '(:ignore f               :which-key "file")
-    "ff" '(counsel-find-file       :which-key "find")
+    "f"  '(:ignore f         :which-key "file")
+    "ff" '(counsel-find-file :which-key "find")
     "fc" '(lambda () (interactive)
             (find-file (concat user-emacs-directory "config.org"))
-                                   :which-key "open config"))
+                             :which-key "open config")
+    "fg" '(counsel-rg        :which-key "ripgrep"))
 #+END_SRC
 
 ** Git
