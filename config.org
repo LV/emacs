@@ -293,6 +293,7 @@ The Meta key (=M-x=) is used to evaluate commands.
 #+BEGIN_SRC emacs-lisp
   (lv/leader-keys
     "w"  '(:ignore w          :which-key "window")
+    ; "wf"   ; Toggle Full Screening Emacs
     "wh" '(evil-window-left   :which-key "move left")
     "wj" '(evil-window-down   :which-key "move down")
     "wk" '(evil-window-up     :which-key "move up")
@@ -417,17 +418,17 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
   (defun lv/org-edit-src-save-only ()
     "Save changes in the special edit buffer without exiting."
     (interactive)
-    (org-edit-src-save))  ; Save changes without exiting
+    (org-edit-src-save))
 
   (defun lv/org-edit-src-exit-save ()
     "Save changes and exit the special edit buffer."
     (interactive)
-    (org-edit-src-exit))  ; Save and exit
+    (org-edit-src-exit))
 
   (defun lv/org-edit-src-abort ()
     "Abort the special edit without saving."
     (interactive)
-    (org-edit-src-abort))  ; Exit without saving
+    (org-edit-src-abort))
 
   (defun lv/setup-org-src-mode-evil-commands ()
     "Set up custom `:w`, `:wq`, and `:q` commands in `org-src-mode`."
@@ -436,7 +437,7 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
     (evil-ex-define-cmd "q[uit]" 'lv/org-edit-src-abort))
 
   (defun lv/restore-evil-commands ()
-    "Restore default `:w`, `:wq`, and `:q` commands."
+    "Restore default `:w`, `:wq`, and `:q` Evil commands."
     (evil-ex-define-cmd "w[rite]" 'evil-write)
     (evil-ex-define-cmd "wq" 'evil-save-and-close)
     (evil-ex-define-cmd "q[uit]" 'evil-quit))
