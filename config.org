@@ -309,10 +309,33 @@ The Meta key (=M-x=) is used to evaluate commands.
 #+END_SRC
 
 ** Window
+The following is a helper function for toggling full screen on and off
+
+#+BEGIN_SRC emacs-lisp
+  ;; https://emacs.stackexchange.com/a/9725
+
+  (defun lv/fullscreen ()
+    (interactive)
+    (set-frame-parameter nil 'fullscreen 'fullboth))
+
+  (defun lv/non-fullscreen ()
+    (interactive)
+    (set-frame-parameter nil 'width 82)
+    (set-frame-parameter nil 'fullscreen 'fullheight))
+
+  ; TODO: This is broken; toggling on FS works, toggling off works, toggling on works,
+  ;   But then toggling off no longer works from that point formwards
+  (defun toggle-fullscreen ()
+    (interactive)
+    (if (eq (frame-parameter nil 'fullscreen) 'fullboth)  ;tests if already fullscreened
+        (lv/non-fullscreen)
+      (lv/fullscreen)))
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp
   (lv/leader-keys
     "w"  '(:ignore w          :which-key "window")
-    ; "wf"   ; Toggle Full Screening Emacs
+    "wf" '(toggle-fullscreen  :which-key "toggle fullscreen")
     "wh" '(evil-window-left   :which-key "move left")
     "wj" '(evil-window-down   :which-key "move down")
     "wk" '(evil-window-up     :which-key "move up")
