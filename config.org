@@ -81,7 +81,7 @@ I hate scrolling horizontally
     (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 200)))
 #+END_SRC
 
-* Changing Emacs defaults
+* Behaviors
 ** Backup files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
 #+BEGIN_SRC emacs-lisp
