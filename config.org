@@ -89,7 +89,7 @@ I hate scrolling horizontally.
 #+END_SRC
 
 * Behaviors
-** Backup files
+** Backup Files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
 
 #+BEGIN_SRC emacs-lisp
@@ -323,9 +323,8 @@ The Meta key (=M-x=) is used to evaluate commands.
   (use-package org)
 #+END_SRC
 
-*** Editor
-**** Text
-***** Show Leading Stars in Headers
+*** Text
+**** Show Leading Stars in Headers
 I like seeing all the stars so I know which indentation level we're at.
 
 #+BEGIN_SRC emacs-lisp
@@ -334,7 +333,7 @@ I like seeing all the stars so I know which indentation level we're at.
               (setq-local org-hide-leading-stars nil)))
 #+END_SRC
 
-***** Bullet Points
+**** Bullet Points
 Replace the ~-~ symbol with ~•~.
 
 #+BEGIN_SRC emacs-lisp
@@ -343,7 +342,7 @@ Replace the ~-~ symbol with ~•~.
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 #+END_SRC
 
-***** Automatically Render $LaTeX$ Fragments
+**** Automatically Render $LaTeX$ Fragments
 #+BEGIN_SRC emacs-lisp
   (defun lv/org-latex-preview-auto ()
     "Automatically refresh LaTeX fragments in the current buffer."
@@ -361,20 +360,34 @@ Replace the ~-~ symbol with ~•~.
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
 #+END_SRC
 
-**** Padding
-***** Line Spacing
+**** Render Entire Document Before Editing
+There's a bug where if you jump to any part of a document, code blocks will not be rendered until both its ~#+BEGIN_SRC~ and ~#+END_SRC~ tags are encountered.
+
+By rendering the entire document, code blocks will appear as they should, new code blocks will not have this problem since as you write them, you will 'encounter' it.
+
+#+BEGIN_SRC emacs-lisp
+  (defun lv-org-render-before-editing () "Render whole Org buffer before editing"
+    (read-only-mode 1)   ; Make the buffer temporarily read-only
+    (font-lock-ensure)   ; Ensure the whole buffer is rendered
+    (read-only-mode -1)) ; Allow editing again
+
+  (add-hook 'org-mode-hook 'lv-org-render-before-editing)
+#+END_SRC
+
+*** Padding
+**** Line Spacing
 Per buffer line spacing can be set using the variable ~line-spacing~. Something like ~0.1~ goes well here.
 #+BEGIN_SRC emacs-lisp
   (setq-default line-spacing 0.1)
 #+END_SRC
 
-***** Top Padding
+**** Top Padding
 Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing
 #+BEGIN_SRC emacs-lisp
   (setq header-line-format " ")
 #+END_SRC
 
-***** Side Padding
+**** Side Padding
 #+BEGIN_SRC emacs-lisp
   (lambda ()
     (progn
@@ -383,7 +396,8 @@ Setting format to empty string ~" "~ gives you top padding. Changing the header 
       (set-window-buffer nil (current-buffer))))
 #+END_SRC
 
-**** Code blocks
+*** Evil (Vim)
+**** Code Blocks
 When editing source code blocks in org-mode, you will encounter many difficulties in getting the indentation right. This is due to the conflicts of org-mode's indentation with the one you're trying to do for your code (minor mode).
 
 When you're in major mode (i.e. normal code editing in its own buffer), you will not experience these issues.
@@ -431,7 +445,7 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
   (add-hook 'org-src-mode-hook 'lv/setup-org-src-mode-hook)
 #+END_SRC
 
-*** Other tweaks
+*** Other Tweaks
 #+BEGIN_SRC emacs-lisp
   (setq org-startup-indented t
         org-ellipsis "  " ; folding symbol
@@ -443,7 +457,6 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
         org-fontify-quote-and-verse-blocks t)
 #+END_SRC
 
-
 **** Disable ~hl-line-mode~
 Disables highlighting the line where the cursor is currently on.
 
@@ -451,20 +464,6 @@ Disables highlighting the line where the cursor is currently on.
   (add-hook 'org-mode-hook
             (lambda ()
               (hl-line-mode -1)))
-#+END_SRC
-
-**** Render the entire document before editing
-There's a bug where if you jump to any part of a document, code blocks will not be rendered until both its ~#+BEGIN_SRC~ and ~#+END_SRC~ tags are encountered.
-
-By rendering the entire document, code blocks will appear as they should, new code blocks will not have this problem since as you write them, you will 'encounter' it.
-
-#+BEGIN_SRC emacs-lisp
-  (defun lv-org-render-before-editing () "Render whole Org buffer before editing"
-    (read-only-mode 1)   ; Make the buffer temporarily read-only
-    (font-lock-ensure)   ; Ensure the whole buffer is rendered
-    (read-only-mode -1)) ; Allow editing again
-
-  (add-hook 'org-mode-hook 'lv-org-render-before-editing)
 #+END_SRC
 
 *** TODO
