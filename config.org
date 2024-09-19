@@ -2,26 +2,37 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
+- The following =.org= file takes all the code blocks and compiles (or tangles) them into =config.el=, which =init.el= reads from.
+
+- Due to constraints with developing on remote machines, I am forced to use Neovim for development (I actually like it a lot, but no org-mode sadly)
+  - Hence, I want to replicate as much of the behavior as possible between both configurations
+  - [[https://github.com/LV/nvim-config][Link to my Neovim configuration]]
+    - I may end up going for some weird dynamic where I use Neovim inside of Emacs that emulates a terminal (that uses ~tmux~). That sounds incredibly dumb (and it probably is), but I think that's what I may actually end up going for.
+
 * Pre-requisites
 You *must* do the following to get the configuration to fully work.
 
 ** Programs
 *** Latex
-**** MacOS:
+*TODO*: Make it so that this configuration doesn't break if a Latex package is not detected
+
+**** Linux
+#+BEGIN_SRC bash :tangle no
+  sudo apt-get install texlive-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended dvipng
+#+END_SRC
+
+**** MacOS
 #+BEGIN_SRC bash :tangle no
   brew install --cask mactex-no-gui
 #+END_SRC
 
-**** On Linux:
-#+BEGIN_SRC bash :tangle no
-  sudo apt-get install texlive-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended dvipng
-#+END_SRC
+*** ripgrep
 
 ** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
   - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
 
-  Evaluate the following commands in Emacs.
+Evaluate the following commands in Emacs:
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (all-the-icons-install-fonts)
