@@ -273,13 +273,13 @@ The Meta key (=M-x=) is used to evaluate commands
 ** Window
 #+BEGIN_SRC emacs-lisp
   (lv/leader-keys
-    "w"  '(:ignore w                     :which-key "window")
-    "wh" '(evil-window-left              :which-key "move left")
-    "wj" '(evil-window-down              :which-key "move down")
-    "wk" '(evil-window-up                :which-key "move up")
-    "wl" '(evil-window-right             :which-key "move right")
-    "ws" '(evil-window-split             :which-key "split horizontally")
-    "wv" '(evil-window-vsplit            :which-key "split vertically"))
+    "w"  '(:ignore w          :which-key "window")
+    "wh" '(evil-window-left   :which-key "move left")
+    "wj" '(evil-window-down   :which-key "move down")
+    "wk" '(evil-window-up     :which-key "move up")
+    "wl" '(evil-window-right  :which-key "move right")
+    "ws" '(evil-window-split  :which-key "split horizontally")
+    "wv" '(evil-window-vsplit :which-key "split vertically"))
 #+END_SRC
 
 * Modules
