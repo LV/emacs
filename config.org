@@ -277,6 +277,9 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 ***** Leading Stars
 I like seeing all the stars so I know which indentation level we're at
 #+BEGIN_SRC emacs-lisp
+  (add-hook 'org-mode-hook
+    (lambda ()
+    (setq-local org-hide-leading-stars nil)))
 #+END_SRC
 
 **** Padding
