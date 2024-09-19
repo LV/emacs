@@ -207,6 +207,8 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 #+END_SRC
 
 * Keybindings
+** Leader Key
+I like to use keybindings by pressing a leader key, which I map as the spacebar
 #+BEGIN_SRC emacs-lisp
   ;; Setup keybindings with a leader key
   (use-package general
@@ -218,31 +220,59 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
       :keymaps 'override
       :prefix "SPC"
       :global-prefix "C-SPC"))
+#+END_SRC
 
+** =M-x=
+The Meta key (=M-x=) is used to evaluate commands
+#+BEGIN_SRC emacs-lisp
   (lv/leader-keys
-    ":"  '(counsel-M-x                   :which-key "M-x")
+    ":"  '(counsel-M-x :which-key "M-x"))
+#+END_SRC
 
-    "b"  '(:ignore b                     :which-key "buffer")
-    "bs" '(counsel-switch-buffer         :which-key "switch")
-    "be" '(eval-buffer                   :which-key "evaluate")
+** Buffer
+#+BEGIN_SRC emacs-lisp
+  (lv/leader-keys
+    "b"  '(:ignore b             :which-key "buffer")
+    "bs" '(counsel-switch-buffer :which-key "switch")
+    "be" '(eval-buffer           :which-key "evaluate"))
+#+END_SRC
 
-    "f"  '(:ignore f                     :which-key "file")
-    "ff" '(counsel-find-file             :which-key "find")
+** File
+#+BEGIN_SRC emacs-lisp
+  (lv/leader-keys
+    "f"  '(:ignore f               :which-key "file")
+    "ff" '(counsel-find-file       :which-key "find")
     "fc" '(lambda () (interactive)
             (find-file (concat user-emacs-directory "config.org"))
-                                         :which-key "open config")
+                                   :which-key "open config"))
+#+END_SRC
 
-    "g"  '(:ignore g                     :which-key "git")
-    "gg" '(magit-status                  :which-key "status")
+** Git
+#+BEGIN_SRC emacs-lisp
+  (lv/leader-keys
+    "g"  '(:ignore g    :which-key "git")
+    "gg" '(magit-status :which-key "status"))
+#+END_SRC
 
-    "h"  '(:ignore h                     :which-key "help")
-    "hf" '(counsel-describe-function     :which-key "function")
-    "hv" '(counsel-describe-variable     :which-key "variable")
+** Help
+#+BEGIN_SRC emacs-lisp
+  (lv/leader-keys
+    "h"  '(:ignore h                 :which-key "help")
+    "hf" '(counsel-describe-function :which-key "function")
+    "hv" '(counsel-describe-variable :which-key "variable"))
+#+END_SRC
 
+** Org-mode
+#+BEGIN_SRC emacs-lisp
+  (lv/leader-keys
     "o"  '(:ignore o                     :which-key "org")
     ; "oi" '(:ignore oi :which-key "insert")
-    "oi" '(org-insert-structure-template :which-key "insert")
+    "oi" '(org-insert-structure-template :which-key "insert"))
+#+END_SRC
 
+** Window
+#+BEGIN_SRC emacs-lisp
+  (lv/leader-keys
     "w"  '(:ignore w                     :which-key "window")
     "wh" '(evil-window-left              :which-key "move left")
     "wj" '(evil-window-down              :which-key "move down")
