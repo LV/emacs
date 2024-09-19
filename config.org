@@ -344,11 +344,14 @@ Replace the ~-~ symbol with ~•~
 #+END_SRC
 
 **** Disable ~hl-line-mode~
-  #+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook (lambda () (hl-line-mode -1)))
 #+END_SRC
 
 **** Render the entire document before editing
+There's a bug where if you jump to any part of a document, code blocks will not be rendered until both its ~#+BEGIN_SRC~ and ~#+END_SRC~ tags are encountered.
+
+By rendering the entire document, code blocks will appear as they should, new code blocks will not have this problem since as you write them, you will 'encounter' it.
 #+BEGIN_SRC emacs-lisp
   (defun lv-org-render-before-editing () "Render whole Org buffer before editing"
     (read-only-mode 1)   ; Make the buffer temporarily read-only
@@ -360,8 +363,6 @@ Replace the ~-~ symbol with ~•~
 
 *** TODO
 - [ ] Once cursor is in a link, expand the code to show the ~\[\[link\]\[name\]\]~
-  - Same for everything else, I want ~~~, ~/~, and ~$~ chars to show up when the cursor is inside and in insert mode
-    - Same also applies for headings, I want to see the ~*~ chars
 - Make indentation for org documents 2 spaces long
   - Fix indentations inside of code blocks (make them respect the languages inside of the code blocks
     
