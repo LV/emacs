@@ -356,8 +356,7 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
   (defun lv/org-edit-src-save-only ()
     "Save changes in the special edit buffer without exiting."
     (interactive)
-    (when (org-src-edit-buffer-p)
-      (org-edit-src-save)))  ; Save changes without exiting
+    (org-edit-src-save))  ; Save changes without exiting
 
   (defun lv/org-edit-src-exit-save ()
     "Save changes and exit the special edit buffer."
@@ -369,11 +368,27 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
     (interactive)
     (org-edit-src-abort))  ; Exit without saving
 
-  (with-eval-after-load 'evil
-    ;; Define custom Ex commands for Org source editing
-    (evil-ex-define-cmd "w[rite]" 'lv/org-edit-src-save-only)  ; `:w` saves without exiting
-    (evil-ex-define-cmd "wq"      'lv/org-edit-src-exit-save)  ; `:wq` saves and exits
-    (evil-ex-define-cmd "q[uit]"  'lv/org-edit-src-abort))     ; `:q` aborts without saving
+  (defun lv/setup-org-src-mode-evil-commands ()
+    "Set up custom `:w`, `:wq`, and `:q` commands in `org-src-mode`."
+    (evil-ex-define-cmd "w[rite]" 'lv/org-edit-src-save-only)
+    (evil-ex-define-cmd "wq" 'lv/org-edit-src-exit-save)
+    (evil-ex-define-cmd "q[uit]" 'lv/org-edit-src-abort))
+
+  (defun lv/restore-evil-commands ()
+    "Restore default `:w`, `:wq`, and `:q` commands."
+    (evil-ex-define-cmd "w[rite]" 'evil-write)
+    (evil-ex-define-cmd "wq" 'evil-save-and-close)
+    (evil-ex-define-cmd "q[uit]" 'evil-quit))
+
+  (defun lv/setup-org-src-mode-hook ()
+    "Hook to set up `org-src-mode`."
+    ;; Set up custom commands for the current buffer only
+    (lv/setup-org-src-mode-evil-commands)
+    ;; Set up a buffer-local hook to restore commands on exit
+    (add-hook 'kill-buffer-hook 'lv/restore-evil-commands nil t))
+
+  ;; Add hook to org-src-mode to set up the custom commands
+  (add-hook 'org-src-mode-hook 'lv/setup-org-src-mode-hook)
 #+END_SRC
 
 *** Other tweaks
@@ -428,4 +443,3 @@ By rendering the entire document, code blocks will appear as they should, new co
 - [ ] Once cursor is in a link, expand the code to show the ~\[\[link\]\[name\]\]~
 - Make indentation for org documents 2 spaces long
   - Fix indentations inside of code blocks (make them respect the languages inside of the code blocks
-    
