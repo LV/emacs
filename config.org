@@ -225,10 +225,12 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
     "b"  '(:ignore b                     :which-key "buffer")
     "bs" '(counsel-switch-buffer         :which-key "switch")
     "be" '(eval-buffer                   :which-key "evaluate")
-    ; "bi" '(counsel-ibuffer               :which-key "ibuffer")
 
     "f"  '(:ignore f                     :which-key "file")
     "ff" '(counsel-find-file             :which-key "find")
+    "fc" '(lambda () (interactive)
+            (find-file (concat user-emacs-directory "config.org"))
+                                         :which-key "open config")
 
     "g"  '(:ignore g                     :which-key "git")
     "gg" '(magit-status                  :which-key "status")
