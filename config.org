@@ -55,7 +55,8 @@ For some modes, line numbers add noise
   (dolist (mode '(org-mode-hook
                   term-mode-hook
                   eshell-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+    (add-hook mode (lambda ()
+                     (display-line-numbers-mode 0))))
 #+END_SRC
 
 *** Column Number Mode
@@ -317,8 +318,8 @@ The Meta key (=M-x=) is used to evaluate commands
 I like seeing all the stars so I know which indentation level we're at
 #+BEGIN_SRC emacs-lisp
   (add-hook 'org-mode-hook
-    (lambda ()
-    (setq-local org-hide-leading-stars nil)))
+            (lambda ()
+              (setq-local org-hide-leading-stars nil)))
 #+END_SRC
 
 ***** Bullet points
@@ -326,7 +327,7 @@ Replace the ~-~ symbol with ~•~
 #+BEGIN_SRC emacs-lisp
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
-                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 #+END_SRC
 
 **** Padding
@@ -344,10 +345,11 @@ Setting format to empty string ~" "~ gives you top padding. Changing the header 
 
 ***** Side Padding
 #+BEGIN_SRC emacs-lisp
-  (lambda () (progn
-    (setq left-margin-width 2)
-    (setq right-margin-width 2)
-    (set-window-buffer nil (current-buffer))))
+  (lambda ()
+    (progn
+      (setq left-margin-width 2)
+      (setq right-margin-width 2)
+      (set-window-buffer nil (current-buffer))))
 #+END_SRC
 
 **** Code blocks
@@ -429,7 +431,9 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
 
 **** Disable ~hl-line-mode~
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'org-mode-hook (lambda () (hl-line-mode -1)))
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (hl-line-mode -1)))
 #+END_SRC
 
 **** Render the entire document before editing
