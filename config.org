@@ -27,7 +27,19 @@ You *must* do the following to get the configuration to fully work.
   brew install --cask mactex-no-gui
 #+END_SRC
 
+*** sqlite3
+**** Linux
+***** Debian
+#+BEGIN_SRC sh :tangle no
+  sudo apt install sqlite3 libsqlite3-dev
+#+END_SRC
+
 *** ripgrep
+**** Linux
+***** Debian
+#+BEGIN_SRC sh :tangle no
+  sudo apt install ripgrep
+#+END_SRC
 
 ** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
@@ -292,6 +304,12 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 #+END_SRC
 
 * Modules
+** SQLite3
+#+BEGIN_SRC emacs-lisp
+  (use-package sqlite3
+    :ensure t)
+#+END_SRC
+
 ** Git
 #+BEGIN_SRC emacs-lisp
   ;; Git porcelain
