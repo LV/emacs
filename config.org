@@ -181,7 +181,7 @@ We choose the size and fonts depending on the system type
   (cond
    ((eq system-type 'gnu/linux)
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 300))
-   ((eq system-type 'gnu/linux)
+   ((eq system-type 'darwin)    ; MacOS
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 150)))
 #+END_SRC
 
