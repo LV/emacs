@@ -138,12 +138,11 @@ Better for using Vim commands.
 #+END_SRC
 
 **** Exceptions
-For some modes, line numbers add noise.
+For some modes, line numbers add noise and it's better not to have them.
 
 #+BEGIN_SRC emacs-lisp
   (dolist (mode '(org-mode-hook
-                  term-mode-hook
-                  eshell-mode-hook))
+                  vterm-mode-hook))
     (add-hook mode (lambda ()
                      (display-line-numbers-mode 0))))
 #+END_SRC
@@ -510,9 +509,17 @@ With the default behavior, pressing =n= goes to the previous word whereas =C-n= 
 #+END_SRC
 
 ** vterm
+Allows you to emulate the terminal in Emacs
+
 #+BEGIN_SRC emacs-lisp
   (use-package vterm
     :ensure t)
+#+END_SRC
+
+And I like having Emacs startup with the terminal
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'emacs-startup-hook 'vterm)
 #+END_SRC
 
 * Keybindings
