@@ -591,6 +591,12 @@ The Meta key (=M-x=) is used to evaluate commands.
     "oi" '(org-insert-structure-template :which-key "insert"))
 #+END_SRC
 
+** Terminal
+#+BEGIN_SRC emacs-lisp
+  (lv/leader-keys
+    "t" '(vterm :which-key "terminal"))
+#+END_SRC
+
 ** Window
 The following is a helper function for toggling full screen on and off
 
