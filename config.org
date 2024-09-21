@@ -41,8 +41,20 @@ Evaluate the following commands in Emacs:
 #+END_SRC
 
 ** Troubleshooting
-**** Windows
+*** Windows
 Don't use Windows (and if you do, use WSL).
+
+*** Org-mode package not found
+
+This will only happen on the first attempt, close Emacs and launch it again
+
+*** Package =compat= unavailable
+
+You will need to use ~M-x~ and run the following before proceeding:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  M-x package-refresh-contents
+#+END_SRC
 
 * Setting Up the Package Manager
 Bring in the package management functions into the environment
