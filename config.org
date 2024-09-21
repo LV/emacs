@@ -44,6 +44,47 @@ Evaluate the following commands in Emacs:
 **** Windows
 Don't use Windows (and if you do, use WSL).
 
+* Setting Up the Package Manager
+Bring in the package management functions into the environment
+
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+#+END_SRC
+
+Set up package URLs
+
+#+BEGIN_SRC emacs-lisp
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("org"   . "https://orgmode/elpa")
+                           ("elpa"  . "https://elpa.gnu.org/packages/")))
+#+END_SRC
+
+Initialize the package system and prepare it to be used
+
+#+BEGIN_SRC emacs-lisp
+  (package-initialize)
+#+END_SRC
+
+Refresh contents only if packages don't exist
+
+#+BEGIN_SRC emacs-lisp
+  (unless package-archive-contents
+    (package-refresh-contents))
+#+END_SRC
+
+Initialize ~use-package~ on non-Linux platforms
+
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+#+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
+    (require 'use-package)
+
+    (setq use-package-always-ensure t)
+#+END_SRC
+
 * Editor
 ** Startup Message
 Start Emacs with a blank buffer instead of the welcome message.
@@ -136,22 +177,6 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
 
   ;; Initialize package sources
-  (require 'package)    ; Brings in the package management functions into the environment
-
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                           ("org"   . "https://orgmode.org/elpa/")
-                           ("elpa"  . "https://elpa.gnu.org/packages/")))
-
-  (package-initialize)  ; Initialize the package system and prepares it to be used
-  (unless package-archive-contents  ; refresh contents only if packages don't exist
-    (package-refresh-contents))
-
-  ;; Initialize use-package on non-Linux platforms
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-
-  (require 'use-package)
-  (setq use-package-always-ensure t)
 
   ;; Vim Mode
   (use-package evil
