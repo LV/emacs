@@ -195,8 +195,6 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
     (ivy-mode 1))
 
   ;; Search inside of an existing buffer
-  (use-package swiper
-    :after ivy)
 
   ;; Additional completion functions based on ivy
   (use-package counsel
@@ -415,6 +413,21 @@ Disables highlighting the line where the cursor is currently on.
 *** TODO
 - Once cursor is in a link, expand the code to show the ~\[\[link\]\[name\]\]~
 - Indentations (Evil's =SHIFT >= and =SHIFT <=) on headings should change the number of stars, not the actual indentation of the text
+
+** Swiper
+Swiper is used to search within the current buffer
+
+#+BEGIN_SRC emacs-lisp
+  (use-package swiper
+    :after ivy
+    :config
+    (evil-define-key 'normal swiper-map
+      (kbd "n") 'swiper-next-line
+      (kbd "N") 'swiper-previous-line))
+#+END_SRC
+
+*** Rebinds
+With the default behavior, pressing =n= goes to the previous word whereas =C-n= goes to the next word. In Vim, it's =n= to go next and =Shift n= to go before
 
 * Keybindings
 ** Leader Key
