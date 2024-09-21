@@ -2,7 +2,7 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-- The following =.org= file takes all the code blocks and compiles (or tangles) them into =config.el=, which =init.el= reads from.
+- The following =.org= file takes all the code blocks and tangles (i.e. compiles) them to =config.el=, from which =init.el= (the default entrypoint) reads off of.
   - This document will not have the best organization, and that's due to the constraint of needing to execute certain lines of code before others.
 
 - Due to constraints with developing on remote machines, I am forced to use Neovim for development (I actually like it a lot, but no org-mode sadly)
