@@ -443,17 +443,17 @@ Disables highlighting the line where the cursor is currently on.
 ** Swiper
 Swiper is used to search within the current buffer
 
+With the default behavior, pressing =n= goes to the previous word whereas =C-n= goes to the next word. In Vim, it's =n= to go next and =Shift n= to go before
+
 #+BEGIN_SRC emacs-lisp
   (use-package swiper
     :after ivy
     :config
-    (evil-define-key 'normal swiper-map
-      (kbd "n") 'swiper-next-line
-      (kbd "N") 'swiper-previous-line))
+    ;; Rebind Evil keys for navigating matches after Swiper
+    (evil-define-key 'normal 'global
+      (kbd "n") 'isearch-repeat-forward
+      (kbd "N") 'isearch-repeat-backward))
 #+END_SRC
-
-*** Rebinds
-With the default behavior, pressing =n= goes to the previous word whereas =C-n= goes to the next word. In Vim, it's =n= to go next and =Shift n= to go before
 
 * Keybindings
 ** Leader Key
