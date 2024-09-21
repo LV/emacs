@@ -144,12 +144,27 @@ I hate scrolling horizontally.
 #+END_SRC
 
 ** Font
+We create a function to set our font
+
+#+BEGIN_SRC emacs-lisp
+  (defun lv/set-font (font-list height)
+    "Set the first available font from FONT-LIST with HEIGHT"
+    (catch 'font-found
+      (dolist (font font-list)
+        (when (find-font (font-spec :name font))
+          (set-face-attribute 'default nil :font font :height height)
+          (throw 'font-found font)))
+      (message "No font from the list is available!")))
+#+END_SRC
+
+We choose the size and fonts depending on the system type
+
 #+BEGIN_SRC emacs-lisp
   (cond
-   ((eq system-type 'gnu/linux)  ; Linux
-    (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 150))
-   ((eq system-type 'darwin)     ; MacOS
-    (set-face-attribute 'default nil :font "PragmataPro Mono Liga" :height 200)))
+   ((eq system-type 'gnu/linux)
+    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 250))
+   ((eq system-type 'gnu/linux)
+    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 150)))
 #+END_SRC
 
 ** Toolbar
