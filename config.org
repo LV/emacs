@@ -642,6 +642,16 @@ And I like having Emacs startup with the terminal
   (add-hook 'emacs-startup-hook 'vterm)
 #+end_src
 
+** undo-tree
+Undo tree
+
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :ensure t
+    :init
+    (global-undo-tree-mode 1))
+#+end_src
+
 * Keybindings
 ** Leader Key
 I like to use keybindings by pressing a leader key, which I map as the spacebar.
@@ -714,6 +724,12 @@ The Meta key (=M-x=) is used to evaluate commands.
 #+begin_src emacs-lisp
   (lv/leader-keys
     "t" '(vterm :which-key "terminal"))
+#+end_src
+
+** Undo-tree
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "u" '(undo-tree-visualize :which-key "undo tree"))
 #+end_src
 
 ** Window
