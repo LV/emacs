@@ -137,6 +137,15 @@ Better for using Vim commands.
   (global-display-line-numbers-mode t)
 #+END_SRC
 
+*** Set Line Number Width
+There is some annoying behavior where once you scroll to a line number with an extra digit, the entire code buffer will shift one character to the right to accomodate for this new line number digit.
+
+Instead, we will set the size of this to be the maximum amount of digits necessary for our document, and then fix this in size.
+
+#+BEGIN_SRC emacs-lisp
+  (setq display-line-numbers-width-start t)
+#+END_SRC
+
 **** Exceptions
 For the terminal, line numbers add noise and it's better not to have them.
 
