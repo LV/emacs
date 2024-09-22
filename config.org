@@ -138,11 +138,10 @@ Better for using Vim commands.
 #+END_SRC
 
 **** Exceptions
-For some modes, line numbers add noise and it's better not to have them.
+For the terminal, line numbers add noise and it's better not to have them.
 
 #+BEGIN_SRC emacs-lisp
-  (dolist (mode '(org-mode-hook
-                  vterm-mode-hook))
+  (dolist (mode '(vterm-mode-hook))
     (add-hook mode (lambda ()
                      (display-line-numbers-mode 0))))
 #+END_SRC
