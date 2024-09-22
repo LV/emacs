@@ -411,8 +411,20 @@ Open ~org-edit-special~ if generating a template with a code block
 
   ;; Add this function to the yasnippet post expansion hook
   (add-hook 'yas-after-exit-snippet-hook 'lv/org-edit-special-after-snippet)
-
 #+end_src
+
+We want to return to normal mode (instead of insert mode) once we leave ~org-edit-special~
+
+#+begin_src emacs-lisp
+  (defun lv/exit-org-edit-special-normal-state ()
+    "Force Evil to go to normal state after exiting `org-edit-special`."
+    (when (org-in-src-block-p)
+      (evil-normal-state)))
+
+  ;; Advise `org-edit-src-exit` to ensure we're in normal state in Evil
+  (advice-add 'org-edit-src-exit :after #'lv/exit-org-edit-special-normal-state)
+#+end_src
+
 
 *** Text
 **** Show Leading Stars in Headers
@@ -600,9 +612,6 @@ Disables highlighting the line where the cursor is currently on.
             (lambda ()
               (hl-line-mode -1)))
 #+end_src
-
-*** TODO
-- Indentations (Evil's =SHIFT >= and =SHIFT <=) on headings should change the number of stars, not the actual indentation of the text
 
 ** Swiper
 Swiper is used to search within the current buffer
