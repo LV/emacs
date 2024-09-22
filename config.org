@@ -196,11 +196,18 @@ Because we do everything through keyboard commands in Emacs, this is unnecessary
 #+END_SRC
 
 * Behaviors
-** Backup Files
+** Remove Backup Files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
 
 #+BEGIN_SRC emacs-lisp
   (setq make-backup-files nil)
+#+END_SRC
+
+** Require Final Newline
+Every file should have a newline at the very end
+
+#+BEGIN_SRC emacs-lisp
+  (setq mode-require-final-newline t)
 #+END_SRC
 
 ** Rest of the config
@@ -628,4 +635,3 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     "ws" '(evil-window-split  :which-key "split horizontally")
     "wv" '(evil-window-vsplit :which-key "split vertically"))
 #+END_SRC
-
