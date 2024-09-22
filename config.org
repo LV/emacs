@@ -2,7 +2,7 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-- The following =.org= file takes all the code blocks and tangles (i.e. compiles) them to =config.el=, from which =init.el= (the default entrypoint) reads off of.
+- The following =.org= file takes all the code blocks and tangles (i.e., compiles) them to =config.el=, from which =init.el= (the default entrypoint) reads off of.
   - This document will not have the best organization, and that's due to the constraint of needing to execute certain lines of code before others.
 
 - Due to constraints with developing on remote machines, I am forced to use Neovim for development (I actually like it a lot, but no org-mode sadly)
@@ -450,12 +450,14 @@ By rendering the entire document, code blocks will appear as they should, new co
 *** Padding
 **** Line Spacing
 Per buffer line spacing can be set using the variable ~line-spacing~. Something like ~0.1~ goes well here.
+
 #+BEGIN_SRC emacs-lisp
   (setq-default line-spacing 0.1)
 #+END_SRC
 
 **** Top Padding
 Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing
+
 #+BEGIN_SRC emacs-lisp
   (setq header-line-format " ")
 #+END_SRC
@@ -473,9 +475,9 @@ Setting format to empty string ~" "~ gives you top padding. Changing the header 
 **** Code Blocks
 When editing source code blocks in org-mode, you will encounter many difficulties in getting the indentation right. This is due to the conflicts of org-mode's indentation with the one you're trying to do for your code (minor mode).
 
-When you're in major mode (i.e. normal code editing in its own buffer), you will not experience these issues.
+When you're in major mode (i.e., normal code editing in its own buffer), you will not experience these issues.
 
-Thus, the best way to edit such code is through ~(org-edit-special)~ (which can be invoked using ={SPC o e}=. This will open the code block in its own buffer and you'll be able to have the full normal coding experience you're used to.
+Thus, the best way to edit such code is through ~(org-edit-special)~ (which can be invoked using ={SPC o e}=). This will open the code block in its own buffer and you'll be able to have the full normal coding experience you're used to.
 
 However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Emacs bindings, and we want to do it the Vim way through ~:w~, ~:wq~, or ~:q~ (~:q!~ works too).
 
