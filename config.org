@@ -195,6 +195,17 @@ Because we do everything through keyboard commands in Emacs, this is unnecessary
   (menu-bar-mode -1)
 #+END_SRC
 
+** Smooth Scrolling
+By default, going up or down the buffer until the boundary will result in jumping to the next 10-15 lines.
+
+I prefer smooth scrolling (one line at a time).
+
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-conservatively 101
+        scroll-margin 0
+        scroll-preserve-screen-position 't)
+#+END_SRC
+
 * Behaviors
 ** Remove Backup Files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
@@ -493,7 +504,6 @@ Disables highlighting the line where the cursor is currently on.
 #+END_SRC
 
 *** TODO
-- Once cursor is in a link, expand the code to show the ~\[\[link\]\[name\]\]~
 - Indentations (Evil's =SHIFT >= and =SHIFT <=) on headings should change the number of stars, not the actual indentation of the text
 
 ** Swiper
@@ -615,8 +625,6 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     (set-frame-parameter nil 'width 82)
     (set-frame-parameter nil 'fullscreen 'fullheight))
 
-  ; TODO: This is broken; toggling on FS works, toggling off works, toggling on works,
-  ;   But then toggling off no longer works from that point formwards
   (defun toggle-fullscreen ()
     (interactive)
     (if (eq (frame-parameter nil 'fullscreen) 'fullboth)  ;tests if already fullscreened
