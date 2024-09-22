@@ -17,36 +17,36 @@ You *must* do the following to get the configuration to fully work.
 *** VTerm
 **** Linux
 ***** Debian
-#+BEGIN_SRC sh :tangle no
+#+begin_src sh :tangle no
   sudo apt install cmake libtool libvterm-dev
-#+END_SRC
+#+end_src
 
 *** Latex
 *TODO*: Make it so that this configuration doesn't break if a Latex package is not detected
 
 **** Linux
-#+BEGIN_SRC bash :tangle no
+#+begin_src bash :tangle no
   sudo apt-get install texlive-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended dvipng
-#+END_SRC
+#+end_src
 
 **** MacOS
-#+BEGIN_SRC bash :tangle no
+#+begin_src bash :tangle no
   brew install --cask mactex-no-gui
-#+END_SRC
+#+end_src
 
 *** sqlite3
 **** Linux
 ***** Debian
-#+BEGIN_SRC sh :tangle no
+#+begin_src sh :tangle no
   sudo apt install sqlite3 libsqlite3-dev
-#+END_SRC
+#+end_src
 
 *** ripgrep
 **** Linux
 ***** Debian
-#+BEGIN_SRC sh :tangle no
+#+begin_src sh :tangle no
   sudo apt install ripgrep
-#+END_SRC
+#+end_src
 
 ** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
@@ -54,10 +54,10 @@ You *must* do the following to get the configuration to fully work.
 
 Evaluate the following commands in Emacs:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle no
   (all-the-icons-install-fonts)
   (nerd-fonts-install-fonts)
-#+END_SRC
+#+end_src
 
 ** Troubleshooting
 *** Windows
@@ -71,108 +71,108 @@ This will only happen on the first attempt, close Emacs and launch it again
 
 You will need to use ~M-x~ and run the following before proceeding:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle no
   M-x package-refresh-contents
-#+END_SRC
+#+end_src
 
 * Setting Up the Package Manager
 Bring in the package management functions into the environment
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (require 'package)
-#+END_SRC
+#+end_src
 
 Set up package URLs
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                            ("org"   . "https://orgmode/elpa")
                            ("elpa"  . "https://elpa.gnu.org/packages/")))
-#+END_SRC
+#+end_src
 
 Initialize the package system and prepare it to be used
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (package-initialize)
-#+END_SRC
+#+end_src
 
 Refresh contents only if packages don't exist
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (unless package-archive-contents
     (package-refresh-contents))
-#+END_SRC
+#+end_src
 
 Initialize ~use-package~ on non-Linux platforms
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (unless (package-installed-p 'use-package)
     (package-install 'use-package))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (require 'use-package)
 
   (setq use-package-always-ensure t)
-#+END_SRC
+#+end_src
 
 * Editor
 ** Startup Message
 Start Emacs with a blank buffer instead of the welcome message.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq inhibit-startup-message t)
-#+END_SRC
+#+end_src
 
 ** Line Numbers
 *** Relative Line Numbers
 Better for using Vim commands.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq display-line-numbers-type 'relative)
-#+END_SRC
+#+end_src
 
 *** Enable Line Numbers
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (global-display-line-numbers-mode t)
-#+END_SRC
+#+end_src
 
 *** Set Line Number Width
 There is some annoying behavior where once you scroll to a line number with an extra digit, the entire code buffer will shift one character to the right to accomodate for this new line number digit.
 
 Instead, we will set the size of this to be the maximum amount of digits necessary for our document, and then fix this in size.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq display-line-numbers-width-start t)
-#+END_SRC
+#+end_src
 
 **** Exceptions
 For the terminal, line numbers add noise and it's better not to have them.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (dolist (mode '(vterm-mode-hook))
     (add-hook mode (lambda ()
                      (display-line-numbers-mode 0))))
-#+END_SRC
+#+end_src
 
 *** Column Number Mode
 Displays the horizontal char position.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq column-number-mode t)
-#+END_SRC
+#+end_src
 
 ** Text Wrapping
 I hate scrolling horizontally.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (add-hook 'text-mode-hook 'visual-line-mode)
-#+END_SRC
+#+end_src
 
 ** Font
 We create a function to set our font
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (defun lv/set-font (font-list height)
     "Set the first available font from FONT-LIST with HEIGHT"
     (catch 'font-found
@@ -181,17 +181,17 @@ We create a function to set our font
           (set-face-attribute 'default nil :font font :height height)
           (throw 'font-found font)))
       (message "No font from the list is available!")))
-#+END_SRC
+#+end_src
 
 We choose the size and fonts depending on the system type
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (cond
    ((eq system-type 'gnu/linux)
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 120))
    ((eq system-type 'darwin)    ; MacOS
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 150)))
-#+END_SRC
+#+end_src
 
 ** Toolbar
 *** Disabling the Menu Bar
@@ -199,40 +199,40 @@ The menu bar is what has the /File/, /Edit/, /Options/, /Help/, etc. options at 
 
 Because we do everything through keyboard commands in Emacs, this is unnecessary and thus we disable it
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (menu-bar-mode -1)
-#+END_SRC
+#+end_src
 
 ** Smooth Scrolling
 By default, going up or down the buffer until the boundary will result in jumping to the next 10-15 lines.
 
 I prefer smooth scrolling (one line at a time).
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq scroll-conservatively 101
         scroll-margin 0
         scroll-preserve-screen-position 't)
-#+END_SRC
+#+end_src
 
 * Behaviors
 ** Remove Backup Files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq make-backup-files nil)
-#+END_SRC
+#+end_src
 
 ** Require Final Newline
 Every file should have a newline at the very end
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq mode-require-final-newline t)
-#+END_SRC
+#+end_src
 
 ** Rest of the config
 This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (scroll-bar-mode -1)    ; Disable visible scrollbar
   (tool-bar-mode -1)      ; Disable toolbar
   (tooltip-mode -1)       ; Disable tooltips
@@ -313,26 +313,26 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
     :diminish which-key-mode
     :config
     (setq which-key-idle-delay 0.3)) ; seconds
-#+END_SRC
+#+end_src
 
 * Modules
 ** All The Icons
 Enables icons via specialized fonts
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (use-package all-the-icons)
-#+END_SRC
+#+end_src
 
 *NOTE*: When running this configuration for the first time, you will need to run the following
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+begin_src emacs-lisp :tangle no
   M-x all-the-icons-install-fonts
-#+END_SRC
+#+end_src
 
 ** Helpful
 Alternative help screen in Emacs that gives better information on possible values for variables and functions, as well as default values
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (use-package helpful
     :ensure t
     :custom
@@ -343,18 +343,18 @@ Alternative help screen in Emacs that gives better information on possible value
     ([remap describe-command] . helpful-command)
     ([remap describe-variable] . counsel-describe-variable)
     ([remap describe-key] . helpful-key))
-#+END_SRC
+#+end_src
 
 ** SQLite3
 This is depended by =magit=. Please install the necessary system modules beforehand (check Pre-requisites for more information)
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (use-package sqlite3
     :ensure t)
-#+END_SRC
+#+end_src
 
 ** Git
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   ;; Git porcelain
   (use-package magit
     :commands (magit-status magit-get-current-branch)
@@ -364,7 +364,7 @@ This is depended by =magit=. Please install the necessary system modules beforeh
   (add-hook 'with-editor-mode-hook 'evil-insert-state) ; immediately start in insert mode when writing commit message in Magit
 
   (use-package forge)
-#+END_SRC
+#+end_src
 
 *** TODO
 - [ ] Make ~<escape>~ key abort (give it the same behavior as ~C-g~) in =magit=
@@ -380,10 +380,10 @@ A templating system. Allows you to type ~>TEMPLATE~ and then press ~TAB~ to expa
 #+end_src
 
 ** Org-mode
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (use-package org
     :ensure nil)
-#+END_SRC
+#+end_src
 
 *** Templates
 Use ~yasnippet~
@@ -409,30 +409,30 @@ Open ~org-edit-special~ if generating a template with a code block
 **** Show Leading Stars in Headers
 I like seeing all the stars so I know which indentation level we're at.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (add-hook 'org-mode-hook
             (lambda ()
               (setq-local org-hide-leading-stars nil)))
-#+END_SRC
+#+end_src
 
 **** Show Links
 Modifying links in org-mode has been a real pain due to its default behavior of hiding the link. I want everything to show up.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq org-descriptive-links nil)
-#+END_SRC
+#+end_src
 
 **** Bullet Points
 Replace the ~-~ symbol with ~•~.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-#+END_SRC
+#+end_src
 
 **** Automatically Render $LaTeX$ Fragments
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (defun lv/org-latex-preview-auto ()
     "Automatically refresh LaTeX fragments in the current buffer."
     (when (derived-mode-p 'org-mode)
@@ -447,45 +447,45 @@ Replace the ~-~ symbol with ~•~.
 
   ;; Scale LaTeX font
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5))
-#+END_SRC
+#+end_src
 
 **** Render Entire Document Before Editing
-There's a bug where if you jump to any part of a document, code blocks will not be rendered until both its ~#+BEGIN_SRC~ and ~#+END_SRC~ tags are encountered.
+There's a bug where if you jump to any part of a document, code blocks will not be rendered until both its ~#+begin_src~ and ~#+end_src~ tags are encountered.
 
 By rendering the entire document, code blocks will appear as they should, new code blocks will not have this problem since as you write them, you will 'encounter' it.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (defun lv-org-render-before-editing () "Render whole Org buffer before editing"
     (read-only-mode 1)   ; Make the buffer temporarily read-only
     (font-lock-ensure)   ; Ensure the whole buffer is rendered
     (read-only-mode -1)) ; Allow editing again
 
   (add-hook 'org-mode-hook 'lv-org-render-before-editing)
-#+END_SRC
+#+end_src
 
 *** Padding
 **** Line Spacing
 Per buffer line spacing can be set using the variable ~line-spacing~. Something like ~0.1~ goes well here.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq-default line-spacing 0.1)
-#+END_SRC
+#+end_src
 
 **** Top Padding
 Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq header-line-format " ")
-#+END_SRC
+#+end_src
 
 **** Side Padding
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (lambda ()
     (progn
       (setq left-margin-width 2)
       (setq right-margin-width 2)
       (set-window-buffer nil (current-buffer))))
-#+END_SRC
+#+end_src
 
 *** Evil (Vim)
 **** Code Blocks
@@ -497,7 +497,7 @@ Thus, the best way to edit such code is through ~(org-edit-special)~ (which can 
 
 However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Emacs bindings, and we want to do it the Vim way through ~:w~, ~:wq~, or ~:q~ (~:q!~ works too).
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (defun lv/org-edit-src-save-only ()
     "Save changes in the special edit buffer without exiting."
     (interactive)
@@ -534,10 +534,10 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
 
   ;; Add hook to org-src-mode to set up the custom commands
   (add-hook 'org-src-mode-hook 'lv/setup-org-src-mode-hook)
-#+END_SRC
+#+end_src
 
 *** Other Tweaks
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq org-startup-indented t
         org-ellipsis "  " ; folding symbol
         org-pretty-entities t
@@ -546,16 +546,16 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
         org-fontify-whole-heading-line t
         org-fontify-done-headline t
         org-fontify-quote-and-verse-blocks t)
-#+END_SRC
+#+end_src
 
 **** Disable ~hl-line-mode~
 Disables highlighting the line where the cursor is currently on.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (add-hook 'org-mode-hook
             (lambda ()
               (hl-line-mode -1)))
-#+END_SRC
+#+end_src
 
 *** TODO
 - Indentations (Evil's =SHIFT >= and =SHIFT <=) on headings should change the number of stars, not the actual indentation of the text
@@ -565,7 +565,7 @@ Swiper is used to search within the current buffer
 
 With the default behavior, pressing =n= goes to the previous word whereas =C-n= goes to the next word. In Vim, it's =n= to go next and =Shift n= to go before
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (use-package swiper
     :after ivy
     :config
@@ -573,27 +573,27 @@ With the default behavior, pressing =n= goes to the previous word whereas =C-n= 
     (evil-define-key 'normal 'global
       (kbd "n") 'isearch-repeat-forward
       (kbd "N") 'isearch-repeat-backward))
-#+END_SRC
+#+end_src
 
 ** vterm
 Allows you to emulate the terminal in Emacs
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (use-package vterm
     :ensure t)
-#+END_SRC
+#+end_src
 
 And I like having Emacs startup with the terminal
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (add-hook 'emacs-startup-hook 'vterm)
-#+END_SRC
+#+end_src
 
 * Keybindings
 ** Leader Key
 I like to use keybindings by pressing a leader key, which I map as the spacebar.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   ;; Setup keybindings with a leader key
   (use-package general
     :config
@@ -604,27 +604,27 @@ I like to use keybindings by pressing a leader key, which I map as the spacebar.
       :keymaps 'override
       :prefix "SPC"
       :global-prefix "C-SPC"))
-#+END_SRC
+#+end_src
 
 ** =M-x=
 The Meta key (=M-x=) is used to evaluate commands.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (lv/leader-keys
     ":" '(counsel-M-x :which-key "M-x"))
-#+END_SRC
+#+end_src
 
 ** Buffer
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (lv/leader-keys
     "b"  '(:ignore b              :which-key "buffer")
     "bs" '(counsel-switch-buffer  :which-key "switch")
     "be" '(eval-buffer            :which-key "evaluate")
     "bk" '(kill-buffer-and-window :which-key "kill"))
-#+END_SRC
+#+end_src
 
 ** File
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (lv/leader-keys
     "f"  '(:ignore f         :which-key "file")
     "ff" '(counsel-find-file :which-key "find")
@@ -632,44 +632,44 @@ The Meta key (=M-x=) is used to evaluate commands.
             (find-file (concat user-emacs-directory "config.org"))
                              :which-key "open config")
     "fg" '(counsel-rg        :which-key "ripgrep"))
-#+END_SRC
+#+end_src
 
 ** Git
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (lv/leader-keys
     "g"  '(:ignore g    :which-key "git")
     "gg" '(magit-status :which-key "status"))
-#+END_SRC
+#+end_src
 
 ** Help
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (lv/leader-keys
     "h"  '(:ignore h                 :which-key "help")
     "hf" '(counsel-describe-function :which-key "function")
     "hv" '(counsel-describe-variable :which-key "variable"))
-#+END_SRC
+#+end_src
 
 ** Org-mode
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (lv/leader-keys
     "o"  '(:ignore o                     :which-key "org")
     ; "oi" '(:ignore oi :which-key "insert")
     "oe" '(org-edit-special              :which-key "edit special")
     "oi" '(org-insert-structure-template :which-key "insert"))
-#+END_SRC
+#+end_src
 
 ** Terminal
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (lv/leader-keys
     "t" '(vterm :which-key "terminal"))
-#+END_SRC
+#+end_src
 
 ** Window
 The following is a helper function for toggling full screen on and off
 
 As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (defun lv/fullscreen ()
     (interactive)
     (set-frame-parameter nil 'fullscreen 'fullboth))
@@ -684,9 +684,9 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     (if (eq (frame-parameter nil 'fullscreen) 'fullboth)  ;tests if already fullscreened
         (lv/non-fullscreen)
       (lv/fullscreen)))
-#+END_SRC
+#+end_src
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (lv/leader-keys
     "w"  '(:ignore w          :which-key "window")
     "wf" '(toggle-fullscreen  :which-key "toggle fullscreen")
@@ -696,4 +696,4 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     "wl" '(evil-window-right  :which-key "move right")
     "ws" '(evil-window-split  :which-key "split horizontally")
     "wv" '(evil-window-vsplit :which-key "split vertically"))
-#+END_SRC
+#+end_src
