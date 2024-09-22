@@ -371,7 +371,22 @@ This is depended by =magit=. Please install the necessary system modules beforeh
 
 ** Org-mode
 #+BEGIN_SRC emacs-lisp
-  (use-package org)
+  (use-package org
+    :ensure t
+    :config
+    (require 'org-tempo)
+
+    (add-hook 'org-mode-hook #'lv/add-org-templates))
+#+END_SRC
+
+*** Templates
+Add code block templates
+
+#+BEGIN_SRC emacs-lisp
+  (defun lv/add-org-templates ()
+    "Add custom structure templates for Org mode."
+    (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+    (add-to-list 'org-structure-template-alist '("cpp" . "src cpp")))
 #+END_SRC
 
 *** Text
