@@ -229,6 +229,15 @@ Every file should have a newline at the very end
   (setq mode-require-final-newline t)
 #+end_src
 
+** Use ~y~ and ~n~ for Prompts
+I don't like needing to type the entire word ~yes~ or ~no~ and then pressing ~RET~ when prompted on things like if I want to save a file or not.
+
+It's much easier to just use ~y~ and ~n~.
+
+#+begin_src emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
 ** Rest of the config
 This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config.
 
