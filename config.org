@@ -110,10 +110,10 @@ Initialize ~use-package~ on non-Linux platforms
     (package-install 'use-package))
 #+END_SRC
 
-  #+BEGIN_SRC emacs-lisp
-    (require 'use-package)
+#+BEGIN_SRC emacs-lisp
+  (require 'use-package)
 
-    (setq use-package-always-ensure t)
+  (setq use-package-always-ensure t)
 #+END_SRC
 
 * Editor
@@ -235,10 +235,6 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
     (evil-mode 1) ; turn on Evil mode
     ; (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ; I think this is the same as just hitting escape when you're not in insert mode
     ; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
-    ;; Use visual line motions even outside of visual-line-mode buffers
-    (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-    (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
     (evil-set-initial-state 'messages-buffer-mode 'normal)
     (evil-set-initial-state 'dashboard-mode 'normal)
