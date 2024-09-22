@@ -369,25 +369,29 @@ This is depended by =magit=. Please install the necessary system modules beforeh
 *** TODO
 - [ ] Make ~<escape>~ key abort (give it the same behavior as ~C-g~) in =magit=
 
+** yasnippet
+A templating system. Allows you to type ~>TEMPLATE~ and then press ~TAB~ to expand the template
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :ensure t
+    :config
+    (yas-global-mode 1))
+#+end_src
+
 ** Org-mode
 #+BEGIN_SRC emacs-lisp
   (use-package org
-    :ensure t
-    :config
-    (require 'org-tempo)
-
-    (add-hook 'org-mode-hook #'lv/add-org-templates))
+    :ensure nil)
 #+END_SRC
 
 *** Templates
-Add code block templates
+Use ~yasnippet~
 
-#+BEGIN_SRC emacs-lisp
-  (defun lv/add-org-templates ()
-    "Add custom structure templates for Org mode."
-    (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-    (add-to-list 'org-structure-template-alist '("cpp" . "src cpp")))
-#+END_SRC
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook #'yas-minor-mode)
+#+end_src
+
 
 *** Text
 **** Show Leading Stars in Headers
