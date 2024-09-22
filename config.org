@@ -488,7 +488,7 @@ Setting format to empty string ~" "~ gives you top padding. Changing the header 
 #+end_src
 
 *** Evil (Vim)
-**** Code Blocks
+**** Code Blocks (Edit Special)
 When editing source code blocks in org-mode, you will encounter many difficulties in getting the indentation right. This is due to the conflicts of org-mode's indentation with the one you're trying to do for your code (minor mode).
 
 When you're in major mode (i.e., normal code editing in its own buffer), you will not experience these issues.
@@ -534,6 +534,41 @@ However, the saving (={C-c '}=) and aborting (={C-c C-k}=) commands are ugly Ema
 
   ;; Add hook to org-src-mode to set up the custom commands
   (add-hook 'org-src-mode-hook 'lv/setup-org-src-mode-hook)
+#+end_src
+
+**** Header Indentation
+When pressing ~>~ or ~<~ in Vim, it changes the indentation of your text. However, when on an org-mode header, I'd like this to change the asterisks on the header and not the actual indentation of the header.
+
+I want this feature to be only available if the cursor is on a header line. If I'm modifying some text and want to change the indentation of bullet points for instance, I would not want indenation to change the header above my text.
+
+#+begin_src emacs-lisp
+  (use-package org
+    :config
+    (with-eval-after-load 'evil
+      (defun lv/org-header-p ()
+        "Check if the current line is an Org header."
+        (save-excursion
+          (beginning-of-line)
+          (looking-at-p org-outline-regexp)))
+
+      (defun lv/org-demote-or-indent ()
+        "Demote Org header if on header, otherwise indent region or insert tab."
+        (interactive)
+        (if (lv/org-header-p)
+            (org-demote-subtree)
+          (evil-shift-right-line 1)))
+
+      (defun lv/org-promote-or-outdent ()
+        "Promote Org header if on header, otherwise outdent region or insert tab."
+        (interactive)
+        (if (lv/org-header-p)
+            (org-promote-subtree)
+          (evil-shift-left-line 1)))
+
+      ;; Remap > and < to promote/demote header level in org-mode when on a header
+      (evil-define-key 'normal org-mode-map
+        (kbd ">") 'lv/org-demote-or-indent
+        (kbd "<") 'lv/org-promote-or-outdent)))
 #+end_src
 
 *** Other Tweaks
@@ -653,7 +688,6 @@ The Meta key (=M-x=) is used to evaluate commands.
 #+begin_src emacs-lisp
   (lv/leader-keys
     "o"  '(:ignore o                     :which-key "org")
-    ; "oi" '(:ignore oi :which-key "insert")
     "oe" '(org-edit-special              :which-key "edit special")
     "oi" '(org-insert-structure-template :which-key "insert"))
 #+end_src
