@@ -188,7 +188,7 @@ We choose the size and fonts depending on the system type
 #+BEGIN_SRC emacs-lisp
   (cond
    ((eq system-type 'gnu/linux)
-    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 150))
+    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 120))
    ((eq system-type 'darwin)    ; MacOS
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 150)))
 #+END_SRC
@@ -313,8 +313,26 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
     :diminish which-key-mode
     :config
     (setq which-key-idle-delay 0.3)) ; seconds
+#+END_SRC
 
-  ;; Alternative help screen
+* Modules
+** All The Icons
+Enables icons via specialized fonts
+
+#+BEGIN_SRC emacs-lisp
+  (use-package all-the-icons)
+#+END_SRC
+
+*NOTE*: When running this configuration for the first time, you will need to run the following
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  M-x all-the-icons-install-fonts
+#+END_SRC
+
+** Helpful
+Alternative help screen in Emacs that gives better information on possible values for variables and functions, as well as default values
+
+#+BEGIN_SRC emacs-lisp
   (use-package helpful
     :ensure t
     :custom
@@ -325,13 +343,8 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
     ([remap describe-command] . helpful-command)
     ([remap describe-variable] . counsel-describe-variable)
     ([remap describe-key] . helpful-key))
-
-  ;; NOTE: The first time you load this config onto a new machine, you'll need to run the following:
-  ;; M-x all-the-icons-install-fonts
-  (use-package all-the-icons)
 #+END_SRC
 
-* Modules
 ** SQLite3
 This is depended by =magit=. Please install the necessary system modules beforehand (check Pre-requisites for more information)
 
