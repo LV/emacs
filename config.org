@@ -214,6 +214,12 @@ I prefer smooth scrolling (one line at a time).
         scroll-preserve-screen-position 't)
 #+end_src
 
+** Theme
+#+begin_src emacs-lisp
+  (use-package doom-themes
+    :init (load-theme 'doom-molokai t))
+#+end_src
+
 * Behaviors
 ** Remove Backup Files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
@@ -250,9 +256,6 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
   (setq visible-bell nil) ; If true, replaces sound bell for visual cue when performing action that can't be done
                           ;   (e.g. backspacing on the first line of the document, down arrow on last line, etc)
                           ; On MacOS, this makes a large caution triangle which can be very annoying, so perhaps disable if using Mac
-
-
-  (load-theme 'tango-dark)
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
 
@@ -307,10 +310,6 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
     :ensure t
     :init (doom-modeline-mode 1)
     :custom (doom-modeline-height 15))
-
-  ;; Themes for Emacs
-  (use-package doom-themes
-    :init (load-theme 'doom-Iosvkem t))
 
   ;; Colorizes parenthesis and braces
   (use-package rainbow-delimiters
