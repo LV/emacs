@@ -108,9 +108,7 @@ Initialize ~use-package~ on non-Linux platforms
 #+begin_src emacs-lisp
   (unless (package-installed-p 'use-package)
     (package-install 'use-package))
-#+end_src
 
-#+begin_src emacs-lisp
   (require 'use-package)
 
   (setq use-package-always-ensure t)
@@ -214,10 +212,25 @@ I prefer smooth scrolling (one line at a time).
         scroll-preserve-screen-position 't)
 #+end_src
 
-** Theme
+** Aesthetics
+*** Theme
 #+begin_src emacs-lisp
   (use-package doom-themes
     :init (load-theme 'doom-molokai t))
+#+end_src
+
+*** Icons
+Enable icons via specialized fonts
+
+#+begin_src emacs-lisp
+  (use-package all-the-icons)
+#+end_src
+
+*NOTE*: When running this configuration for the first time, you will need to run the following
+
+#+begin_src emacs-lisp :tangle no
+  M-x all-the-icons-install-fonts
+  M-x nerd-icons-install-fonts
 #+end_src
 
 * Behaviors
@@ -324,19 +337,6 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 #+end_src
 
 * Modules
-** All The Icons
-Enables icons via specialized fonts
-
-#+begin_src emacs-lisp
-  (use-package all-the-icons)
-#+end_src
-
-*NOTE*: When running this configuration for the first time, you will need to run the following
-
-#+begin_src emacs-lisp :tangle no
-  M-x all-the-icons-install-fonts
-#+end_src
-
 ** Helpful
 Alternative help screen in Emacs that gives better information on possible values for variables and functions, as well as default values
 
