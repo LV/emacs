@@ -339,19 +339,27 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 
 Main documentation can be found [[https://emacs-lsp.github.io/lsp-mode/][here]].
 
+** Add-ons
+*** Header Breadcrumb
+We add a breadcrumb to show the relative path of our current buffer in regards to the rest of the project
+
+#+begin_src emacs-lisp
+  (defun lv/lsp-setup-mode ()
+    (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+    (setq lsp-headerline-breadcrumb-enable t))
+#+end_src
+
 ** Installation
 Install and use ~lsp-mode~
 
 #+begin_src emacs-lisp
   (use-package lsp-mode
+    :commands (lsp lsp-defererd)
+    :hook (lsp-mode . lv/lsp-setup-mode)
     :init
-    ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
     (setq lsp-keymap-prefix "C-c l")
-    :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-           ; (XXX-mode . lsp)
-           ;; if you want which-key integration
-           (lsp-mode . lsp-enable-which-key-integration))
-    :commands lsp lsp-deferred)
+    :config
+    (lsp-enable-which-key-integration t))
 #+end_src
 
 Add LSP UI Mode
