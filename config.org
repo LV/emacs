@@ -543,7 +543,6 @@ We want to return to normal mode (instead of insert mode) once we leave ~org-edi
   (advice-add 'org-edit-src-exit :after #'lv/exit-org-edit-special-normal-state)
 #+end_src
 
-
 *** Text
 **** Show Leading Stars in Headers
 I like seeing all the stars so I know which indentation level we're at.
@@ -731,6 +730,30 @@ Disables highlighting the line where the cursor is currently on.
               (hl-line-mode -1)))
 #+end_src
 
+*** Org-roam
+Org-roam is an extension that makes it easy to create topic-focused org files and link them together using backlinks.
+
+Org-roam treats information as a node in a network (like a brain) rather than a heirarchy like a traditional org document
+
+SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on how to install
+
+*NOTE*: Make sure the =~/org/roam= directory exists
+
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory "~/org/roam")
+    (org-roam-completion-everywhere t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           :map org-mode-map
+           ("C-M-i"   . completion-at-point))
+    :config
+    (org-roam-setup))
+#+end_src
+
 ** Projectile
 Projectile is a way of organizing your projects
 
@@ -837,7 +860,6 @@ When I open ~flymake-show-buffer-diagnostics~, I want the cursor to move to the 
     (other-window 1))
 #+end_src
 
-
 #+begin_src emacs-lisp
   (lv/leader-keys
     "c"   '(:ignore c                                    :which-key "code")
@@ -892,9 +914,16 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 ** Org-mode
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "o"  '(:ignore o                     :which-key "org")
-    "oe" '(org-edit-special              :which-key "edit special")
-    "oi" '(org-insert-structure-template :which-key "insert"))
+    "o"   '(:ignore o                     :which-key "org")
+    "oc"  '(:ignore c                     :which-key "create")
+    "oci" '(org-id-get-create             :which-key "id")
+    "oe"  '(org-edit-special              :which-key "edit special")
+    "oi"  '(org-insert-structure-template :which-key "insert")
+    "or"  '(:ignore or                    :which-key "roam")
+    "ora" '(org-roam-alias-add            :which-key "add alias")
+    "orf" '(org-roam-node-find            :which-key "find")
+    "ori" '(org-roam-node-insert          :which-key "insert")
+    "ort" '(org-roam-buffer-toggle        :which-key "toggle buffer"))
 #+end_src
 
 ** Projectile
