@@ -15,13 +15,12 @@ You *must* do the following to get the configuration to fully work.
 
 ** Programs
 *** VTerm
-**** Linux
-***** Debian
+**** Debian
 #+begin_src sh :tangle no
   sudo apt install cmake libtool libvterm-dev
 #+end_src
 
-***** MacOS
+**** MacOS
 #+begin_src sh :tangle no
   brew install cmake
 #+end_src
@@ -40,15 +39,13 @@ You *must* do the following to get the configuration to fully work.
 #+end_src
 
 *** sqlite3
-**** Linux
-***** Debian
+**** Debian
 #+begin_src sh :tangle no
   sudo apt install sqlite3 libsqlite3-dev
 #+end_src
 
 *** ripgrep
-**** Linux
-***** Debian
+**** Debian
 #+begin_src sh :tangle no
   sudo apt install ripgrep
 #+end_src
