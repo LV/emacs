@@ -701,10 +701,7 @@ Projectile is a way of organizing your projects
     (projectile-mode 1)
     (setq projectile-switch-project-action #'projectile-dired)
     :bind-keymap
-    ("C-c p" . projectile-command-map)
-    :init
-    (when (file-directory-p "~/Dev")
-      (setq projectile-project-search-path '("~/Dev"))))
+    ("C-c p" . projectile-command-map))
 #+end_src
 
 ** Swiper
@@ -849,9 +846,9 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 ** Projectile
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "p" '(:keymap projectile-command-map
-          :package projectile
-          :which-key "project"))
+    "p"  '(:ignore p                    :which-key "project")
+    "pa" '(projectile-add-known-project :which-key "add")
+    "ps" '(projectile-switch-project    :which-key "switch"))
 #+end_src
 
 ** Terminal
