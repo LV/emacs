@@ -196,8 +196,8 @@ We choose the size and fonts depending on the system type
   (cond
    ((eq system-type 'gnu/linux)
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 120))
-   ((eq system-type 'darwin)    ; MacOS
-    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 150)))
+   ((eq system-type 'darwin) ; MacOS
+    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 200)))
 #+end_src
 
 ** Toolbar
