@@ -509,8 +509,31 @@ We want to disable this.
   (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 #+end_src
 
+***** Show ~ediff~ Diffs Vertically
+The default behavior is that diffs are split horizontally (-). I prefer vertical splits (|) when viewing diffs as that's probably just what I've been used to with GitHub's UI.
+
+I have no idea why, but the following will change the behavior to have vertical splits.
+
 #+begin_src emacs-lisp
   (setq ediff-split-window-function 'split-window-horizontally)
+#+end_src
+
+***** Add Better Visibility to ~ediff~ Diffs
+This will add a faint background to lines with merge-conflicting diffs
+
+#+begin_src emacs-lisp
+  (custom-set-faces
+   '(ediff-current-diff-A ((t (:background "yellow" :foreground "black"))))
+   '(ediff-current-diff-B ((t (:background "yellow" :foreground "black"))))
+   '(ediff-fine-diff-A ((t (:background "orange" :foreground "black"))))
+   '(ediff-fine-diff-B ((t (:background "orange" :foreground "black")))))
+#+end_src
+
+***** Refine Differences in ~ediff~
+Narrow down the exact words or characters that differ
+
+#+begin_src emacs-lisp
+  (setq ediff-auto-refine 'on)
 #+end_src
 
 *** Forge
