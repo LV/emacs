@@ -362,12 +362,6 @@ Install and use ~lsp-mode~
     (lsp-enable-which-key-integration t))
 #+end_src
 
-Add LSP UI Mode
-
-#+begin_src emacs-lisp
-  (use-package lsp-ui :commands lsp-ui-mode)
-#+end_src
-
 Add ~ivy~ integration
 
 #+begin_src emacs-lisp
@@ -443,6 +437,16 @@ And then we can install and use ~lsp-pyright~
 #+begin_src emacs-lisp
   (use-package company-box
     :hook (company-mode . company-box-mode))
+#+end_src
+
+** LSP UI
+Additional UI integrations.
+
+See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
+
+#+begin_src emacs-lisp
+  (use-package lsp-ui
+    :hook (lsp-mode . lsp-ui-mode))
 #+end_src
 
 * Modules
