@@ -371,13 +371,15 @@ Add LSP UI Mode
 Add ~ivy~ integration
 
 #+begin_src emacs-lisp
-  (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+  (use-package lsp-ivy
+    :commands lsp-ivy-workspace-symbol)
 #+end_src
 
 Add ~treemacs~ integration
 
 #+begin_src emacs-lisp
-  (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+  (use-package lsp-treemacs
+    :commands lsp-treemacs-errors-list)
 #+end_src
 
 Use debugger
@@ -391,8 +393,8 @@ Add ~which-key~ integration
 
 #+begin_src emacs-lisp
   (use-package which-key
-      :config
-      (which-key-mode))
+    :config
+    (which-key-mode))
 #+end_src
 
 ** Languages
