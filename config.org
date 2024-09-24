@@ -72,13 +72,17 @@ Don't use Windows (and if you do, use WSL).
 
 This will only happen on the first attempt, close Emacs and launch it again
 
-*** Package =compat= unavailable
+*** ~package-refresh-contents~
 
-You will need to use ~M-x~ and run the following before proceeding:
+If something breaks when installing new packages, chances are that you'll need to run:
 
 #+begin_src emacs-lisp :tangle no
   M-x package-refresh-contents
 #+end_src
+
+**** Examples of errors that this will fix
+- Package =compat= unavailable
+- Package =foo= not found in MELPA
 
 * Setting Up the Package Manager
 Bring in the package management functions into the environment
