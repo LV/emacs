@@ -663,6 +663,22 @@ Disables highlighting the line where the cursor is currently on.
               (hl-line-mode -1)))
 #+end_src
 
+** Projectile
+Projectile is a way of organizing your projects
+
+#+begin_src emacs-lisp
+  (use-package projectile
+    :diminish projectile-mode
+    :config
+    (projectile-mode 1)
+    (setq projectile-switch-project-action #'projectile-dired)
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :init
+    (when (file-directory-p "~/Dev")
+      (setq projectile-project-search-path '("~/Dev"))))
+#+end_src
+
 ** Swiper
 Swiper is used to search within the current buffer
 
@@ -768,6 +784,14 @@ The Meta key (=M-x=) is used to evaluate commands.
     "o"  '(:ignore o                     :which-key "org")
     "oe" '(org-edit-special              :which-key "edit special")
     "oi" '(org-insert-structure-template :which-key "insert"))
+#+end_src
+
+** Projectile
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "p" '(:keymap projectile-command-map
+          :package projectile
+          :which-key "project"))
 #+end_src
 
 ** Terminal
