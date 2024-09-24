@@ -55,3 +55,4 @@ config.el
 eln-cache/
 custom.el
 ltximg/
+.lsp-session*
