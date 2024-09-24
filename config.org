@@ -86,7 +86,6 @@ Set up package URLs
 
 #+begin_src emacs-lisp
   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                           ("org"   . "https://orgmode/elpa")
                            ("elpa"  . "https://elpa.gnu.org/packages/")))
 #+end_src
 
