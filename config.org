@@ -363,13 +363,6 @@ Install and use ~lsp-mode~
     (lsp-enable-which-key-integration t))
 #+end_src
 
-Add ~ivy~ integration
-
-#+begin_src emacs-lisp
-  (use-package lsp-ivy
-    :commands lsp-ivy-workspace-symbol)
-#+end_src
-
 Use debugger
 
 #+begin_src emacs-lisp
@@ -425,7 +418,7 @@ And then we can install and use ~lsp-pyright~
             ("<return>"   . newline))
     :custom
     (company-minimum-prefix-length 1)
-    (company-idle-delay 0.0))
+    (company-idle-delay 0.0)) ; seconds
 #+end_src
 
 #+begin_src emacs-lisp
@@ -447,6 +440,13 @@ See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
 #+begin_src emacs-lisp
   (use-package lsp-treemacs
     :commands lsp-treemacs-errors-list)
+#+end_src
+
+** Ivy
+
+#+begin_src emacs-lisp
+  (use-package lsp-ivy
+    :commands lsp-ivy-workspace-symbol)
 #+end_src
 
 * Modules
