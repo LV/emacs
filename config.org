@@ -147,7 +147,8 @@ Instead, we will set the size of this to be the maximum amount of digits necessa
 For the terminal, line numbers add noise and it's better not to have them.
 
 #+begin_src emacs-lisp
-  (dolist (mode '(vterm-mode-hook))
+  (dolist (mode '(treemacs-mode-hook
+                  vterm-mode-hook))
     (add-hook mode (lambda ()
                      (display-line-numbers-mode 0))))
 #+end_src
@@ -369,13 +370,6 @@ Add ~ivy~ integration
     :commands lsp-ivy-workspace-symbol)
 #+end_src
 
-Add ~treemacs~ integration
-
-#+begin_src emacs-lisp
-  (use-package lsp-treemacs
-    :commands lsp-treemacs-errors-list)
-#+end_src
-
 Use debugger
 
 #+begin_src emacs-lisp
@@ -447,6 +441,12 @@ See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
 #+begin_src emacs-lisp
   (use-package lsp-ui
     :hook (lsp-mode . lsp-ui-mode))
+#+end_src
+
+** Treemacs
+#+begin_src emacs-lisp
+  (use-package lsp-treemacs
+    :commands lsp-treemacs-errors-list)
 #+end_src
 
 * Modules
@@ -824,14 +824,18 @@ When I open ~flymake-show-buffer-diagnostics~, I want the cursor to move to the 
 
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "c"  '(:ignore c                                    :which-key "code")
-    "cd" '(lsp-find-definition                          :which-key "definition")
-    "cD" '(lsp-find-declarations                        :which-key "declaration")
-    "cf" '(lsp-format-buffer                            :which-key "format")
-    "cg" '(lv/flymake-show-buffer-diagnostics-and-focus :which-key "diagnostics")
-    "ci" '(lsp-find-implementation                      :which-key "implementation")
-    "cr" '(lsp-find-references                          :which-key "references")
-    "ct" '(lsp-find-type-definition                     :which-key "type definition"))
+    "c"   '(:ignore c                                    :which-key "code")
+    "cd"  '(lsp-find-declarations                        :which-key "declaration")
+    "cD"  '(lsp-find-definition                          :which-key "definition")
+    "cf"  '(lsp-format-buffer                            :which-key "format")
+    "cg"  '(lv/flymake-show-buffer-diagnostics-and-focus :which-key "diagnostics")
+    "ci"  '(lsp-find-implementation                      :which-key "implementation")
+    "cr"  '(lsp-find-references                          :which-key "references")
+    "ct"  '(:ignore ct                                   :which-key "treemacs")
+    "ctr" '(lsp-treemacs-references                      :which-key "references")
+    "cts" '(lsp-treemacs-symbols                         :which-key "symbols")
+    "ctt" '(treemacs                                     :which-key "tree")
+    "cT"  '(lsp-find-type-definition                     :which-key "type definition"))
 #+end_src
 
 *** TODO
