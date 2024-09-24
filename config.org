@@ -415,6 +415,29 @@ And then we can install and use ~lsp-pyright~
                             (lsp-deferred))))
 #+end_src
 
+** Company Mode
+Before, we'd need to invoke ~M-x completion-at-point~ everytime to get the buffer of autocompletable things.
+
+We get this automatically with ~company-mode~.
+
+#+begin_src emacs-lisp
+  (use-package company
+    :after lsp-mode
+    :hook (prog-mode . company-mode)
+    :bind (:map company-active-map
+            ("<tab>" . company-complete-selection))
+          (:map lsp-mode-map
+            ("<tab>" . company-indent-or-complete-common))
+    :custom
+    (company-minimum-prefix-length 1)
+    (company-idle-delay 0.0))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+#+end_src
+
 * Modules
 ** Helpful
 Alternative help screen in Emacs that gives better information on possible values for variables and functions, as well as default values
