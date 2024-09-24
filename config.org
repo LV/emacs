@@ -416,18 +416,23 @@ And then we can install and use ~lsp-pyright~
 #+end_src
 
 ** Company Mode
-Before, we'd need to invoke ~M-x completion-at-point~ everytime to get the buffer of autocompletable things.
+- Before, we'd need to invoke ~M-x completion-at-point~ everytime to get the buffer of autocompletable things
+  - We get this automatically with ~company-mode~
 
-We get this automatically with ~company-mode~.
+- I like autocompleting by pressing ~TAB~ (the default behavior is pressing ~ENTER~)
+  - Even if you rebind this to ~TAB~, the default behavior remains
+    - I've binding ~ENTER~ to ~newline~ to fix this
 
 #+begin_src emacs-lisp
   (use-package company
     :after lsp-mode
     :hook (prog-mode . company-mode)
     :bind (:map company-active-map
-            ("<tab>" . company-complete-selection))
+            ("<tab>"      . company-complete-selection)
+            ("<return>"   . newline))
           (:map lsp-mode-map
-            ("<tab>" . company-indent-or-complete-common))
+            ("<tab>"      . company-indent-or-complete-common)
+            ("<return>"   . newline))
     :custom
     (company-minimum-prefix-length 1)
     (company-idle-delay 0.0))
