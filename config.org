@@ -21,6 +21,11 @@ You *must* do the following to get the configuration to fully work.
   sudo apt install cmake libtool libvterm-dev
 #+end_src
 
+***** MacOS
+#+begin_src sh :tangle no
+  brew install cmake
+#+end_src
+
 *** Latex
 *TODO*: Make it so that this configuration doesn't break if a Latex package is not detected
 
@@ -765,6 +770,16 @@ And I like having Emacs startup with the terminal
 
 #+begin_src emacs-lisp
   (add-hook 'emacs-startup-hook 'vterm)
+#+end_src
+
+*** Troubleshooting
+**** Can't find ~vterm~ module
+This happened to me on my MacOS. Something about launching the GUI doesn't give Emacs the ~$PATH~ variable with the homebrew path, and thus fails to find ~cmake~.
+
+To fix this, simply launch Emacs on the terminal (you only have to do this once).
+
+#+begin_src sh :tangle no
+  emacs -nw
 #+end_src
 
 ** undo-tree
