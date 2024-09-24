@@ -481,15 +481,44 @@ This is depended by =magit=. Please install the necessary system modules beforeh
 #+end_src
 
 ** Git
+*** Magit
+Magit is a porcerlain for Git that allows you to quickly stage, commit, pull, push, and do other basic Git commands with just a series of keybindings. It is a great way to quickly perform actions and not need to open a shell to perform Git commands.
+
 #+begin_src emacs-lisp
   ;; Git porcelain
   (use-package magit
-    :commands (magit-status magit-get-current-branch)
+    :commands (magit-status magit-get-current-branch) ; lazy load
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+#+end_src
 
-  (add-hook 'with-editor-mode-hook 'evil-insert-state) ; immediately start in insert mode when writing commit message in Magit
+**** Tweaks
+***** Insert Mode in Commit Message Prompts
+When writing a commit mesasge, I want to be in /insert mode/ immediately
 
+#+begin_src emacs-lisp
+  (add-hook 'with-editor-mode-hook 'evil-insert-state)
+#+end_src
+
+***** Stop ~ediff~ from Creating New Window just for Help Commands
+Very annoyingly, ~ediff~ will create a new window just for showing you help commands upon being invoked. This totally messes up my workflow especially if Emacs is full-screened.
+
+We want to disable this.
+
+#+begin_src emacs-lisp
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+end_src
+
+#+begin_src emacs-lisp
+  (setq ediff-split-window-function 'split-window-horizontally)
+#+end_src
+
+*** Forge
+Forge is an extension of ~magit~ that adds support for interacting with Git forges such as GitHub, directly from Emacs.
+
+You can view, comment, and create pull requests or issues directly from Emacs.
+
+#+begin_src emacs-lisp
   (use-package forge)
 #+end_src
 
