@@ -56,3 +56,4 @@ eln-cache/
 custom.el
 ltximg/
 .lsp-session*
+.cache/
