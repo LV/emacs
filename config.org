@@ -788,14 +788,20 @@ The Meta key (=M-x=) is used to evaluate commands.
 - [ ] Make buffers smaller for references, definitions, etc. Don't let it take 50% of the screen.
 
 ** File
+I want a keybinding dedicated exclusively to opening ~config.org~
+
+#+begin_src emacs-lisp
+  (defun lv/open-config-file ()
+    (interactive)
+    (find-file (concat user-emacs-directory "config.org")))
+#+end_src
+
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "f"  '(:ignore f         :which-key "file")
-    "ff" '(counsel-find-file :which-key "find")
-    "fc" '(lambda () (interactive)
-            (find-file (concat user-emacs-directory "config.org"))
-                             :which-key "open config")
-    "fg" '(counsel-rg        :which-key "ripgrep"))
+    "f"  '(:ignore f           :which-key "file")
+    "ff" '(counsel-find-file   :which-key "find")
+    "fc" '(lv/open-config-file :which-key "open config")
+    "fg" '(counsel-rg          :which-key "ripgrep"))
 #+end_src
 
 ** Git
