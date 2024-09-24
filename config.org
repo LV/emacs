@@ -309,9 +309,9 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
              ("C-k" . ivy-previous-line)
              ("C-d" . ivy-reverse-i-search-kill)))
     :config
+    (setq ivy-re-builders-alist
+          '((t . ivy--regex-fuzzy))) ; Enable fuzzy search globally
     (ivy-mode 1))
-
-  ;; Search inside of an existing buffer
 
   ;; Additional completion functions based on ivy
   (use-package counsel
