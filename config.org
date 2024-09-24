@@ -387,6 +387,26 @@ Add ~which-key~ integration
       (which-key-mode))
 #+end_src
 
+** Languages
+*** Python (Pyright)
+[[https://emacs-lsp.github.io/lsp-pyright/][lsp-mode Pyright documentation]]
+
+Firstly, you will need to install Python manually
+
+#+begin_src sh :tangle no
+  npm install -g pyright
+#+end_src
+
+And then we can install and use ~lsp-pyright~
+
+#+begin_src emacs-lisp
+  (use-package lsp-pyright
+    :ensure t
+    :hook (python-mode . (lambda ()
+                            (require 'lsp-pyright)
+                            (lsp-deferred))))
+#+end_src
+
 * Modules
 ** Helpful
 Alternative help screen in Emacs that gives better information on possible values for variables and functions, as well as default values
