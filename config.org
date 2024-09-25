@@ -991,16 +991,18 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 ** Org-mode
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "o"   '(:ignore o                     :which-key "org")
-    "oc"  '(:ignore c                     :which-key "create")
-    "oci" '(org-id-get-create             :which-key "id")
-    "oe"  '(org-edit-special              :which-key "edit special")
-    "oi"  '(org-insert-structure-template :which-key "insert")
-    "or"  '(:ignore or                    :which-key "roam")
-    "ora" '(org-roam-alias-add            :which-key "add alias")
-    "orf" '(org-roam-node-find            :which-key "find")
-    "ori" '(org-roam-node-insert          :which-key "insert")
-    "ort" '(org-roam-buffer-toggle        :which-key "toggle buffer"))
+    "o"   '(:ignore o                      :which-key "org")
+    "oc"  '(:ignore oc                     :which-key "create")
+    "oci" '(org-id-get-create              :which-key "id")
+    "od"  '(:ignore od                     :which-key "daily")
+    "ode" '(org-roam-dailies-capture-today :which-key "entry")
+    "oe"  '(org-edit-special               :which-key "edit special")
+    "oi"  '(org-insert-structure-template  :which-key "insert")
+    "or"  '(:ignore or                     :which-key "roam")
+    "ora" '(org-roam-alias-add             :which-key "add alias")
+    "orf" '(org-roam-node-find             :which-key "find")
+    "ori" '(org-roam-node-insert           :which-key "insert")
+    "ort" '(org-roam-buffer-toggle         :which-key "toggle buffer"))
 #+end_src
 
 ** Projectile
