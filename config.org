@@ -560,6 +560,33 @@ Narrow down the exact words or characters that differ
   (setq ediff-auto-refine 'on)
 #+end_src
 
+***** Use ~:w~ and ~:q~ to commit/abort
+While I am used to doing =C-c C-c= to commit a message at this point, I want to do it the Vim way
+
+#+begin_src emacs-lisp
+  (defun lv/magit-commit-save-and-exit ()
+    "Commit the message and close the buffer."
+    (interactive)
+    (with-editor-finish))
+
+  (defun lv/magit-commit-abort ()
+    "Abort the commit message and close the buffer."
+    (interactive)
+    (with-editor-cancel))
+
+  (defun lv/setup-git-commit-mode-evil-commands ()
+    "Set up buffer-local Evil ex commands in `git-commit-mode`."
+    ;; Make `evil-ex-commands` buffer-local by copying it as a hash table
+    (setq-local evil-ex-commands (copy-hash-table evil-ex-commands))
+    ;; Define buffer-local ex commands
+    (evil-ex-define-cmd "w[rite]" #'lv/magit-commit-save-and-exit)
+    (evil-ex-define-cmd "wq"     #'lv/magit-commit-save-and-exit)
+    (evil-ex-define-cmd "q[uit]" #'lv/magit-commit-abort))
+
+  ;; Add the hook for `git-commit-mode`
+  (add-hook 'git-commit-mode-hook #'lv/setup-git-commit-mode-evil-commands)
+#+end_src
+
 *** Forge
 Forge is an extension of ~magit~ that adds support for interacting with Git forges such as GitHub, directly from Emacs.
 
