@@ -49,6 +49,7 @@ projectile-bookmarks.eld
 # network security
 /network-security.data
 
+## Added files (over time)
 transient/
 forge-database.sqlite
 config.el
@@ -57,3 +58,6 @@ custom.el
 ltximg/
 .lsp-session*
 .cache/
+bookmarks
+ltxmathml-*
+org-roam.db
