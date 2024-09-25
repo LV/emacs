@@ -893,6 +893,13 @@ I want this feature to be only available if the cursor is on a header line. If I
         (kbd "<") 'lv/org-promote-or-outdent)))
 #+end_src
 
+**** Automatically be in Insert Mode in New Entry
+Upon invoking ~org-roam-dailies-capture-today~, you will get a new buffer but you will be in normal mode. It makes much more sense to be directly in insert mode.
+
+#+begin_src emacs-lisp
+  (advice-add 'org-roam-dailies-capture-today :after (lambda (&rest _) (evil-insert-state)))
+#+end_src
+
 *** Other Tweaks
 #+begin_src emacs-lisp
   (setq org-startup-indented t
