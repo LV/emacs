@@ -674,10 +674,10 @@ Note that is intended for documents that are to persist only in the =~/org= dire
            :unnarrowed t)))
 #+end_src
 
-***** Org-roam dalies
+***** Org-roam dailies
 #+begin_src emacs-lisp
   (setq org-roam-dailies-capture-templates
-        '(("d" "default" entry "* %?"
+        '(("d" "default" entry "* [%<%Y-%m-%d %H:%M:%S>] %?"
            :if-new (file+head "%<%Y-%m-%d>.org"
                               "#+title: %<%Y-%m-%d>\n#+author: Luis Victoria\n#+CREATED: %U\n\n"))))
 #+end_src
