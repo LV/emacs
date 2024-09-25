@@ -201,13 +201,40 @@ We choose the size and fonts depending on the system type
 *** Disabling the Menu Bar
 The menu bar is what has the /File/, /Edit/, /Options/, /Help/, etc. options at the top of the window.
 
-Because we do everything through keyboard commands in Emacs, this is unnecessary and thus we disable it
+Because we do everything through keyboard commands in Emacs, this is unnecessary and thus we disable it.
 
 #+begin_src emacs-lisp
   (menu-bar-mode -1)
 #+end_src
 
-** Smooth Scrolling
+*** Disabling the Tool Bar
+The tool bar is the section under the menu bar that displays icons such as /New File/, /Open Directory/, /Save/, /Undo/, /Cut/, etc.
+
+I think this is unnecessary because, once again, we do everything via keybinds and commands.
+
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+#+end_src
+
+*** Disabling Tooltips
+- Tooltips are small little popups that appear when you're hovering over an element; they generally display additional help information
+  - Generally, I think using ~helpful~ is better
+  - I prefer everything to live in a single window, and having multiple windows might not just be distracting, but problematic with certain display managers
+
+#+begin_src emacs-lisp
+  (tooltip-mode -1)
+#+end_src
+
+** Scrolling
+*** Disable Scrollbar
+- We already have line numbers for navigation, and commands to jump around the document more effectively
+  - I don't find it particularly useful to know which section (as in you're 30% into the document) you're in
+
+#+begin_src emacs-lisp
+  (scroll-bar-mode -1)
+#+end_src
+
+*** Smooth Scrolling
 By default, going up or down the buffer until the boundary will result in jumping to the next 10-15 lines.
 
 I prefer smooth scrolling (one line at a time).
@@ -267,9 +294,6 @@ It's much easier to just use ~y~ and ~n~.
 This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config.
 
 #+begin_src emacs-lisp
-  (scroll-bar-mode -1)    ; Disable visible scrollbar
-  (tool-bar-mode -1)      ; Disable toolbar
-  (tooltip-mode -1)       ; Disable tooltips
   (set-fringe-mode 10)    ; Add fringe space to the left and right of the buffer
 
   (setq visible-bell nil) ; If true, replaces sound bell for visual cue when performing action that can't be done
