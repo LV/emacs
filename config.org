@@ -641,7 +641,42 @@ SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on ho
 #+end_src
 
 *** Templates
-Use ~yasnippet~
+**** New File Template
+When creating a new =.org= file, I want the document to automatically generate ~#+~ keywords
+
+#+begin_src emacs-lisp
+  (defun my-org-new-file-template ()
+    "Insert a header with title, author, and dates for new org-mode documents."
+    (when (and (equal (buffer-size) 0)
+               (string= (file-name-extension (buffer-file-name)) "org"))
+      (insert "#+title: \n")
+      (insert "#+author: Luis Victoria\n")
+      (insert (format "#+CREATED: %s\n" (format-time-string "%Y-%m-%d %H:%M:%S")))
+      (insert "#+last_modified: \n")
+      ;; Position the cursor after the title
+      (goto-char (point-min))
+      (search-forward "#+title: ")
+      (end-of-line)))
+
+  (add-hook 'find-file-hook 'my-org-new-file-template)
+#+end_src
+
+I want the ~#+last_modified~ keyword to automatically update upon saving
+
+#+begin_src emacs-lisp
+  (defun update-last-modified ()
+    "Update the #+last_modified date in the org file."
+    (when (string= (file-name-extension (buffer-file-name)) "org")
+      (save-excursion
+        (goto-char (point-min))
+        (when (re-search-forward "^#\\+last_modified: .*" nil t)
+          (replace-match (format "#+last_modified: %s" (format-time-string "%Y-%m-%d %H:%M:%S")))))))
+
+  (add-hook 'before-save-hook 'update-last-modified)
+#+end_src
+
+**** ~yasnippet~
+Create snippets by typing ~>TEMPLATE~
 
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook #'yas-minor-mode)
