@@ -67,7 +67,7 @@ Don't use Windows (and if you do, use WSL).
 
 *** Org-mode package not found
 
-This will only happen on the first attempt, close Emacs and launch it again
+This might only happen on the first attempt. Close Emacs and launch it again.
 
 *** ~package-refresh-contents~
 
