@@ -588,6 +588,31 @@ A templating system. Allows you to type ~>TEMPLATE~ and then press ~TAB~ to expa
     :ensure nil)
 #+end_src
 
+*** Addons
+**** Org-roam
+Org-roam is an extension that makes it easy to create topic-focused org files and link them together using backlinks.
+
+Org-roam treats information as a node in a network (like a brain) rather than a heirarchy like a traditional org document
+
+SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on how to install
+
+*NOTE*: Make sure the =~/org/roam= directory exists
+
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :custom
+    (org-roam-directory "~/org/roam")
+    (org-roam-completion-everywhere t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert)
+           :map org-mode-map
+           ("C-M-i"   . completion-at-point))
+    :config
+    (org-roam-setup))
+#+end_src
+
 *** Templates
 Use ~yasnippet~
 
@@ -804,30 +829,6 @@ Disables highlighting the line where the cursor is currently on.
   (add-hook 'org-mode-hook
             (lambda ()
               (hl-line-mode -1)))
-#+end_src
-
-*** Org-roam
-Org-roam is an extension that makes it easy to create topic-focused org files and link them together using backlinks.
-
-Org-roam treats information as a node in a network (like a brain) rather than a heirarchy like a traditional org document
-
-SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on how to install
-
-*NOTE*: Make sure the =~/org/roam= directory exists
-
-#+begin_src emacs-lisp
-  (use-package org-roam
-    :ensure t
-    :custom
-    (org-roam-directory "~/org/roam")
-    (org-roam-completion-everywhere t)
-    :bind (("C-c n l" . org-roam-buffer-toggle)
-           ("C-c n f" . org-roam-node-find)
-           ("C-c n i" . org-roam-node-insert)
-           :map org-mode-map
-           ("C-M-i"   . completion-at-point))
-    :config
-    (org-roam-setup))
 #+end_src
 
 ** Projectile
