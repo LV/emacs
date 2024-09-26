@@ -1046,7 +1046,7 @@ The Meta key (=M-x=) is used to evaluate commands.
 #+begin_src emacs-lisp
   (lv/leader-keys
     "b"  '(:ignore b              :which-key "buffer")
-    "bs" '(counsel-switch-buffer  :which-key "switch")
+    "bb" '(counsel-switch-buffer  :which-key "switch")
     "be" '(eval-buffer            :which-key "evaluate")
     "bk" '(kill-buffer-and-window :which-key "kill"))
 #+end_src
