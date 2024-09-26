@@ -1056,7 +1056,6 @@ The Meta key (=M-x=) is used to evaluate commands.
   (lv/leader-keys
     "b"  '(:ignore b              :which-key "buffer")
     "bb" '(counsel-switch-buffer  :which-key "switch")
-    "be" '(eval-buffer            :which-key "evaluate")
     "bk" '(kill-buffer-and-window :which-key "kill")
     "bt" '(tab-bar-new-tab        :which-key "new tab"))
 #+end_src
@@ -1089,6 +1088,14 @@ When I open ~flymake-show-buffer-diagnostics~, I want the cursor to move to the 
 
 *** TODO
 - [ ] Make buffers smaller for references, definitions, etc. Don't let it take 50% of the screen.
+
+** Evaluate
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "e"  '(:ignore e       :which-key "evaulate")
+    "eb" '(eval-buffer     :which-key "buffer")
+    "ee" '(eval-expression :which-key "expression"))
+#+end_src
 
 ** File
 I want a keybinding dedicated exclusively to opening ~config.org~
