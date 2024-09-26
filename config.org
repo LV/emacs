@@ -1135,7 +1135,7 @@ I want a keybinding dedicated exclusively to opening ~config.org~
   (lv/leader-keys
     "p"  '(:ignore p                    :which-key "project")
     "pa" '(projectile-add-known-project :which-key "add")
-    "ps" '(projectile-switch-project    :which-key "switch"))
+    "pp" '(projectile-switch-project    :which-key "switch"))
 #+end_src
 
 ** Terminal
