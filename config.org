@@ -963,7 +963,6 @@ Despite =counsel-rg= using the ripgrep package in your system, =projectile-ripgr
     :ensure t)
 #+end_src
 
-
 ** Swiper
 Swiper is used to search within the current buffer
 
@@ -1024,6 +1023,21 @@ Undo tree
     :ensure t
     :init
     (global-undo-tree-mode 1))
+#+end_src
+
+** ~hl-todo~
+Highlight TODOs, FIXMEs, NOTEs, etc.
+
+#+begin_src emacs-lisp
+  (use-package hl-todo
+    :hook (prog-mode . hl-todo-mode)
+    :config
+    (setq hl-todo-keyword-faces
+          '(("TODO"   . "#FF0000")
+            ("FIXME"  . "#FF4500")
+            ("DEBUG"  . "#A020F0")
+            ("GOTCHA" . "#FF4500")
+            ("STUB"   . "#1E90FF"))))
 #+end_src
 
 * Keybindings
