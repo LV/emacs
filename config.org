@@ -266,6 +266,16 @@ Enable icons via specialized fonts
   M-x nerd-icons-install-fonts
 #+end_src
 
+*** Emojis
+I think emojis in documents are a good thing (in moderation and appropriate cases)
+
+😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂
+
+#+begin_src emacs-lisp
+  (use-package emojify
+    :hook (after-init . global-emojify-mode))
+#+end_src
+
 ** Writable Directory Buffer
 *** Install ~dired-x~
 #+begin_src emacs-lisp :tangle no
