@@ -341,7 +341,7 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
              ("C-d" . ivy-reverse-i-search-kill)))
     :config
     (setq ivy-re-builders-alist
-          '((t . ivy--regex-fuzzy))) ; Enable fuzzy search globally
+          '((t . ivy--regex-fuzzy))) ; Enable fuzzy search globally ; TODO: Un-fuzzy swiper, you already have `SPC f g` for ripgrep withing a file with covers this use-case
     (ivy-mode 1))
 
   ;; Additional completion functions based on ivy
@@ -1152,7 +1152,7 @@ I want a keybinding dedicated exclusively to opening ~config.org~
   (lv/leader-keys
     "p"  '(:ignore p                    :which-key "project")
     "pa" '(projectile-add-known-project :which-key "add")
-    "pg" '(projectile-ripgrep           :which-key "ripgrep")
+    "pg" '(projectile-ripgrep           :which-key "ripgrep") ; TODO: Make it so that once you perform a search, the cursor automatically moves to this buffer
     "pp" '(projectile-switch-project    :which-key "switch"))
 #+end_src
 
