@@ -1048,7 +1048,8 @@ The Meta key (=M-x=) is used to evaluate commands.
     "b"  '(:ignore b              :which-key "buffer")
     "bb" '(counsel-switch-buffer  :which-key "switch")
     "be" '(eval-buffer            :which-key "evaluate")
-    "bk" '(kill-buffer-and-window :which-key "kill"))
+    "bk" '(kill-buffer-and-window :which-key "kill")
+    "bt" '(tab-bar-new-tab        :which-key "new tab"))
 #+end_src
 
 ** Code
