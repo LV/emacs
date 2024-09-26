@@ -1015,7 +1015,7 @@ To fix this, simply launch Emacs on the terminal (you only have to do this once)
   emacs -nw
 #+end_src
 
-** undo-tree
+** ~undo-tree~
 Undo tree
 
 #+begin_src emacs-lisp
@@ -1024,6 +1024,8 @@ Undo tree
     :init
     (global-undo-tree-mode 1))
 #+end_src
+
+[TODO]: Fix behavior where undoing an existing file (likely with already a =*.~undo-tree~= existing), newer changes after loading the existing file can't be undo-ed.
 
 ** ~hl-todo~
 Highlight TODOs, FIXMEs, NOTEs, etc.
