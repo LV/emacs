@@ -385,6 +385,7 @@ Install and use ~lsp-mode~
 
 #+begin_src emacs-lisp
   (use-package lsp-mode
+    :ensure t
     :commands (lsp lsp-defererd)
     :hook (lsp-mode . lv/lsp-setup-mode)
     :init
@@ -409,6 +410,26 @@ Add ~which-key~ integration
 #+end_src
 
 ** Languages
+*** Nix (Nil)
+[[https://emacs-lsp.github.io/lsp-mode/page/lsp-nix-nil/][lsp-mode Nix Nil documentation]]
+
+- I almost exclusively edit Nix packages when I'm using NixOS`
+  - The package is called /nil/ on nixpkgs ([[https://search.nixos.org/packages?channel=24.05&show=nil&from=0&size=50&sort=relevance&type=packages&query=nil][(link)]])
+
+#+begin_src emacs-lisp
+  (use-package lsp-nix
+    :ensure lsp-mode
+    :after (lsp-mode)
+    :demand t
+    :custom
+    (lsp-nix-nil-formatter ["nixfmt"]))
+
+  (use-package nix-mode
+    :hook (nix-mode . lsp-deferred)
+    :ensure t)
+#+end_src
+
+
 *** Python (Pyright)
 [[https://emacs-lsp.github.io/lsp-pyright/][lsp-mode Pyright documentation]]
 
