@@ -600,7 +600,7 @@ While I am used to doing =C-c C-c= to commit a message at this point, I want to 
     ;; Make `evil-ex-commands` buffer-local by copying it as a hash table
     (setq-local evil-ex-commands (copy-hash-table evil-ex-commands))
     ;; Define buffer-local ex commands
-    (evil-ex-define-cmd "w[rite]" #'lv/magit-commit-save-and-exit) ; TODO: Fix this, performing just ~:w~ doesn't commit and then quit buffer
+    (evil-ex-define-cmd "w[rite]" #'lv/magit-commit-save-and-exit) ; FIXME: Fix this, performing just ~:w~ doesn't commit and then quit buffer
     (evil-ex-define-cmd "wq"     #'lv/magit-commit-save-and-exit)
     (evil-ex-define-cmd "q[uit]" #'lv/magit-commit-abort))
 
@@ -1023,9 +1023,9 @@ Undo tree
     :ensure t
     :init
     (global-undo-tree-mode 1))
-#+end_src
 
-[TODO]: Fix behavior where undoing an existing file (likely with already a =*.~undo-tree~= existing), newer changes after loading the existing file can't be undo-ed.
+  ; FIXME Undoing an existing file (likely with already a =*.~undo-tree~= existing), newer changes after loading the existing file can't be undo-ed.
+#+end_src
 
 ** ~hl-todo~
 Highlight TODOs, FIXMEs, NOTEs, etc.
@@ -1035,11 +1035,12 @@ Highlight TODOs, FIXMEs, NOTEs, etc.
     :hook (prog-mode . hl-todo-mode)
     :config
     (setq hl-todo-keyword-faces
-          '(("TODO"   . "#FF0000")
-            ("FIXME"  . "#FF4500")
-            ("DEBUG"  . "#A020F0")
-            ("GOTCHA" . "#FF4500")
-            ("STUB"   . "#1E90FF"))))
+          '(("TODO"   . "#FFFF00")
+            ("FIXME"  . "#FF0000")
+            ("DEBUG"  . "#00FFFF")
+            ("GOTCHA" . "#A020F0")
+            ("HACK"   . "#FFA500")
+            ("STUB"   . "#7393B3"))))
 #+end_src
 
 * Keybindings
@@ -1100,10 +1101,9 @@ When I open ~flymake-show-buffer-diagnostics~, I want the cursor to move to the 
     "cts" '(lsp-treemacs-symbols                         :which-key "symbols")
     "ctt" '(treemacs                                     :which-key "tree")
     "cT"  '(lsp-find-type-definition                     :which-key "type definition"))
-#+end_src
 
-*** TODO
-- [ ] Make buffers smaller for references, definitions, etc. Don't let it take 50% of the screen.
+  ; TODO: Make buffers smaller for references, definitions, etc. Don't let it take 50% of the screen.
+#+end_src
 
 ** Evaluate
 #+begin_src emacs-lisp
@@ -1125,7 +1125,7 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 #+begin_src emacs-lisp
   (lv/leader-keys
     "f"  '(:ignore f           :which-key "file")
-    "ff" '(counsel-find-file   :which-key "find")
+    "ff" '(counsel-find-file   :which-key "find") ; TODO: Ignore certain files from showing up such as =*.~undo-tree~
     "fc" '(lv/open-config-file :which-key "open config")
     "fg" '(counsel-rg          :which-key "ripgrep"))
 #+end_src
