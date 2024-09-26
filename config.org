@@ -600,7 +600,7 @@ While I am used to doing =C-c C-c= to commit a message at this point, I want to 
     ;; Make `evil-ex-commands` buffer-local by copying it as a hash table
     (setq-local evil-ex-commands (copy-hash-table evil-ex-commands))
     ;; Define buffer-local ex commands
-    (evil-ex-define-cmd "w[rite]" #'lv/magit-commit-save-and-exit)
+    (evil-ex-define-cmd "w[rite]" #'lv/magit-commit-save-and-exit) ; TODO: Fix this, performing just ~:w~ doesn't commit and then quit buffer
     (evil-ex-define-cmd "wq"     #'lv/magit-commit-save-and-exit)
     (evil-ex-define-cmd "q[uit]" #'lv/magit-commit-abort))
 
