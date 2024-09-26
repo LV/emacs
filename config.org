@@ -955,6 +955,15 @@ Projectile is a way of organizing your projects
     ("C-c p" . projectile-command-map))
 #+end_src
 
+** Ripgrep
+Despite =counsel-rg= using the ripgrep package in your system, =projectile-ripgrep= annoyingly requires the =ripgrep= Emacs package and will fail otherwise. Thus we need two copies of ripgrep 🙄
+
+#+begin_src emacs-lisp
+  (use-package ripgrep
+    :ensure t)
+#+end_src
+
+
 ** Swiper
 Swiper is used to search within the current buffer
 
@@ -1136,6 +1145,7 @@ I want a keybinding dedicated exclusively to opening ~config.org~
   (lv/leader-keys
     "p"  '(:ignore p                    :which-key "project")
     "pa" '(projectile-add-known-project :which-key "add")
+    "pg" '(projectile-ripgrep           :which-key "ripgrep")
     "pp" '(projectile-switch-project    :which-key "switch"))
 #+end_src
 
