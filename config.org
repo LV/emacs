@@ -121,16 +121,6 @@ Initialize ~use-package~ on non-Linux platforms
 #+end_src
 
 * Editor
-** Global Keys
-Setting this up at the top just in case
-
-*** ~ESC~ Behaviors
-Make ~ESC~ key quit prompts
-
-#+begin_src emacs-lisp
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
-#+end_src
-
 ** Startup Message
 Start Emacs with a blank buffer instead of the welcome message.
 
@@ -344,6 +334,47 @@ Use ~wdired~ whenever ~dired~ is invoked. Replicate same behavior as [[https://g
   (add-hook 'wdired-mode-hook 'lv/setup-wdired-evil-commands)
 #+end_src
 
+** Global Keybindings and Vim
+Setting this up at the top just in case
+
+*** ~ESC~ Behaviors
+Make ~ESC~ key quit prompts
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
+#+end_src
+
+*** Evil Mode
+Evil mode allows you to use Vim keybindings in all Emacs buffers. Vim keybindings are just better than Emacs keybindings
+
+#+begin_src emacs-lisp
+  (use-package evil
+    :ensure t
+    :init
+    (setq evil-want-integration t)
+    (setq evil-want-keybinding nil)
+    :config
+    (evil-mode 1) ; turn on Evil mode
+    ; (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ; I think this is the same as just hitting escape when you're not in insert mode
+    ; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+    (evil-set-initial-state 'messages-buffer-mode 'normal)
+    (evil-set-initial-state 'dashboard-mode 'normal)
+
+    (define-key evil-normal-state-map (kbd "/") 'swiper)
+    (define-key evil-visual-state-map (kbd "/") 'swiper))
+#+end_src
+
+**** Evil Collection
+A package that extends Vim keybindings to work with other packages such as =magit=, =org=, =mu4e=, etc.
+#+begin_src emacs-lisp
+  (use-package evil-collection
+    :after (evil magit)
+    :ensure t
+    :config
+    (evil-collection-init))
+#+end_src
+
 * Behaviors
 ** Remove Backup Files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
@@ -388,30 +419,6 @@ When performing an action that can't be done (e.g. backspacing on first characte
 This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config.
 
 #+begin_src emacs-lisp
-  ;; Vim Mode
-  (use-package evil
-    :ensure t
-    :init
-    (setq evil-want-integration t)
-    (setq evil-want-keybinding nil)
-    ; (setq evil-want-C-u-scroll t)
-    ; (setq evil-want-C-i-jump nil)
-    :config
-    (evil-mode 1) ; turn on Evil mode
-    ; (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ; I think this is the same as just hitting escape when you're not in insert mode
-    ; (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
-    (evil-set-initial-state 'messages-buffer-mode 'normal)
-    (evil-set-initial-state 'dashboard-mode 'normal)
-
-    (define-key evil-normal-state-map (kbd "/") 'swiper)
-    (define-key evil-visual-state-map (kbd "/") 'swiper))
-
-  (use-package evil-collection
-    :after (evil magit)
-    :ensure t
-    :config
-    (evil-collection-init))
 
   ;; Completion framework
   (use-package ivy
