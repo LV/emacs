@@ -386,6 +386,11 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
   (use-package counsel
     :after ivy)
 
+  ; Ignore certain files from appearing
+  ; \\  is used to begin a regex
+  ; \\| is used to append regexes
+  (setq counsel-find-file-ignore-regexp "\\.~undo-tree~$\\|.*#.*#$")
+
   ;; Information bar at the bottom
   (use-package doom-modeline
     :ensure t
@@ -1194,7 +1199,7 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 #+begin_src emacs-lisp
   (lv/leader-keys
     "f"  '(:ignore f           :which-key "file")
-    "ff" '(counsel-find-file   :which-key "find") ; TODO: Ignore certain files from showing up such as =*.~undo-tree~
+    "ff" '(counsel-find-file   :which-key "find")
     "fc" '(lv/open-config-file :which-key "open config")
     "fg" '(counsel-rg          :which-key "ripgrep"))
 #+end_src
