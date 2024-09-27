@@ -420,24 +420,8 @@ This is from the monolithic =init.el= config. This block will slowly be migrated
 
 #+begin_src emacs-lisp
 
-  ;; Completion framework
-  (use-package ivy
-    :diminish
-    :bind ((:map ivy-switch-buffer-map
-             ("C-k" . ivy-previous-line)
-             ("C-l" . ivy-done)
-             ("C-d" . ivy-switch-buffer-kill))
-           (:map ivy-reverse-i-search-map
-             ("C-k" . ivy-previous-line)
-             ("C-d" . ivy-reverse-i-search-kill)))
-    :config
-    (setq ivy-re-builders-alist
-          '((t . ivy--regex-fuzzy))) ; Enable fuzzy search globally ; TODO: Un-fuzzy swiper, you already have `SPC f g` for ripgrep withing a file with covers this use-case
-    (ivy-mode 1))
 
   ;; Additional completion functions based on ivy
-  (use-package counsel
-    :after ivy)
 
   ; Ignore certain files from appearing
   ; \\  is used to begin a regex
@@ -597,6 +581,33 @@ See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
 #+end_src
 
 * Modules
+** Ivy
+Ivy is a completion framework that allows you to find files, switch buffers, etc.
+
+#+begin_src emacs-lisp
+  (use-package ivy
+    :diminish
+    :bind ((:map ivy-switch-buffer-map
+             ("C-k" . ivy-previous-line)
+             ("C-l" . ivy-done)
+             ("C-d" . ivy-switch-buffer-kill))
+           (:map ivy-reverse-i-search-map
+             ("C-k" . ivy-previous-line)
+             ("C-d" . ivy-reverse-i-search-kill)))
+    :config
+    (setq ivy-re-builders-alist
+          '((t . ivy--regex-fuzzy))) ; Enable fuzzy search globally ; TODO: Un-fuzzy swiper, you already have `SPC f g` for ripgrep withing a file with covers this use-case
+    (ivy-mode 1))
+#+end_src
+
+*** Counsel
+Counsel is an extension of Ivy and enhances features such as looking for commands, and makes use of Ivy's completion framework capabilities
+
+#+begin_src emacs-lisp
+    (use-package counsel
+      :after ivy)
+#+end_src
+
 ** Helpful
 Alternative help screen in Emacs that gives better information on possible values for variables and functions, as well as default values
 
