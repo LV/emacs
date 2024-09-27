@@ -277,6 +277,37 @@ I think emojis in documents are a good thing (in moderation and appropriate case
     :hook (after-init . global-emojify-mode))
 #+end_src
 
+*** Padding
+**** Line Spacing
+Per buffer line spacing can be set using the variable ~line-spacing~. Something like ~0.1~ goes well here.
+
+#+begin_src emacs-lisp
+  (setq-default line-spacing 0.1)
+#+end_src
+
+**** Top Padding
+Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing
+
+#+begin_src emacs-lisp
+  (setq header-line-format " ")
+#+end_src
+
+**** Side Padding
+#+begin_src emacs-lisp
+  (lambda ()
+    (progn
+      (setq left-margin-width 2)
+      (setq right-margin-width 2)
+      (set-window-buffer nil (current-buffer))))
+#+end_src
+
+**** Fringe Space
+Add fringe space to the left and right of the buffer
+
+#+begin_src emacs-lisp
+  (set-fringe-mode 10)
+#+end_src
+
 ** Writable Directory Buffer
 *** Install ~dired-x~
 #+begin_src emacs-lisp :tangle no
@@ -302,7 +333,6 @@ Use ~wdired~ whenever ~dired~ is invoked. Replicate same behavior as [[https://g
 
   (add-hook 'wdired-mode-hook 'lv/setup-wdired-evil-commands)
 #+end_src
-
 
 * Behaviors
 ** Remove Backup Files
@@ -332,15 +362,11 @@ It's much easier to just use ~y~ and ~n~.
 This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config.
 
 #+begin_src emacs-lisp
-  (set-fringe-mode 10)    ; Add fringe space to the left and right of the buffer
-
   (setq visible-bell nil) ; If true, replaces sound bell for visual cue when performing action that can't be done
                           ;   (e.g. backspacing on the first line of the document, down arrow on last line, etc)
                           ; On MacOS, this makes a large caution triangle which can be very annoying, so perhaps disable if using Mac
 
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
-
-  ;; Initialize package sources
 
   ;; Vim Mode
   (use-package evil
@@ -875,30 +901,6 @@ By rendering the entire document, code blocks will appear as they should, new co
     (read-only-mode -1)) ; Allow editing again
 
   (add-hook 'org-mode-hook 'lv-org-render-before-editing)
-#+end_src
-
-*** Padding
-**** Line Spacing
-Per buffer line spacing can be set using the variable ~line-spacing~. Something like ~0.1~ goes well here.
-
-#+begin_src emacs-lisp
-  (setq-default line-spacing 0.1)
-#+end_src
-
-**** Top Padding
-Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing
-
-#+begin_src emacs-lisp
-  (setq header-line-format " ")
-#+end_src
-
-**** Side Padding
-#+begin_src emacs-lisp
-  (lambda ()
-    (progn
-      (setq left-margin-width 2)
-      (setq right-margin-width 2)
-      (set-window-buffer nil (current-buffer))))
 #+end_src
 
 *** Evil (Vim)
