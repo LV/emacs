@@ -121,6 +121,16 @@ Initialize ~use-package~ on non-Linux platforms
 #+end_src
 
 * Editor
+** Global Keys
+Setting this up at the top just in case
+
+*** ~ESC~ Behaviors
+Make ~ESC~ key quit prompts
+
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
+#+end_src
+
 ** Startup Message
 Start Emacs with a blank buffer instead of the welcome message.
 
@@ -378,8 +388,6 @@ When performing an action that can't be done (e.g. backspacing on first characte
 This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config.
 
 #+begin_src emacs-lisp
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
-
   ;; Vim Mode
   (use-package evil
     :ensure t
