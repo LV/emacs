@@ -308,6 +308,30 @@ Add fringe space to the left and right of the buffer
   (set-fringe-mode 10)
 #+end_src
 
+*** Modeline
+Modeline is thte bar in the bottom that gives you a general overview of the buffer you're in. It shows you:
+- What Vim Mode you're in (e.g. insert, normal, visual, etc.)
+- The path of the file you're editing with respect to the project directory
+- What line and column number your cursor is at
+- Text encoding (e.g. UTF-8)
+- What git branch name you're on
+
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :ensure t
+    :init (doom-modeline-mode 1)
+    :custom (doom-modeline-height 15))
+#+end_src
+
+*** Rainbow Delimiters
+- Especially when writing lisp, it can be very difficult to keep track of which ~(~ belongs to which ~)~
+  - This package makes it easy to distinguish this
+
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
 ** Writable Directory Buffer
 *** Install ~dired-x~
 #+begin_src emacs-lisp :tangle no
@@ -413,22 +437,6 @@ When performing an action that can't be done (e.g. backspacing on first characte
     (setq visible-bell t))
    ((eq system-type 'darwin) ; MacOS
     (setq visible-bell nil)))
-#+end_src
-
-** Rest of the config
-This is from the monolithic =init.el= config. This block will slowly be migrated into the rest of the config.
-
-#+begin_src emacs-lisp
-
-  ;; Information bar at the bottom
-  (use-package doom-modeline
-    :ensure t
-    :init (doom-modeline-mode 1)
-    :custom (doom-modeline-height 15))
-
-  ;; Colorizes parenthesis and braces
-  (use-package rainbow-delimiters
-    :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
 * Modules
