@@ -1218,18 +1218,21 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 #+begin_src emacs-lisp
   (lv/leader-keys
     "o"   '(:ignore o                      :which-key "org")
-    "oc"  '(:ignore oc                     :which-key "create")
-    "oci" '(org-id-get-create              :which-key "id")
+    "oc"  '(org-ctrl-c-ctrl-c              :which-key "execute")
     "od"  '(:ignore od                     :which-key "daily")
     "ode" '(org-roam-dailies-capture-today :which-key "new entry")
     "odt" '(org-roam-dailies-goto-today    :which-key "view today's entries")
     "oe"  '(org-edit-special               :which-key "edit special")
-    "oi"  '(org-insert-structure-template  :which-key "insert template")
+    "oi"  '(:ignore oi                     :which-key "insert")
+    "oii" '(org-id-get-create              :which-key "id")
+    "oit" '(org-insert-structure-template  :which-key "template")
     "or"  '(:ignore or                     :which-key "roam")
     "ora" '(org-roam-alias-add             :which-key "add alias")
     "orf" '(org-roam-node-find             :which-key "find node")
     "ori" '(org-roam-node-insert           :which-key "insert node")
-    "ort" '(org-roam-buffer-toggle         :which-key "toggle buffer"))
+    "ot"  '(:ignore ot                     :which-key "toggle")
+    "oti" '(org-toggle-inline-images       :which-key "image")
+    "otr" '(org-roam-buffer-toggle         :which-key "roam buffer"))
 #+end_src
 
 ** Projectile
