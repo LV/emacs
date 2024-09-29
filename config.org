@@ -52,6 +52,9 @@ You *must* do the following to get the configuration to fully work.
   sudo apt install ripgrep
 #+end_src
 
+** LSPs
+- Pyright
+- clangd
 ** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
   - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
@@ -1088,8 +1091,10 @@ Install and use ~lsp-mode~
 #+begin_src emacs-lisp
   (use-package lsp-mode
     :ensure t
-    :commands (lsp lsp-defererd)
-    :hook (lsp-mode . lv/lsp-setup-mode)
+    :commands (lsp lsp-deferred)
+    :hook ((lsp-mode . lv/lsp-setup-mode)
+           (c++-mode . lsp-deferred)
+           (c-mode   . lsp-deferred))
     :init
     (setq lsp-keymap-prefix "C-c l")
     :config
@@ -1130,7 +1135,6 @@ Add ~which-key~ integration
     :hook (nix-mode . lsp-deferred)
     :ensure t)
 #+end_src
-
 
 *** Python (Pyright)
 [[https://emacs-lsp.github.io/lsp-pyright/][lsp-mode Pyright documentation]]
