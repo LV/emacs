@@ -399,6 +399,32 @@ A package that extends Vim keybindings to work with other packages such as =magi
     (evil-collection-init))
 #+end_src
 
+** Indentation
+*** C++
+- Spaces; 4 Spaces per Tab
+
+#+begin_src emacs-lisp
+  (setq auto-mode-alist
+        (append
+         '(("\\.cpp\\'" . c++-mode)
+           ("\\.h\\'"   . c++-mode)
+           ("\\.hpp\\'" . c++-mode)
+           ("\\.cxx\\'" . c++-mode)
+           ("\\.hxx\\'" . c++-mode)
+           ("\\.cc\\'"  . c++-mode)
+           ("\\.hh\\'"  . c++-mode))
+         auto-mode-alist))
+
+  ;; Set indentation settings for C++ mode
+  (defun lv/c++-setup ()
+    "Set up C++ indentation preferences."
+    (setq c-basic-offset 4)  ;; Set indentation to 4 spaces
+    (setq tab-width 4)       ;; Set tab width to 4
+    (setq indent-tabs-mode nil))  ;; Use spaces instead of tabs
+
+  (add-hook 'c++-mode-hook 'lv/c++-setup)
+#+end_src
+
 * Behaviors
 ** Remove Backup Files
 Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
