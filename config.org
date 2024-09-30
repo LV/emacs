@@ -697,11 +697,6 @@ SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on ho
     :custom
     (org-roam-directory "~/org/roam")
     (org-roam-completion-everywhere t)
-    :bind (("C-c n l" . org-roam-buffer-toggle)
-           ("C-c n f" . org-roam-node-find)
-           ("C-c n i" . org-roam-node-insert)
-           :map org-mode-map
-           ("C-M-i"   . completion-at-point))
     :config
     (org-roam-setup))
 #+end_src
@@ -736,16 +731,29 @@ Add =mermaid= to =orb-babel= languages
 
 *** Templates
 **** ~org-capture~ Templates
+We want to replicate the behavior of the ~org-roam-dailies-capture-today~ function, but have it appear on the ~org-capture~ menu
+#+begin_src emacs-lisp
+  (defun lv/org-roam-capture--daily-target ()
+    "Return the path to the daily note file for today."
+    (let ((daily-path (expand-file-name (format-time-string "%Y-%m-%d.org") (concat org-roam-directory "/daily/"))))
+      (set-buffer (org-capture-target-buffer daily-path))
+      (widen)
+      (goto-char (point-max))))
+#+end_src
+
+And then we insert the templates
 #+begin_src emacs-lisp
   (setq org-capture-templates
-        '(("d" "daily" entry "* [%<%Y-%m-%d %H:%M:%S>] %?"
-           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n#+author: Luis Victoria\n#+CREATED: %U\n\n")
+        '(("d" "Daily Note" entry
+           (function lv/org-roam-capture--daily-target)
+           "* [%<%H:%M:%S>] %?\n"
+           :if-new (file+head "%<%Y-%m-%d>.org"
+                              "#+title: %<%Y-%m-%d>\n#+author: Luis Victoria\n#+CREATED: %U\n\n")
            :unnarrowed t)
-          ("m" "main" plain "%?"
-           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n#+author: Luis Victoria\n#+CREATED: %U\n\n")
-           :unnarrowed t)))
+          ("m" "Main Note" entry
+           (file+head "~/org/roam/main/${slug}.org"
+                      "#+title: ${title}\n#+author: Luis Victoria\n#+CREATED: %U\n\n")
+           "* %?\n")))
 #+end_src
 
 **** ~yasnippet~
