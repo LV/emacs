@@ -763,7 +763,7 @@ Note that is intended for documents that are to persist only in the =~/org= dire
   (setq org-roam-capture-templates
         '(("d" "default" plain "%?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n#+author: Luis Victoria\n#+CREATED: %U\n#+last_modified: \n\n")
+                              "#+title: ${title}\n#+author: Luis Victoria\n#+CREATED: %U\n\n")
            :unnarrowed t)))
 #+end_src
 
@@ -773,20 +773,6 @@ Note that is intended for documents that are to persist only in the =~/org= dire
         '(("d" "default" entry "* [%<%Y-%m-%d %H:%M:%S>] %?"
            :if-new (file+head "%<%Y-%m-%d>.org"
                               "#+title: %<%Y-%m-%d>\n#+author: Luis Victoria\n#+CREATED: %U\n\n"))))
-#+end_src
-
-***** Update Last Modified Date Upon Saving
-#+begin_src emacs-lisp
-  (defun update-last-modified ()
-    "Update the #+last_modified date in the org file."
-    (when (and (string= (file-name-extension (or (buffer-file-name) "")) "org")
-               (not (org-roam-buffer-p)))
-      (save-excursion
-        (goto-char (point-min))
-        (when (re-search-forward "^#\\+last_modified:.*" nil t)
-          (replace-match (format "#+last_modified: %s" (format-time-string "%Y-%m-%d %H:%M:%S")))))))
-
-  (add-hook 'before-save-hook 'update-last-modified)
 #+end_src
 
 **** ~yasnippet~
