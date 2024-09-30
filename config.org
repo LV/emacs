@@ -1408,3 +1408,7 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     "ws" '(evil-window-split  :which-key "split horizontally")
     "wv" '(evil-window-vsplit :which-key "split vertically"))
 #+end_src
+
+* TODO Future Features to add
+- [ ] Add Spotify control panel
+  - Perhaps integrate emacs with some sort of [[https://github.com/Spotifyd/spotifyd][Spotify daemon]]
