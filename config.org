@@ -521,6 +521,8 @@ Note that the syntax for regexes in Emacs is different than what you might be us
 - ~\\~ is used to begin a regex
 - ~\\|~ is used to append regexes
 
+[[https://regex101.com/][regex101]] is an excellent resource to build and test your regex strings.
+
 #+begin_src emacs-lisp
   (setq counsel-find-file-ignore-regexp
         (concat "\\"
