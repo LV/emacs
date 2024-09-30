@@ -735,45 +735,17 @@ Add =mermaid= to =orb-babel= languages
 #+end_src
 
 *** Templates
-**** New File Template
-***** Org-mode
-When creating a new =.org= file, I want the document to automatically generate ~#+~ keywords.
-
-Note that is intended for documents that are to persist only in the =~/org= directory (i.e. not ~org-roam~ generated documents)
-
+**** ~org-capture~ Templates
 #+begin_src emacs-lisp
-  (defun lv/org-new-file-template ()
-    "Insert a header with title, author, and dates for new org-mode documents."
-    (when (and (equal (buffer-size) 0)
-               (string= (file-name-extension (or (buffer-file-name) "")) "org")
-               (not (org-roam-file-p)))
-      (insert "#+title: \n")
-      (insert "#+author: Luis Victoria\n")
-      (insert (format "#+CREATED: %s\n" (format-time-string "%Y-%m-%d %H:%M:%S")))
-      (insert "#+last_modified: \n")
-      ;; Position the cursor after the title
-      (goto-char (point-min))
-      (search-forward "#+title: ")
-      (end-of-line)))
-
-  (add-hook 'find-file-hook 'lv/org-new-file-template)
-#+end_src
-
-***** Org-roam
-#+begin_src emacs-lisp
-  (setq org-roam-capture-templates
-        '(("d" "default" plain "%?"
+  (setq org-capture-templates
+        '(("d" "daily" entry "* [%<%Y-%m-%d %H:%M:%S>] %?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n#+author: Luis Victoria\n#+CREATED: %U\n\n")
+           :unnarrowed t)
+          ("m" "main" plain "%?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                               "#+title: ${title}\n#+author: Luis Victoria\n#+CREATED: %U\n\n")
            :unnarrowed t)))
-#+end_src
-
-***** Org-roam dailies
-#+begin_src emacs-lisp
-  (setq org-roam-dailies-capture-templates
-        '(("d" "default" entry "* [%<%Y-%m-%d %H:%M:%S>] %?"
-           :if-new (file+head "%<%Y-%m-%d>.org"
-                              "#+title: %<%Y-%m-%d>\n#+author: Luis Victoria\n#+CREATED: %U\n\n"))))
 #+end_src
 
 **** ~yasnippet~
