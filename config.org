@@ -1163,15 +1163,21 @@ And then we can install and use ~lsp-pyright~
   - Even if you rebind this to ~TAB~, the default behavior remains
     - I've binding ~ENTER~ to ~newline~ to fix this
 
+- ~TAB~ key in GUI != ~TAB~ key in Terminal Emacs
+  - In GUI, ~TAB~ is ~<tab>~
+  - In Terminal mode, ~TAB~ is ~C-i~
+
 #+begin_src emacs-lisp
   (use-package company
     :after lsp-mode
     :hook (prog-mode . company-mode)
     :bind (:map company-active-map
             ("<tab>"      . company-complete-selection)
+            ("C-i"        . company-complete-selection)
             ("<return>"   . newline))
           (:map lsp-mode-map
             ("<tab>"      . company-indent-or-complete-common)
+            ("C-i"        . company-indent-or-complete-common)
             ("<return>"   . newline))
     :custom
     (company-minimum-prefix-length 1)
