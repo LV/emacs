@@ -631,6 +631,22 @@ While I am used to doing =C-c C-c= to commit a message at this point, I want to 
   (add-hook 'git-commit-mode-hook #'lv/setup-git-commit-mode-evil-commands)
 #+end_src
 
+***** Change Text Color for Highlighted Added Diffs
+- On Alacritty for some reason, added diffs (highlighted in green) are really hard to see with the default settings (green text on green background)
+  - This behavior is different when using WezTerm
+    - Regardless, I will change this for all non-grahical instances of Emacs
+
+#+begin_src emacs-lisp
+  (unless (display-graphic-p)
+    (with-eval-after-load 'magit
+      (set-face-attribute 'magit-diff-added nil
+                          :foreground "#003000"
+                          :background nil)
+      (set-face-attribute 'magit-diff-added-highlight nil
+                          :foreground "#003000"
+                          :background nil)))
+#+end_src
+
 *** Forge
 Forge is an extension of ~magit~ that adds support for interacting with Git forges such as GitHub, directly from Emacs.
 
