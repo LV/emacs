@@ -16,15 +16,33 @@ You *must* do the following to get the configuration to fully work.
 /NOTE/: If you're building this through my [[https://github.com/lv/nixos][NixOS Flake]], it'll take care of everything you need 🙂
 
 ** Programs
-*** VTerm
-**** Debian
+*** Dirvish
+Dirvish is the file manager used for this configuration
+
+**** ~fd~
+***** MacOS
 #+begin_src sh :tangle no
-  sudo apt install cmake libtool libvterm-dev
+  brew install fd
 #+end_src
 
-**** MacOS
+**** ~ffmpegthumbnailer~
+Video preview
+
+***** MacOS
 #+begin_src sh :tangle no
-  brew install cmake
+  brew install ffmpegthumbnailer
+#+end_src
+**** ~gls~
+***** MacOS
+#+begin_src sh :tangle no
+  brew install g-ls
+#+end_src
+
+**** ~imagemagick~
+**** ~mediainfo~
+***** MacOS
+#+begin_src sh :tangle no
+  brew install --cask mediainfo
 #+end_src
 
 *** Latex
@@ -40,16 +58,27 @@ You *must* do the following to get the configuration to fully work.
   brew install --cask mactex-no-gui
 #+end_src
 
-*** sqlite3
+*** ~ripgrep~
+**** Debian
+#+begin_src sh :tangle no
+  sudo apt install ripgrep
+#+end_src
+
+*** ~sqlite3~
 **** Debian
 #+begin_src sh :tangle no
   sudo apt install sqlite3 libsqlite3-dev
 #+end_src
 
-*** ripgrep
+*** VTerm
 **** Debian
 #+begin_src sh :tangle no
-  sudo apt install ripgrep
+  sudo apt install cmake libtool libvterm-dev
+#+end_src
+
+**** MacOS
+#+begin_src sh :tangle no
+  brew install cmake
 #+end_src
 
 ** LSPs
@@ -335,30 +364,14 @@ Modeline is thte bar in the bottom that gives you a general overview of the buff
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
-** Writable Directory Buffer
-*** Install ~dired-x~
-#+begin_src emacs-lisp :tangle no
-  (require 'dired-x)
-#+end_src
+** Directory Buffer
+We use ~dirvish~ for our file/directory management
 
-*** Use ~wdired~
-Use ~wdired~ whenever ~dired~ is invoked. Replicate same behavior as [[https://github.com/stevearc/oil.nvim][oil.nvim]].
-
-#+begin_src emacs-lisp :tangle no
-  (add-hook 'dired-mode-hook 'wdired-change-to-wdired-mode)
-  ; FIXME: wdired is not even opening
-#+end_src
-
-*** Save and quit using ~:w~ and ~:wq~
-#+begin_src emacs-lisp :tangle no
-  (defun lv/setup-wdired-evil-commands()
-    (evil-ex-define-cmd "w[rite]" 'wdired-finish-edit)
-    (evil-ex-define-cmd "wq" '(lambda ()
-                                (wdired-finish-edit)
-                                (quit-window)))
-    (evil-ex-define-cmd "q[uit]" wdired-abort-changes))
-
-  (add-hook 'wdired-mode-hook 'lv/setup-wdired-evil-commands)
+#+begin_src emacs-lisp
+  (use-package dirvish
+    :ensure t
+    :config
+    (dirvish-override-dired-mode)) ; Force the use of dirvish instead of dired
 #+end_src
 
 ** Global Keybindings and Vim
