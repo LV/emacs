@@ -692,9 +692,11 @@ I treat everything ~org~ like a monolith, and have it live in a single directory
 **** Org-roam
 Org-roam is an extension that makes it easy to create topic-focused org files and link them together using backlinks.
 
-Org-roam treats information as a node in a network (like a brain) rather than a heirarchy like a traditional org document
+Org-roam treats information as a node in a network (like a brain) rather than a heirarchy like a traditional org document.
 
-SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on how to install
+I use the Zettelkasten method. You can visit [[https://writing.bobdoto.computer/zettelkasten/][this page]] for notes on how this notetaking system works.
+
+SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on how to install.
 
 *NOTE*: Make sure the =~/org/roam= directory exists
 
