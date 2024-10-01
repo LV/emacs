@@ -228,6 +228,8 @@ We choose the size and fonts depending on the system type
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 120))
    ((eq system-type 'darwin) ; MacOS
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 200)))
+
+  ; TODO: Remove this check if you're launching in terminal mode
 #+end_src
 
 ** Toolbar
@@ -1172,10 +1174,11 @@ Add ~which-key~ integration
 *** Python (Pyright)
 [[https://emacs-lsp.github.io/lsp-pyright/][lsp-mode Pyright documentation]]
 
-Firstly, you will need to install Python manually
+Firstly, you will need to install ~basedpyright~ (and ~ruff~ for some reason) manually
 
 #+begin_src sh :tangle no
-  npm install -g pyright
+  pip install basedpyright
+  pip install ruff
 #+end_src
 
 And then we can install and use ~lsp-pyright~
@@ -1183,9 +1186,10 @@ And then we can install and use ~lsp-pyright~
 #+begin_src emacs-lisp
   (use-package lsp-pyright
     :ensure t
+    :custom (lsp-pyright-langserver-command "basedpyright")
     :hook (python-mode . (lambda ()
-                            (require 'lsp-pyright)
-                            (lsp-deferred))))
+                           (require 'lsp-pyright)
+                           (lsp-deferred))))
 #+end_src
 
 ** Company Mode
@@ -1204,14 +1208,15 @@ And then we can install and use ~lsp-pyright~
   (use-package company
     :after lsp-mode
     :hook (prog-mode . company-mode)
-    :bind (:map company-active-map
-            ("<tab>"      . company-complete-selection)
-            ("C-i"        . company-complete-selection)
-            ("<return>"   . newline))
-          (:map lsp-mode-map
-            ("<tab>"      . company-indent-or-complete-common)
-            ("C-i"        . company-indent-or-complete-common)
-            ("<return>"   . newline))
+    :bind
+    (:map company-active-map
+          ("<tab>"    . company-complete-selection)
+          ("C-i"      . company-complete-selection)
+          ("<return>" . newline))
+    (:map lsp-mode-map
+          ("<tab>"    . company-indent-or-complete-common)
+          ("C-i"      . company-indent-or-complete-common)
+          ("<return>" . newline))
     :custom
     (company-minimum-prefix-length 1)
     (company-idle-delay 0.0)) ; seconds
