@@ -731,32 +731,29 @@ Add =mermaid= to =orb-babel= languages
 
 *** Templates
 **** ~org-capture~ Templates
-We want to replicate the behavior of the ~org-roam-dailies-capture-today~ function, but have it appear on the ~org-capture~ menu
+***** Targets
 #+begin_src emacs-lisp
-  (defun lv/org-roam-capture--daily-target ()
-    "Return the path to the daily note file for today."
-    (let ((daily-path (expand-file-name (format-time-string "%Y-%m-%d.org") (concat org-roam-directory "/daily/"))))
-      (set-buffer (org-capture-target-buffer daily-path))
+  (defun lv/org-capture--fleeting-target ()
+    "Return the path to the fleeting note file for today."
+    (let ((fleeting-path (expand-file-name (format-time-string "%Y%m%d%H%M%S-%s.org") (concat org-roam-directory "/zk/fleeting/"))))
+      (set-buffer (org-capture-target-buffer fleeting-path))
       (widen)
       (goto-char (point-max))))
 #+end_src
 
-And then we insert the templates
+***** Templates
 #+begin_src emacs-lisp
   (setq org-capture-templates
-        '(("d" "Daily Note" entry
-           (function lv/org-roam-capture--daily-target)
-           "* [%<%H:%M:%S>] %?\n"
-           :if-new (file+head "%<%Y-%m-%d>.org"
-                              "#+title: %<%Y-%m-%d>\n#+author: Luis Victoria\n#+CREATED: %U\n\n")
-           :unnarrowed t)
-          ("m" "Main Note" entry
-           (file+head "~/org/roam/main/${slug}.org"
-                      "#+title: ${title}\n#+author: Luis Victoria\n#+CREATED: %U\n\n")
-           "* %?\n")))
+        ;; Zettelkasten
+        '(("f" "Fleeting Note" plain
+           (function lv/org-capture--fleeting-target)
+           "%?"
+           :if-new (file+head "zk/fleeting/%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n#+created: %U\n")
+           :unnarrowed t)))
 #+end_src
 
-**** ~yasnippet~
+**** Snippets Using ~yasnippet~
 Create snippets by typing ~>TEMPLATE~
 
 #+begin_src emacs-lisp
@@ -1318,7 +1315,8 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 #+begin_src emacs-lisp
   (lv/leader-keys
     "o"   '(:ignore o                      :which-key "org")
-    "oc"  '(org-capture                    :which-key "capture")
+    "oc"  '(:ignore oc                     :which-key "create")
+    "ocd" '(org-roam-dailies-capture-today :which-key "daily")
     "od"  '(:ignore od                     :which-key "daily")
     "ode" '(org-roam-dailies-capture-today :which-key "new entry")
     "odt" '(org-roam-dailies-goto-today    :which-key "view today's entries")
