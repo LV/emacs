@@ -365,7 +365,8 @@ Modeline is thte bar in the bottom that gives you a general overview of the buff
 #+end_src
 
 ** Directory Buffer
-We use ~dirvish~ for our file/directory management
+- We use ~dirvish~ for our file/directory management
+  - For documentation on customizing ~dirvish~, [[https://github.com/alexluigit/dirvish/blob/main/docs/CUSTOMIZING.org][see here]]
 
 #+begin_src emacs-lisp
   (use-package dirvish
@@ -373,7 +374,7 @@ We use ~dirvish~ for our file/directory management
     :config
     (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
     (setq dirvish-attributes
-          '(vc-state all-the-icons)))
+          '(vc-state all-the-icons file-size)))
 #+end_src
 
 ** Global Keybindings and Vim
