@@ -761,6 +761,16 @@ Add =mermaid= to =orb-babel= languages
            :unnarrowed t)))
 #+end_src
 
+**** ~org-dailies~
+I like having a timestamp for every new entry in my dailies
+#+begin_src emacs-lisp
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry "* [%<%H:%M:%S>] %?"
+           :if-new (file+head "%<%Y-%m-%d>.org"
+                              "#+title: %<%Y-%m-%d>\n#+author: Luis Victoria\n#+CREATED: %U\n\n"))))
+#+end_src
+
+
 **** Snippets Using ~yasnippet~
 Create snippets by typing ~>TEMPLATE~
 
