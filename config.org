@@ -681,6 +681,13 @@ A templating system. Allows you to type ~>TEMPLATE~ and then press ~TAB~ to expa
     :ensure nil)
 #+end_src
 
+*** Directory
+I treat everything ~org~ like a monolith, and have it live in a single directory.
+
+#+begin_src emacs-lisp
+  (setq lv/org-directory "~/org")
+#+end_src
+
 *** Addons
 **** Org-roam
 Org-roam is an extension that makes it easy to create topic-focused org files and link them together using backlinks.
@@ -695,7 +702,8 @@ SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on ho
   (use-package org-roam
     :ensure t
     :custom
-    (org-roam-directory "~/org/roam")
+    (org-roam-directory (concat lv/org-directory "/roam"))
+    (org-roam-dailies-directory (concat lv/org-directory "/daily"))
     (org-roam-completion-everywhere t)
     :config
     (org-roam-setup))
@@ -1324,13 +1332,11 @@ We have templates that we have defined in ~org-capture~. While we could just inv
 #+begin_src emacs-lisp
   (lv/leader-keys
     "o"   '(:ignore o                      :which-key "org")
-    "oc"  '(:ignore oc                     :which-key "create")
-    "ocd" '(org-roam-dailies-capture-today :which-key "daily")
-    "ocf" '(lv/capture-fleeting-note       :which-key "fleeting")
     "od"  '(:ignore od                     :which-key "daily")
     "ode" '(org-roam-dailies-capture-today :which-key "new entry")
     "odt" '(org-roam-dailies-goto-today    :which-key "view today's entries")
     "oe"  '(org-edit-special               :which-key "edit special")
+    "of"  '(lv/capture-fleeting-note       :which-key "create fleeting note")
     "oi"  '(:ignore oi                     :which-key "insert")
     "oii" '(org-id-get-create              :which-key "id")
     "oit" '(org-insert-structure-template  :which-key "template")
