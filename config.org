@@ -1349,6 +1349,7 @@ I want a keybinding dedicated exclusively to opening ~config.org~
   (lv/leader-keys
     "h"  '(:ignore h                 :which-key "help")
     "hf" '(counsel-describe-function :which-key "function")
+    "hk" '(describe-key              :which-key "key")
     "hv" '(counsel-describe-variable :which-key "variable"))
 #+end_src
 
