@@ -743,7 +743,7 @@ Add =mermaid= to =orb-babel= languages
 #+begin_src emacs-lisp
   (defun lv/org-capture--fleeting-target ()
     "Return the path to the fleeting note file for today."
-    (let ((fleeting-path (expand-file-name (format-time-string "%Y%m%d%H%M%S-%s.org") (concat org-roam-directory "/zk/fleeting/"))))
+    (let ((fleeting-path (expand-file-name (format-time-string "%Y%m%d%H%M%S-%s.org") (concat lv/org-directory "/fleeting"))))
       (set-buffer (org-capture-target-buffer fleeting-path))
       (widen)
       (goto-char (point-max))))
