@@ -374,7 +374,7 @@ Modeline is thte bar in the bottom that gives you a general overview of the buff
     :config
     (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
     (setq dirvish-attributes
-          '(vc-state all-the-icons file-size)))
+          '(vc-state all-the-icons file-time file-size)))
 #+end_src
 
 ** Global Keybindings and Vim
