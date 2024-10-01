@@ -373,7 +373,7 @@ We use ~dirvish~ for our file/directory management
     :config
     (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
     (setq dirvish-attributes
-          '(all-the-icons)))
+          '(vc-state all-the-icons)))
 #+end_src
 
 ** Global Keybindings and Vim
