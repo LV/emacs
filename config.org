@@ -371,7 +371,9 @@ We use ~dirvish~ for our file/directory management
   (use-package dirvish
     :ensure t
     :config
-    (dirvish-override-dired-mode)) ; Force the use of dirvish instead of dired
+    (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
+    (setq dirvish-attributes
+          '(all-the-icons)))
 #+end_src
 
 ** Global Keybindings and Vim
