@@ -794,6 +794,18 @@ Add =mermaid= to =orb-babel= languages
    '((mermaid . t)))
 #+end_src
 
+**** Calendar
+I use the ~calfw~ package to add a calendar to org-mode
+
+#+begin_src emacs-lisp
+  (use-package calfw
+    :ensure t)
+
+  (use-package calfw-org
+    :ensure t
+    :after calfw)
+#+end_src
+
 *** Templates
 **** ~org-capture~ Templates
 ***** Targets
@@ -1339,6 +1351,13 @@ The Meta key (=M-x=) is used to evaluate commands.
 #+begin_src emacs-lisp
   (lv/leader-keys
     ":" '(counsel-M-x :which-key "M-x"))
+#+end_src
+
+** Agenda
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "a"  '(:ignore a                :which-key "agenda")
+    "ac" '(cfw:open-calendar-buffer :which-key "calendar"))
 #+end_src
 
 ** Buffer
