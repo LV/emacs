@@ -514,7 +514,8 @@ Ivy is a completion framework that allows you to find files, switch buffers, etc
              ("C-d" . ivy-reverse-i-search-kill)))
     :config
     (setq ivy-re-builders-alist
-          '((t . ivy--regex-fuzzy))) ; Enable fuzzy search globally ; TODO: Un-fuzzy swiper, you already have `SPC f g` for ripgrep withing a file with covers this use-case
+          '((t . ivy--regex-plus))) ; Enable fuzzy search globally ; TODO: Un-fuzzy swiper, you already have `SPC f g` for ripgrep withing a file with covers this use-case
+          ; '((t . ivy--regex-fuzzy))) ; Disable fuzzy search globally
     (ivy-mode 1))
 #+end_src
 
@@ -1164,6 +1165,14 @@ Add ~which-key~ integration
     :config
     (which-key-mode))
 #+end_src
+
+Add ~flycheck~, does real-time syntax checking
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+#+end_src
+
 
 ** Languages
 *** Nix (Nil)
