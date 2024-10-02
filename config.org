@@ -514,7 +514,7 @@ Ivy is a completion framework that allows you to find files, switch buffers, etc
              ("C-d" . ivy-reverse-i-search-kill)))
     :config
     (setq ivy-re-builders-alist
-          '((t . ivy--regex-plus))) ; Enable fuzzy search globally ; TODO: Un-fuzzy swiper, you already have `SPC f g` for ripgrep withing a file with covers this use-case
+          '((t . ivy--regex-plus))) ; Enable normal search globally
           ; '((t . ivy--regex-fuzzy))) ; Disable fuzzy search globally
     (ivy-mode 1))
 #+end_src
