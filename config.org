@@ -207,20 +207,21 @@ I hate scrolling horizontally.
 #+end_src
 
 ** Font
-We create a function to set our font
+We create a helper function to set our font. Note that in terminal mode, Emacs has no control over font rendering (including font sizes) as it's left to the terminal to do this.
 
 #+begin_src emacs-lisp
   (defun lv/set-font (font-list height)
     "Set the first available font from FONT-LIST with HEIGHT"
-    (catch 'font-found
-      (dolist (font font-list)
-        (when (find-font (font-spec :name font))
-          (set-face-attribute 'default nil :font font :height height)
-          (throw 'font-found font)))
-      (message "No font from the list is available!")))
+    (when (display-graphic-p)
+      (catch 'font-found
+        (dolist (font font-list)
+          (when (find-font (font-spec :name font))
+            (set-face-attribute 'default nil :font font :height height)
+            (throw 'font-found font)))
+        (message "No font from the list is available!"))))
 #+end_src
 
-We choose the size and fonts depending on the system type
+We choose the size and fonts depending on the system type.
 
 #+begin_src emacs-lisp
   (cond
@@ -228,8 +229,6 @@ We choose the size and fonts depending on the system type
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 120))
    ((eq system-type 'darwin) ; MacOS
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 200)))
-
-  ; TODO: Remove this check if you're launching in terminal mode
 #+end_src
 
 ** Toolbar
