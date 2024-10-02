@@ -1379,13 +1379,6 @@ The Meta key (=M-x=) is used to evaluate commands.
     ":" '(counsel-M-x :which-key "M-x"))
 #+end_src
 
-** Agenda
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "a"  '(:ignore a             :which-key "agenda")
-    "ac" '(cfw:open-org-calendar :which-key "calendar"))
-#+end_src
-
 ** Buffer
 #+begin_src emacs-lisp
   (lv/leader-keys
@@ -1468,9 +1461,17 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 We have templates that we have defined in ~org-capture~. While we could just invoke ~org-capture~, we also have other documents that are not generated through this function. To have all possible generatable documents under one keystroke, we create a helper function to invoke the templates inside of ~org-capture~
 
 #+begin_src emacs-lisp
+  (defun lv/capture-appointment-note ()
+    "Capture an appointment note."
+    (interactive)
+    (org-capture nil "a"))
+#+end_src
+
+#+begin_src emacs-lisp
   (lv/leader-keys
     "o"   '(:ignore o                      :which-key "org")
-    "oc"  '(org-capture                    :which-key "capture")
+    "oa"  '(lv/capture-appointment-note    :which-key "appointment")
+    "oc"  '(cfw:open-org-calendar          :which-key "calendar")
     "od"  '(:ignore od                     :which-key "daily")
     "ode" '(org-roam-dailies-capture-today :which-key "new entry")
     "odt" '(org-roam-dailies-goto-today    :which-key "view today's entries")
