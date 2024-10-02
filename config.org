@@ -374,6 +374,8 @@ Modeline is thte bar in the bottom that gives you a general overview of the buff
     (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
     (setq dirvish-attributes
           '(vc-state subtree-state all-the-icons file-time file-size)))
+
+  ; FIXME: ~dirvish~ is not showing the current state of the directory! If you create a new directory or rename files, you won't see this in ~dirvish~ unless you quit and restart Emacs
 #+end_src
 
 ** ~undo-tree~
