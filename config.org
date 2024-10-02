@@ -1468,20 +1468,13 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 We have templates that we have defined in ~org-capture~. While we could just invoke ~org-capture~, we also have other documents that are not generated through this function. To have all possible generatable documents under one keystroke, we create a helper function to invoke the templates inside of ~org-capture~
 
 #+begin_src emacs-lisp
-  (defun lv/capture-fleeting-note ()
-    "Capture a fleeting note."
-    (interactive)
-    (org-capture nil "f"))
-#+end_src
-
-#+begin_src emacs-lisp
   (lv/leader-keys
     "o"   '(:ignore o                      :which-key "org")
+    "oc"  '(org-capture                    :which-key "capture")
     "od"  '(:ignore od                     :which-key "daily")
     "ode" '(org-roam-dailies-capture-today :which-key "new entry")
     "odt" '(org-roam-dailies-goto-today    :which-key "view today's entries")
     "oe"  '(org-edit-special               :which-key "edit special")
-    "of"  '(lv/capture-fleeting-note       :which-key "create fleeting note")
     "oi"  '(:ignore oi                     :which-key "insert")
     "oii" '(org-id-get-create              :which-key "id")
     "oit" '(org-insert-structure-template  :which-key "template")
