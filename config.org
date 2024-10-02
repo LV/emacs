@@ -384,6 +384,8 @@ Modeline is thte bar in the bottom that gives you a general overview of the buff
     :init
     ; (setq undo-tree-auto-save-history nil) ; Disable persistent history
     (global-undo-tree-mode 1))
+
+  ; TODO: Make buffer width for calling undo-tree significantly thinner
 #+end_src
 
 ** Global Keybindings and Vim
