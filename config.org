@@ -854,9 +854,11 @@ We set the file for the agenda
 ***** Templates
 #+begin_src emacs-lisp
   (setq org-capture-templates
-        '(("a" "Appointment" entry
-           (file+headline lv/org-agenda-path "Appointments")
+        '(("c" "Calendar" entry
+           (file+headline lv/org-agenda-path "Calendar")
            "* %?\n  %^T")
+                                          ; TODO: Make time of day optional. i.e. if I have a deadline for a specific day, I don't need to put in a specific hour of when it's due
+                                          ;         as of right now, it defaults to the current time of day. You need to remove the time of day every entry which is annoying
 
           ;; Zettelkasten
           ("f" "Fleeting Note" plain
@@ -1475,17 +1477,18 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 We have templates that we have defined in ~org-capture~. While we could just invoke ~org-capture~, we also have other documents that are not generated through this function. To have all possible generatable documents under one keystroke, we create a helper function to invoke the templates inside of ~org-capture~
 
 #+begin_src emacs-lisp
-  (defun lv/capture-appointment-note ()
-    "Capture an appointment note."
+  (defun lv/capture-calendar-note ()
+    "Capture an calendar note."
     (interactive)
-    (org-capture nil "a"))
+    (org-capture nil "c"))
 #+end_src
 
 #+begin_src emacs-lisp
   (lv/leader-keys
     "o"   '(:ignore o                      :which-key "org")
-    "oa"  '(lv/capture-appointment-note    :which-key "appointment")
-    "oc"  '(cfw:open-org-calendar          :which-key "calendar")
+    "oc"  '(:ignore oc                     :which-key "calendar")
+    "oce" '(lv/capture-calendar-note       :which-key "entry")
+    "occ" '(cfw:open-org-calendar          :which-key "open calendar")
     "od"  '(:ignore od                     :which-key "daily")
     "ode" '(org-roam-dailies-capture-today :which-key "new entry")
     "odt" '(org-roam-dailies-goto-today    :which-key "view today's entries")
