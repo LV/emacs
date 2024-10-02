@@ -803,7 +803,29 @@ I use the ~calfw~ package to add a calendar to org-mode
 
   (use-package calfw-org
     :ensure t
-    :after calfw)
+    :after (calfw org)
+    :config
+    (setq cfw:org-agenda-schedule-args '(:timestamp))
+    (setq cfw:org-overwrite-default-keybinding t))
+#+end_src
+
+**** Agenda
+We set the file for the agenda
+
+#+begin_src emacs-lisp
+  (setq lv/org-agenda-path (concat lv/org-directory "/agenda.org"))
+#+end_src
+
+#+begin_src emacs-lisp
+  (setq org-agenda-files (list lv/org-agenda-path))
+
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package org-super-agenda
+    :ensure t
+    :config
+    (org-super-agenda-mode))
 #+end_src
 
 *** Templates
@@ -821,8 +843,12 @@ I use the ~calfw~ package to add a calendar to org-mode
 ***** Templates
 #+begin_src emacs-lisp
   (setq org-capture-templates
-        ;; Zettelkasten
-        '(("f" "Fleeting Note" plain
+        '(("a" "Appointment" entry
+           (file+headline lv/org-agenda-path "Appointments")
+           "* %?\n  %^T")
+
+          ;; Zettelkasten
+          ("f" "Fleeting Note" plain
            (function lv/org-capture--fleeting-target)
            "%?"
            :if-new (file+head "zk/fleeting/%<%Y%m%d%H%M%S>-${slug}.org"
@@ -1356,8 +1382,8 @@ The Meta key (=M-x=) is used to evaluate commands.
 ** Agenda
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "a"  '(:ignore a                :which-key "agenda")
-    "ac" '(cfw:open-calendar-buffer :which-key "calendar"))
+    "a"  '(:ignore a             :which-key "agenda")
+    "ac" '(cfw:open-org-calendar :which-key "calendar"))
 #+end_src
 
 ** Buffer
