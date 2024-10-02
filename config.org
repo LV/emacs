@@ -837,7 +837,7 @@ I like seeing all the stars so I know which indentation level we're at.
 Modifying links in org-mode has been a real pain due to its default behavior of hiding the link. I want everything to show up.
 
 #+begin_src emacs-lisp
-  (setq org-descriptive-links nil) ; TODO: Change the color of the links to be light blue
+  (setq org-descriptive-links nil)
 #+end_src
 
 **** Bullet Points
