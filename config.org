@@ -378,6 +378,15 @@ Modeline is thte bar in the bottom that gives you a general overview of the buff
           '(vc-state subtree-state all-the-icons file-time file-size)))
 #+end_src
 
+** ~undo-tree~
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :ensure t
+    :init
+    ; (setq undo-tree-auto-save-history nil) ; Disable persistent history
+    (global-undo-tree-mode 1))
+#+end_src
+
 ** Global Keybindings and Vim
 Setting this up at the top just in case
 
@@ -409,6 +418,8 @@ Evil mode allows you to use Vim keybindings in all Emacs buffers. Vim keybinding
     :init
     (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
+    :custom
+    (evil-undo-system 'undo-tree)
     :config
     (evil-mode 1) ; turn on Evil mode
     ; (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state) ; I think this is the same as just hitting escape when you're not in insert mode
@@ -1081,18 +1092,6 @@ To fix this, simply launch Emacs on the terminal (you only have to do this once)
 
 #+begin_src sh :tangle no
   emacs -nw
-#+end_src
-
-** ~undo-tree~
-Undo tree
-
-#+begin_src emacs-lisp
-  (use-package undo-tree
-    :ensure t
-    :init
-    (global-undo-tree-mode 1))
-
-  ; FIXME Undoing an existing file (likely with already a =*.~undo-tree~= existing), newer changes after loading the existing file can't be undo-ed.
 #+end_src
 
 ** ~hl-todo~
