@@ -1536,6 +1536,8 @@ I also want a keybinding dedicated towards opening the =agenda.org= file
 #+begin_src emacs-lisp
   (lv/leader-keys
     "u" '(undo-tree-visualize :which-key "undo tree"))
+
+  ; TODO: Make buffer less wide. Doesn't need to take half of the screen
 #+end_src
 
 ** Window
