@@ -1267,6 +1267,8 @@ Performs real-time syntax checking
   (use-package flycheck
     :ensure t
     :init (global-flycheck-mode))
+
+  ; TODO: Make sure that =RET= doesn't result in autocompletion and instead creates a newline. Use =TAB= to autocomplete instead
 #+end_src
 
 *** ~lsp-treemacs~
