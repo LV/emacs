@@ -514,8 +514,9 @@ Ivy is a completion framework that allows you to find files, switch buffers, etc
              ("C-d" . ivy-reverse-i-search-kill)))
     :config
     (setq ivy-re-builders-alist
-          '((t . ivy--regex-plus))) ; Enable normal search globally
-          ; '((t . ivy--regex-fuzzy))) ; Disable fuzzy search globally
+          '((t . ivy--regex-plus)))    ; Enable normal search globally
+          ; '((t . ivy--regex-fuzzy))) ; Enable fuzzy search globally
+                                       ; NOTE: These two options are mutually exclusive
     (ivy-mode 1))
 #+end_src
 
@@ -1106,6 +1107,7 @@ Highlight TODOs, FIXMEs, NOTEs, etc.
           '(("TODO"   . "#FFFF00")
             ("FIXME"  . "#FF0000")
             ("DEBUG"  . "#00FFFF")
+            ("NOTE"   . "#50C878")
             ("GOTCHA" . "#A020F0")
             ("HACK"   . "#FFA500")
             ("STUB"   . "#7393B3"))))
