@@ -228,6 +228,8 @@ We choose the size and fonts depending on the system type
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 120))
    ((eq system-type 'darwin) ; MacOS
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 200)))
+
+  ; TODO: Remove this check if you're launching in terminal mode
 #+end_src
 
 ** Toolbar
@@ -996,14 +998,28 @@ You already have =M-RET= creating indented bullet points, no need to have a newl
 ** Projectile
 Projectile is a way of organizing your projects
 
+I want my projects inside of =~/Dev=. By default, it takes a very long time for the projects to show up in ~projectile-switch-project~, so we create a helper function to invoke the search of these folders. I tried adding them straight under ~:config~ and it still wasn't working.
+
+#+begin_src emacs-lisp
+  (defun lv/projectile-discover-projects()
+    "Discover all projects in the search path"
+    (interactive)
+    (projectile-discover-projects-in-search-path))
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package projectile
     :diminish projectile-mode
-    :config
-    (projectile-mode 1)
+    :init
+    (when (file-directory-p "~/Dev/")
+      (setq projectile-project-search-path '("~/Dev/")))
     (setq projectile-switch-project-action #'projectile-dired)
+    :config
+    (setq projectile-enable-caching t)
+    (projectile-mode 1)
     :bind-keymap
-    ("C-c p" . projectile-command-map))
+    ("C-c p" . projectile-command-map)
+    :hook (projectile-mode . lv/projectile-discover-projects))
 #+end_src
 
 ** Ripgrep
@@ -1172,10 +1188,11 @@ Add ~which-key~ integration
 *** Python (Pyright)
 [[https://emacs-lsp.github.io/lsp-pyright/][lsp-mode Pyright documentation]]
 
-Firstly, you will need to install Python manually
+Firstly, you will need to install ~basedpyright~ (and ~ruff~ for some reason) manually
 
 #+begin_src sh :tangle no
-  npm install -g pyright
+  pip install basedpyright
+  pip install ruff
 #+end_src
 
 And then we can install and use ~lsp-pyright~
@@ -1183,9 +1200,10 @@ And then we can install and use ~lsp-pyright~
 #+begin_src emacs-lisp
   (use-package lsp-pyright
     :ensure t
+    :custom (lsp-pyright-langserver-command "basedpyright")
     :hook (python-mode . (lambda ()
-                            (require 'lsp-pyright)
-                            (lsp-deferred))))
+                           (require 'lsp-pyright)
+                           (lsp-deferred))))
 #+end_src
 
 ** Company Mode
@@ -1204,14 +1222,15 @@ And then we can install and use ~lsp-pyright~
   (use-package company
     :after lsp-mode
     :hook (prog-mode . company-mode)
-    :bind (:map company-active-map
-            ("<tab>"      . company-complete-selection)
-            ("C-i"        . company-complete-selection)
-            ("<return>"   . newline))
-          (:map lsp-mode-map
-            ("<tab>"      . company-indent-or-complete-common)
-            ("C-i"        . company-indent-or-complete-common)
-            ("<return>"   . newline))
+    :bind
+    (:map company-active-map
+          ("<tab>"    . company-complete-selection)
+          ("C-i"      . company-complete-selection)
+          ("<return>" . newline))
+    (:map lsp-mode-map
+          ("<tab>"    . company-indent-or-complete-common)
+          ("C-i"      . company-indent-or-complete-common)
+          ("<return>" . newline))
     :custom
     (company-minimum-prefix-length 1)
     (company-idle-delay 0.0)) ; seconds
@@ -1344,6 +1363,7 @@ I want a keybinding dedicated exclusively to opening ~config.org~
   (lv/leader-keys
     "h"  '(:ignore h                 :which-key "help")
     "hf" '(counsel-describe-function :which-key "function")
+    "hk" '(describe-key              :which-key "key")
     "hv" '(counsel-describe-variable :which-key "variable"))
 #+end_src
 
