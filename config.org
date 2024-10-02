@@ -740,6 +740,8 @@ SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on ho
     (org-roam-completion-everywhere t)
     :config
     (org-roam-setup))
+
+  ; TODO: Add 2 newlines after a new daily entry
 #+end_src
 
 ***** UI
@@ -1038,6 +1040,9 @@ Disables highlighting the line where the cursor is currently on.
             (lambda ()
               (hl-line-mode -1)))
 #+end_src
+
+**** TODO Potential Additional features
+- [[https://github.com/l3kn/org-fc][org-fc]] for spaced repetition (or flashcards)
 
 **** TODO Make ~<enter>~ be unindented when coming out of a bullet point
 You already have =M-RET= creating indented bullet points, no need to have a newline be indented
