@@ -197,6 +197,17 @@ Displays the horizontal char position.
   (setq column-number-mode t)
 #+end_src
 
+** Clipboard
+While normal Emacs takes care of copy and pasting, I've had some issues copying to clipboard in terminal Emacs using Alacritty in WSL2 Ubuntu 22.02
+
+The fix is to use ~clipetty~
+
+#+begin_src emacs-lisp
+  (use-package clipetty
+    :ensure t
+    :hook (after-init . global-clipetty-mode))
+#+end_src
+
 ** Text Wrapping
 I hate scrolling horizontally.
 
