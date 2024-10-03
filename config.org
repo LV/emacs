@@ -1602,3 +1602,7 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 - [ ] Add Spotify control panel
   - Perhaps integrate emacs with some sort of [[https://github.com/Spotifyd/spotifyd][Spotify daemon]]
 - Maybe add workspaces (on top of tabs)
+
+* TODO Non-obvious things to fix
+- Pressing the tab character in terminal emacs does not result in an indent behavior
+  - This should happen if there's no autocomplete box to fill
