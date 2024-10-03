@@ -1274,9 +1274,11 @@ Install and use ~lsp-mode~
   (use-package lsp-mode
     :ensure t
     :commands (lsp lsp-deferred)
-    :hook ((lsp-mode . lv/lsp-setup-mode)
-           (c++-mode . lsp-deferred)
-           (c-mode   . lsp-deferred))
+    :hook ((lsp-mode    . lv/lsp-setup-mode)
+           (c++-mode    . lsp-deferred)
+           (c-mode      . lsp-deferred)
+           (python-mode . lsp-deferred)
+           (yaml-mode   . lsp-deferred))
     :init
     (setq lsp-keymap-prefix "C-c l")
     :config
