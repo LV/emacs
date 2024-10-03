@@ -933,6 +933,10 @@ Open ~org-edit-special~ if generating a template with a code block
 
   ;; Add this function to the yasnippet post expansion hook
   (add-hook 'yas-after-exit-snippet-hook 'lv/org-edit-special-after-snippet)
+
+  ;; FIXME: If you choose to write code inside of a codeblock without invoking the ~org-edit-special~, assuming you are in insert mode, pressing newline will stop you from being able to write code down
+  ;;          It formats the code, but forces you back into insert mode
+  ;;          Perhaps disable this formatting, as we only want it to be formatted when we're inside of ~org-edit-special~, or maybe format it but keep us in insert mode
 #+end_src
 
 We want to return to normal mode (instead of insert mode) once we leave ~org-edit-special~
