@@ -80,8 +80,9 @@ Video preview
 #+end_src
 
 ** LSPs
-- Pyright
 - clangd
+- Pyright
+- YAML
 ** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
   - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
@@ -1333,7 +1334,7 @@ Performs real-time syntax checking
     :ensure t)
 #+end_src
 
-*** Python (Pyright)
+*** Python (basedpyright)
 [[https://emacs-lsp.github.io/lsp-pyright/][lsp-mode Pyright documentation]]
 
 Firstly, you will need to install ~basedpyright~ (and ~ruff~ for some reason) manually
@@ -1352,6 +1353,15 @@ And then we can install and use ~lsp-pyright~
     :hook (python-mode . (lambda ()
                            (require 'lsp-pyright)
                            (lsp-deferred))))
+#+end_src
+
+*** YAML
+
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :ensure t
+    :mode "\\.ya?ml\\'"
+    :hook (yaml-mode . lsp-deferred))
 #+end_src
 
 ** Company Mode
@@ -1437,6 +1447,7 @@ The Meta key (=M-x=) is used to evaluate commands.
     "b"  '(:ignore b              :which-key "buffer")
     "bb" '(counsel-switch-buffer  :which-key "switch")
     "bk" '(kill-buffer-and-window :which-key "kill")
+    "bl" '(list-buffers           :which-key "list")
     "bt" '(tab-bar-new-tab        :which-key "new tab"))
 #+end_src
 
