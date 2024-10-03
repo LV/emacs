@@ -1446,11 +1446,12 @@ The Meta key (=M-x=) is used to evaluate commands.
 ** Buffer
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "b"  '(:ignore b              :which-key "buffer")
-    "bb" '(counsel-switch-buffer  :which-key "switch")
-    "bk" '(kill-buffer-and-window :which-key "kill")
-    "bl" '(list-buffers           :which-key "list")
-    "bt" '(tab-bar-new-tab        :which-key "new tab"))
+    "b"  '(:ignore b                           :which-key "buffer")
+    "bb" '(evil-switch-to-windows-last-buffer  :which-key "back to last buffer")
+    "bk" '(kill-buffer-and-window              :which-key "kill")
+    "bl" '(list-buffers                        :which-key "list")
+    "bs" '(counsel-switch-buffer               :which-key "switch")
+    "bt" '(tab-bar-new-tab                     :which-key "new tab"))
 #+end_src
 
 ** Code
