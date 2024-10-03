@@ -1505,6 +1505,8 @@ I want a keybinding dedicated exclusively to opening ~config.org~
     "ff" '(counsel-find-file   :which-key "find")
     "fc" '(lv/open-config-file :which-key "open config")
     "fg" '(counsel-rg          :which-key "ripgrep"))
+
+  ; TODO: Add functionality where going through the different options gives you a preview of the code in the other window
 #+end_src
 
 ** Git
