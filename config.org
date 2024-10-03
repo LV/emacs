@@ -462,6 +462,7 @@ Indentations will be described with the following syntax: ~n(s/t)~
 - ~n~ refers to the indentation length. How many spaces the indentation appears (if it's a tab character, how long should the tab character appear)
 - ~s~ refers to the indentation consisting of spaces (i.e. ~expandtab=on~)
 - ~t~ refers to the indentation consisting of tab characters (i.e. ~expandtab=off~)
+
 *** C++: ~4s~
 #+begin_src emacs-lisp
   (setq auto-mode-alist
@@ -485,10 +486,22 @@ Indentations will be described with the following syntax: ~n(s/t)~
   (add-hook 'c++-mode-hook 'lv/c++-setup)
 #+end_src
 
+*** Python: ~4s~
+[[https://peps.python.org/pep-0008/#indentation][PEP-0008]] says 4 spaces per indentation level
+
+#+begin_src emacs-lisp
+  (defun lv/python-setup ()
+    "Set up Python indentation preferences."
+    (setq python-indent-offset 4) ; set indentation to 4 spaces
+    (setq tab-width 4)
+    (setq indent-tabs-mode nil) ; use spaces instead of tabs
+
+    (add-hook 'python-mode-hook 'lv/python-setup))
+#+end_src
+
 *** TODO Languages to add
 - Makefile: ~4t~
 - Org-mode: ~2s~
-- Python: ~2s~ or ~4s~
 - sh: ~2s~
 
 * Behaviors
