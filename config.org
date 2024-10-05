@@ -397,6 +397,14 @@ Modeline is thte bar in the bottom that gives you a general overview of the buff
   ; TODO: Add a keybinding for inserting an empty file
 #+end_src
 
+I also don't really see the need for ~dired-toggle-read-only~, whereas I keep performing ~dired-create-empty-file~, thus I change the keybinding for this
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'evil
+  (with-eval-after-load 'dirvish
+    (evil-define-key 'normal dirvish-mode-map (kbd "i") 'dired-create-empty-file)))
+#+end_src
+
 ** ~undo-tree~
 #+begin_src emacs-lisp
   (use-package undo-tree
