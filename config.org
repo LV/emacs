@@ -32,13 +32,13 @@ Video preview
 #+begin_src sh :tangle no
   brew install ffmpegthumbnailer
 #+end_src
+
 **** ~gls~
 ***** MacOS
 #+begin_src sh :tangle no
   brew install g-ls
 #+end_src
 
-**** ~imagemagick~
 **** ~mediainfo~
 ***** MacOS
 #+begin_src sh :tangle no
