@@ -887,6 +887,17 @@ We set the file for the agenda
     (org-super-agenda-mode))
 #+end_src
 
+**** Webpage
+You can create a webpage using your org files by compiling them into HTML
+
+We use the ~httpd~ package to preview how our site will look like
+
+#+begin_src emacs-lisp
+  (use-package simple-httpd
+    :ensure t)
+#+end_src
+
+
 *** Templates
 **** ~org-capture~ Templates
 ***** Targets
