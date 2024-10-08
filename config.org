@@ -1508,7 +1508,7 @@ When I open ~flymake-show-buffer-diagnostics~, I want the cursor to move to the 
 #+end_src
 
 ** File
-I want a keybinding dedicated exclusively to opening ~config.org~
+I want a keybinding dedicated exclusively to opening specific files/directories
 
 #+begin_src emacs-lisp
   (defun lv/open-config-file ()
@@ -1517,11 +1517,18 @@ I want a keybinding dedicated exclusively to opening ~config.org~
 #+end_src
 
 #+begin_src emacs-lisp
+  (defun lv/open-org-dir ()
+    (interactive)
+    (find-file lv/org-directory))
+#+end_src
+
+#+begin_src emacs-lisp
   (lv/leader-keys
     "f"  '(:ignore f           :which-key "file")
     "ff" '(counsel-find-file   :which-key "find")
     "fc" '(lv/open-config-file :which-key "open config")
-    "fg" '(counsel-rg          :which-key "ripgrep"))
+    "fg" '(counsel-rg          :which-key "ripgrep")
+    "fo" '(lv/open-org-dir     :which-key "open org"))
 
   ; TODO: Add functionality where going through the different options gives you a preview of the code in the other window
 #+end_src
