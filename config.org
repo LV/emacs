@@ -1345,6 +1345,11 @@ Performs real-time syntax checking
 #+end_src
 
 ** Languages
+*** TODO Docker
+Add LSP integration with Docker. Use the following resources:
+- [[https://github.com/emacs-lsp/lsp-docker][LSP Docker]]
+- [[https://happihacking.com/blog/posts/2023/dev-containers-emacs/][Docker Dev Containers in Emacs]] (like in VSCode)
+
 *** Nix (Nil)
 [[https://emacs-lsp.github.io/lsp-mode/page/lsp-nix-nil/][lsp-mode Nix Nil documentation]]
 
