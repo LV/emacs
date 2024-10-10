@@ -943,6 +943,9 @@ Create snippets by typing ~>TEMPLATE~
 
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook #'yas-minor-mode)
+
+  ; TODO: Stop yasnippet from inserting an extra \n character after pressing TAB to open the snippet
+  ;         This is probably only for org-mode, but maybe this behavior should be global
 #+end_src
 
 Open ~org-edit-special~ if generating a template with a code block
