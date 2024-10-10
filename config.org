@@ -1354,7 +1354,7 @@ Add LSP integration with Docker. Use the following resources:
 [[https://emacs-lsp.github.io/lsp-mode/page/lsp-nix-nil/][lsp-mode Nix Nil documentation]]
 
 - I almost exclusively edit Nix packages when I'm using NixOS`
-  - The package is called /nil/ on nixpkgs ([[https://search.nixos.org/packages?channel=24.05&show=nil&from=0&size=50&sort=relevance&type=packages&query=nil][(link)]])
+  - The package is called /nil/ on nixpkgs ([[https://search.nixos.org/packages?channel=24.05&show=nil&from=0&size=50&sort=relevance&type=packages&query=nil][link]])
 
 #+begin_src emacs-lisp
   (use-package lsp-nix
