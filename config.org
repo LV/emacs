@@ -1455,6 +1455,24 @@ See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
 #+end_src
 
 * Keybindings
+** Emacs Keys
+I rarely ever use Emacs bindings, but the only exception is emitting the ~ESCAPE~ button in ~vterm~.
+
+#+begin_src emacs-lisp
+  (defun lv/vterm-ctrl-c-escape ()
+    "Send ESCAPE after CTRL-C in vterm."
+    (interactive)
+    (vterm-send-key "C-c")      ; Send CTRL-C to vterm
+    (vterm-send-key "<escape>")) ; Send ESCAPE after CTRL-C
+#+end_src
+
+#+begin_src emacs-lisp
+  (general-define-key
+   :states '(insert normal)
+   :keymaps 'vterm-mode-map
+   "C-c <escape>" 'lv/vterm-ctrl-c-escape)
+#+end_src
+
 ** Leader Key
 I like to use keybindings by pressing a leader key, which I map as the spacebar.
 
