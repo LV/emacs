@@ -802,6 +802,10 @@ SQLite is a prerequisite, see /Pre-requisites/ at the top for instructions on ho
     (org-roam-setup))
 
   ; TODO: Add 2 newlines after a new daily entry
+  ; TODO: Make it's invokation cover a full window
+  ;          - Full window refers to monitor environment of user
+  ;          - Buffer refers to cursor local environment (Emacs buffer)
+
 #+end_src
 
 ***** UI
