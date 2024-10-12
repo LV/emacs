@@ -1509,10 +1509,11 @@ I rarely ever use Emacs bindings, but the only exception is emitting the ~ESCAPE
 #+end_src
 
 #+begin_src emacs-lisp
-  (general-define-key
-   :states '(insert normal)
-   :keymaps 'vterm-mode-map
-   "C-c <escape>" 'lv/vterm-ctrl-c-escape)
+  (with-eval-after-load 'general
+    (general-define-key
+     :states '(insert normal)
+     :keymaps 'vterm-mode-map
+     "C-c <escape>" 'lv/vterm-ctrl-c-escape))
 #+end_src
 
 ** Leader Key
@@ -1521,6 +1522,7 @@ I like to use keybindings by pressing a leader key, which I map as the spacebar.
 #+begin_src emacs-lisp
   ;; Setup keybindings with a leader key
   (use-package general
+    :ensure t
     :config
     (general-evil-setup t)
 
