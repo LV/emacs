@@ -1171,32 +1171,34 @@ Customize the =RET= key in Org mode to handle bullet points intelligently:
 - Elsewhere, =RET= inserts a new line as usual.
 
 #+begin_src emacs-lisp
-    (defun lv/org-return-dwim ()
-      "Handle RET in Org mode with context-sensitive behavior.
+  (defun lv/org-return-dwim ()
+    "Handle RET in Org mode with context-sensitive behavior.
   If at a bullet point:
-    - If empty, delete the bullet and insert a newline.
-    - If non-empty, insert a new bullet.
+  - If empty, delete the bullet.
+  - If non-empty, insert a new bullet.
   Else, insert a newline."
-      (interactive)
-      (cond
-       ;; If at an empty bullet point, remove it and insert a newline
-       ((and (org-at-item-p)
-             (save-excursion
-               (beginning-of-line)
-               (looking-at-p "^[ \t]*[-+*] \\(?:[ \t]*$\\)")))
-        (delete-region (line-beginning-position) (line-end-position))
-        (newline))
-       ;; If at a non-empty bullet point, insert a new bullet
-       ((org-at-item-p)
-        (org-insert-item))
-       ;; Else, insert a newline
-       (t
-        (newline))))
+    (interactive)
+    (cond
+     ;; If at an empty bullet point, remove it without adding a new line
+     ((and (org-at-item-p)
+           (save-excursion
+             (beginning-of-line)
+             (looking-at-p "^[ \t]*[-+*] \\(?:[ \t]*$\\)")))
+      ;; Delete the entire line including the newline character
+      (delete-region (line-beginning-position)
+                     (line-beginning-position 2)))
+     ;; If at a non-empty bullet point, insert a new bullet
+     ((org-at-item-p)
+      (org-insert-item))
+     ;; Else, insert a newline
+     (t
+      (newline))))
 
-    ;; Bind RET to our custom function in Org mode
-    (with-eval-after-load 'org
-      (define-key org-mode-map (kbd "RET") 'lv/org-return-dwim))
+  ;; Bind RET to our custom function in Org mode
+  (with-eval-after-load 'org
+    (define-key org-mode-map (kbd "RET") 'lv/org-return-dwim))
 #+end_src
+
 
 **** TODO Potential Additional features
 - [[https://github.com/l3kn/org-fc][org-fc]] for spaced repetition (or flashcards)
