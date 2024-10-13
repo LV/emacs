@@ -1541,15 +1541,11 @@ The Meta key (=M-x=) is used to evaluate commands.
     ":" '(counsel-M-x :which-key "M-x"))
 #+end_src
 
-** Buffer
+** =DEL=
+I use the =DEL= key to return to the previous buffer. I know that this should be in window, but I use it too often to do ~wbb~ every time I want to go to the previous buffer.
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "b"  '(:ignore b                           :which-key "buffer")
-    "bb" '(evil-switch-to-windows-last-buffer  :which-key "back to last buffer")
-    "bk" '(kill-buffer-and-window              :which-key "kill")
-    "bl" '(list-buffers                        :which-key "list")
-    "bs" '(counsel-switch-buffer               :which-key "switch")
-    "bt" '(tab-bar-new-tab                     :which-key "new tab"))
+    "DEL" '(evil-switch-to-windows-last-buffer :which-key "go to prev context"))
 #+end_src
 
 ** Code
@@ -1720,15 +1716,20 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "w"  '(:ignore w          :which-key "window")
-    "wf" '(toggle-fullscreen  :which-key "toggle fullscreen")
-    "wh" '(evil-window-left   :which-key "move left")
-    "wj" '(evil-window-down   :which-key "move down")
-    "wk" '(evil-window-up     :which-key "move up")
-    "wl" '(evil-window-right  :which-key "move right")
-    "wm" '(maximize-window    :which-key "maximize window")
-    "ws" '(evil-window-split  :which-key "split horizontally")
-    "wv" '(evil-window-vsplit :which-key "split vertically"))
+    "w"   '(:ignore w              :which-key "window")
+    "wb"  '(:ignore wb             :which-key "buffer")
+    "wbk" '(kill-buffer-and-window :which-key "kill")
+    "wbl" '(list-buffers           :which-key "list")
+    "wbs" '(counsel-switch-buffer  :which-key "switch")
+    "wf"  '(toggle-fullscreen      :which-key "toggle fullscreen")
+    "wh"  '(evil-window-left       :which-key "move left")
+    "wj"  '(evil-window-down       :which-key "move down")
+    "wk"  '(evil-window-up         :which-key "move up")
+    "wl"  '(evil-window-right      :which-key "move right")
+    "wm"  '(maximize-window        :which-key "maximize window")
+    "ws"  '(evil-window-split      :which-key "split horizontally")
+    "wt"  '(tab-bar-new-tab        :which-key "new tab")
+    "wv"  '(evil-window-vsplit     :which-key "split vertically"))
 #+end_src
 
 * TODO Future Features to add
