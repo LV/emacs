@@ -1731,6 +1731,8 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
       (lv/fullscreen)))
 #+end_src
 
+    "b"  '(:ignore b                           :which-key "buffer")
+
 #+begin_src emacs-lisp
   (lv/leader-keys
     "w"   '(:ignore w              :which-key "window")
