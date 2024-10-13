@@ -1199,7 +1199,7 @@ Disables highlighting the line where the cursor is currently on.
 #+end_src
 
 **** Custom =RET= Behavior for Bullet Points
-
+***** Normal Mode
 Customize the =RET= key in Org mode to handle bullet points intelligently:
 
 - Pressing =RET= on a non-empty bullet point creates a new bullet point.
@@ -1235,6 +1235,59 @@ Customize the =RET= key in Org mode to handle bullet points intelligently:
     (define-key org-mode-map (kbd "RET") 'lv/org-return-dwim))
 #+end_src
 
+***** Evil Mode
+- Do the same thing, but when going from Evil normal mode to insert mode
+- More specifically, when pressing the =o= or =O= keys
+
+#+begin_src emacs-lisp
+  (defun lv/evil-org-insert-item-below ()
+    "Insert a new item below the current one in Org mode or open a new line.
+  If on a bullet point, insert a new item at the same level.
+  Otherwise, perform `evil-open-below`."
+    (interactive)
+    (condition-case nil
+        (if (org-at-item-p)
+            (progn
+              ;; Move to the end of the current line
+              (end-of-line)
+              ;; Insert a new item at the same level
+              (org-insert-item)
+              ;; Switch to insert mode
+              (evil-insert-state))
+          ;; Default behavior when not on a bullet point
+          (evil-open-below 1))
+      ;; In case of any error, fall back to default behavior
+      (error (evil-open-below 1))))
+#+end_src
+
+#+begin_src emacs-lisp
+  (defun lv/evil-org-insert-item-above ()
+    "Insert a new item above the current one in Org mode or open a new line.
+  If on a bullet point, insert a new item at the same level.
+  Otherwise, perform `evil-open-above`."
+    (interactive)
+    (condition-case nil
+        (if (org-at-item-p)
+            (progn
+              ;; Move to the beginning of the current line
+              (beginning-of-line)
+              ;; Insert a new item at the same level
+              (org-insert-item)
+              ;; Switch to insert mode
+              (evil-insert-state))
+          ;; Default behavior when not on a bullet point
+          (evil-open-above 1))
+      ;; In case of any error, fall back to default behavior
+      (error (evil-open-above 1))))
+
+#+end_src
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil
+    (evil-define-key 'normal org-mode-map
+      (kbd "o") 'lv/evil-org-insert-item-below
+      (kbd "O") 'lv/evil-org-insert-item-above))
+#+end_src
 
 **** TODO Potential Additional features
 - [[https://github.com/l3kn/org-fc][org-fc]] for spaced repetition (or flashcards)
