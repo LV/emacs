@@ -1198,7 +1198,7 @@ Disables highlighting the line where the cursor is currently on.
               (hl-line-mode -1)))
 #+end_src
 
-**** Custom =RET= Behavior
+**** Custom =RET= Behavior for Bullet Points
 
 Customize the =RET= key in Org mode to handle bullet points intelligently:
 
@@ -1241,9 +1241,6 @@ Customize the =RET= key in Org mode to handle bullet points intelligently:
 - [[https://ditaa.sourceforge.net/][ditaa]] and/or [[https://www.graphviz.org/][graphviz]] for inserting diagrams to org-mode
   - See [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-ditaa.html][org ditaa]] and [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-dot.html][org dot]] respectively
 - [[https://github.com/alphapapa/org-ql][org-ql]] for searching org-files
-
-**** TODO Make ~<enter>~ be unindented when coming out of a bullet point
-You already have =M-RET= creating indented bullet points, no need to have a newline be indented
 
 ** Projectile
 Projectile is a way of organizing your projects
