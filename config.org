@@ -528,6 +528,27 @@ Makefile indentations [[https://www.gnu.org/software/make/manual/make.html#Recip
   (add-hook 'makefile-mode-hook 'lv/makefile-setup)
 #+end_src
 
+*** Org-mode: ~2s~
+#+begin_src emacs-lisp
+  (defun lv/org-mode-setup ()
+    "Set up Org-mode indentation preferences."
+    (setq org-adapt-indentation nil) ; Disable adaptive indentation for clean look
+    (setq org-indent-indentation-per-level 2) ; Set indentation level to 2 spaces
+    (setq tab-width 2)  ; Set tab width to 2 spaces
+    (setq indent-tabs-mode nil)) ; Use spaces instead of tabs
+
+  (add-hook 'org-mode-hook 'lv/org-mode-setup)
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; Adjust Evil's shift width for Org-mode
+  (defun lv/org-mode-evil-setup ()
+    "Set up Evil indentation for Org-mode."
+    (setq evil-shift-width 2)) ; Set shift width to 2 spaces in Org-mode
+
+  (add-hook 'org-mode-hook 'lv/org-mode-evil-setup)
+#+end_src
+
 *** Python: ~4s~
 [[https://peps.python.org/pep-0008/#indentation][PEP-0008]] says 4 spaces per indentation level
 
@@ -542,8 +563,6 @@ Makefile indentations [[https://www.gnu.org/software/make/manual/make.html#Recip
 #+end_src
 
 *** TODO Languages to add
-- Makefile: ~4t~
-- Org-mode: ~2s~
 - sh: ~2s~
 
 * Behaviors
