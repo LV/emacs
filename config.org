@@ -420,20 +420,37 @@ I also don't really see the need for ~dired-toggle-read-only~, whereas I keep pe
 Setting this up at the top just in case
 
 *** ~ESC~ Behaviors
-Make ~ESC~ key quit prompts
-
-#+begin_src emacs-lisp
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
-#+end_src
-
+**** Make ~ESC~ Instantly Responsive
 - We want the ~ESC~ key to be immediately responsive
   - On default terminal Emacs, when the ~ESC~ key is pressed, there is about a 700ms delay between switching from insert mode to normal mode
     - This could be attributed to using a slower terminal emulator. The delay was quite big on WezTerm, but using Alacritty I noticed that this delay was significantly reduced
       - I tried using Emacs on Kitty, and it was the slowest. I've found that Alacritty in general is the best performing emulator
       - My laptop is also quite bad, so these performance differences are important
 
+***** Evil
 #+begin_src emacs-lisp
   (setq evil-esc-delay 0)
+#+end_src
+
+***** Emacs 27 and Before
+#+begin_src emacs-lisp
+  (setq escape-delay 0)
+#+end_src
+
+***** Emacs 28 and Later
+#+begin_src emacs-lisp
+  (setq key-escape-delay 0)
+#+end_src
+
+***** Terminal Emacs
+#+begin_src emacs-lisp
+  (setq tty-escape-code-delay 0)
+#+end_src
+
+
+**** Make ~ESC~ Key Quit Prompts
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
 #+end_src
 
 This fixes the delay in WezTerm, although I'm not sure in the first place why the behavior is different across the two terminal emulators.
