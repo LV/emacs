@@ -1825,6 +1825,7 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 - From within ~vterm~, do something like ~e FILETOOPEN~ and it will open a new buffer inside of the current emacs instance
 - Split config into multiple files
 - Replicate /oil.nvim/
+- Migrate away from /lsp-mode/ to something like /lsp-bridge/
 
 * TODO Non-obvious things to fix
 - Pressing the tab character in terminal emacs does not result in an indent behavior
