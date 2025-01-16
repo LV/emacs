@@ -316,16 +316,6 @@ Enable icons via specialized fonts
   M-x nerd-icons-install-fonts
 #+end_src
 
-*** Emojis
-I think emojis in documents are a good thing (in moderation and appropriate cases)
-
-😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂😂
-
-#+begin_src emacs-lisp
-  (use-package emojify
-    :hook (after-init . global-emojify-mode))
-#+end_src
-
 *** Padding
 **** Line Spacing
 Per buffer line spacing can be set using the variable ~line-spacing~. Something like ~0.1~ goes well here.
