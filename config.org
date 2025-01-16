@@ -296,7 +296,7 @@ I prefer smooth scrolling (one line at a time).
 *** Theme
 #+begin_src emacs-lisp
   (use-package doom-themes
-    :init (load-theme 'doom-molokai t))
+    :init (load-theme 'doom-bluloco-dark t))
 
   ; TODO: Make the color for the background of text selection more clear
   ; Currently very difficult to see which selection you're on
