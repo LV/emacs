@@ -1,0 +1,47 @@
+#+TITLE: Org-mode Configuration
+#+PROPERTY: header-args :tangle yes
+
+* Which-key
+We have templates that we have defined in ~org-capture~. While we could just invoke ~org-capture~, we also have other documents that are not generated through this function. To have all possible generatable documents under one keystroke, we create a helper function to invoke the templates inside of ~org-capture~
+
+#+begin_src emacs-lisp
+  (defun lv/capture-calendar-note ()
+    "Capture an calendar note."
+    (interactive)
+    (org-capture nil "c"))
+#+end_src
+
+I also want dedicated keybindings
+
+#+begin_src emacs-lisp
+  (defun lv/open-agenda-file ()
+    (interactive)
+    (find-file lv/org-agenda-path))
+#+end_src
+
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "o"   '(:ignore o                      :which-key "org")
+    "oa"  '(lv/open-agenda-file            :which-key "open agenda")
+    "oc"  '(:ignore oc                     :which-key "calendar")
+    "oce" '(lv/capture-calendar-note       :which-key "entry")
+    "occ" '(cfw:open-org-calendar          :which-key "open calendar")
+    "od"  '(:ignore od                     :which-key "daily")
+    "ode" '(org-roam-dailies-capture-today :which-key "new entry")
+    "odt" '(org-roam-dailies-goto-today    :which-key "view today's entries")
+    "oe"  '(org-edit-special               :which-key "edit special")
+    "oi"  '(:ignore oi                     :which-key "insert")
+    "oii" '(org-id-get-create              :which-key "id")
+    "oit" '(org-insert-structure-template  :which-key "template")
+    "on"  '(:ignore on                     :which-key "new")
+    "onf" '(org-roam-dailies-capture-today :which-key "daily/fleeting note")
+    "or"  '(:ignore or                     :which-key "roam")
+    "ora" '(org-roam-alias-add             :which-key "add alias")
+    "orf" '(org-roam-node-find             :which-key "find node")
+    "ori" '(org-roam-node-insert           :which-key "insert node")
+    "oru" '(org-roam-ui-mode               :which-key "UI")
+    "ot"  '(:ignore ot                     :which-key "toggle")
+    "oti" '(org-toggle-inline-images       :which-key "image")
+    "otr" '(org-roam-buffer-toggle         :which-key "roam buffer")
+    "ox"  '(org-ctrl-c-ctrl-c              :which-key "execute"))
+#+end_src
