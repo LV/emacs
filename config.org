@@ -565,6 +565,7 @@ Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the fil
 
 #+begin_src emacs-lisp
   (setq make-backup-files nil)
+  (setq auto-save-default nil)
 #+end_src
 
 ** Require Final Newline
