@@ -1454,7 +1454,12 @@ Install and use ~lsp-mode~
     :init
     (setq lsp-keymap-prefix "C-c l")
     :config
-    (lsp-enable-which-key-integration t))
+    (lsp-enable-which-key-integration t)
+    :custom
+    (lsp-idle-delay 0.5)
+    (lsp-log-io nil)
+    (gc-cons-threshold 100000000)
+    (read-process-output-max (* 1024 1024)))
 #+end_src
 
 ** Extra Packages
