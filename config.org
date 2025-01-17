@@ -936,32 +936,15 @@ We use the ~httpd~ package to preview how our site will look like
 
 *** Templates
 **** ~org-capture~ Templates
-***** Targets
-#+begin_src emacs-lisp
-  (defun lv/org-capture--fleeting-target ()
-    "Return the path to the fleeting note file for today."
-    (let ((fleeting-path (expand-file-name (format-time-string "%Y%m%d%H%M%S-%s.org") (concat lv/org-directory "/fleeting"))))
-      (set-buffer (org-capture-target-buffer fleeting-path))
-      (widen)
-      (goto-char (point-max))))
-#+end_src
-
 ***** Templates
 #+begin_src emacs-lisp
   (setq org-capture-templates
         '(("c" "Calendar" entry
            (file+headline lv/org-agenda-path "Calendar")
-           "* %?\n  %^T")
-                                          ; TODO: Make time of day optional. i.e. if I have a deadline for a specific day, I don't need to put in a specific hour of when it's due
-                                          ;         as of right now, it defaults to the current time of day. You need to remove the time of day every entry which is annoying
+           "* %?\n  %^T")))
 
-          ;; Zettelkasten
-          ("f" "Fleeting Note" plain
-           (function lv/org-capture--fleeting-target)
-           "%?"
-           :if-new (file+head "zk/fleeting/%<%Y%m%d%H%M%S>-${slug}.org"
-                              "#+title: ${title}\n#+created: %U\n")
-           :unnarrowed t)))
+  ; TODO: Make time of day optional. i.e. if I have a deadline for a specific day, I don't need to put in a specific hour of when it's due
+  ;         as of right now, it defaults to the current time of day. You need to remove the time of day every entry which is annoying
 #+end_src
 
 **** ~org-dailies~
