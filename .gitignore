@@ -53,6 +53,7 @@ projectile-bookmarks.eld
 transient/
 forge-database.sqlite
 config.el
+modules/*.el
 eln-cache/
 custom.el
 ltximg/
