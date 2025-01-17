@@ -456,6 +456,8 @@ Evil mode allows you to use Vim keybindings in all Emacs buffers. Vim keybinding
     :init
     (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
+    (setq evil-undo-system 'undo-tree)
+    (setq evil-mode-line-format nil) ; disable evil state in modeline (using doom-modeline instead)
     :custom
     (evil-undo-system 'undo-tree)
     :config
