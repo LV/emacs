@@ -1749,6 +1749,13 @@ I also want a keybinding dedicated towards opening the =agenda.org= file
 #+end_src
 
 #+begin_src emacs-lisp
+  (defun lv/capture-fleeting-note ()
+    "Capture a fleeting note."
+    (interactive)
+    (org-capture nil "f"))
+#+end_src
+
+#+begin_src emacs-lisp
   (lv/leader-keys
     "o"   '(:ignore o                      :which-key "org")
     "oa"  '(lv/open-agenda-file            :which-key "open agenda")
@@ -1762,6 +1769,8 @@ I also want a keybinding dedicated towards opening the =agenda.org= file
     "oi"  '(:ignore oi                     :which-key "insert")
     "oii" '(org-id-get-create              :which-key "id")
     "oit" '(org-insert-structure-template  :which-key "template")
+    "on"  '(:ignore on                     :which-key "new")
+    "onf" '(lv/capture-fleeting-note       :which-key "fleeting note")
     "or"  '(:ignore or                     :which-key "roam")
     "ora" '(org-roam-alias-add             :which-key "add alias")
     "orf" '(org-roam-node-find             :which-key "find node")
