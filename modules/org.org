@@ -498,7 +498,7 @@ I also want dedicated keybindings.
     "oc"  '(:ignore oc                     :which-key "calendar")
     "oce" '(lv/capture-calendar-note       :which-key "entry")
     "occ" '(cfw:open-org-calendar          :which-key "open calendar")
-    "od"  '(org-roam-dalies-goto-today     :which-key "view daily entries")
+    "od"  '(org-roam-dailies-goto-today    :which-key "view daily entries")
     "oe"  '(org-edit-special               :which-key "edit special")
     "oi"  '(:ignore oi                     :which-key "insert")
     "oii" '(org-id-get-create              :which-key "id")
