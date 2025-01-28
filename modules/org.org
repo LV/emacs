@@ -7,6 +7,7 @@
   (use-package org
     :ensure nil)
 #+end_src
+
 * General Settings
 ** Main Directory
 I treat everything ~org~ like a monolith, and have it live in a single main directory.
@@ -35,6 +36,13 @@ I treat everything ~org~ like a monolith, and have it live in a single main dire
     (setq evil-shift-width 2)) ; Set shift width to 2 spaces in Org-mode
 
   (add-hook 'org-mode-hook 'lv/org-mode-evil-setup)
+#+end_src
+
+** Behaviors
+Enter /org-mode/ when creating a new org note.
+
+#+begin_src emacs-lisp
+  (add-hook 'org-roam-capture-new-node-hook 'org-mode)
 #+end_src
 
 * Package Add-ons
@@ -213,6 +221,7 @@ Return to Normal Mode (instead of Insert Mode) when leaving ~org-edit-special~
   ;; Advise `org-edit-src-exit` to ensure we're in normal state in Evil
   (advice-add 'org-edit-src-exit :after #'lv/exit-org-edit-special-normal-state)
 #+end_src
+
 * Text Rendering Preferences
 ** Show Leading Stars in Headers
 #+begin_src emacs-lisp
@@ -299,6 +308,7 @@ Disables highlighting the line where the cursor is currently on.
         org-fontify-done-headline t
         org-fontify-quote-and-verse-blocks t)
 #+end_src
+
 * Evil Mode
 ** Save and Abort ~org-edit-special~ buffers with Vim Commands
 Must edit ~#+begin_src~ code blocks through ~org-edit-special~ since indentations and syntax highlighting won't appear otherwise.
@@ -385,6 +395,7 @@ Original behavior is to enter in Normal Mode.
 #+begin_src emacs-lisp
   (advice-add 'org-roam-dailies-capture-today :after (lambda (&rest _) (evil-insert-state)))
 #+end_src
+
 ** Custom =RET= Behavior for Bullet Points
 *** Normal Mode
 Customize the =RET= key in Org mode to handle bullet points intelligently:
@@ -473,6 +484,7 @@ Customize the =RET= key in Org mode to handle bullet points intelligently:
       (kbd "o") 'lv/evil-org-insert-item-below
       (kbd "O") 'lv/evil-org-insert-item-above))
 #+end_src
+
 * Keybindings
 We have templates that we have defined in ~org-capture~. While we could just invoke ~org-capture~, we also have other documents that are not generated through this function. To have all possible generatable documents under one keystroke, we create a helper function to invoke the templates inside of ~org-capture~.
 
@@ -492,6 +504,13 @@ I also want dedicated keybindings.
 #+end_src
 
 #+begin_src emacs-lisp
+  (defun lv/org-roam-capture ()
+    "Wrapper around org-roam-capture."
+    (interactive)
+    (org-roam-capture))
+#+end_src
+
+#+begin_src emacs-lisp
   (lv/leader-keys
     "o"   '(:ignore o                      :which-key "org")
     "oa"  '(lv/open-agenda-file            :which-key "open agenda")
@@ -504,6 +523,7 @@ I also want dedicated keybindings.
     "oii" '(org-id-get-create              :which-key "id")
     "oit" '(org-insert-structure-template  :which-key "template")
     "on"  '(:ignore on                     :which-key "new")
+    "ona" '(lv/org-roam-capture            :which-key "atomic note")
     "onf" '(org-roam-dailies-capture-today :which-key "daily/fleeting note")
     "or"  '(:ignore or                     :which-key "roam")
     "ora" '(org-roam-alias-add             :which-key "add alias")
@@ -514,6 +534,25 @@ I also want dedicated keybindings.
     "oti" '(org-toggle-inline-images       :which-key "image")
     "otr" '(org-roam-buffer-toggle         :which-key "roam buffer")
     "ox"  '(org-ctrl-c-ctrl-c              :which-key "execute"))
+#+end_src
+
+
+* Fixes
+** ~org-roam-capture~ spacebar bug
+There is an incredibly annoying bug upon launching ~org-roam-capture~ that tries to perform completion upon pressing spacebar (and thus not allowing you to insert a space character). But if you launched /swiper/ and then launched ~org-roam-capture~, then it spacebar would work fine.
+
+The following is a band-aid fix for the bug.
+
+#+begin_src emacs-lisp
+  (defun lv/org-roam-capture-force ()
+    "Force org-roam-capture to accept spaces by bypassing the node reading."
+    (interactive)
+    (let ((title (read-string "Title: ")))
+      (org-roam-capture- :node (org-roam-node-create :title title)
+                         :props '(:finalize find-file))))
+
+  ;; Use this as your main capture function
+  (defalias 'lv/org-roam-capture 'lv/org-roam-capture-force)
 #+end_src
 
 
