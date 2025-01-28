@@ -154,6 +154,43 @@ Compiles =.org= files into HTML
     :ensure t)
 #+end_src
 
+** Citations
+Add functionality for including citations
+
+#+begin_src emacs-lisp
+  (setq lv/bibliography-path (concat lv/org-directory "/references.bib"))
+#+end_src
+
+*** ~org-cite~
+#+begin_src emacs-lisp
+  (require 'oc)
+  (require 'oc-basic)
+  (require 'oc-csl)
+#+end_src
+
+#+begin_src emacs-lisp
+  (setq org-cite-global-bibliography  (list lv/bibliography-path))
+#+end_src
+
+*** ~citar~
+#+begin_src emacs-lisp
+  (use-package citar
+    :ensure t
+    :custom
+    (citar-bibliography (list lv/bibliography-path)))
+#+end_src
+
+*** ~org-ref~
+#+begin_src emacs-lisp
+  (use-package org-ref
+    :ensure t
+    :after org
+    :config
+    (setq
+     org-ref-default-bibliography (list lv/bibliography-path)
+     org-ref-pdf-directory (concat lv/org-directory "/PDFs")))
+#+end_src
+
 * Templates
 ** ~org-capture~ templates
 #+begin_src emacs-lisp
@@ -355,6 +392,7 @@ Now save with ~:w~ or ~:wq~, and abort with ~:q~ or ~:q!~.
   ;; Add hook to org-src-mode to set up the custom commands
   (add-hook 'org-src-mode-hook 'lv/setup-org-src-mode-hook)
 #+end_src
+
 ** Header Indentation
 When pressing =>= or =<= on headers, have it change the bulletpoint level of the header.
 
@@ -389,6 +427,7 @@ Otherwise, performa a normal text indentation.
         (kbd ">") 'lv/org-demote-or-indent
         (kbd "<") 'lv/org-promote-or-outdent)))
 #+end_src
+
 ** Automatically Enter Insert Mode when Inserting New Daily Entry
 Original behavior is to enter in Normal Mode.
 
@@ -520,6 +559,7 @@ I also want dedicated keybindings.
     "od"  '(org-roam-dailies-goto-today    :which-key "view daily entries")
     "oe"  '(org-edit-special               :which-key "edit special")
     "oi"  '(:ignore oi                     :which-key "insert")
+    "oic" '(org-cite-insert                :which-key "citation")
     "oii" '(org-id-get-create              :which-key "id")
     "oit" '(org-insert-structure-template  :which-key "template")
     "on"  '(:ignore on                     :which-key "new")
