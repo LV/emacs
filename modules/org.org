@@ -12,7 +12,7 @@
 ** Main Directory
 I treat everything ~org~ like a monolith, and have it live in a single main directory.
 #+begin_src emacs-lisp
-  (setq lv/org-directory "~/org")
+  (setq lv/org-directory "~/Vault")
 #+end_src
 
 ** Indentation
@@ -53,8 +53,8 @@ Allow notes to take on a graph structure, linked together using backlings.
   (use-package org-roam
     :ensure t
     :custom
-    (org-roam-directory (concat lv/org-directory "/roam"))
-    (org-roam-dailies-directory (concat lv/org-directory "/daily"))
+    (org-roam-directory (concat lv/org-directory "/Zettelkasten"))
+    (org-roam-dailies-directory (concat lv/org-directory "/Daily"))
     (org-roam-completion-everywhere t)
     (org-roam-database-connector 'sqlite-builtin)
     :config
