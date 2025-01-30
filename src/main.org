@@ -1153,4 +1153,5 @@ This configuration is modularized for maintainability.
   (lv/org-babel-load-file "src/modules/evil.org")
   (lv/org-babel-load-file "src/modules/org.org")
   (lv/org-babel-load-file "src/modules/projectile.org")
+  (lv/org-babel-load-file "src/modules/yasnippet.org")
 #+end_src
