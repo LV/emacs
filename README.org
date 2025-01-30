@@ -1,1 +1,1 @@
-config.org
+src/main.org
