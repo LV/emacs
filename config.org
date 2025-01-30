@@ -68,17 +68,6 @@ Video preview
   sudo apt install sqlite3 libsqlite3-dev
 #+end_src
 
-*** VTerm
-**** Debian
-#+begin_src sh :tangle no
-  sudo apt install cmake libtool libvterm-dev
-#+end_src
-
-**** MacOS
-#+begin_src sh :tangle no
-  brew install cmake
-#+end_src
-
 ** LSPs
 - clangd
 - Pyright
@@ -190,8 +179,7 @@ Instead, we will set the size of this to be the maximum amount of digits necessa
 For the terminal, line numbers add noise and it's better not to have them.
 
 #+begin_src emacs-lisp
-  (dolist (mode '(treemacs-mode-hook
-                  vterm-mode-hook))
+  (dolist (mode '(treemacs-mode-hook))
     (add-hook mode (lambda ()
                      (display-line-numbers-mode 0))))
 #+end_src
@@ -781,43 +769,6 @@ With the default behavior, pressing =n= goes to the previous word whereas =C-n= 
       (kbd "N") 'isearch-repeat-backward))
 #+end_src
 
-** vterm
-Allows you to emulate the terminal in Emacs
-
-#+begin_src emacs-lisp
-  (use-package vterm
-    :ensure t)
-#+end_src
-
-And I like having Emacs startup with the terminal
-
-#+begin_src emacs-lisp
-  (add-hook 'emacs-startup-hook 'vterm)
-#+end_src
-
-The default behavior of ~vterm~ is to start in insert mode. Let's change it to normal mode.
-
-*NOTE*: Without this ~0.1~ second delay, this command will not work; you might need to change this depending on how long ~vterm~ takes to launch, I have no idea if this fixes for every machine or just mine.
-
-#+begin_src emacs-lisp
-  (defun lv/switch-to-normal-after-vterm-delay ()
-    "Switch to normal mode after vterm starts with a small delay."
-    (run-at-time "0.1 sec" nil 'evil-normal-state))
-
-  ;; Add this hook to switch to normal mode after vterm starts
-  (add-hook 'vterm-mode-hook 'lv/switch-to-normal-after-vterm-delay)
-#+end_src
-
-*** Troubleshooting
-**** Can't find ~vterm~ module
-This happened to me on my MacOS. Something about launching the GUI doesn't give Emacs the ~$PATH~ variable with the homebrew path, and thus fails to find ~cmake~.
-
-To fix this, simply launch Emacs on the terminal (you only have to do this once).
-
-#+begin_src sh :tangle no
-  emacs -nw
-#+end_src
-
 ** ~hl-todo~
 Highlight TODOs, FIXMEs, NOTEs, etc.
 
@@ -1041,25 +992,6 @@ See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
 #+end_src
 
 * Keybindings
-** Emacs Keys
-I rarely ever use Emacs bindings, but the only exception is emitting the ~ESCAPE~ button in ~vterm~.
-
-#+begin_src emacs-lisp
-  (defun lv/vterm-ctrl-c-escape ()
-    "Send ESCAPE after CTRL-C in vterm."
-    (interactive)
-    (vterm-send-key "C-c")      ; Send CTRL-C to vterm
-    (vterm-send-key "<escape>")) ; Send ESCAPE after CTRL-C
-#+end_src
-
-#+begin_src emacs-lisp
-  (with-eval-after-load 'general
-    (general-define-key
-     :states '(insert normal)
-     :keymaps 'vterm-mode-map
-     "C-c <escape>" 'lv/vterm-ctrl-c-escape))
-#+end_src
-
 ** Leader Key
 I like to use keybindings by pressing a leader key, which I map as the spacebar.
 
@@ -1179,11 +1111,6 @@ I want a keybinding dedicated exclusively to opening specific files/directories
     )
 #+end_src
 
-** Terminal
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "t" '(vterm :which-key "terminal"))
-#+end_src
 
 ** Undo-tree
 #+begin_src emacs-lisp
@@ -1237,7 +1164,6 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 - [ ] Add Spotify control panel
   - Perhaps integrate emacs with some sort of [[https://github.com/Spotifyd/spotifyd][Spotify daemon]]
 - Maybe add workspaces (on top of tabs)
-- From within ~vterm~, do something like ~e FILETOOPEN~ and it will open a new buffer inside of the current emacs instance
 - Split config into multiple files
 - Replicate /oil.nvim/
 - Migrate away from /lsp-mode/ to something like /lsp-bridge/
@@ -1257,6 +1183,7 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 #+end_src
 
 #+begin_src emacs-lisp
+  (lv/load-config-file "eshell.org")
   (lv/load-config-file "org.org")
   (lv/load-config-file "projectile.org")
 #+end_src
