@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Module Title
+# key: >module
+# --
+#+TITLE: $0 Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
