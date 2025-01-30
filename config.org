@@ -1174,6 +1174,9 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
   - This behavior does not happen in Makefile
   - This happens in Python, Org-mode
 
+* Load Config Modules
+This configuration is modularized for maintainability.
+
 #+begin_src emacs-lisp
   (defun lv/load-config-file (file)
     "Load a config file from the =modules/= directory."
