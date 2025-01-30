@@ -1,0 +1,14 @@
+#+TITLE: Slime Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+Slime is an IDE for Lisp
+
+* Installation
+#+begin_src emacs-lisp
+  (use-package slime
+    :ensure t
+    :config
+    (setq inferior-lisp-program "sbcl")
+    (slime-setup '(slime-fancy)))
+#+end_src
