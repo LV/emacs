@@ -1066,7 +1066,7 @@ I want a keybinding dedicated exclusively to opening specific files/directories
 #+begin_src emacs-lisp
   (defun lv/open-config-file ()
     (interactive)
-    (find-file (concat user-emacs-directory "config.org")))
+    (find-file (concat user-emacs-directory "src/main.org")))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1161,8 +1161,6 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 #+end_src
 
 * TODO Future Features to add
-- [ ] Add Spotify control panel
-  - Perhaps integrate emacs with some sort of [[https://github.com/Spotifyd/spotifyd][Spotify daemon]]
 - Maybe add workspaces (on top of tabs)
 - Split config into multiple files
 - Replicate /oil.nvim/
@@ -1178,15 +1176,15 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 This configuration is modularized for maintainability.
 
 #+begin_src emacs-lisp
-  (defun lv/load-config-file (file)
-    "Load a config file from the =modules/= directory."
+  (defun lv/org-babel-load-file (file-path)
+    "Load an org-babel file from the root emacs config directory."
     (org-babel-load-file
      (expand-file-name
-      (concat user-emacs-directory "modules/" file))))
+      (concat user-emacs-directory file-path))))
 #+end_src
 
 #+begin_src emacs-lisp
-  (lv/load-config-file "eshell.org")
-  (lv/load-config-file "org.org")
-  (lv/load-config-file "projectile.org")
+  (lv/org-babel-load-file "src/modules/eshell.org")
+  (lv/org-babel-load-file "src/modules/org.org")
+  (lv/org-babel-load-file "src/modules/projectile.org")
 #+end_src
