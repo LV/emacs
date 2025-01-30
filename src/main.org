@@ -762,23 +762,6 @@ which-key shows which keybindings to press to invoke a command if such a keybind
     (setq which-key-idle-delay 0.3)) ; seconds
 #+end_src
 
-** Slime
-Slime is an IDE for Lisp
-
-#+begin_src emacs-lisp
-  (use-package slime
-    :ensure t
-    :config
-    (setq inferior-lisp-program "sbcl")
-    (slime-setup '(slime-fancy)))
-#+end_src
-
-#+begin_src emacs-lisp
-  (use-package paredit
-    :ensure t
-    :hook (emacs-lisp-mode lisp-mode))
-#+end_src
-
 * LSP
 Main documentation can be found [[https://emacs-lsp.github.io/lsp-mode/][here]].
 
@@ -1153,6 +1136,8 @@ This configuration is modularized for maintainability.
   (lv/org-babel-load-file "src/modules/evil.org")
   (lv/org-babel-load-file "src/modules/markdown-mode.org")
   (lv/org-babel-load-file "src/modules/org.org")
+  (lv/org-babel-load-file "src/modules/paredit.org")
   (lv/org-babel-load-file "src/modules/projectile.org")
+  (lv/org-babel-load-file "src/modules/slime.org")
   (lv/org-babel-load-file "src/modules/yasnippet.org")
 #+end_src
