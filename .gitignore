@@ -52,8 +52,7 @@ projectile-bookmarks.eld
 ## Added files (over time)
 transient/
 forge-database.sqlite
-config.el
-modules/*.el
+src/**/*.el
 eln-cache/
 custom.el
 ltximg/
