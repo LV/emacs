@@ -1,0 +1,47 @@
+#+TITLE: Projectile Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Pre-requisites
+** Ripgrep
+Despite =counsel-rg= using the ripgrep package in your system, =projectile-ripgrep= annoyingly requires the =ripgrep= Emacs package and will fail otherwise. Thus we need two copies of ripgrep 🙄
+
+#+begin_src emacs-lisp
+  (use-package ripgrep
+    :ensure t)
+#+end_src
+
+* Installation
+Projectile is a way of organizing your projects
+
+By default, it takes a very long time for the projects to show up in ~projectile-switch-project~, so we create a helper function to invoke the search of these folders. I tried adding them straight under ~:config~ and it still wasn't working.
+
+#+begin_src emacs-lisp
+  (defun lv/projectile-discover-projects()
+    "Discover all projects in the search path"
+    (interactive)
+    (projectile-discover-projects-in-search-path))
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package projectile
+    :diminish projectile-mode
+    :init
+    (setq projectile-switch-project-action #'projectile-dired)
+    :config
+    (setq projectile-enable-caching t)
+    (projectile-mode 1)
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :hook (projectile-mode . lv/projectile-discover-projects))
+#+end_src
+
+* Keybindings
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "p"  '(:ignore p                       :which-key "project")
+    "pa" '(projectile-add-known-project    :which-key "add")
+    "pg" '(projectile-ripgrep              :which-key "ripgrep") ; TODO: Make it so that once you perform a search, the cursor automatically moves to this buffer
+    "pp" '(projectile-switch-project       :which-key "switch")
+    "pr" '(projectile-remove-known-project :which-key "switch"))
+#+end_src
