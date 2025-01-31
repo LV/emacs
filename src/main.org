@@ -135,6 +135,18 @@ Modifies default settings and extends editor functionality.
   (lv/org-babel-load-file "src/editor.org")
 #+end_src
 
+** Evil-mode
+Use Vim keybindings.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/evil-mode.org")
+#+end_src
+
+** Org-mode
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/org-mode.org")
+#+end_src
+
 ** Set Language Configurations
 Includes LSP, linting, indentation, and any language specific settings.
 
@@ -552,8 +564,6 @@ See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
 This configuration is modularized for maintainability.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/evil-mode.org")
-  (lv/org-babel-load-file "src/org-mode.org")
   (lv/org-babel-load-file "src/modules/eshell.org")
   (lv/org-babel-load-file "src/modules/markdown-mode.org")
   (lv/org-babel-load-file "src/modules/paredit.org")
