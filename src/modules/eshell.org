@@ -32,7 +32,8 @@ Without the delay, this will not work.
 * Keybindings
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "t" '(eshell :which-key "terminal"))
+    "t" '(eshell :which-key "terminal")
+    )
 #+end_src
 
 * TODO
