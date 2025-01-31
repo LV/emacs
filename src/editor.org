@@ -2,6 +2,11 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
+* Eshell
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/eshell.org")
+#+end_src
+
 * Undo Tree
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/modules/undo-tree.org")
