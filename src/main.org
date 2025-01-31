@@ -131,37 +131,6 @@ The fix is to use ~clipetty~
     :hook (after-init . global-clipetty-mode))
 #+end_src
 
-*** Padding
-**** Line Spacing
-Per buffer line spacing can be set using the variable ~line-spacing~. Something like ~0.1~ goes well here.
-
-#+begin_src emacs-lisp
-  (setq-default line-spacing 0.1)
-#+end_src
-
-**** Top Padding
-Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing
-
-#+begin_src emacs-lisp
-  (setq header-line-format " ")
-#+end_src
-
-**** Side Padding
-#+begin_src emacs-lisp
-  (lambda ()
-    (progn
-      (setq left-margin-width 2)
-      (setq right-margin-width 2)
-      (set-window-buffer nil (current-buffer))))
-#+end_src
-
-**** Fringe Space
-Add fringe space to the left and right of the buffer
-
-#+begin_src emacs-lisp
-  (set-fringe-mode 10)
-#+end_src
-
 ** Directory Buffer
 - We use ~dirvish~ for our file/directory management
   - For documentation on customizing ~dirvish~, [[https://github.com/alexluigit/dirvish/blob/main/docs/CUSTOMIZING.org][see here]]
