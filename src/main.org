@@ -128,8 +128,12 @@ This configuration is modularized for maintainability.
   (lv/org-babel-load-file "src/keybinding.org")
 #+end_src
 
+** Modify/Enhance Editor
+Modifies default settings and extends editor functionality.
 
-
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/editor.org")
+#+end_src
 
 * Editor
 ** Indentation
@@ -598,7 +602,6 @@ See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
 This configuration is modularized for maintainability.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/editor.org")
   (lv/org-babel-load-file "src/evil-mode.org")
   (lv/org-babel-load-file "src/org-mode.org")
   (lv/org-babel-load-file "src/modules/eshell.org")
