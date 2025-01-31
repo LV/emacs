@@ -113,10 +113,22 @@ This configuration is modularized for maintainability.
       (concat user-emacs-directory file-path))))
 #+end_src
 
+** Load Package Manager
 #+begin_src emacs-lisp
-    (lv/org-babel-load-file "src/package.org")
-    (lv/org-babel-load-file "src/behavior.org")
+  (lv/org-babel-load-file "src/package.org")
 #+end_src
+
+** Modify Emacs Behaviors
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/behavior.org")
+#+end_src
+
+** Define Keybindings
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/keybinding.org")
+#+end_src
+
+
 
 
 * Editor
@@ -432,17 +444,6 @@ Highlight TODOs, FIXMEs, NOTEs, etc.
             ("STUB"   . "#7393B3"))))
 #+end_src
 
-** ~which-key~
-which-key shows which keybindings to press to invoke a command if such a keybinding exists
-
-#+begin_src emacs-lisp
-  (use-package which-key
-    :init (which-key-mode)
-    :diminish which-key-mode
-    :config
-    (setq which-key-idle-delay 0.3)) ; seconds
-#+end_src
-
 * LSP
 Main documentation can be found [[https://emacs-lsp.github.io/lsp-mode/][here]].
 
@@ -487,13 +488,6 @@ Install and use ~lsp-mode~
 #+begin_src emacs-lisp
   (use-package dap-mode)
   ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
-#+end_src
-
-*** ~which-key~ Integration
-#+begin_src emacs-lisp
-  (use-package which-key
-    :config
-    (which-key-mode))
 #+end_src
 
 *** ~flycheck~
@@ -621,156 +615,8 @@ See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
 #+end_src
 
 * Keybindings
-** Leader Key
-I like to use keybindings by pressing a leader key, which I map as the spacebar.
-
-#+begin_src emacs-lisp
-  ;; Setup keybindings with a leader key
-  (use-package general
-    :ensure t
-    :config
-    (general-evil-setup t)
-
-    (general-create-definer lv/leader-keys
-      :states '(normal visual)
-      :keymaps 'override
-      :prefix "SPC"
-      :global-prefix "C-SPC"))
-#+end_src
-
-** =M-x=
-The Meta key (=M-x=) is used to evaluate commands.
-
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    ":" '(counsel-M-x :which-key "M-x"))
-#+end_src
-
-** =DEL=
-I use the =DEL= key to return to the previous buffer. I know that this should be in window, but I use it too often to do ~wbb~ every time I want to go to the previous buffer.
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "DEL" '(evil-switch-to-windows-last-buffer :which-key "go to prev context"))
-#+end_src
-
-** Code
-When I open ~flymake-show-buffer-diagnostics~, I want the cursor to move to the new buffer. Otherwise, I need to move the cursor to this new buffer and then press ~q~ to close it.
-
-#+begin_src emacs-lisp
-  (defun lv/flymake-show-buffer-diagnostics-and-focus ()
-    (interactive)
-    (flymake-show-buffer-diagnostics)
-    (other-window 1))
-#+end_src
-
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "c"   '(:ignore c                                    :which-key "code")
-    "cd"  '(lsp-find-declarations                        :which-key "declaration")
-    "cD"  '(lsp-find-definition                          :which-key "definition")
-    "cf"  '(lsp-format-buffer                            :which-key "format")
-    "cg"  '(lv/flymake-show-buffer-diagnostics-and-focus :which-key "diagnostics")
-    "ci"  '(lsp-find-implementation                      :which-key "implementation")
-    "cr"  '(lsp-find-references                          :which-key "references")
-    "ct"  '(:ignore ct                                   :which-key "treemacs")
-    "ctr" '(lsp-treemacs-references                      :which-key "references")
-    "cts" '(lsp-treemacs-symbols                         :which-key "symbols")
-    "ctt" '(treemacs                                     :which-key "tree")
-    "cT"  '(lsp-find-type-definition                     :which-key "type definition"))
-
-  ; TODO: Make buffers smaller for references, definitions, etc. Don't let it take 50% of the screen.
-#+end_src
-
-** Evaluate
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "e"  '(:ignore e       :which-key "evaulate")
-    "eb" '(eval-buffer     :which-key "buffer")
-    "ee" '(eval-expression :which-key "expression"))
-#+end_src
-
-** File
-I want a keybinding dedicated exclusively to opening specific files/directories
-
-#+begin_src emacs-lisp
-  (defun lv/open-config-file ()
-    (interactive)
-    (find-file (concat user-emacs-directory "src/main.org")))
-#+end_src
-
-#+begin_src emacs-lisp
-  (defun lv/open-org-dir ()
-    (interactive)
-    (find-file lv/org-directory))
-#+end_src
-
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "f"  '(:ignore f           :which-key "file")
-    "ff" '(counsel-find-file   :which-key "find")
-    "fc" '(lv/open-config-file :which-key "open config")
-    "fg" '(counsel-rg          :which-key "ripgrep")
-    "fo" '(lv/open-org-dir     :which-key "open org"))
-
-  ; TODO: Add functionality where going through the different options gives you a preview of the code in the other window
-#+end_src
-
-** Git
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "g"  '(:ignore g    :which-key "git")
-    "gg" '(magit-status :which-key "status"))
-#+end_src
-
-** Help
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "h"  '(:ignore h                 :which-key "help")
-    "hf" '(counsel-describe-function :which-key "function")
-    "hk" '(describe-key              :which-key "key")
-    "hv" '(counsel-describe-variable :which-key "variable"))
-#+end_src
 
 
-** Window
-The following is a helper function for toggling full screen on and off
-
-As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
-
-#+begin_src emacs-lisp
-  (defun lv/fullscreen ()
-    (interactive)
-    (set-frame-parameter nil 'fullscreen 'fullboth))
-
-  (defun lv/non-fullscreen ()
-    (interactive)
-    (set-frame-parameter nil 'width 82)
-    (set-frame-parameter nil 'fullscreen 'fullheight))
-
-  (defun toggle-fullscreen ()
-    (interactive)
-    (if (eq (frame-parameter nil 'fullscreen) 'fullboth)  ;tests if already fullscreened
-        (lv/non-fullscreen)
-      (lv/fullscreen)))
-#+end_src
-
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "w"   '(:ignore w              :which-key "window")
-    "wb"  '(:ignore wb             :which-key "buffer")
-    "wbk" '(kill-buffer-and-window :which-key "kill")
-    "wbl" '(list-buffers           :which-key "list")
-    "wbs" '(counsel-switch-buffer  :which-key "switch")
-    "wf"  '(toggle-fullscreen      :which-key "toggle fullscreen")
-    "wh"  '(evil-window-left       :which-key "move left")
-    "wj"  '(evil-window-down       :which-key "move down")
-    "wk"  '(evil-window-up         :which-key "move up")
-    "wl"  '(evil-window-right      :which-key "move right")
-    "wm"  '(maximize-window        :which-key "maximize window")
-    "ws"  '(evil-window-split      :which-key "split horizontally")
-    "wt"  '(tab-bar-new-tab        :which-key "new tab")
-    "wv"  '(evil-window-vsplit     :which-key "split vertically"))
-#+end_src
 
 * TODO Future Features to add
 - Maybe add workspaces (on top of tabs)
