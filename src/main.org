@@ -80,6 +80,11 @@ This configuration is modularized for maintainability.
       (concat user-emacs-directory file-path))))
 #+end_src
 
+** Define Keybindings
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/keybinding.org")
+#+end_src
+
 ** Org-mode
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/org-mode.org")
@@ -88,11 +93,6 @@ This configuration is modularized for maintainability.
 ** Modify/Enhance Emacs Behaviors and Core Functionality
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/core.org")
-#+end_src
-
-** Define Keybindings
-#+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/keybinding.org")
 #+end_src
 
 ** Modify/Enhance Editor
