@@ -2,9 +2,11 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
+Navigate and manage projects.
+
 * Pre-requisites
 ** Ripgrep
-Despite =counsel-rg= using the ripgrep package in your system, =projectile-ripgrep= annoyingly requires the =ripgrep= Emacs package and will fail otherwise. Thus we need two copies of ripgrep 🙄
+Despite =counsel-rg= using the ripgrep package in your system, =projectile-ripgrep= annoyingly requires the =ripgrep= Emacs package and will fail otherwise. Thus we need two copies of ripgrep 🙄.
 
 #+begin_src emacs-lisp
   (use-package ripgrep
@@ -12,8 +14,6 @@ Despite =counsel-rg= using the ripgrep package in your system, =projectile-ripgr
 #+end_src
 
 * Installation
-Projectile is a way of organizing your projects
-
 By default, it takes a very long time for the projects to show up in ~projectile-switch-project~, so we create a helper function to invoke the search of these folders. I tried adding them straight under ~:config~ and it still wasn't working.
 
 #+begin_src emacs-lisp

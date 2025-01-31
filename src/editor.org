@@ -23,3 +23,10 @@
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/modules/hl-todo.org")
 #+end_src
+
+* Projectile
+Navigate and manage projects.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/projectile.org")
+#+end_src
