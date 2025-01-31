@@ -49,12 +49,14 @@ projectile-bookmarks.eld
 # network security
 /network-security.data
 
+# org config
+custom.el
+src/**/*.el
+
 ## Added files (over time)
 transient/
 forge-database.sqlite
-src/**/*.el
 eln-cache/
-custom.el
 ltximg/
 .lsp-session*
 .cache/
