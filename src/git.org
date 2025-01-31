@@ -1,0 +1,18 @@
+#+TITLE: Git Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Magit
+A porcerlain for Git that enables keybindings for performing Git commands (e.g. stage, commit, push, etc.).
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/magit.org")
+#+end_src
+
+* Forge
+Forge is an extension of ~magit~ that adds support for interacting with Git forges such as GitHub, directly from Emacs.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/forge.org")
+#+end_src
+
