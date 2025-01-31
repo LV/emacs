@@ -26,4 +26,5 @@ Ivy is a completion framework that allows you to find files, switch buffers, etc
 * Extensions
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/modules/counsel.org")
+  (lv/org-babel-load-file "src/modules/swiper.org")
 #+end_src

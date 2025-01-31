@@ -139,22 +139,6 @@ Includes LSP, linting, indentation, and any language specific settings.
   (lv/org-babel-load-file "src/git.org")
 #+end_src
 
-* Modules
-** Swiper
-Swiper is used to search within the current buffer
-
-With the default behavior, pressing =n= goes to the previous word whereas =C-n= goes to the next word. In Vim, it's =n= to go next and =Shift n= to go before
-
-#+begin_src emacs-lisp
-  (use-package swiper
-    :after ivy
-    :config
-    ;; Rebind Evil keys for navigating matches after Swiper
-    (evil-define-key 'normal 'global
-      (kbd "n") 'isearch-repeat-forward
-      (kbd "N") 'isearch-repeat-backward))
-#+end_src
-
 * LSP
 Main documentation can be found [[https://emacs-lsp.github.io/lsp-mode/][here]].
 
