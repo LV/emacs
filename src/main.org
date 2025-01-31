@@ -115,6 +115,7 @@ This configuration is modularized for maintainability.
 
 #+begin_src emacs-lisp
     (lv/org-babel-load-file "src/package.org")
+    (lv/org-babel-load-file "src/behavior.org")
 #+end_src
 
 
@@ -122,9 +123,6 @@ This configuration is modularized for maintainability.
 ** Startup Message
 Start Emacs with a blank buffer instead of the welcome message.
 
-#+begin_src emacs-lisp
-  (setq inhibit-startup-message t)
-#+end_src
 
 ** Line Numbers
 *** Relative Line Numbers
@@ -238,25 +236,6 @@ I think this is unnecessary because, once again, we do everything via keybinds a
   (tooltip-mode -1)
 #+end_src
 
-** Scrolling
-*** Disable Scrollbar
-- We already have line numbers for navigation, and commands to jump around the document more effectively
-  - I don't find it particularly useful to know which section (as in you're 30% into the document) you're in
-
-#+begin_src emacs-lisp
-  (scroll-bar-mode -1)
-#+end_src
-
-*** Smooth Scrolling
-By default, going up or down the buffer until the boundary will result in jumping to the next 10-15 lines.
-
-I prefer smooth scrolling (one line at a time).
-
-#+begin_src emacs-lisp
-  (setq scroll-conservatively 101
-        scroll-margin 0
-        scroll-preserve-screen-position 't)
-#+end_src
 
 ** Aesthetics
 *** Theme
@@ -372,45 +351,6 @@ I also don't really see the need for ~dired-toggle-read-only~, whereas I keep pe
   ; TODO: Make buffer width for calling undo-tree significantly thinner
 #+end_src
 
-** Global Keybindings and Vim
-Setting this up at the top just in case
-
-*** ~ESC~ Behaviors
-**** Make ~ESC~ Instantly Responsive
-- We want the ~ESC~ key to be immediately responsive
-  - On default terminal Emacs, when the ~ESC~ key is pressed, there is about a 700ms delay between switching from insert mode to normal mode
-    - This could be attributed to using a slower terminal emulator. The delay was quite big on WezTerm, but using Alacritty I noticed that this delay was significantly reduced
-      - I tried using Emacs on Kitty, and it was the slowest. I've found that Alacritty in general is the best performing emulator
-      - My laptop is also quite bad, so these performance differences are important
-
-***** Evil
-#+begin_src emacs-lisp
-  (setq evil-esc-delay 0)
-#+end_src
-
-***** Emacs 27 and Before
-#+begin_src emacs-lisp
-  (setq escape-delay 0)
-#+end_src
-
-***** Emacs 28 and Later
-#+begin_src emacs-lisp
-  (setq key-escape-delay 0)
-#+end_src
-
-***** Terminal Emacs
-#+begin_src emacs-lisp
-  (setq tty-escape-code-delay 0)
-#+end_src
-
-
-**** Make ~ESC~ Key Quit Prompts
-#+begin_src emacs-lisp
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)  ; Make ESC quit prompts
-#+end_src
-
-This fixes the delay in WezTerm, although I'm not sure in the first place why the behavior is different across the two terminal emulators.
-
 ** Indentation
 Indentations will be described with the following syntax: ~n(s/t)~
 - ~n~ refers to the indentation length. How many spaces the indentation appears (if it's a tab character, how long should the tab character appear)
@@ -467,46 +407,6 @@ Makefile indentations [[https://www.gnu.org/software/make/manual/make.html#Recip
 *** TODO Languages to add
 - sh: ~2s~
 
-* Behaviors
-** Remove Backup Files
-Say that you're editing the file =foo.py=. Annoyingly, Emacs will create the file =foo.py~= as a backup file and will create =#foo.py#= if the file is currently being edited. We want to disable this.
-
-#+begin_src emacs-lisp
-  (setq make-backup-files nil)
-  (setq auto-save-default nil)
-#+end_src
-
-** Require Final Newline
-Every file should have a newline at the very end
-
-#+begin_src emacs-lisp
-  (setq mode-require-final-newline t)
-#+end_src
-
-** Use ~y~ and ~n~ for Prompts
-I don't like needing to type the entire word ~yes~ or ~no~ and then pressing ~RET~ when prompted on things like if I want to save a file or not.
-
-It's much easier to just use ~y~ and ~n~.
-
-#+begin_src emacs-lisp
-  (fset 'yes-or-no-p 'y-or-n-p)
-#+end_src
-
-** Alert for invalid action
-When performing an action that can't be done (e.g. backspacing on first character of document, down arrow on last line, etc.):
-- If ~t~, visual cue will show
-- If ~nil~, bell will sound
-- Default behavior is ~nil~
-
-/NOTE/: On MacOS, this makes a large caution triangle which can be very annoying, so perhaps disable if using Mac
-
-#+begin_src emacs-lisp
-  (cond
-   ((eq system-type 'gnu/linux)
-    (setq visible-bell t))
-   ((eq system-type 'darwin) ; MacOS
-    (setq visible-bell nil)))
-#+end_src
 
 * Modules
 ** Ivy
