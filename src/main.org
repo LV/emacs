@@ -731,15 +731,6 @@ I want a keybinding dedicated exclusively to opening specific files/directories
     "hv" '(counsel-describe-variable :which-key "variable"))
 #+end_src
 
-** Slime
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "s"  '(:ignore s                   :which-key "slime")
-    "sc" '(slime-compile-and-load-file :which-key "compile and load")
-    "ss" '(slime                       :which-key "start slime")
-    )
-#+end_src
-
 
 ** Window
 The following is a helper function for toggling full screen on and off

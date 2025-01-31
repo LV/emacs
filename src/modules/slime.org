@@ -12,3 +12,12 @@ Slime is an IDE for Lisp
     (setq inferior-lisp-program "sbcl")
     (slime-setup '(slime-fancy)))
 #+end_src
+
+* Keybindings
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "s"  '(:ignore s                   :which-key "slime")
+    "sc" '(slime-compile-and-load-file :which-key "compile and load")
+    "ss" '(slime                       :which-key "start slime")
+    )
+#+end_src
