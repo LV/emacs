@@ -15,26 +15,31 @@ You *must* do the following to get the configuration to fully work.
 
 /NOTE/: If you're building this through my [[https://github.com/lv/nixos][NixOS Flake]], it'll take care of everything you need 🙂.
 
-** MacOS
+** Dependencies
+*** Setup Python Virtualenv
+Python dependencies exist in this configuration.
+
 #+begin_src sh
-  brew install fd ffmpegthumbnailer g-ls ripgrep && brew install --cask mactex-no-gui mediainfo
+  mkdir -p ~/.venvs
+  python3 -m venv ~/.venvs/emacs
+  source ~/.venvs/emacs/bin/activate
+  pip install epc orjson sexpdata paramiko rapidfuzz watchdog
 #+end_src
 
-*** Latex
-**** Linux
-#+begin_src bash :tangle no
-  sudo apt-get install texlive-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended dvipng
+*** System-wide dependencies
+**** MacOS
+#+begin_src sh
+  brew install fd ffmpegthumbnailer g-ls python-packaging python-setuptools ripgrep six sqlite && brew install --cask mactex-no-gui mediainfo
 #+end_src
 
-*** ~ripgrep~
 **** Debian
-#+begin_src sh :tangle no
-  sudo apt install ripgrep
+#+begin_src bash :tangle no
+  sudo apt install dvipng ripgrep sqlite3 libsqlite3-dev texlive-base texlive-fonts-recommended texlive-latex-extra texlive-latex-recommended
 #+end_src
 
 ** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
-  - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
+- Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
 
 Evaluate the following commands in Emacs:
 
