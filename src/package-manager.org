@@ -1,0 +1,41 @@
+#+TITLE: Package Manager Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+Enable Package Management
+
+* Installation
+
+#+begin_src emacs-lisp
+  (require 'package)
+#+end_src
+
+* Set Up Package URLs
+#+begin_src emacs-lisp
+  (setq package-archives '(("melpa"  . "https://melpa.org/packages/")
+                           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                           ("gnu"    . "https://elpa.gnu.org/packages/")
+                           ("elpa"   . "https://elpa.gnu.org/packages/")))
+#+end_src
+
+* Initialize Package System
+#+begin_src emacs-lisp
+  (package-initialize)
+#+end_src
+
+** For Non-Linux Platforms
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+
+  (require 'use-package)
+
+  (setq use-package-always-ensure t)
+#+end_src
+
+* Refresh Contents if Packages don't Exist
+#+begin_src emacs-lisp
+  (unless package-archive-contents
+    (package-refresh-contents))
+#+end_src
+

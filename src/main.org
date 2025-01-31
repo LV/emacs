@@ -102,45 +102,21 @@ If something breaks when installing new packages, chances are that you'll need t
 - Package =compat= unavailable
 - Package =foo= not found in MELPA
 
-* Setting Up the Package Manager
-Bring in the package management functions into the environment
+* Load Config Modules
+This configuration is modularized for maintainability.
 
 #+begin_src emacs-lisp
-  (require 'package)
+  (defun lv/org-babel-load-file (file-path)
+    "Load an org-babel file from the root emacs config directory."
+    (org-babel-load-file
+     (expand-file-name
+      (concat user-emacs-directory file-path))))
 #+end_src
-
-Set up package URLs
 
 #+begin_src emacs-lisp
-  (setq package-archives '(("melpa"  . "https://melpa.org/packages/")
-                           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-                           ("gnu"    . "https://elpa.gnu.org/packages/")
-                           ("elpa"   . "https://elpa.gnu.org/packages/")))
+    (lv/org-babel-load-file "src/package-manager.org")
 #+end_src
 
-Initialize the package system and prepare it to be used
-
-#+begin_src emacs-lisp
-  (package-initialize)
-#+end_src
-
-Refresh contents only if packages don't exist
-
-#+begin_src emacs-lisp
-  (unless package-archive-contents
-    (package-refresh-contents))
-#+end_src
-
-Initialize ~use-package~ on non-Linux platforms
-
-#+begin_src emacs-lisp
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-
-  (require 'use-package)
-
-  (setq use-package-always-ensure t)
-#+end_src
 
 * Editor
 ** Startup Message
@@ -1122,14 +1098,6 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 
 * Load Config Modules
 This configuration is modularized for maintainability.
-
-#+begin_src emacs-lisp
-  (defun lv/org-babel-load-file (file-path)
-    "Load an org-babel file from the root emacs config directory."
-    (org-babel-load-file
-     (expand-file-name
-      (concat user-emacs-directory file-path))))
-#+end_src
 
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/modules/eshell.org")
