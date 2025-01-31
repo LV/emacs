@@ -30,3 +30,10 @@ Navigate and manage projects.
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/modules/projectile.org")
 #+end_src
+
+* Yasnippet
+Add snippets.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/yasnippet.org")
+#+end_src
