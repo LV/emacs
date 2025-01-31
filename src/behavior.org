@@ -49,18 +49,6 @@ When performing an invalid action (e.g. backspacing on first character of docume
     (setq visible-bell nil)))
 #+end_src
 
-** Scrolling
-* Smooth Scrolling
-By default, going up or down the buffer until the boundary will result in jumping to the next 10-15 lines.
-
-Smooth scrolling does one line at a time.
-
-#+begin_src emacs-lisp
-  (setq scroll-conservatively 101
-        scroll-margin 0
-        scroll-preserve-screen-position 't)
-#+end_src
-
 * ~ESC~ Behaviors
 ** Make ~ESC~ Instantly Responsive
 On terminal emacs there is about a 700ms delay switching from insert to normal mode.
