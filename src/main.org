@@ -140,57 +140,6 @@ Includes LSP, linting, indentation, and any language specific settings.
 #+end_src
 
 * Modules
-** Ivy
-Ivy is a completion framework that allows you to find files, switch buffers, etc.
-
-#+begin_src emacs-lisp
-  (use-package ivy
-    :diminish
-    :bind ((:map ivy-switch-buffer-map
-             ("C-k" . ivy-previous-line)
-             ("C-l" . ivy-done)
-             ("C-d" . ivy-switch-buffer-kill))
-           (:map ivy-reverse-i-search-map
-             ("C-k" . ivy-previous-line)
-             ("C-d" . ivy-reverse-i-search-kill)))
-    :config
-    (setq ivy-re-builders-alist
-          '((t . ivy--regex-plus)))    ; Enable normal search globally
-          ; '((t . ivy--regex-fuzzy))) ; Enable fuzzy search globally
-                                       ; NOTE: These two options are mutually exclusive
-    (ivy-mode 1))
-#+end_src
-
-*** Counsel
-Counsel is an extension of Ivy and enhances features such as looking for commands, and makes use of Ivy's completion framework capabilities
-
-#+begin_src emacs-lisp
-    (use-package counsel
-      :after ivy)
-#+end_src
-
-**** Ignoring Files in search
-When searching for files using =M-x counsel-find-file=, you will get results for all existing files. Some files are incredibly annoying and I never have a need to find them. These are (listed with respect to the order on the regex expression):
-- =.~undo-tree~=
-  - Store file's undo-tree onto disk, used to load tree and undo across sessions
-- =#foo#=
-  - Emacs backup files
-- =.DS_Store=
-  - Used in MacOS to store custom attributes of the existing folder
-
-Note that the syntax for regexes in Emacs is different than what you might be used to seeing in Perl.
-- ~\\~ is used to begin a regex
-- ~\\|~ is used to append regexes
-
-[[https://regex101.com/][regex101]] is an excellent resource to build and test your regex strings.
-
-#+begin_src emacs-lisp
-  (setq counsel-find-file-ignore-regexp
-        (concat "\\"
-                ".~undo-tree~$\\|" ; .~undo-tree~
-                ".*#.*#$"))        ; #foo#
-#+end_src
-
 ** Helpful
 Alternative help screen in Emacs that gives better information on possible values for variables and functions, as well as default values
 
