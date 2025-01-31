@@ -2,7 +2,7 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-~eshell~ comes integrated into Emacs.
+Command interpreter that is heavily integrated into the Emacs ecosystem.
 
 * Settings
 ** Launch on Startup
