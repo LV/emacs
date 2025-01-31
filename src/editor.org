@@ -31,7 +31,7 @@ Tooltips pop up when hovering over an element and display additional help inform
   (tooltip-mode -1)
 #+end_src
 
-* Aesthetics
+* Visual Enhancements
 ** Theme
 #+begin_src emacs-lisp
   (use-package doom-themes
@@ -94,13 +94,46 @@ Enable icons via specialized fonts
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
-* Line Numbers
-** Enable Line Numbers
+
+* Layout and Margins
+** Line Spacing
+Per buffer line spacing.
+
+#+begin_src emacs-lisp
+  (setq-default line-spacing 0.1)
+#+end_src
+
+** Top Padding
+Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing.
+
+#+begin_src emacs-lisp
+  (setq header-line-format " ")
+#+end_src
+
+** Side Padding
+#+begin_src emacs-lisp
+  (lambda ()
+    (progn
+      (setq left-margin-width 2)
+      (setq right-margin-width 2)
+      (set-window-buffer nil (current-buffer))))
+#+end_src
+
+** Fringe Space
+Add fringe space to the left and right of the buffer.
+
+#+begin_src emacs-lisp
+  (set-fringe-mode 10)
+#+end_src
+
+* Display Settings
+** Line Numbers
+*** Enable Line Numbers
 #+begin_src emacs-lisp
   (global-display-line-numbers-mode t)
 #+end_src
 
-*** Exceptions
+**** Exceptions
 Otherwise, you get line numbers on things that don't make sense like ~eshell~.
 
 #+begin_src emacs-lisp
@@ -109,17 +142,17 @@ Otherwise, you get line numbers on things that don't make sense like ~eshell~.
                      (display-line-numbers-mode 0))))
 #+end_src
 
-** Use Relative Line Numbers
+*** Use Relative Line Numbers
 #+begin_src emacs-lisp
   (setq display-line-numbers-type 'relative)
 #+end_src
 
-** Display Horizontal Character Position
+*** Display Horizontal Character Position
 #+begin_src emacs-lisp
   (setq column-number-mode t)
 #+end_src
 
-** Set Line Number Width
+*** Set Line Number Width
 There is some annoying behavior where once you scroll to a line number with an extra digit, the entire code buffer will shift one character to the right to accomodate for this new line number digit.
 
 Instead, we will set the size of this to be the maximum amount of digits necessary for our document, and then fix this in size.
@@ -133,13 +166,12 @@ Instead, we will set the size of this to be the maximum amount of digits necessa
   ;; TODO: Document this bug on GitHub issues
 #+end_src
 
-
-* Enable Text Wrapping
+** Enable Text Wrapping
 #+begin_src emacs-lisp
   (add-hook 'text-mode-hook 'visual-line-mode)
 #+end_src
 
-* Add ~undo-tree~
+* ~undo-tree~
 #+begin_src emacs-lisp
   (use-package undo-tree
     :ensure t
