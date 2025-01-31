@@ -6,6 +6,33 @@ File directory management.
 
 [[https://github.com/alexluigit/dirvish/blob/main/docs/CUSTOMIZING.org][Link to documentation]].
 
+* Pre-requisites
+** ~fd~
+*** MacOS
+#+begin_src sh :tangle no
+  brew install fd
+#+end_src
+
+** ~ffmpegthumbnailer~
+Video preview
+
+*** MacOS
+#+begin_src sh :tangle no
+  brew install ffmpegthumbnailer
+#+end_src
+
+** ~gls~
+*** MacOS
+#+begin_src sh :tangle no
+  brew install g-ls
+#+end_src
+
+** ~mediainfo~
+*** MacOS
+#+begin_src sh :tangle no
+  brew install --cask mediainfo
+#+end_src
+
 * Installation
 #+begin_src emacs-lisp
   (use-package dirvish

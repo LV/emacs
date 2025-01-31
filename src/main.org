@@ -15,34 +15,9 @@ You *must* do the following to get the configuration to fully work.
 
 /NOTE/: If you're building this through my [[https://github.com/lv/nixos][NixOS Flake]], it'll take care of everything you need 🙂
 
-** Programs
-*** Dirvish
-Dirvish is the file manager used for this configuration
-
-**** ~fd~
-***** MacOS
-#+begin_src sh :tangle no
-  brew install fd
-#+end_src
-
-**** ~ffmpegthumbnailer~
-Video preview
-
-***** MacOS
-#+begin_src sh :tangle no
-  brew install ffmpegthumbnailer
-#+end_src
-
-**** ~gls~
-***** MacOS
-#+begin_src sh :tangle no
-  brew install g-ls
-#+end_src
-
-**** ~mediainfo~
-***** MacOS
-#+begin_src sh :tangle no
-  brew install --cask mediainfo
+** MacOS
+#+begin_src sh
+  brew install fd ffmpegthumbnailer g-ls && brew install --cask mediainfo
 #+end_src
 
 *** Latex
