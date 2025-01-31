@@ -121,7 +121,16 @@ Use Vim keybindings.
   (lv/org-babel-load-file "src/org-mode.org")
 #+end_src
 
-** Set Language Configurations
+** Git
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/git.org")
+#+end_src
+
+** Programming
+*** LSP
+**** TODO Replace ~lsp-mode~ with ~lsp-bridge~
+
+*** Language Specific Configurations
 Includes LSP, linting, indentation, and any language specific settings.
 
 #+begin_src emacs-lisp
@@ -131,13 +140,8 @@ Includes LSP, linting, indentation, and any language specific settings.
   (lv/org-babel-load-file "src/languages/python.org")
 #+end_src
 
-*** TODO Languages to add
+**** TODO Languages to add
 - sh: 2 Spaces.
-
-** Git
-#+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/git.org")
-#+end_src
 
 * LSP
 Main documentation can be found [[https://emacs-lsp.github.io/lsp-mode/][here]].
