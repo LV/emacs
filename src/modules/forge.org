@@ -6,5 +6,6 @@
 
 * Installation
 #+begin_src emacs-lisp
-  (use-package forge)
+  (use-package forge
+    :straight t)
 #+end_src

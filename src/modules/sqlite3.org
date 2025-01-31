@@ -11,5 +11,5 @@
 * Installation
 #+begin_src emacs-lisp
   (use-package sqlite3
-    :ensure t)
+    :straight t)
 #+end_src

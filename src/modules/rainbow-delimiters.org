@@ -7,5 +7,6 @@ Make it easy to find scope of ~(~ ~)~ chars.
 * Installation
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
+    :straight t
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src

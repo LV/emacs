@@ -7,6 +7,7 @@ Pop-up showing available keybindings as you type.
 * Installation
 #+begin_src emacs-lisp
   (use-package which-key
+    :straight t
     :init (which-key-mode)
     :diminish which-key-mode
     :config
