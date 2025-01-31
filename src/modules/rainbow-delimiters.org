@@ -1,0 +1,11 @@
+#+TITLE: Rainbow Delimiters Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+Make it easy to find scope of ~(~ ~)~ chars.
+
+* Installation
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+    :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src

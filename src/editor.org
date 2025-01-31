@@ -33,12 +33,10 @@ Tooltips pop up when hovering over an element and display additional help inform
 
 * Visual Enhancements
 ** Theme
-#+begin_src emacs-lisp
-  (use-package doom-themes
-    :init (load-theme 'doom-bluloco-dark t))
+Load bluloco theme from ~doom-themes~.
 
-  ; TODO: Make the color for the background of text selection more clear
-  ; Currently very difficult to see which selection you're on
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/doom-themes.org")
 #+end_src
 
 ** Font
@@ -67,31 +65,21 @@ Tooltips pop up when hovering over an element and display additional help inform
 #+end_src
 
 ** Icons
-Enable icons via specialized fonts
+Enable icons through specialized fonts.
 
 #+begin_src emacs-lisp
-  (use-package all-the-icons)
+  (lv/org-babel-load-file "src/modules/all-the-icons.org")
 #+end_src
 
-/NOTE/: When running this configuration for the first time, you will need to run the following:
-
-#+begin_src emacs-lisp :tangle no
-  M-x all-the-icons-install-fonts
-  M-x nerd-icons-install-fonts
-#+end_src
 
 ** Modeline
 #+begin_src emacs-lisp
-  (use-package doom-modeline
-    :ensure t
-    :init (doom-modeline-mode 1)
-    :custom (doom-modeline-height 15))
+  (lv/org-babel-load-file "src/modules/doom-modeline.org")
 #+end_src
 
 ** Rainbow Delimiters
 #+begin_src emacs-lisp
-  (use-package rainbow-delimiters
-    :hook (prog-mode . rainbow-delimiters-mode))
+  (lv/org-babel-load-file "src/modules/rainbow-delimiters.org")
 #+end_src
 
 * Layout and Margins
@@ -170,53 +158,21 @@ Instead, we will set the size of this to be the maximum amount of digits necessa
   (add-hook 'text-mode-hook 'visual-line-mode)
 #+end_src
 
-* ~undo-tree~
+* Undo Tree
 #+begin_src emacs-lisp
-  (use-package undo-tree
-    :ensure t
-    :init
-    ; (setq undo-tree-auto-save-history nil) ; Disable persistent history
-    (global-undo-tree-mode 1))
-
-  ; TODO: Make buffer width for calling undo-tree significantly thinner
-#+end_src
-
-#+begin_src emacs-lisp
-  (lv/leader-keys
-    "u" '(undo-tree-visualize :which-key "undo tree"))
-
-  ; TODO: Make buffer less wide. Doesn't need to take half of the screen
+  (lv/org-babel-load-file "src/modules/undo-tree.org")
 #+end_src
 
 * Clipboard
 ~clipetty~ fixes clipboard issues in terminal Emacs.
 
 #+begin_src emacs-lisp
-  (use-package clipetty
-    :ensure t
-    :hook (after-init . global-clipetty-mode))
+  (lv/org-babel-load-file "src/modules/clipetty.org")
 #+end_src
 
 * Directory Buffer
-- We use ~dirvish~ for our file/directory management
-  - For documentation on customizing ~dirvish~, [[https://github.com/alexluigit/dirvish/blob/main/docs/CUSTOMIZING.org][see here]]
+Use ~dirvish~ for our file/directory management.
 
 #+begin_src emacs-lisp
-  (use-package dirvish
-    :ensure t
-    :config
-    (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
-    (setq dirvish-attributes
-          '(vc-state subtree-state all-the-icons file-time file-size))
-    (setq dired-auto-revert-buffer t))
-
-  ; TODO: Add a keybinding for inserting an empty file
-#+end_src
-
-I also don't really see the need for ~dired-toggle-read-only~, whereas I keep performing ~dired-create-empty-file~, thus I change the keybinding for this
-
-#+begin_src emacs-lisp
-(with-eval-after-load 'evil
-  (with-eval-after-load 'dirvish
-    (evil-define-key 'normal dirvish-mode-map (kbd "i") 'dired-create-empty-file)))
+  (lv/org-babel-load-file "src/modules/dirvish.org")
 #+end_src
