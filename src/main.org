@@ -1100,9 +1100,9 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 This configuration is modularized for maintainability.
 
 #+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/evil-mode.org")
   (lv/org-babel-load-file "src/org-mode.org")
   (lv/org-babel-load-file "src/modules/eshell.org")
-  (lv/org-babel-load-file "src/modules/evil.org")
   (lv/org-babel-load-file "src/modules/markdown-mode.org")
   (lv/org-babel-load-file "src/modules/paredit.org")
   (lv/org-babel-load-file "src/modules/projectile.org")
