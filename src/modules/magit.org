@@ -1,0 +1,110 @@
+#+TITLE: Magit Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+A porcerlain for Git that enables keybindings for performing Git commands (e.g. stage, commit, push, etc.).
+
+* Pre-requisites
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/sqlite3.org")
+#+end_src
+
+* Installation
+#+begin_src emacs-lisp
+  (use-package magit
+    :commands (magit-status magit-get-current-branch) ; lazy load
+    :custom
+    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+#+end_src
+
+* Functionality
+** Insert Mode in Commit Message Prompts
+Enter Vim /insert mode/ immediately.
+
+#+begin_src emacs-lisp
+  (add-hook 'with-editor-mode-hook 'evil-insert-state)
+#+end_src
+
+** Use ~:w~ and ~:q~ to commit/abort
+Enable Vim's ~:wq~, ~q~, and ~q!~ functionality in Magit's commit message buffer.
+
+#+begin_src emacs-lisp
+  (defun lv/magit-commit-save-and-exit ()
+    "Commit the message and close the buffer."
+    (interactive)
+    (with-editor-finish))
+
+  (defun lv/magit-commit-abort ()
+    "Abort the commit message and close the buffer."
+    (interactive)
+    (with-editor-cancel))
+
+  (defun lv/setup-git-commit-mode-evil-commands ()
+    "Set up buffer-local Evil ex commands in `git-commit-mode`."
+    ;; Make `evil-ex-commands` buffer-local by copying it as a hash table
+    (setq-local evil-ex-commands (copy-hash-table evil-ex-commands))
+    ;; Define buffer-local ex commands
+    (evil-ex-define-cmd "w[rite]" #'lv/magit-commit-save-and-exit) ; FIXME: Fix this, performing just ~:w~ doesn't commit and then quit buffer
+    (evil-ex-define-cmd "wq"     #'lv/magit-commit-save-and-exit)
+    (evil-ex-define-cmd "q[uit]" #'lv/magit-commit-abort))
+
+  ;; Add the hook for `git-commit-mode`
+  (add-hook 'git-commit-mode-hook #'lv/setup-git-commit-mode-evil-commands)
+#+end_src
+
+
+** ~ediff~
+*** Stop ~ediff~ from Creating New Window just for Help Commands
+Very annoyingly, ~ediff~ will create a new window just for showing you help commands upon being invoked. This totally messes up my workflow especially if Emacs is full-screened.
+
+We want to disable this.
+
+#+begin_src emacs-lisp
+  (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+#+end_src
+
+*** Show ~ediff~ Vertically
+Diffs are split horizontally (-) by default. Use vertical splits (|) to replicate GitHub's UI.
+
+/NOTE/: ~'split-window-horizontally~ is the correct command to split vertically 👍.
+
+#+begin_src emacs-lisp
+  (setq ediff-split-window-function 'split-window-horizontally)
+#+end_src
+
+*** Improve ~ediff~ Visibility
+Adds a faint background to lines with merge-conflicting diffs.
+
+#+begin_src emacs-lisp
+  (custom-set-faces
+   '(ediff-current-diff-A ((t (:background "yellow" :foreground "black"))))
+   '(ediff-current-diff-B ((t (:background "yellow" :foreground "black"))))
+   '(ediff-fine-diff-A ((t (:background "orange" :foreground "black"))))
+   '(ediff-fine-diff-B ((t (:background "orange" :foreground "black")))))
+#+end_src
+
+*** Refine Differences in ~ediff~
+Narrow down the exact words or characters that differ.
+
+#+begin_src emacs-lisp
+  (setq ediff-auto-refine 'on)
+#+end_src
+
+*** Change Text Color for Highlighted Added Diffs
+- On Alacritty for some reason, added diffs (highlighted in green) are really hard to see with the default settings (green text on green background)
+  - This behavior is different when using WezTerm
+    - Regardless, I will change this for all non-grahical instances of Emacs
+
+#+begin_src emacs-lisp
+  (unless (display-graphic-p)
+    (with-eval-after-load 'magit
+      (set-face-attribute 'magit-diff-added nil
+                          :foreground "#003000"
+                          :background nil)
+      (set-face-attribute 'magit-diff-added-highlight nil
+                          :foreground "#003000"
+                          :background nil)))
+#+end_src
+
+* TODO
+- [ ] Make ~<escape>~ key abort (give it the same behavior as ~C-g~) in =magit=
