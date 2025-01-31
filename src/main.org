@@ -140,22 +140,6 @@ Includes LSP, linting, indentation, and any language specific settings.
 #+end_src
 
 * Modules
-** Helpful
-Alternative help screen in Emacs that gives better information on possible values for variables and functions, as well as default values
-
-#+begin_src emacs-lisp
-  (use-package helpful
-    :ensure t
-    :custom
-    (counsel-describe-function-function #'helpful-callable)
-    (counsel-describe-variable-function #'helpful-variable)
-    :bind
-    ([remap describe-function] . counsel-describe-function)
-    ([remap describe-command] . helpful-command)
-    ([remap describe-variable] . counsel-describe-variable)
-    ([remap describe-key] . helpful-key))
-#+end_src
-
 ** Swiper
 Swiper is used to search within the current buffer
 
