@@ -43,5 +43,6 @@ By default, it takes a very long time for the projects to show up in ~projectile
     "pa" '(projectile-add-known-project    :which-key "add")
     "pg" '(projectile-ripgrep              :which-key "ripgrep") ; TODO: Make it so that once you perform a search, the cursor automatically moves to this buffer
     "pp" '(projectile-switch-project       :which-key "switch")
-    "pr" '(projectile-remove-known-project :which-key "switch"))
+    "pr" '(projectile-remove-known-project :which-key "switch")
+    )
 #+end_src
