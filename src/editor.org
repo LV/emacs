@@ -20,3 +20,8 @@ Use ~dirvish~ for our file/directory management.
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/modules/dirvish.org")
 #+end_src
+
+* Highlight TODOs
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/hl-todo.org")
+#+end_src

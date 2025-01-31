@@ -222,23 +222,6 @@ With the default behavior, pressing =n= goes to the previous word whereas =C-n= 
       (kbd "N") 'isearch-repeat-backward))
 #+end_src
 
-** ~hl-todo~
-Highlight TODOs, FIXMEs, NOTEs, etc.
-
-#+begin_src emacs-lisp
-  (use-package hl-todo
-    :hook (prog-mode . hl-todo-mode)
-    :config
-    (setq hl-todo-keyword-faces
-          '(("TODO"   . "#FFFF00")
-            ("FIXME"  . "#FF0000")
-            ("DEBUG"  . "#00FFFF")
-            ("NOTE"   . "#50C878")
-            ("GOTCHA" . "#A020F0")
-            ("HACK"   . "#FFA500")
-            ("STUB"   . "#7393B3"))))
-#+end_src
-
 * LSP
 Main documentation can be found [[https://emacs-lsp.github.io/lsp-mode/][here]].
 
