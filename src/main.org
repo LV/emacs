@@ -132,42 +132,6 @@ This configuration is modularized for maintainability.
 
 
 * Editor
-** Clipboard
-While normal Emacs takes care of copy and pasting, I've had some issues copying to clipboard in terminal Emacs using Alacritty in WSL2 Ubuntu 22.02
-
-The fix is to use ~clipetty~
-
-#+begin_src emacs-lisp
-  (use-package clipetty
-    :ensure t
-    :hook (after-init . global-clipetty-mode))
-#+end_src
-
-** Directory Buffer
-- We use ~dirvish~ for our file/directory management
-  - For documentation on customizing ~dirvish~, [[https://github.com/alexluigit/dirvish/blob/main/docs/CUSTOMIZING.org][see here]]
-
-#+begin_src emacs-lisp
-  (use-package dirvish
-    :ensure t
-    :config
-    (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
-    (setq dirvish-attributes
-          '(vc-state subtree-state all-the-icons file-time file-size))
-    (setq dired-auto-revert-buffer t))
-
-  ; TODO: Add a keybinding for inserting an empty file
-#+end_src
-
-I also don't really see the need for ~dired-toggle-read-only~, whereas I keep performing ~dired-create-empty-file~, thus I change the keybinding for this
-
-#+begin_src emacs-lisp
-(with-eval-after-load 'evil
-  (with-eval-after-load 'dirvish
-    (evil-define-key 'normal dirvish-mode-map (kbd "i") 'dired-create-empty-file)))
-#+end_src
-
-
 ** Indentation
 Indentations will be described with the following syntax: ~n(s/t)~
 - ~n~ refers to the indentation length. How many spaces the indentation appears (if it's a tab character, how long should the tab character appear)
