@@ -1,0 +1,20 @@
+#+TITLE: Programming Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+Configurations for LSP and entrypoint for any language specific settings.
+
+* LSP
+
+* Language Specific Configurations
+Contains any language specific settings for LSP, linting, indentation, etc.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/languages/cpp.org")
+  (lv/org-babel-load-file "src/languages/lisp.org")
+  (lv/org-babel-load-file "src/languages/make.org")
+  (lv/org-babel-load-file "src/languages/python.org")
+#+end_src
+
+** TODO Languages to add
+- sh: 2 Spaces.
