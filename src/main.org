@@ -121,6 +121,7 @@ Includes LSP, linting, indentation, and any language specific settings.
 
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/languages/cpp.org")
+  (lv/org-babel-load-file "src/languages/lisp.org")
   (lv/org-babel-load-file "src/languages/make.org")
   (lv/org-babel-load-file "src/languages/python.org")
 #+end_src
@@ -423,6 +424,5 @@ This configuration is modularized for maintainability.
   (lv/org-babel-load-file "src/modules/markdown-mode.org")
   (lv/org-babel-load-file "src/modules/paredit.org")
   (lv/org-babel-load-file "src/modules/projectile.org")
-  (lv/org-babel-load-file "src/modules/slime.org")
   (lv/org-babel-load-file "src/modules/yasnippet.org")
 #+end_src
