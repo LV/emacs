@@ -1,0 +1,16 @@
+#+TITLE: Make(file) Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Indentation
+Tabs.
+
+Makefile indentations [[https://www.gnu.org/software/make/manual/make.html#Recipe-Syntax][must be tabs]]. Spaces will not work.
+
+#+begin_src emacs-lisp
+  (defun lv/makefile-setup ()
+    "Set up Makefile indentation preferences."
+    (setq tab-width 4)         ; set tab width to 4
+    (setq indent-tabs-mode t)) ; force tabs instead of spaces
+  (add-hook 'makefile-mode-hook 'lv/makefile-setup)
+#+end_src

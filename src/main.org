@@ -135,63 +135,17 @@ Modifies default settings and extends editor functionality.
   (lv/org-babel-load-file "src/editor.org")
 #+end_src
 
-* Editor
-** Indentation
-Indentations will be described with the following syntax: ~n(s/t)~
-- ~n~ refers to the indentation length. How many spaces the indentation appears (if it's a tab character, how long should the tab character appear)
-- ~s~ refers to the indentation consisting of spaces (i.e. ~expandtab=on~)
-- ~t~ refers to the indentation consisting of tab characters (i.e. ~expandtab=off~)
-
-*** C++: ~4s~
-#+begin_src emacs-lisp
-  (setq auto-mode-alist
-        (append
-         '(("\\.cpp\\'" . c++-mode)
-           ("\\.h\\'"   . c++-mode)
-           ("\\.hpp\\'" . c++-mode)
-           ("\\.cxx\\'" . c++-mode)
-           ("\\.hxx\\'" . c++-mode)
-           ("\\.cc\\'"  . c++-mode)
-           ("\\.hh\\'"  . c++-mode))
-         auto-mode-alist))
-
-  ;; Set indentation settings for C++ mode
-  (defun lv/c++-setup ()
-    "Set up C++ indentation preferences."
-    (setq c-basic-offset 4)      ; Set indentation to 4 spaces
-    (setq tab-width 4)           ; Set tab width to 4
-    (setq indent-tabs-mode nil)) ; Use spaces instead of tabs
-
-  (add-hook 'c++-mode-hook 'lv/c++-setup)
-#+end_src
-
-*** Makefile: ~4t~
-Makefile indentations [[https://www.gnu.org/software/make/manual/make.html#Recipe-Syntax][must be tabs]]. Spaces will not work.
+** Set Language Configurations
+Includes LSP, linting, indentation, and any language specific settings.
 
 #+begin_src emacs-lisp
-  (defun lv/makefile-setup ()
-    "Set up Makefile indenation preferences."
-    (setq tab-width 4)         ; set tab width to 4
-    (setq indent-tabs-mode t)) ; force tabs instead of spaces
-  (add-hook 'makefile-mode-hook 'lv/makefile-setup)
-#+end_src
-
-*** Python: ~4s~
-[[https://peps.python.org/pep-0008/#indentation][PEP-0008]] says 4 spaces per indentation level
-
-#+begin_src emacs-lisp
-  (defun lv/python-setup ()
-    "Set up Python indentation preferences."
-    (setq python-indent-offset 4) ; set indentation to 4 spaces
-    (setq tab-width 4)
-    (setq indent-tabs-mode nil) ; use spaces instead of tabs
-
-    (add-hook 'python-mode-hook 'lv/python-setup))
+  (lv/org-babel-load-file "src/languages/cpp.org")
+  (lv/org-babel-load-file "src/languages/make.org")
+  (lv/org-babel-load-file "src/languages/python.org")
 #+end_src
 
 *** TODO Languages to add
-- sh: ~2s~
-
+- sh: 2 Spaces.
 
 * Modules
 ** Ivy
@@ -581,10 +535,6 @@ See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
   (use-package lsp-ivy
     :commands lsp-ivy-workspace-symbol)
 #+end_src
-
-* Keybindings
-
-
 
 * TODO Future Features to add
 - Maybe add workspaces (on top of tabs)
