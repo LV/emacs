@@ -14,9 +14,7 @@
   (lv/org-babel-load-file "src/modules/clipetty.org")
 #+end_src
 
-* Directory Buffer
-Use ~dirvish~ for our file/directory management.
-
+* File Directory Buffer Management
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/modules/dirvish.org")
 #+end_src
