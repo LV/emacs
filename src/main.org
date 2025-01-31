@@ -29,12 +29,12 @@ Python dependencies exist in this configuration.
 *** System-wide dependencies
 **** MacOS
 #+begin_src sh
-  brew install fd ffmpegthumbnailer g-ls python-packaging python-setuptools ripgrep six sqlite && brew install --cask mactex-no-gui mediainfo
+  brew install fd ffmpegthumbnailer g-ls git python-packaging python-setuptools ripgrep six sqlite && brew install --cask mactex-no-gui mediainfo
 #+end_src
 
 **** Debian
 #+begin_src bash :tangle no
-  sudo apt install dvipng ripgrep sqlite3 libsqlite3-dev texlive-base texlive-fonts-recommended texlive-latex-extra texlive-latex-recommended
+  sudo apt install dvipng git ripgrep sqlite3 libsqlite3-dev texlive-base texlive-fonts-recommended texlive-latex-extra texlive-latex-recommended
 #+end_src
 
 ** Fonts
