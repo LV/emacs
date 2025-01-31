@@ -23,7 +23,7 @@ I treat everything ~org~ like a monolith, and have it live in a single main dire
     "Set up Org-mode indentation preferences."
     (setq org-adapt-indentation nil) ; Disable adaptive indentation for clean look
     (setq org-indent-indentation-per-level 2) ; Set indentation level to 2 spaces
-    (setq tab-width 2)  ; Set tab width to 2 spaces
+    (setq tab-width 8)  ; Org-mode parser forces tab-width to be 8
     (setq indent-tabs-mode nil)) ; Use spaces instead of tabs
 
   (add-hook 'org-mode-hook 'lv/org-mode-setup)
