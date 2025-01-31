@@ -13,11 +13,11 @@
 * Pre-requisites
 You *must* do the following to get the configuration to fully work.
 
-/NOTE/: If you're building this through my [[https://github.com/lv/nixos][NixOS Flake]], it'll take care of everything you need 🙂
+/NOTE/: If you're building this through my [[https://github.com/lv/nixos][NixOS Flake]], it'll take care of everything you need 🙂.
 
 ** MacOS
 #+begin_src sh
-  brew install fd ffmpegthumbnailer g-ls && brew install --cask mediainfo
+  brew install fd ffmpegthumbnailer g-ls ripgrep && brew install --cask mactex-no-gui mediainfo
 #+end_src
 
 *** Latex
