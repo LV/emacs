@@ -102,7 +102,7 @@ If something breaks when installing new packages, chances are that you'll need t
 - Package =compat= unavailable
 - Package =foo= not found in MELPA
 
-* Load Config Modules
+* Load External Config Files
 This configuration is modularized for maintainability.
 
 #+begin_src emacs-lisp
