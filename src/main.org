@@ -87,9 +87,9 @@ This configuration is modularized for maintainability.
   (lv/org-babel-load-file "src/package.org")
 #+end_src
 
-** Modify Emacs Behaviors
+** Modify/Enhance Emacs Behaviors and Core Functionality
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/behavior.org")
+  (lv/org-babel-load-file "src/core.org")
 #+end_src
 
 ** Define Keybindings
