@@ -2,7 +2,7 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-Slime is an IDE for Lisp
+The /Superior Lisp Interaction Mode/ \_for /Emacs/.
 
 * Installation
 #+begin_src emacs-lisp
