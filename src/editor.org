@@ -2,7 +2,7 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-* UI
+* Emacs UI
 ** Disable Scrollbar
 #+begin_src emacs-lisp
   (scroll-bar-mode -1)
@@ -93,7 +93,6 @@ Enable icons via specialized fonts
   (use-package rainbow-delimiters
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
-
 
 * Layout and Margins
 ** Line Spacing
@@ -187,4 +186,37 @@ Instead, we will set the size of this to be the maximum amount of digits necessa
     "u" '(undo-tree-visualize :which-key "undo tree"))
 
   ; TODO: Make buffer less wide. Doesn't need to take half of the screen
+#+end_src
+
+* Clipboard
+~clipetty~ fixes clipboard issues in terminal Emacs.
+
+#+begin_src emacs-lisp
+  (use-package clipetty
+    :ensure t
+    :hook (after-init . global-clipetty-mode))
+#+end_src
+
+* Directory Buffer
+- We use ~dirvish~ for our file/directory management
+  - For documentation on customizing ~dirvish~, [[https://github.com/alexluigit/dirvish/blob/main/docs/CUSTOMIZING.org][see here]]
+
+#+begin_src emacs-lisp
+  (use-package dirvish
+    :ensure t
+    :config
+    (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
+    (setq dirvish-attributes
+          '(vc-state subtree-state all-the-icons file-time file-size))
+    (setq dired-auto-revert-buffer t))
+
+  ; TODO: Add a keybinding for inserting an empty file
+#+end_src
+
+I also don't really see the need for ~dired-toggle-read-only~, whereas I keep performing ~dired-create-empty-file~, thus I change the keybinding for this
+
+#+begin_src emacs-lisp
+(with-eval-after-load 'evil
+  (with-eval-after-load 'dirvish
+    (evil-define-key 'normal dirvish-mode-map (kbd "i") 'dired-create-empty-file)))
 #+end_src
