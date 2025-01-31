@@ -5,7 +5,7 @@
 * Installation
 #+begin_src emacs-lisp
   (use-package org
-    :straight nil)
+    :straight t)
 #+end_src
 
 * General Settings
