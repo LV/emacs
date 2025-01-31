@@ -15,7 +15,7 @@ You *must* do the following to get the configuration to fully work.
 
 /NOTE/: If you're building this through my [[https://github.com/lv/nixos][NixOS Flake]], it'll take care of everything you need 🙂.
 
-** Dependencies
+** External Dependencies
 *** Setup Python Virtualenv
 Python dependencies exist in this configuration.
 
