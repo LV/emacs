@@ -1,0 +1,169 @@
+#+TITLE: UI Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Disable Scrollbar
+#+begin_src emacs-lisp
+  (scroll-bar-mode -1)
+#+end_src
+
+* Disable Menu Bar
+By default, Emacs shows the /File/, /Edit/, etc. tabs.
+
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+#+end_src
+
+* Disable Tool Bar
+By default, displays icons for /New File/, /Open Directory/, /Save/, etc. even if menu bar is disabled.
+
+#+begin_src emacs-lisp
+  (tool-bar-mode -1)
+#+end_src
+
+* Disable Tooltips
+Tooltips pop up when hovering over an element and display additional help information.
+
+~helpful~ replaces this functionality.
+
+#+begin_src emacs-lisp
+  (tooltip-mode -1)
+#+end_src
+
+* Visual Enhancements
+** Theme
+Load bluloco theme from ~doom-themes~.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/doom-themes.org")
+#+end_src
+
+** Font
+/NOTE/: Not applicable to terminal Emacs.
+
+*** Font Face
+#+begin_src emacs-lisp
+  (defun lv/set-font (font-list height)
+    "Set the first available font from FONT-LIST with HEIGHT"
+    (when (display-graphic-p)
+      (catch 'font-found
+        (dolist (font font-list)
+          (when (find-font (font-spec :name font))
+            (set-face-attribute 'default nil :font font :height height)
+            (throw 'font-found font)))
+        (message "No font from the list is available!"))))
+#+end_src
+
+*** Font Size
+#+begin_src emacs-lisp
+  (cond
+   ((eq system-type 'gnu/linux)
+    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 120))
+   ((eq system-type 'darwin) ; MacOS
+    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 200)))
+#+end_src
+
+** Icons
+Enable icons through specialized fonts.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/all-the-icons.org")
+#+end_src
+
+
+** Modeline
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/doom-modeline.org")
+#+end_src
+
+** Rainbow Delimiters
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/modules/rainbow-delimiters.org")
+#+end_src
+
+* Layout and Margins
+** Line Spacing
+Per buffer line spacing.
+
+#+begin_src emacs-lisp
+  (setq-default line-spacing 0.1)
+#+end_src
+
+** Top Padding
+Setting format to empty string ~" "~ gives you top padding. Changing the header line face height will change the spacing.
+
+#+begin_src emacs-lisp
+  (setq header-line-format " ")
+#+end_src
+
+** Side Padding
+#+begin_src emacs-lisp
+  (lambda ()
+    (progn
+      (setq left-margin-width 2)
+      (setq right-margin-width 2)
+      (set-window-buffer nil (current-buffer))))
+#+end_src
+
+** Fringe Space
+Add fringe space to the left and right of the buffer.
+
+#+begin_src emacs-lisp
+  (set-fringe-mode 10)
+#+end_src
+
+* Display Settings
+** Line Numbers
+*** Enable Line Numbers
+#+begin_src emacs-lisp
+  (global-display-line-numbers-mode t)
+#+end_src
+
+**** Exceptions
+Otherwise, you get line numbers on things that don't make sense like ~eshell~.
+
+#+begin_src emacs-lisp
+  (dolist (mode '(treemacs-mode-hook))
+    (add-hook mode (lambda ()
+                     (display-line-numbers-mode 0))))
+#+end_src
+
+*** Use Relative Line Numbers
+#+begin_src emacs-lisp
+  (setq display-line-numbers-type 'relative)
+#+end_src
+
+*** Display Horizontal Character Position
+#+begin_src emacs-lisp
+  (setq column-number-mode t)
+#+end_src
+
+*** Set Line Number Width
+There is some annoying behavior where once you scroll to a line number with an extra digit, the entire code buffer will shift one character to the right to accomodate for this new line number digit.
+
+Instead, we will set the size of this to be the maximum amount of digits necessary for our document, and then fix this in size.
+
+#+begin_src emacs-lisp
+  (setq display-line-numbers-width-start t)
+
+  ;; FIXME: This is not working; saw a bug when editing a =.org= file
+  ;;          weirdly, this doesn't happen to this config
+  
+  ;; TODO: Document this bug on GitHub issues
+#+end_src
+
+** Enable Text Wrapping
+#+begin_src emacs-lisp
+  (add-hook 'text-mode-hook 'visual-line-mode)
+#+end_src
+
+* Smooth Scrolling
+By default, going up or down the buffer until the boundary will result in jumping to the next 10-15 lines.
+
+Smooth scrolling does one line at a time.
+
+#+begin_src emacs-lisp
+  (setq scroll-conservatively 101
+        scroll-margin 0
+        scroll-preserve-screen-position 't)
+#+end_src

@@ -104,6 +104,11 @@ Modifies default settings and extends editor functionality.
   (lv/org-babel-load-file "src/editor.org")
 #+end_src
 
+** Modify/Enhance UI
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/ui.org")
+#+end_src
+
 ** Evil-mode
 Use Vim keybindings.
 
