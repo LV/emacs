@@ -2,7 +2,7 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-Easier editing with parenthesis
+Easier editing with parenthesis.
 
 * Installation
 #+begin_src emacs-lisp
