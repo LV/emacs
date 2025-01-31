@@ -114,7 +114,7 @@ This configuration is modularized for maintainability.
 #+end_src
 
 #+begin_src emacs-lisp
-    (lv/org-babel-load-file "src/package-manager.org")
+    (lv/org-babel-load-file "src/package.org")
 #+end_src
 
 

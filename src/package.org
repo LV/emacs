@@ -1,4 +1,4 @@
-#+TITLE: Package Manager Configuration
+#+TITLE: Package Configuration
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
