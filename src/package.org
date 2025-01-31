@@ -2,40 +2,35 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-Enable Package Management
+Enable package management via ~straight.el~.
 
-* Installation
+* Disable ~package.el~
+~straight.el~ is not compatible with ~package.el~.
 
 #+begin_src emacs-lisp
-  (require 'package)
+  (setq package-enable-at-startup nil)
 #+end_src
 
-* Set Up Package URLs
+* Bootstrap Straight
 #+begin_src emacs-lisp
-  (setq package-archives '(("melpa"  . "https://melpa.org/packages/")
-                           ("nongnu" . "https://elpa.nongnu.org/nongnu/")
-                           ("gnu"    . "https://elpa.gnu.org/packages/")
-                           ("elpa"   . "https://elpa.gnu.org/packages/")))
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name
+          "straight/repos/straight.el/bootstrap.el"
+          (or (bound-and-true-p straight-base-dir)
+              user-emacs-directory)))
+        (bootstrap-version 7))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
 #+end_src
 
-* Initialize Package System
+* Use-Package Integration
 #+begin_src emacs-lisp
-  (package-initialize)
+  (straight-use-package 'use-package)
 #+end_src
-
-** For Non-Linux Platforms
-#+begin_src emacs-lisp
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-
-  (require 'use-package)
-
-  (setq use-package-always-ensure t)
-#+end_src
-
-* Refresh Contents if Packages don't Exist
-#+begin_src emacs-lisp
-  (unless package-archive-contents
-    (package-refresh-contents))
-#+end_src
-

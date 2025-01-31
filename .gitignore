@@ -49,6 +49,9 @@ projectile-bookmarks.eld
 # network security
 /network-security.data
 
+# straight.el
+straight/*
+
 # org config
 custom.el
 src/**/*.el
