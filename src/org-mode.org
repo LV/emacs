@@ -5,7 +5,7 @@
 * Installation
 #+begin_src emacs-lisp
   (use-package org
-    :ensure nil)
+    :straight nil)
 #+end_src
 
 * General Settings
@@ -51,7 +51,7 @@ Allow notes to take on a graph structure, linked together using backlings.
 
 #+begin_src emacs-lisp
   (use-package org-roam
-    :ensure t
+    :straight t
     :custom
     (org-roam-directory (concat lv/org-directory "/Zettelkasten"))
     (org-roam-dailies-directory (concat lv/org-directory "/Daily"))
@@ -73,12 +73,14 @@ Allow notes to take on a graph structure, linked together using backlings.
 **** Pre-requisite
 #+begin_src emacs-lisp
   (use-package websocket
+    :straight t
     :after org-roam)
 #+end_src
 
 **** Installation
 #+begin_src emacs-lisp
   (use-package org-roam-ui
+    :straight t
     :after org-roam
     :config
     (setq org-roam-ui-sync-theme t
@@ -90,7 +92,7 @@ Allow notes to take on a graph structure, linked together using backlings.
 ** Mermaid Diagrams
 #+begin_src emacs-lisp
   (use-package mermaid-mode
-    :ensure t
+    :straight t
     :mode "\\.mmd\\'"
     :config
     (setq mermaid-mmdc-location "mmdc"))
@@ -98,7 +100,7 @@ Allow notes to take on a graph structure, linked together using backlings.
 
 #+begin_src emacs-lisp
   (use-package ob-mermaid
-    :ensure t
+    :straight t
     :after org
     :config
     (setq ob-mermaid-cli-path "mmdc")  ;; Path to mmdc in Nix
@@ -118,10 +120,10 @@ Add =mermaid= to =orb-babel= languages
 ** Calendar
 #+begin_src emacs-lisp
   (use-package calfw
-    :ensure t)
+    :straight t)
 
   (use-package calfw-org
-    :ensure t
+    :straight t
     :after (calfw org)
     :config
     (setq cfw:org-agenda-schedule-args '(:timestamp))
@@ -141,7 +143,7 @@ Add =mermaid= to =orb-babel= languages
 *** Installation
 #+begin_src emacs-lisp
   (use-package org-super-agenda
-    :ensure t
+    :straight t
     :config
     (org-super-agenda-mode))
 #+end_src
@@ -151,7 +153,7 @@ Compiles =.org= files into HTML
 
 #+begin_src emacs-lisp
   (use-package simple-httpd
-    :ensure t)
+    :straight t)
 #+end_src
 
 ** Citations
@@ -175,7 +177,7 @@ Add functionality for including citations
 *** ~citar~
 #+begin_src emacs-lisp
   (use-package citar
-    :ensure t
+    :straight t
     :custom
     (citar-bibliography (list lv/bibliography-path)))
 #+end_src
@@ -183,7 +185,7 @@ Add functionality for including citations
 *** ~org-ref~
 #+begin_src emacs-lisp
   (use-package org-ref
-    :ensure t
+    :straight t
     :after org
     :config
     (setq
@@ -354,6 +356,7 @@ Otherwise, performa a normal text indentation.
 
 #+begin_src emacs-lisp
   (use-package org
+    :straight t
     :config
     (with-eval-after-load 'evil
       (defun lv/org-header-p ()

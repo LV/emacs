@@ -7,7 +7,7 @@ A templating system. Allows you to type ~>TEMPLATE~ and then press ~TAB~ to expa
 * Installation
 #+begin_src emacs-lisp
   (use-package yasnippet
-    :ensure t
+    :straight t
     :config
     (yas-global-mode 1))
 #+end_src

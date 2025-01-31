@@ -5,7 +5,7 @@
 * Installation
 #+begin_src emacs-lisp
   (use-package undo-tree
-    :ensure t
+    :straight t
     :init
     ; (setq undo-tree-auto-save-history nil) ; Disable persistent history
     (global-undo-tree-mode 1))
