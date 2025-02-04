@@ -37,6 +37,13 @@ Without the delay, this will not work.
     (apply #'find-file args))
 #+end_src
 
+** ~gg~
+#+begin_src emacs-lisp
+  (defun eshell/gg ()
+      "Invoke magit from eshell."
+      (magit))
+#+end_src
+
 ** ~mkcdir~
 #+begin_src emacs-lisp
   (defun eshell/mkcdir (dir)
