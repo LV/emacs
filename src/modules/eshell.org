@@ -29,6 +29,15 @@ Without the delay, this will not work.
   (add-hook 'eshell-mode-hook 'lv/switch-to-normal-after-eshell-delay)
 #+end_src
 
+* Aliases & Functions
+** ~find-file~
+Opens a file/directory in an Emacs buffer
+
+#+begin_src emacs-lisp
+  (defun eshell/e (&rest args)
+    (apply #'find-file args))
+#+end_src
+
 * Keybindings
 #+begin_src emacs-lisp
   (lv/leader-keys
