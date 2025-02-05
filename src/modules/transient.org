@@ -1,0 +1,8 @@
+#+TITLE: Transient Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Installation
+#+begin_src emacs-lisp
+  (use-package transient)
+#+end_src
