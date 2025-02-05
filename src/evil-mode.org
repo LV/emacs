@@ -8,7 +8,7 @@ Use Vim keybindings within Emacs
 
 #+begin_src emacs-lisp
   (use-package evil
-    :ensure t
+    :straight t
     :init
     (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
@@ -33,8 +33,8 @@ A package that extends Vim keybindings to work with other packages such as ~magi
 
 #+begin_src emacs-lisp
   (use-package evil-collection
+    :straight t
     :after (evil magit)
-    :ensure t
     :config
     (evil-collection-init))
 #+end_src

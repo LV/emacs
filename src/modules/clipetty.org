@@ -7,6 +7,6 @@
 * Installation
 #+begin_src emacs-lisp
   (use-package clipetty
-    :ensure t
+    :straight t
     :hook (after-init . global-clipetty-mode))
 #+end_src

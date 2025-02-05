@@ -7,6 +7,6 @@ Easier editing with parenthesis.
 * Installation
 #+begin_src emacs-lisp
   (use-package paredit
-    :ensure t
+    :straight t
     :hook (emacs-lisp-mode lisp-mode))
 #+end_src
