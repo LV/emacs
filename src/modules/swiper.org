@@ -9,6 +9,7 @@ With the default behavior, pressing =n= goes to the previous word whereas =C-n= 
 
 #+begin_src emacs-lisp
   (use-package swiper
+    :straight t
     :after ivy
     :config
     ;; Rebind Evil keys for navigating matches after Swiper

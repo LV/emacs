@@ -6,6 +6,29 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+;; Disable package.el so we can use straight.el
+(setq package-enable-at-startup nil)
+
+;; Bootstrap straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; Enable ~use-package~ macro
+(straight-use-package 'use-package)
+
 ;; Load the configuration from config.org
-(require 'org)
+(straight-use-package 'org)
 (org-babel-load-file (expand-file-name "src/main.org" user-emacs-directory))

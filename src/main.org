@@ -15,30 +15,31 @@ You *must* do the following to get the configuration to fully work.
 
 /NOTE/: If you're building this through my [[https://github.com/lv/nixos][NixOS Flake]], it'll take care of everything you need 🙂.
 
-** MacOS
+** External Dependencies
+*** Setup Python Virtualenv
+Python dependencies exist in this configuration.
+
 #+begin_src sh
-  brew install fd ffmpegthumbnailer g-ls ripgrep && brew install --cask mactex-no-gui mediainfo
+  mkdir -p ~/.venvs
+  python3 -m venv ~/.venvs/emacs
+  source ~/.venvs/emacs/bin/activate
+  pip install epc orjson sexpdata paramiko rapidfuzz watchdog
 #+end_src
 
-*** Latex
-**** Linux
-#+begin_src bash :tangle no
-  sudo apt-get install texlive-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended dvipng
+*** System-wide dependencies
+**** MacOS
+#+begin_src sh
+  brew install fd ffmpegthumbnailer g-ls git python-packaging python-setuptools ripgrep six sqlite && brew install --cask mactex-no-gui mediainfo
 #+end_src
 
-*** ~ripgrep~
 **** Debian
-#+begin_src sh :tangle no
-  sudo apt install ripgrep
+#+begin_src bash :tangle no
+  sudo apt install dvipng git ripgrep sqlite3 libsqlite3-dev texlive-base texlive-fonts-recommended texlive-latex-extra texlive-latex-recommended
 #+end_src
 
-** LSPs
-- clangd
-- Pyright
-- YAML
 ** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
-  - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
+- Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
 
 Evaluate the following commands in Emacs:
 
@@ -69,6 +70,8 @@ If something breaks when installing new packages, chances are that you'll need t
 * Load External Config Files
 This configuration is modularized for maintainability.
 
+/NOTE/: ~straight.el~ package manager is already loaded in order to get the correct version of ~org-mode~ to load this configuration.
+
 #+begin_src emacs-lisp
   (defun lv/org-babel-load-file (file-path)
     "Load an org-babel file from the root emacs config directory."
@@ -77,19 +80,19 @@ This configuration is modularized for maintainability.
       (concat user-emacs-directory file-path))))
 #+end_src
 
-** Load Package Manager
+** Define Keybindings
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/package.org")
+  (lv/org-babel-load-file "src/keybinding.org")
+#+end_src
+
+** Org-mode
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/org-mode.org")
 #+end_src
 
 ** Modify/Enhance Emacs Behaviors and Core Functionality
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/core.org")
-#+end_src
-
-** Define Keybindings
-#+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/keybinding.org")
 #+end_src
 
 ** Modify/Enhance Editor
@@ -111,202 +114,18 @@ Use Vim keybindings.
   (lv/org-babel-load-file "src/evil-mode.org")
 #+end_src
 
-** Org-mode
-#+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/org-mode.org")
-#+end_src
-
 ** Git
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/git.org")
 #+end_src
 
 ** Programming
-*** LSP
-**** TODO Replace ~lsp-mode~ with ~lsp-bridge~
-
-*** Language Specific Configurations
-Includes LSP, linting, indentation, and any language specific settings.
+LSP and language specific settings.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/languages/cpp.org")
-  (lv/org-babel-load-file "src/languages/lisp.org")
-  (lv/org-babel-load-file "src/languages/make.org")
-  (lv/org-babel-load-file "src/languages/python.org")
+  (lv/org-babel-load-file "src/programming.org")
 #+end_src
 
-**** TODO Languages to add
-- sh: 2 Spaces.
-
-* LSP
-Main documentation can be found [[https://emacs-lsp.github.io/lsp-mode/][here]].
-
-** Add-ons
-*** Header Breadcrumb
-We add a breadcrumb to show the relative path of our current buffer in regards to the rest of the project
-
-#+begin_src emacs-lisp
-  (defun lv/lsp-setup-mode ()
-    (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-    (setq lsp-headerline-breadcrumb-enable t)
-    (setq lsp-headerline-breadcrumb-icons-enable t))
-
-  ; TODO: Fix the missing icons in this breadcrumb header
-#+end_src
-
-** Installation
-Install and use ~lsp-mode~
-
-#+begin_src emacs-lisp
-  (use-package lsp-mode
-    :ensure t
-    :commands (lsp lsp-deferred)
-    :hook ((lsp-mode    . lv/lsp-setup-mode)
-           (c++-mode    . lsp-deferred)
-           (c-mode      . lsp-deferred)
-           (python-mode . lsp-deferred)
-           (yaml-mode   . lsp-deferred))
-    :init
-    (setq lsp-keymap-prefix "C-c l")
-    :config
-    (lsp-enable-which-key-integration t)
-    :custom
-    (lsp-idle-delay 0.5)
-    (lsp-log-io nil)
-    (gc-cons-threshold 100000000)
-    (read-process-output-max (* 1024 1024)))
-#+end_src
-
-** Extra Packages
-*** Debugger
-#+begin_src emacs-lisp
-  (use-package dap-mode)
-  ;; (use-package dap-LANGUAGE) to load the dap adapter for your language
-#+end_src
-
-*** ~flycheck~
-Performs real-time syntax checking
-#+begin_src emacs-lisp
-  (use-package flycheck
-    :ensure t
-    :init (global-flycheck-mode))
-
-  ; TODO: Make sure that =RET= doesn't result in autocompletion and instead creates a newline. Use =TAB= to autocomplete instead
-#+end_src
-
-*** ~lsp-treemacs~
-#+begin_src emacs-lisp
-  (use-package lsp-treemacs
-    :after (lsp-mode treemacs)
-    :commands lsp-treemacs-errors-list) ; only load when this command is called
-#+end_src
-
-** Languages
-*** TODO Docker
-Add LSP integration with Docker. Use the following resources:
-- [[https://github.com/emacs-lsp/lsp-docker][LSP Docker]]
-- [[https://happihacking.com/blog/posts/2023/dev-containers-emacs/][Docker Dev Containers in Emacs]] (like in VSCode)
-
-*** Nix (Nil)
-[[https://emacs-lsp.github.io/lsp-mode/page/lsp-nix-nil/][lsp-mode Nix Nil documentation]]
-
-- I almost exclusively edit Nix packages when I'm using NixOS`
-  - The package is called /nil/ on nixpkgs ([[https://search.nixos.org/packages?channel=24.05&show=nil&from=0&size=50&sort=relevance&type=packages&query=nil][link]])
-
-#+begin_src emacs-lisp
-  (use-package lsp-nix
-    :ensure lsp-mode
-    :after (lsp-mode)
-    :demand t
-    :custom
-    (lsp-nix-nil-formatter ["nixfmt"]))
-
-  (use-package nix-mode
-    :hook (nix-mode . lsp-deferred)
-    :ensure t)
-#+end_src
-
-*** Python (basedpyright)
-[[https://emacs-lsp.github.io/lsp-pyright/][lsp-mode Pyright documentation]]
-
-Firstly, you will need to install ~basedpyright~ (and ~ruff~ for some reason) manually
-
-#+begin_src sh :tangle no
-  pip install basedpyright
-  pip install ruff
-#+end_src
-
-And then we can install and use ~lsp-pyright~
-
-#+begin_src emacs-lisp
-  (use-package lsp-pyright
-    :ensure t
-    :custom (lsp-pyright-langserver-command "basedpyright")
-    :hook (python-mode . (lambda ()
-                           (require 'lsp-pyright)
-                           (lsp-deferred))))
-#+end_src
-
-*** YAML
-
-#+begin_src emacs-lisp
-  (use-package yaml-mode
-    :ensure t
-    :mode "\\.ya?ml\\'"
-    :hook (yaml-mode . lsp-deferred))
-#+end_src
-
-** Company Mode
-- Before, we'd need to invoke ~M-x completion-at-point~ everytime to get the buffer of autocompletable things
-  - We get this automatically with ~company-mode~
-
-- I like autocompleting by pressing ~TAB~ (the default behavior is pressing ~ENTER~)
-  - Even if you rebind this to ~TAB~, the default behavior remains
-    - I've binding ~ENTER~ to ~newline~ to fix this
-
-- ~TAB~ key in GUI != ~TAB~ key in Terminal Emacs
-  - In GUI, ~TAB~ is ~<tab>~
-  - In Terminal mode, ~TAB~ is ~C-i~
-
-#+begin_src emacs-lisp
-  (use-package company
-    :after lsp-mode
-    :hook (prog-mode . company-mode)
-    :bind
-    (:map company-active-map
-          ("<tab>"    . company-complete-selection)
-          ("C-i"      . company-complete-selection)
-          ("<return>" . newline))
-    (:map lsp-mode-map
-          ("<tab>"    . company-indent-or-complete-common)
-          ("C-i"      . company-indent-or-complete-common)
-          ("<return>" . newline))
-    :custom
-    (company-minimum-prefix-length 1)
-    (company-idle-delay 0.0)) ; seconds
-#+end_src
-
-#+begin_src emacs-lisp
-  (use-package company-box
-    :hook (company-mode . company-box-mode))
-#+end_src
-
-** LSP UI
-Additional UI integrations.
-
-See the [[https://github.com/emacs-lsp/lsp-ui][GitHub repo]] for more info.
-
-#+begin_src emacs-lisp
-  (use-package lsp-ui
-    :hook (lsp-mode . lsp-ui-mode))
-#+end_src
-
-** Ivy
-
-#+begin_src emacs-lisp
-  (use-package lsp-ivy
-    :commands lsp-ivy-workspace-symbol)
-#+end_src
 
 * TODO Future Features to add
 - Maybe add workspaces (on top of tabs)
