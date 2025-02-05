@@ -5,7 +5,7 @@
 * Installation
 #+begin_src emacs-lisp
   (use-package org
-    :straight t)
+    :straight (:type built-in))
 #+end_src
 
 * General Settings
