@@ -8,7 +8,7 @@ Use Vim keybindings within Emacs
 
 #+begin_src emacs-lisp
   (use-package evil
-    :ensure t
+    :ensure (:wait t)  ;; TODO: See if there's a way to use ~:demand t~ instead
     :init
     (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
