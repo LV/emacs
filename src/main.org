@@ -70,7 +70,7 @@ If something breaks when installing new packages, chances are that you'll need t
 * Load External Config Files
 This configuration is modularized for maintainability.
 
-/NOTE/: ~straight.el~ package manager is already loaded in order to get the correct version of ~org-mode~ to load this configuration.
+/NOTE/: ~elpaca~ package manager is already loaded in order to get the correct version of ~org-mode~ to load this configuration.
 
 #+begin_src emacs-lisp
   (defun lv/org-babel-load-file (file-path)

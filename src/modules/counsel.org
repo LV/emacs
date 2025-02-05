@@ -6,7 +6,7 @@ Counsel is an extension of ~ivy~ and enhances features such as looking for comma
 * Installation
 #+begin_src emacs-lisp
   (use-package counsel
-    :straight t
+    :ensure t
     :after ivy)
 #+end_src
 

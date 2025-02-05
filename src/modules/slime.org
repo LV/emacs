@@ -7,7 +7,7 @@ The /Superior Lisp Interaction Mode/ \_for /Emacs/.
 * Installation
 #+begin_src emacs-lisp
   (use-package slime
-    :straight t
+    :ensure t
     :config
     (setq inferior-lisp-program "sbcl")
     (slime-setup '(slime-fancy)))
