@@ -7,13 +7,11 @@ A templating system. Allows you to type ~>TEMPLATE~ and then press ~TAB~ to expa
 * Installation
 #+begin_src emacs-lisp
   (use-package yasnippet
-    :straight t
+    :ensure t
+    :hook ((org-mode  . yas-minor-mode)
+           (prog-mode . yas-minor-mode))
     :config
     (yas-global-mode 1))
-#+end_src
-
-#+begin_src emacs-lisp
-  (add-hook 'org-mode-hook #'yas-minor-mode)
 
   ; TODO: Stop yasnippet from inserting an extra \n character after pressing TAB to open the snippet
   ;         This is probably only for org-mode, but maybe this behavior should be global

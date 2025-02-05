@@ -7,7 +7,7 @@ Ivy is a completion framework that allows you to find files, switch buffers, etc
 * Installation
 #+begin_src emacs-lisp
   (use-package ivy
-    :straight t
+    :ensure t
     :diminish
     :bind ((:map ivy-switch-buffer-map
              ("C-k" . ivy-previous-line)

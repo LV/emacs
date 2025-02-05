@@ -3,10 +3,7 @@
 #+PROPERTY: header-args :tangle yes
 
 * Installation
-#+begin_src emacs-lisp
-  (use-package org
-    :straight (:type built-in))
-#+end_src
+Installation code is inside of =init.el=, as =org= is the first dependency needed in order to enable this literate configuration file.
 
 * General Settings
 ** Main Directory
@@ -51,7 +48,7 @@ Allow notes to take on a graph structure, linked together using backlings.
 
 #+begin_src emacs-lisp
   (use-package org-roam
-    :straight t
+    :ensure t
     :custom
     (org-roam-directory (concat lv/org-directory "/Zettelkasten"))
     (org-roam-dailies-directory (concat lv/org-directory "/Daily"))
@@ -73,14 +70,14 @@ Allow notes to take on a graph structure, linked together using backlings.
 **** Pre-requisite
 #+begin_src emacs-lisp
   (use-package websocket
-    :straight t
+    :ensure t
     :after org-roam)
 #+end_src
 
 **** Installation
 #+begin_src emacs-lisp
   (use-package org-roam-ui
-    :straight t
+    :ensure t
     :after org-roam
     :config
     (setq org-roam-ui-sync-theme t
@@ -89,41 +86,13 @@ Allow notes to take on a graph structure, linked together using backlings.
           org-roam-ui-open-on-start t))
 #+end_src
 
-** Mermaid Diagrams
-#+begin_src emacs-lisp
-  (use-package mermaid-mode
-    :straight t
-    :mode "\\.mmd\\'"
-    :config
-    (setq mermaid-mmdc-location "mmdc"))
-#+end_src
-
-#+begin_src emacs-lisp
-  (use-package ob-mermaid
-    :straight t
-    :after org
-    :config
-    (setq ob-mermaid-cli-path "mmdc")  ;; Path to mmdc in Nix
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((mermaid . t))))
-#+end_src
-
-Add =mermaid= to =orb-babel= languages
-
-#+begin_src emacs-lisp
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((mermaid . t)))
-#+end_src
-
 ** Calendar
 #+begin_src emacs-lisp
   (use-package calfw
-    :straight t)
+    :ensure t)
 
   (use-package calfw-org
-    :straight t
+    :ensure t
     :after (calfw org)
     :config
     (setq cfw:org-agenda-schedule-args '(:timestamp))
@@ -143,7 +112,7 @@ Add =mermaid= to =orb-babel= languages
 *** Installation
 #+begin_src emacs-lisp
   (use-package org-super-agenda
-    :straight t
+    :ensure t
     :config
     (org-super-agenda-mode))
 #+end_src
@@ -153,7 +122,7 @@ Compiles =.org= files into HTML
 
 #+begin_src emacs-lisp
   (use-package simple-httpd
-    :straight t)
+    :ensure t)
 #+end_src
 
 ** Citations
@@ -177,7 +146,7 @@ Add functionality for including citations
 *** ~citar~
 #+begin_src emacs-lisp
   (use-package citar
-    :straight t
+    :ensure t
     :custom
     (citar-bibliography (list lv/bibliography-path)))
 #+end_src
@@ -185,7 +154,7 @@ Add functionality for including citations
 *** ~org-ref~
 #+begin_src emacs-lisp
   (use-package org-ref
-    :straight t
+    :ensure t
     :after org
     :config
     (setq
@@ -355,9 +324,7 @@ When pressing =>= or =<= on headers, have it change the bulletpoint level of the
 Otherwise, performa a normal text indentation.
 
 #+begin_src emacs-lisp
-  (use-package org
-    :straight t
-    :config
+  (with-eval-after-load 'org
     (with-eval-after-load 'evil
       (defun lv/org-header-p ()
         "Check if the current line is an Org header."

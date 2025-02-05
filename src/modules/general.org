@@ -10,7 +10,7 @@ Leader Key is set to spacebar.
 #+begin_src emacs-lisp
   ;; Setup keybindings with a leader key
   (use-package general
-    :straight t
+    :ensure (:wait t)
     :config
     (general-evil-setup t)
 

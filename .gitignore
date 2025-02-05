@@ -52,6 +52,9 @@ projectile-bookmarks.eld
 # straight.el
 straight/*
 
+# elpaca
+elpaca/
+
 # org config
 custom.el
 src/**/*.el

@@ -10,7 +10,7 @@ Despite =counsel-rg= using the ripgrep package in your system, =projectile-ripgr
 
 #+begin_src emacs-lisp
   (use-package ripgrep
-    :straight t)
+    :ensure t)
 #+end_src
 
 * Installation
@@ -25,7 +25,7 @@ By default, it takes a very long time for the projects to show up in ~projectile
 
 #+begin_src emacs-lisp
   (use-package projectile
-    :straight t
+    :ensure t
     :diminish projectile-mode
     :init
     (setq projectile-switch-project-action #'projectile-dired)

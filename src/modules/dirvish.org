@@ -36,7 +36,7 @@ Video preview
 * Installation
 #+begin_src emacs-lisp
   (use-package dirvish
-    :straight t
+    :ensure t
     :config
     (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
     (setq dirvish-attributes
