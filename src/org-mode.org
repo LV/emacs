@@ -3,10 +3,7 @@
 #+PROPERTY: header-args :tangle yes
 
 * Installation
-#+begin_src emacs-lisp
-  (use-package org
-    :ensure (:type built-in))
-#+end_src
+Installation code is inside of =init.el=, as =org= is the first dependency needed in order to enable this literate configuration file.
 
 * General Settings
 ** Main Directory
@@ -327,9 +324,7 @@ When pressing =>= or =<= on headers, have it change the bulletpoint level of the
 Otherwise, performa a normal text indentation.
 
 #+begin_src emacs-lisp
-  (use-package org
-    :ensure t
-    :config
+  (with-eval-after-load 'org
     (with-eval-after-load 'evil
       (defun lv/org-header-p ()
         "Check if the current line is an Org header."

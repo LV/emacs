@@ -54,5 +54,8 @@
   (elpaca-use-package-mode))
 
 ;; Load the configuration from config.org
-(require 'org)
+(use-package org
+  ; :ensure (:type built-in))
+  :ensure (:wait t)) ;; TODO: See if this ~wait~ can be replaced
+
 (org-babel-load-file (expand-file-name "src/main.org" user-emacs-directory))
