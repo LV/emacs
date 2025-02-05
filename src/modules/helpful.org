@@ -7,7 +7,7 @@ Alternative help screen in Emacs that gives better information on possible value
 
 #+begin_src emacs-lisp
   (use-package helpful
-    :straight t
+    :ensure t
     :custom
     (counsel-describe-function-function #'helpful-callable)
     (counsel-describe-variable-function #'helpful-variable)

@@ -7,7 +7,7 @@ Displays buffer metadata such as current vim mode, git branch name, text encodin
 * Installation
 #+begin_src emacs-lisp
   (use-package doom-modeline
-    :straight t
+    :ensure t
     :init (doom-modeline-mode 1)
     :custom (doom-modeline-height 15))
 #+end_src

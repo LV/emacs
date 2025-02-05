@@ -7,7 +7,7 @@ Enable icons through specialized fonts.
 * Installation
 #+begin_src emacs-lisp
   (use-package all-the-icons
-    :straight t)
+    :ensure t)
 #+end_src
 
 * Post-requisites
