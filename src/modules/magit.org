@@ -13,6 +13,7 @@ A porcerlain for Git that enables keybindings for performing Git commands (e.g. 
 * Installation
 #+begin_src emacs-lisp
   (use-package magit
+    :after (transient)
     :commands (magit-status magit-get-current-branch) ; lazy load
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))

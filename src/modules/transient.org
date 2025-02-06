@@ -4,5 +4,7 @@
 
 * Installation
 #+begin_src emacs-lisp
-  (use-package transient)
+  (use-package transient
+    :ensure (:wait t)
+    :after elpaca)
 #+end_src
