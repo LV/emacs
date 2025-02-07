@@ -95,6 +95,13 @@ This configuration is modularized for maintainability.
   (lv/org-babel-load-file "src/org-mode.org")
 #+end_src
 
+** Evil-mode
+Use Vim keybindings.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/evil-mode.org")
+#+end_src
+
 ** Modify/Enhance Emacs Behaviors and Core Functionality
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/core.org")
@@ -110,13 +117,6 @@ Modifies default settings and extends editor functionality.
 ** Modify/Enhance UI
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/ui.org")
-#+end_src
-
-** Evil-mode
-Use Vim keybindings.
-
-#+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/evil-mode.org")
 #+end_src
 
 ** Git
