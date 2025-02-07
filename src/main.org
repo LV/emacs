@@ -80,6 +80,11 @@ This configuration is modularized for maintainability.
       (concat user-emacs-directory file-path))))
 #+end_src
 
+** Package Management
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/package.org")
+#+end_src
+
 ** Define Keybindings
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/keybinding.org")
