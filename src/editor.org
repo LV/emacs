@@ -42,3 +42,16 @@ Add snippets.
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/modules/yasnippet.org")
 #+end_src
+
+* Avy
+Jump to a specific text character in a buffer.
+#+begin_src emacs-lisp
+  (use-package avy
+    :ensure t)
+#+end_src
+
+And bind it to the =.= key when in Evil normal mode.
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil
+    (define-key evil-normal-state-map (kbd ".") 'avy-goto-char))
+#+end_src
