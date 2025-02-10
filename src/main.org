@@ -16,20 +16,10 @@ You *must* do the following to get the configuration to fully work.
 /NOTE/: If you're building this through my [[https://github.com/lv/nixos][NixOS Flake]], it'll take care of everything you need 🙂.
 
 ** External Dependencies
-*** Setup Python Virtualenv
-Python dependencies exist in this configuration.
-
-#+begin_src sh
-  mkdir -p ~/.venvs
-  python3 -m venv ~/.venvs/emacs
-  source ~/.venvs/emacs/bin/activate
-  pip install epc orjson sexpdata paramiko rapidfuzz watchdog
-#+end_src
-
 *** System-wide dependencies
 **** MacOS
 #+begin_src sh
-  brew install fd ffmpegthumbnailer g-ls git python-packaging python-setuptools ripgrep six sqlite && brew install --cask mactex-no-gui mediainfo
+  brew install fd ffmpegthumbnailer g-ls git ripgrep sqlite && brew install --cask mactex-no-gui mediainfo
 #+end_src
 
 **** Debian
@@ -56,7 +46,6 @@ Don't use Windows (and if you do, use WSL).
 This might only happen on the first attempt. Close Emacs and launch it again.
 
 *** ~package-refresh-contents~
-
 If something breaks when installing new packages, chances are that you'll need to run:
 
 #+begin_src emacs-lisp :tangle no
