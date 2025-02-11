@@ -88,12 +88,19 @@ I want a keybinding dedicated exclusively to opening specific files/directories
 #+end_src
 
 #+begin_src emacs-lisp
+  (defun lv/open-current-dir ()
+    (interactive)
+    (find-file "."))
+#+end_src
+
+#+begin_src emacs-lisp
   (lv/leader-keys
     "f"  '(:ignore f           :which-key "file")
     "ff" '(counsel-find-file   :which-key "find")
-    "fc" '(lv/open-config-file :which-key "open config")
+    "fc" '(lv/open-config-file :which-key "open emacs config")
+    "fe" '(lv/open-current-dir :which-key "open current dir")
     "fg" '(counsel-rg          :which-key "ripgrep")
-    "fo" '(lv/open-org-dir     :which-key "open org"))
+    "fv" '(lv/open-org-dir     :which-key "open vault"))
 
   ; TODO: Add functionality where going through the different options gives you a preview of the code in the other window
 #+end_src
