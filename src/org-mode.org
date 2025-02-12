@@ -480,7 +480,7 @@ I also want dedicated keybindings.
     "oc"  '(:ignore oc                     :which-key "calendar")
     "oce" '(lv/capture-calendar-note       :which-key "entry")
     "occ" '(cfw:open-org-calendar          :which-key "open calendar")
-    "od"  '(org-roam-dailies-goto-today    :which-key "view daily entries")
+    "od"  '(org-roam-dailies-goto-today    :which-key "view daily entries") ; TODO: open in Vim normal mode instead of insert mode
     "oe"  '(org-edit-special               :which-key "edit special")
     "oi"  '(:ignore oi                     :which-key "insert")
     "oic" '(org-cite-insert                :which-key "citation")
