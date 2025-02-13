@@ -8,9 +8,10 @@
     :ensure t
     :init
     ; (setq undo-tree-auto-save-history nil) ; Disable persistent history
-    (global-undo-tree-mode 1))
-
-  ; TODO: Make buffer width for calling undo-tree significantly thinner
+    (global-undo-tree-mode 1)
+    :custom
+    (undo-tree-visualizer-diff t)
+    (undo-tree-visualizer-timestamps t))
 #+end_src
 
 * Keybindings
@@ -18,6 +19,3 @@
   (lv/leader-keys
     "u" '(undo-tree-visualize :which-key "undo tree"))
 #+end_src
-
-* TODO
-- [ ] Make buffer width significantly thinner upon being invoked.
