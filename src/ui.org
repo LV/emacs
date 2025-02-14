@@ -60,7 +60,7 @@ Load bluloco theme from ~doom-themes~.
    ((eq system-type 'gnu/linux)
     (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 120))
    ((eq system-type 'darwin) ; MacOS
-    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 200)))
+    (lv/set-font '("PragmataPro Mono Liga" "Hack" "DejaVu Sans Mono") 160)))
 #+end_src
 
 ** Icons
