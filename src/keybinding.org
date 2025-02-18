@@ -134,6 +134,7 @@ The following is a helper function for toggling full screen on and off
 
 As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
 
+*** Fullscreen Helpers
 #+begin_src emacs-lisp
   (defun lv/fullscreen ()
     (interactive)
@@ -144,13 +145,32 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     (set-frame-parameter nil 'width 82)
     (set-frame-parameter nil 'fullscreen 'fullheight))
 
-  (defun toggle-fullscreen ()
+  (defun lv/toggle-fullscreen ()
     (interactive)
     (if (eq (frame-parameter nil 'fullscreen) 'fullboth)  ;tests if already fullscreened
         (lv/non-fullscreen)
       (lv/fullscreen)))
 #+end_src
 
+*** Window Resizing Helpers
+#+begin_src emacs-lisp
+  (defun lv/resize-window ()
+    "Activate a transient keymap for resizing windows using 'hjkl'"
+    (interactive)
+    (message "Window Resize Mode: h/j/k/l to resize, ESC to exit.")
+    (set-transient-map
+     (let ((map (make-sparse-keymap)))
+       (define-key map (kbd "h") (lambda () (interactive) (enlarge-window-horizontally 1)))
+       (define-key map (kbd "j") (lambda () (interactive) (shrink-window 1)))
+       (define-key map (kbd "k") (lambda () (interactive) (enlarge-window 1)))
+       (define-key map (kbd "l") (lambda () (interactive) (shrink-window-horizontally 1)))
+       ;; TODO: Use =ESC= to exit out of transient keymap
+       map)
+     t))
+#+end_src
+
+
+*** Window Keybinding Declarations
 #+begin_src emacs-lisp
   (lv/leader-keys
     "w"   '(:ignore w              :which-key "window")
@@ -159,12 +179,13 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     "wbl" '(list-buffers           :which-key "list")
     "wbr" '(rename-buffer          :which-key "rename")
     "wbs" '(counsel-switch-buffer  :which-key "switch")
-    "wf"  '(toggle-fullscreen      :which-key "toggle fullscreen")
+    "wf"  '(lv/toggle-fullscreen   :which-key "toggle fullscreen")
     "wh"  '(evil-window-left       :which-key "move left")
     "wj"  '(evil-window-down       :which-key "move down")
     "wk"  '(evil-window-up         :which-key "move up")
     "wl"  '(evil-window-right      :which-key "move right")
     "wm"  '(maximize-window        :which-key "maximize window")
+    "wR"  '(lv/resize-window       :which-key "resize window")
     "wr"  '(tab-bar-rename-tab     :which-key "rename tab")
     "ws"  '(evil-window-split      :which-key "split horizontally")
     "wt"  '(tab-bar-new-tab        :which-key "new tab")
