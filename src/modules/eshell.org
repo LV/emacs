@@ -4,6 +4,8 @@
 
 Command interpreter that is heavily integrated into the Emacs ecosystem.
 
+/NOTE/: To have multiple instances, rename the ~*eshell*~ buffer to something else first.
+
 * Settings
 ** Launch on Startup
 #+begin_src emacs-lisp

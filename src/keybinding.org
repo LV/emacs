@@ -157,6 +157,7 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     "wb"  '(:ignore wb             :which-key "buffer")
     "wbk" '(kill-buffer-and-window :which-key "kill")
     "wbl" '(list-buffers           :which-key "list")
+    "wbr" '(rename-buffer          :which-key "rename")
     "wbs" '(counsel-switch-buffer  :which-key "switch")
     "wf"  '(toggle-fullscreen      :which-key "toggle fullscreen")
     "wh"  '(evil-window-left       :which-key "move left")
