@@ -164,7 +164,10 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     "wk"  '(evil-window-up         :which-key "move up")
     "wl"  '(evil-window-right      :which-key "move right")
     "wm"  '(maximize-window        :which-key "maximize window")
+    "wr"  '(tab-bar-rename-tab     :which-key "rename tab")
     "ws"  '(evil-window-split      :which-key "split horizontally")
     "wt"  '(tab-bar-new-tab        :which-key "new tab")
-    "wv"  '(evil-window-vsplit     :which-key "split vertically"))
+    "wv"  '(evil-window-vsplit     :which-key "split vertically")
+    "wx"  '(tab-bar-close-tab      :which-key "close tab")
+    )
 #+end_src
