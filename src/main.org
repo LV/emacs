@@ -91,7 +91,7 @@ MacOS requires additional an additional package to launch Emacs with the correct
 
 ** Org-mode
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/org-mode.org")
+  (lv/org-babel-load-file "src/org-mode/org-mode.org")
 #+end_src
 
 ** Evil-mode
