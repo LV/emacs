@@ -69,11 +69,6 @@ This configuration is modularized for maintainability.
       (concat user-emacs-directory file-path))))
 #+end_src
 
-** Package Management
-#+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/package.org")
-#+end_src
-
 ** Launch Emacs with ~PATH~ Environment Variables
 MacOS requires additional an additional package to launch Emacs with the correct environment variables
 
