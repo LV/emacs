@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Title Author Org-mode Properties
+# key: >ta
+# --
+#+TITLE: $0
+#+AUTHOR: Luis Victoria
