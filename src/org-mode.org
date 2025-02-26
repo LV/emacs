@@ -118,7 +118,7 @@ Allow notes to take on a graph structure, linked together using backlings.
 #+end_src
 
 ** Webpage
-Compiles =.org= files into HTML
+Hosts your =.html= files as a website on your local machine.
 
 #+begin_src emacs-lisp
   (use-package simple-httpd
