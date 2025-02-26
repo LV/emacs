@@ -496,6 +496,7 @@ I also want dedicated keybindings.
     "oru" '(org-roam-ui-mode               :which-key "UI")
     "ot"  '(:ignore ot                     :which-key "toggle")
     "oti" '(org-toggle-inline-images       :which-key "image")
+    "otl" '(org-latex-preview              :which-key "latex")
     "otr" '(org-roam-buffer-toggle         :which-key "roam buffer")
     "ox"  '(org-ctrl-c-ctrl-c              :which-key "execute"))
 #+end_src
