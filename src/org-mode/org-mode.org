@@ -208,34 +208,9 @@ Replace the ~-~ symbol with ~•~.
                              (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 #+end_src
 
-** Automatically Render $LaTeX$ Fragments
-We first need to check if $LaTeX$ packages are installed. We want to be robust and make this optional as these packages can get quite large.
-
+** Load $LaTeX$
 #+begin_src emacs-lisp
-  (defun lv/latex-packages-installed-p ()
-    "Check if necessary LaTeX packages are installed."
-    (executable-find "latex"))
-#+end_src
-
-Run the auto-rendering if the package is found
-
-#+begin_src emacs-lisp
-  (when (and (lv/latex-packages-installed-p)
-             (display-graphic-p))
-    (defun lv/org-latex-preview-auto ()
-      "Automatically refresh LaTeX fragments in the current buffer."
-      (when (derived-mode-p 'org-mode)
-        (org-latex-preview '(16))))
-
-    ;; Add hooks to automatically render LaTeX
-    (add-hook 'org-mode-hook 'lv/org-latex-preview-auto)
-    (add-hook 'after-save-hook 'lv/org-latex-preview-auto)
-    (add-hook 'after-change-functions
-              (lambda (_beg _end _len)
-                (lv/org-latex-preview-auto)))
-
-    ;; Scale LaTeX font
-    (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5)))
+  (lv/org-babel-load-file "src/org-mode/latex.org")
 #+end_src
 
 ** Render Entire Document Before Editing
