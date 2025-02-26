@@ -18,12 +18,12 @@ You *must* do the following to get the configuration to fully work.
 ** External Dependencies
 *** System-wide dependencies
 **** MacOS
-#+begin_src sh
+#+begin_src sh :tangle no
   brew install fd ffmpegthumbnailer g-ls git ripgrep sqlite && brew install --cask mactex-no-gui mediainfo
 #+end_src
 
 **** Debian
-#+begin_src bash :tangle no
+#+begin_src sh :tangle no
   sudo apt install dvipng git ripgrep sqlite3 libsqlite3-dev texlive-base texlive-fonts-recommended texlive-latex-extra texlive-latex-recommended
 #+end_src
 
