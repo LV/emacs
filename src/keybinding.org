@@ -158,15 +158,25 @@ As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
     "Activate a transient keymap for resizing windows using 'hjkl'"
     (interactive)
     (message "Window Resize Mode: h/j/k/l to resize, ESC to exit.")
-    (set-transient-map
-     (let ((map (make-sparse-keymap)))
-       (define-key map (kbd "h") (lambda () (interactive) (enlarge-window-horizontally 1)))
-       (define-key map (kbd "j") (lambda () (interactive) (shrink-window 1)))
-       (define-key map (kbd "k") (lambda () (interactive) (enlarge-window 1)))
-       (define-key map (kbd "l") (lambda () (interactive) (shrink-window-horizontally 1)))
-       ;; TODO: Use =ESC= to exit out of transient keymap
-       map)
-     t))
+    (let ((map (make-sparse-keymap)))
+      (define-key map (kbd "h") (lambda () (interactive) (enlarge-window-horizontally 1)))
+      (define-key map (kbd "j") (lambda () (interactive) (shrink-window 1)))
+      (define-key map (kbd "k") (lambda () (interactive) (enlarge-window 1)))
+      (define-key map (kbd "l") (lambda () (interactive) (shrink-window-horizontally 1)))
+
+      ;; Bind ESC to ~keyboard-quit~
+      (define-key map (kbd "<escape>") 'keyboard-quit)
+
+      ;; Activate the transient map with a keep-predicate:
+      ;; The map remains active unless the user pressed ~keyboard-quit~.
+      (set-transient-map
+       map
+       (lambda ()
+         ;; If the command just ran was ~keyboard-quit~,
+         ;;   remove the transient map.
+         (not (eq this-command 'keyboard-quit))))))
+
+  ;; FIXME: Direction of window resizing not relative to the window in which the cursor is in
 #+end_src
 
 
