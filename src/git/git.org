@@ -1,0 +1,40 @@
+#+TITLE: Git Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Magit
+A porcerlain for Git that enables keybindings for performing Git commands (e.g. stage, commit, push, etc.).
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/git/magit.org")
+#+end_src
+
+* Forge
+Forge is an extension of ~magit~ that adds support for interacting with Git forges such as GitHub, directly from Emacs.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/git/forge.org")
+#+end_src
+
+* Git Lines
+Show diff next to line number; following  [[https://ianyepan.github.io/posts/emacs-git-gutter/][this blog post]].
+
+** Git Gutter
+#+begin_src emacs-lisp
+  (use-package git-gutter
+    :ensure t
+    :hook ((org-mode  . git-gutter-mode)
+           (prog-mode . git-gutter-mode))
+    :config
+    (setq git-gutter:update-interval 0.02))
+#+end_src
+
+** Git Gutter Fringe
+#+begin_src emacs-lisp
+  (use-package git-gutter-fringe
+    :ensure t
+    :config
+    (define-fringe-bitmap 'git-gutter-fr:added [244] nil nil '(center repeated))
+    (define-fringe-bitmap 'git-gutter-fr:modified [244] nil nil '(center repeated))
+    (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+#+end_src

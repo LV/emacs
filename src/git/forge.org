@@ -1,0 +1,11 @@
+#+TITLE: Forge Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+~magit~ extension that brings support for interacting with Git forges (e.g. GitHub) directly from Emacs.
+
+* Installation
+#+begin_src emacs-lisp
+  (use-package forge
+    :ensure t)
+#+end_src

@@ -37,3 +37,9 @@ Modifies default settings and extends editor functionality.
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/ui/ui.org")
 #+end_src
+
+
+** Git
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/git/git.org")
+#+end_src
