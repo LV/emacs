@@ -1,0 +1,8 @@
+#+TITLE: Emacs Editor Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Eshell
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/editor/eshell.org")
+#+end_src

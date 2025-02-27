@@ -4,7 +4,7 @@
 
 /Literate Emacs Config Entrypoint/
 
-Note that ~elpaca~, ~general~, and ~org~ have already been loaded by this point.
+Note that ~elpaca~, ~evil~, ~general~, and ~org~ have already been loaded by this point.
 
 
 ** Keybindings
@@ -16,4 +16,18 @@ Note that ~elpaca~, ~general~, and ~org~ have already been loaded by this point.
 ** Org-mode
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/org-mode.org")
+#+end_src
+
+
+** Modify/Enhance Emacs Behaviors and Core Functionality
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/core.org")
+#+end_src
+
+
+** Modify/Enhance Editor
+Modifies default settings and extends editor functionality.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/editor/editor.org")
 #+end_src

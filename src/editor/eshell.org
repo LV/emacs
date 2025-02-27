@@ -1,0 +1,67 @@
+#+TITLE: Eshell Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+Command interpreter that is heavily integrated into the Emacs ecosystem.
+
+/NOTE/: To have multiple instances, rename the ~*eshell*~ buffer to something else first.
+
+* Settings
+** Launch on Startup
+#+begin_src emacs-lisp
+  (add-hook 'emacs-startup-hook 'eshell)
+#+end_src
+
+** Remove Line Numbers
+#+begin_src emacs-lisp
+  (dolist (mode '(eshell-mode-hook))
+    (add-hook mode (lambda ()
+                     (display-line-numbers-mode 0))))
+#+end_src
+
+** Start in Evil Normal Mode
+Without the delay, this will not work.
+
+#+begin_src emacs-lisp
+  (defun lv/switch-to-normal-after-eshell-delay ()
+    "Switch to normal mode after eshell starts with a small delay."
+    (run-at-time "0.1 sec" nil 'evil-normal-state))
+
+  ;; Add this hook to switch to normal mode after eshell starts
+  (add-hook 'eshell-mode-hook 'lv/switch-to-normal-after-eshell-delay)
+#+end_src
+
+* Aliases & Functions
+** ~find-file~
+#+begin_src emacs-lisp
+  (defun eshell/e (&rest args)
+    "Open a file/directory in an Emacs buffer from eshell."
+    (apply #'find-file args))
+#+end_src
+
+** ~gg~
+#+begin_src emacs-lisp
+  (defun eshell/gg ()
+      "Invoke magit from eshell."
+      (magit))
+#+end_src
+
+** ~mkcdir~
+#+begin_src emacs-lisp
+  (defun eshell/mkcdir (dir)
+    "Create a directory and ~cd~ into it from eshell."
+    (mkdir dir t)
+    (cd dir))
+#+end_src
+
+
+* Keybindings
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "t" '(eshell :which-key "terminal")
+    )
+#+end_src
+
+* TODO
+- [ ] Fix the direction of eshell display
+  - When launching, commands start at the top, but if you run ~clear~ then commands show at the bottom
