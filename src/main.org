@@ -1,0 +1,7 @@
+#+TITLE: LV's Emacs Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+#+begin_src emacs-lisp
+  (message "Hello, World!")
+#+end_src

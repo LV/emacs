@@ -45,3 +45,18 @@
     (load "./elpaca-autoloads")))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
+
+;; Elpaca ~use-package~ integration
+(elpaca elpaca-use-package
+  (elpaca-use-package-mode))
+
+(use-package org
+  :ensure (:wait t)
+  :config
+  ;; Define org-babel loading function
+  (defun lv/org-babel-load-file (file-path)
+	"Load an org-babel file from the root emacs config directory."
+	(org-babel-load-file
+	  (expand-file-name
+		(concat user-emacs-directory file-path))))
+  (lv/org-babel-load-file "src/main.org"))
