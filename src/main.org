@@ -43,3 +43,11 @@ Modifies default settings and extends editor functionality.
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/git/git.org")
 #+end_src
+
+
+** Programming
+LSP and language specific settings.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/programming/programming.org")
+#+end_src

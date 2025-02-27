@@ -1,0 +1,12 @@
+#+TITLE: Paredit Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+Easier editing with parenthesis.
+
+* Installation
+#+begin_src emacs-lisp
+  (use-package paredit
+    :ensure t
+    :hook (emacs-lisp-mode lisp-mode))
+#+end_src
