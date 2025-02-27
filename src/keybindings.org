@@ -1,0 +1,206 @@
+#+TITLE: Keybinding Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Modules
+** Which-key
+Pop-up showing available keybindings as you type.
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t
+    :init (which-key-mode)
+    :diminish which-key-mode
+    :config
+    (setq which-key-idle-delay 0.3)) ; seconds
+#+end_src
+
+** Leader Key
+Invoke keybindings by pressing a leader key.
+
+* Keybindings
+/NOTE/: This is not the complete set of keybindings, only the general ones. The module specific keybindings are defined in the module configurations themselves.
+
+** =M-x=
+The Meta key (=M-x=) is used to evaluate commands.
+
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    ":" '(counsel-M-x :which-key "M-x"))
+#+end_src
+
+** =DEL=
+Return to previous buffer.
+
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "DEL" '(evil-switch-to-windows-last-buffer :which-key "go to prev context"))
+#+end_src
+
+** Code
+When I open ~flymake-show-buffer-diagnostics~, I want the cursor to move to the new buffer. Otherwise, I need to move the cursor to this new buffer and then press ~q~ to close it.
+
+#+begin_src emacs-lisp
+  (defun lv/flymake-show-buffer-diagnostics-and-focus ()
+    (interactive)
+    (flymake-show-buffer-diagnostics)
+    (other-window 1))
+#+end_src
+
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "c"   '(:ignore c                                    :which-key "code")
+    "cd"  '(lsp-find-declarations                        :which-key "declaration")
+    "cD"  '(lsp-find-definition                          :which-key "definition")
+    "cf"  '(lsp-format-buffer                            :which-key "format")
+    "cg"  '(lv/flymake-show-buffer-diagnostics-and-focus :which-key "diagnostics")
+    "ci"  '(lsp-find-implementation                      :which-key "implementation")
+    "cr"  '(lsp-find-references                          :which-key "references")
+    "ct"  '(:ignore ct                                   :which-key "treemacs")
+    "ctr" '(lsp-treemacs-references                      :which-key "references")
+    "cts" '(lsp-treemacs-symbols                         :which-key "symbols")
+    "ctt" '(treemacs                                     :which-key "tree")
+    "cT"  '(lsp-find-type-definition                     :which-key "type definition"))
+
+  ; TODO: Make buffers smaller for references, definitions, etc. Don't let it take 50% of the screen.
+#+end_src
+
+** Evaluate
+#+begin_src emacs-lisp
+  (defun lv/eval-config ()
+    (interactive)
+    (load user-init-file))
+#+end_src
+
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "e"  '(:ignore e       :which-key "evaulate")
+    "eb" '(eval-buffer     :which-key "buffer")
+    "ec" '(lv/eval-config  :which-key "config")
+    "ee" '(eval-expression :which-key "expression"))
+#+end_src
+
+** File
+I want a keybinding dedicated exclusively to opening specific files/directories
+
+#+begin_src emacs-lisp
+  (defun lv/open-config-file ()
+    (interactive)
+    (find-file (concat user-emacs-directory "src/main.org")))
+#+end_src
+
+#+begin_src emacs-lisp
+  (defun lv/open-org-dir ()
+    (interactive)
+    (find-file lv/org-directory))
+#+end_src
+
+#+begin_src emacs-lisp
+  (defun lv/open-current-dir ()
+    (interactive)
+    (find-file "."))
+#+end_src
+
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "f"  '(:ignore f           :which-key "file")
+    "ff" '(counsel-find-file   :which-key "find")
+    "fc" '(lv/open-config-file :which-key "open emacs config")
+    "fe" '(lv/open-current-dir :which-key "open current dir")
+    "fg" '(counsel-rg          :which-key "ripgrep")
+    "fv" '(lv/open-org-dir     :which-key "open vault"))
+
+  ; TODO: Add functionality where going through the different options gives you a preview of the code in the other window
+#+end_src
+
+** Git
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "g"  '(:ignore g    :which-key "git")
+    "gg" '(magit-status :which-key "status"))
+#+end_src
+
+** Help
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "h"  '(:ignore h                 :which-key "help")
+    "hf" '(counsel-describe-function :which-key "function")
+    "hk" '(describe-key              :which-key "key")
+    "hv" '(counsel-describe-variable :which-key "variable"))
+#+end_src
+
+
+** Window
+The following is a helper function for toggling full screen on and off
+
+As per [[https://emacs.stackexchange.com/a/9725][Stack Exchange]]:
+
+*** Fullscreen Helpers
+#+begin_src emacs-lisp
+  (defun lv/fullscreen ()
+    (interactive)
+    (set-frame-parameter nil 'fullscreen 'fullboth))
+
+  (defun lv/non-fullscreen ()
+    (interactive)
+    (set-frame-parameter nil 'width 82)
+    (set-frame-parameter nil 'fullscreen 'fullheight))
+
+  (defun lv/toggle-fullscreen ()
+    (interactive)
+    (if (eq (frame-parameter nil 'fullscreen) 'fullboth)  ;tests if already fullscreened
+        (lv/non-fullscreen)
+      (lv/fullscreen)))
+#+end_src
+
+*** Window Resizing Helpers
+#+begin_src emacs-lisp
+  (defun lv/resize-window ()
+    "Activate a transient keymap for resizing windows using 'hjkl'"
+    (interactive)
+    (message "Window Resize Mode: h/j/k/l to resize, ESC to exit.")
+    (let ((map (make-sparse-keymap)))
+      (define-key map (kbd "h") (lambda () (interactive) (enlarge-window-horizontally 1)))
+      (define-key map (kbd "j") (lambda () (interactive) (shrink-window 1)))
+      (define-key map (kbd "k") (lambda () (interactive) (enlarge-window 1)))
+      (define-key map (kbd "l") (lambda () (interactive) (shrink-window-horizontally 1)))
+
+      ;; Bind ESC to ~keyboard-quit~
+      (define-key map (kbd "<escape>") 'keyboard-quit)
+
+      ;; Activate the transient map with a keep-predicate:
+      ;; The map remains active unless the user pressed ~keyboard-quit~.
+      (set-transient-map
+       map
+       (lambda ()
+         ;; If the command just ran was ~keyboard-quit~,
+         ;;   remove the transient map.
+         (not (eq this-command 'keyboard-quit))))))
+
+  ;; FIXME: Direction of window resizing not relative to the window in which the cursor is in
+#+end_src
+
+
+*** Window Keybinding Declarations
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "w"   '(:ignore w              :which-key "window")
+    "wb"  '(:ignore wb             :which-key "buffer")
+    "wbk" '(kill-buffer-and-window :which-key "kill")
+    "wbl" '(list-buffers           :which-key "list")
+    "wbr" '(rename-buffer          :which-key "rename")
+    "wbs" '(counsel-switch-buffer  :which-key "switch")
+    "wf"  '(lv/toggle-fullscreen   :which-key "toggle fullscreen")
+    "wh"  '(evil-window-left       :which-key "move left")
+    "wj"  '(evil-window-down       :which-key "move down")
+    "wk"  '(evil-window-up         :which-key "move up")
+    "wl"  '(evil-window-right      :which-key "move right")
+    "wm"  '(maximize-window        :which-key "maximize window")
+    "wR"  '(lv/resize-window       :which-key "resize window")
+    "wr"  '(tab-bar-rename-tab     :which-key "rename tab")
+    "ws"  '(evil-window-split      :which-key "split horizontally")
+    "wt"  '(tab-bar-new-tab        :which-key "new tab")
+    "wv"  '(evil-window-vsplit     :which-key "split vertically")
+    "wx"  '(tab-bar-close-tab      :which-key "close tab")
+    )
+#+end_src

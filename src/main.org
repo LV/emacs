@@ -2,6 +2,12 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
+/Literate Emacs Config Entrypoint/
+
+Note that ~elpaca~, ~general~, and ~org~ have already been loaded by this point.
+
+
+* Define Keybindings
 #+begin_src emacs-lisp
-  (message "Hello, World!")
+  (lv/org-babel-load-file "src/keybindings.org")
 #+end_src

@@ -50,6 +50,11 @@
 (elpaca elpaca-use-package
   (elpaca-use-package-mode))
 
+;; Preload essential packages that cannot be lazily loaded
+;; Without this done beforehand, the config would completely break
+(load (expand-file-name "preload.el" user-emacs-directory))
+
+;; Load ~org~
 (use-package org
   :ensure (:wait t)
   :config
@@ -58,5 +63,9 @@
 	"Load an org-babel file from the root emacs config directory."
 	(org-babel-load-file
 	  (expand-file-name
-		(concat user-emacs-directory file-path))))
-  (lv/org-babel-load-file "src/main.org"))
+		(concat user-emacs-directory file-path)))))
+
+;; Load literate config after essential packages have already loaded
+(add-hook 'elpaca-after-init-hook
+		  (lambda ()
+			(lv/org-babel-load-file "src/main.org")))
