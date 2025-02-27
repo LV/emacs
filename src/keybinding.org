@@ -15,6 +15,7 @@ Invoke keybindings by pressing a leader key.
 
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/modules/general.org")
+  (elpaca-wait) ;; Ensure that =general.org= loads before ~lv/leader-keys~ are invoked
 #+end_src
 
 * Keybindings

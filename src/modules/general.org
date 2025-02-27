@@ -11,6 +11,7 @@ Leader Key is set to spacebar.
   ;; Setup keybindings with a leader key
   (use-package general
     :ensure t
+    :demand t
     :config
     (general-evil-setup t)
 
