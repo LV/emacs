@@ -10,10 +10,10 @@ Configurations for LSP and entrypoint for any language specific settings.
 Contains any language specific settings for LSP, linting, indentation, etc.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/languages/cpp.org")
-  (lv/org-babel-load-file "src/languages/lisp.org")
-  (lv/org-babel-load-file "src/languages/make.org")
-  (lv/org-babel-load-file "src/languages/python.org")
+  (lv/org-babel-load-file "src/programming/languages/cpp.org")
+  (lv/org-babel-load-file "src/programming/languages/lisp/lisp.org")
+  (lv/org-babel-load-file "src/programming/languages/make.org")
+  (lv/org-babel-load-file "src/programming/languages/python.org")
 #+end_src
 
 ** TODO Languages to add

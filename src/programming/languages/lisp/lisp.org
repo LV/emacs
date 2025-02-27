@@ -6,12 +6,12 @@
 An IDE for Lisp that includes a REPL.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/slime.org")
+  (lv/org-babel-load-file "src/programming/languages/lisp/slime.org")
 #+end_src
 
 * Paredit
 Eases programming with parenthesis.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/paredit.org")
+  (lv/org-babel-load-file "src/programming/languages/lisp/paredit.org")
 #+end_src

@@ -35,7 +35,7 @@ Tooltips pop up when hovering over an element and display additional help inform
 Load bluloco theme from ~doom-themes~.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/doom-themes.org")
+  (lv/org-babel-load-file "src/ui/doom-themes.org")
 #+end_src
 
 ** Font
@@ -67,18 +67,18 @@ Load bluloco theme from ~doom-themes~.
 Enable icons through specialized fonts.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/all-the-icons.org")
+  (lv/org-babel-load-file "src/ui/all-the-icons.org")
 #+end_src
 
 
 ** Modeline
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/doom-modeline.org")
+  (lv/org-babel-load-file "src/ui/doom-modeline.org")
 #+end_src
 
 ** Rainbow Delimiters
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/rainbow-delimiters.org")
+  (lv/org-babel-load-file "src/ui/rainbow-delimiters.org")
 #+end_src
 
 * Layout and Margins

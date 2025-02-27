@@ -6,7 +6,7 @@ A porcerlain for Git that enables keybindings for performing Git commands (e.g. 
 
 * Pre-requisites
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/sqlite3.org")
+  (lv/org-babel-load-file "src/git/sqlite3.org")
 #+end_src
 
 * Installation

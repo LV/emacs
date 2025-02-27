@@ -7,15 +7,16 @@
 Pop-up showing available keybindings as you type.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/which-key.org")
+  (use-package which-key
+    :ensure (:wait t)
+    :init (which-key-mode)
+    :diminish which-key-mode
+    :config
+    (setq which-key-idle-delay 0.3)) ; seconds
 #+end_src
 
 ** Leader Key
 Invoke keybindings by pressing a leader key.
-
-#+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/general.org")
-#+end_src
 
 * Keybindings
 /NOTE/: This is not the complete set of keybindings, only the general ones. The module specific keybindings are defined in the module configurations themselves.
