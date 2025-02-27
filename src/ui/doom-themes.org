@@ -1,0 +1,10 @@
+#+TITLE: Doom Themes Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Installation and Setup
+#+begin_src emacs-lisp
+  (use-package doom-themes
+    :ensure t
+    :init (load-theme 'doom-bluloco-dark t))
+#+end_src
