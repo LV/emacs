@@ -7,7 +7,13 @@
 Note that ~elpaca~, ~general~, and ~org~ have already been loaded by this point.
 
 
-* Define Keybindings
+** Keybindings
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/keybindings.org")
+#+end_src
+
+
+** Org-mode
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/org-mode.org")
 #+end_src
