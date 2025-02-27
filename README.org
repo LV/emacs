@@ -1,0 +1,53 @@
+#+TITLE: LV's Emacs Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+/Literate Emacs Config Entrypoint/
+
+Note that ~elpaca~, ~evil~, ~general~, and ~org~ have already been loaded by this point.
+
+
+** Keybindings
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/keybindings.org")
+#+end_src
+
+
+** Org-mode
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/org-mode/org-mode.org")
+#+end_src
+
+
+** Modify/Enhance Emacs Behaviors and Core Functionality
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/core.org")
+#+end_src
+
+
+** Modify/Enhance Editor
+Modifies default settings and extends editor functionality.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/editor/editor.org")
+#+end_src
+
+
+** Modify/Enhance UI
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/ui/ui.org")
+#+end_src
+
+
+** Git
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/git/git.org")
+#+end_src
+
+
+** Programming
+LSP and language specific settings.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/programming/programming.org")
+#+end_src
