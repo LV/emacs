@@ -1,0 +1,22 @@
+#+TITLE: Undo Tree Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Installation
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :ensure t
+    :init
+    ; (setq undo-tree-auto-save-history nil) ; Disable persistent history
+    (global-undo-tree-mode 1)
+    :custom
+    (undo-tree-visualizer-diff t)
+    (undo-tree-visualizer-timestamps t))
+#+end_src
+
+* Keybindings
+#+begin_src emacs-lisp
+  (lv/leader-keys
+    "u" '(undo-tree-visualize :which-key "undo tree"))
+#+end_src
+

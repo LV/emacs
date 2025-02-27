@@ -1,0 +1,21 @@
+#+TITLE: HL-Todo Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+Highlight TODOs, FIXMEs, NOTEs, etc.
+
+* Installation
+#+begin_src emacs-lisp
+  (use-package hl-todo
+    :ensure t
+    :hook (prog-mode . hl-todo-mode)
+    :config
+    (setq hl-todo-keyword-faces
+          '(("TODO"   . "#FFFF00")
+            ("FIXME"  . "#FF0000")
+            ("DEBUG"  . "#00FFFF")
+            ("NOTE"   . "#50C878")
+            ("GOTCHA" . "#A020F0")
+            ("HACK"   . "#FFA500")
+            ("STUB"   . "#7393B3"))))
+#+end_src
