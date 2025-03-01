@@ -2,7 +2,7 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-The /Superior Lisp Interaction Mode/ \_for /Emacs/.
+The /Superior Lisp Interaction Mode/ for /Emacs/.
 
 * Installation
 #+begin_src emacs-lisp
