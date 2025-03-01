@@ -133,7 +133,6 @@ LSP and language specific settings.
 
 * TODO Future Features to add
 - Maybe add workspaces (on top of tabs)
-- Split config into multiple files
 - Replicate /oil.nvim/
 - Migrate away from /lsp-mode/ to something like /lsp-bridge/
 
@@ -142,6 +141,3 @@ LSP and language specific settings.
   - This should happen if there's no autocomplete box to fill
   - This behavior does not happen in Makefile
   - This happens in Python, Org-mode
-
-* Load Config Modules
-This configuration is modularized for maintainability.
