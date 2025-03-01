@@ -110,7 +110,7 @@ Use Vim keybindings.
 Modifies default settings and extends editor functionality.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/editor.org")
+  (lv/org-babel-load-file "src/editor/editor.org")
 #+end_src
 
 ** Modify/Enhance UI
