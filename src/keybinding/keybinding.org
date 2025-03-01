@@ -19,7 +19,7 @@ Pop-up showing available keybindings as you type.
 Invoke keybindings by pressing a leader key.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/general.org")
+  (lv/org-babel-load-file "src/keybinding/general.org")
 #+end_src
 
 * Keybindings

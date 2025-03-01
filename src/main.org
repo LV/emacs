@@ -86,7 +86,7 @@ MacOS requires additional an additional package to launch Emacs with the correct
 
 ** Define Keybindings
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/keybinding.org")
+  (lv/org-babel-load-file "src/keybinding/keybinding.org")
 #+end_src
 
 ** Org-mode
