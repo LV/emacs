@@ -6,5 +6,6 @@
 #+begin_src emacs-lisp
   (use-package doom-themes
     :ensure t
-    :init (load-theme 'doom-bluloco-dark t))
+    :config
+    (load-theme 'doom-bluloco-dark t))
 #+end_src
