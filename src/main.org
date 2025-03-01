@@ -10,6 +10,7 @@
   - [[https://github.com/LV/nvim-config][Link to my Neovim configuration]]
     - I may end up going for some weird dynamic where I use Neovim inside of Emacs that emulates a terminal (that uses ~tmux~). That sounds incredibly dumb (and it probably is), but I think that's what I may actually end up going for.
 
+
 * Pre-requisites
 You *must* do the following to get the configuration to fully work.
 
@@ -27,6 +28,7 @@ You *must* do the following to get the configuration to fully work.
   sudo apt install dvipng git ripgrep sqlite3 libsqlite3-dev texlive-base texlive-fonts-recommended texlive-latex-extra texlive-latex-recommended
 #+end_src
 
+
 ** Fonts
 - [[https://fsd.it/shop/fonts/pragmatapro/][PragmataPro Mono Liga]] (Not free)
 - Alternatively, any [[https://www.nerdfonts.com/][Nerd Font]] should work
@@ -37,6 +39,7 @@ Evaluate the following commands in Emacs:
   (all-the-icons-install-fonts)
   (nerd-fonts-install-fonts)
 #+end_src
+
 
 ** Troubleshooting
 *** Windows
@@ -56,6 +59,7 @@ If something breaks when installing new packages, chances are that you'll need t
 - Package =compat= unavailable
 - Package =foo= not found in MELPA
 
+
 * Load External Config Files
 This configuration is modularized for maintainability.
 
@@ -69,10 +73,12 @@ This configuration is modularized for maintainability.
       (concat user-emacs-directory file-path))))
 #+end_src
 
+
 ** Package Management
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/package.org")
 #+end_src
+
 
 ** Launch Emacs with ~PATH~ Environment Variables
 MacOS requires additional an additional package to launch Emacs with the correct environment variables
@@ -84,15 +90,18 @@ MacOS requires additional an additional package to launch Emacs with the correct
     (exec-path-from-shell-initialize))
 #+end_src
 
+
 ** Define Keybindings
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/keybinding/keybinding.org")
 #+end_src
 
+
 ** Org-mode
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/org-mode/org-mode.org")
 #+end_src
+
 
 ** Evil-mode
 Use Vim keybindings.
@@ -101,10 +110,12 @@ Use Vim keybindings.
   (lv/org-babel-load-file "src/evil-mode.org")
 #+end_src
 
+
 ** Modify/Enhance Emacs Behaviors and Core Functionality
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/core/core.org")
 #+end_src
+
 
 ** Modify/Enhance Editor
 Modifies default settings and extends editor functionality.
@@ -113,15 +124,18 @@ Modifies default settings and extends editor functionality.
   (lv/org-babel-load-file "src/editor/editor.org")
 #+end_src
 
+
 ** Modify/Enhance UI
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/ui/ui.org")
 #+end_src
 
+
 ** Git
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/git/git.org")
 #+end_src
+
 
 ** Programming
 LSP and language specific settings.
