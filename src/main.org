@@ -115,7 +115,7 @@ Modifies default settings and extends editor functionality.
 
 ** Modify/Enhance UI
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/ui.org")
+  (lv/org-babel-load-file "src/ui/ui.org")
 #+end_src
 
 ** Git
