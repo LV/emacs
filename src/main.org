@@ -145,7 +145,3 @@ LSP and language specific settings.
 
 * Load Config Modules
 This configuration is modularized for maintainability.
-
-#+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/markdown-mode.org")
-#+end_src
