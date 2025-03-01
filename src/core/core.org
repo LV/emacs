@@ -51,36 +51,12 @@ When performing an invalid action (e.g. backspacing on first character of docume
 
 ** Better Help Messages
 #+begin_src emacs-lisp
-  (use-package helpful
-    :ensure t
-    :custom
-    (counsel-describe-function-function #'helpful-callable)
-    (counsel-describe-variable-function #'helpful-variable)
-    :bind
-    ([remap describe-function] . counsel-describe-function)
-    ([remap describe-command] . helpful-command)
-    ([remap describe-variable] . counsel-describe-variable)
-    ([remap describe-key] . helpful-key))
+  (lv/org-babel-load-file "src/core/helpful.org")
 #+end_src
 
 * Completion Frameworks
 #+begin_src emacs-lisp
-  (use-package ivy
-    :ensure t
-    :diminish
-    :bind ((:map ivy-switch-buffer-map
-             ("C-k" . ivy-previous-line)
-             ("C-l" . ivy-done)
-             ("C-d" . ivy-switch-buffer-kill))
-           (:map ivy-reverse-i-search-map
-             ("C-k" . ivy-previous-line)
-             ("C-d" . ivy-reverse-i-search-kill)))
-    :config
-    (setq ivy-re-builders-alist
-          '((t . ivy--regex-plus)))    ; Enable normal search globally
-          ; '((t . ivy--regex-fuzzy))) ; Enable fuzzy search globally
-                                       ; NOTE: These two options are mutually exclusive
-    (ivy-mode 1))
+  (lv/org-babel-load-file "src/core/ivy.org")
 #+end_src
 
 * ~ESC~ Behaviors

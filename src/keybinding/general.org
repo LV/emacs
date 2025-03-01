@@ -1,0 +1,22 @@
+#+TITLE: General (package) Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+~general~ allows keybindings to be invoked using a leader key.
+
+* Installation and Set Up
+Leader Key is set to spacebar.
+
+#+begin_src emacs-lisp
+  ;; Setup keybindings with a leader key
+  (use-package general
+    :ensure t
+    :config
+    (general-evil-setup t)
+
+    (general-create-definer lv/leader-keys
+      :states '(normal visual)
+      :keymaps 'override
+      :prefix "SPC"
+      :global-prefix "C-SPC"))
+#+end_src

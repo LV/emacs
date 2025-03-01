@@ -4,12 +4,38 @@
 
 /Literate Emacs Config Entrypoint/
 
-Note that ~elpaca~, ~evil~, ~general~, and ~org~ have already been loaded by this point.
+** Load External Config Files
+This configuration is modularized for maintainability.
+
+#+begin_src emacs-lisp
+  (defun lv/org-babel-load-file (file-path)
+    "Load an org-babel file from the root emacs config directory."
+    (org-babel-load-file
+     (expand-file-name
+      (concat user-emacs-directory file-path))))
+#+end_src
+
+
+** Package Management
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/package.org")
+#+end_src
+
+
+** Launch Emacs with ~PATH~ Environment Variables
+MacOS requires additional an additional package to launch Emacs with the correct environment variables
+
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :if (memq window-system '(mac ns x))
+    :config
+    (exec-path-from-shell-initialize))
+#+end_src
 
 
 ** Keybindings
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/keybindings.org")
+  (lv/org-babel-load-file "src/keybinding/keybinding.org")
 #+end_src
 
 
@@ -19,9 +45,17 @@ Note that ~elpaca~, ~evil~, ~general~, and ~org~ have already been loaded by thi
 #+end_src
 
 
+** Evil-mode
+Use Vim keybindings.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/evil-mode.org")
+#+end_src
+
+
 ** Modify/Enhance Emacs Behaviors and Core Functionality
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/core.org")
+  (lv/org-babel-load-file "src/core/core.org")
 #+end_src
 
 
@@ -51,3 +85,15 @@ LSP and language specific settings.
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/programming/programming.org")
 #+end_src
+
+
+* TODO Future Features to add
+- Maybe add workspaces (on top of tabs)
+- Replicate /oil.nvim/
+- Migrate away from /lsp-mode/ to something like /lsp-bridge/
+
+* TODO Non-obvious things to fix
+- Pressing the tab character in terminal emacs does not result in an indent behavior
+  - This should happen if there's no autocomplete box to fill
+  - This behavior does not happen in Makefile
+  - This happens in Python, Org-mode

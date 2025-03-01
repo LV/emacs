@@ -1,0 +1,19 @@
+#+TITLE: Swiper Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+Swiper is used to search within the current buffer
+
+* Installation
+With the default behavior, pressing =n= goes to the previous word whereas =C-n= goes to the next word. In Vim, it's =n= to go next and =Shift n= to go before
+
+#+begin_src emacs-lisp
+  (use-package swiper
+    :ensure t
+    :after ivy
+    :config
+    ;; Rebind Evil keys for navigating matches after Swiper
+    (evil-define-key 'normal 'global
+      (kbd "n") 'isearch-repeat-forward
+      (kbd "N") 'isearch-repeat-backward))
+#+end_src
