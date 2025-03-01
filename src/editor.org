@@ -4,43 +4,43 @@
 
 * Eshell
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/editor/eshell.org")
+  (lv/org-babel-load-file "src/modules/eshell.org")
 #+end_src
 
 * Undo Tree
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/editor/undo-tree.org")
+  (lv/org-babel-load-file "src/modules/undo-tree.org")
 #+end_src
 
 * Clipboard
 ~clipetty~ fixes clipboard issues in terminal Emacs.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/editor/clipetty.org")
+  (lv/org-babel-load-file "src/modules/clipetty.org")
 #+end_src
 
 * File Directory Buffer Management
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/editor/dirvish.org")
+  (lv/org-babel-load-file "src/modules/dirvish.org")
 #+end_src
 
 * Highlight TODOs
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/editor/hl-todo.org")
+  (lv/org-babel-load-file "src/modules/hl-todo.org")
 #+end_src
 
 * Projectile
 Navigate and manage projects.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/editor/projectile.org")
+  (lv/org-babel-load-file "src/modules/projectile.org")
 #+end_src
 
 * Yasnippet
 Add snippets.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/editor/yasnippet.org")
+  (lv/org-babel-load-file "src/modules/yasnippet.org")
 #+end_src
 
 * Avy

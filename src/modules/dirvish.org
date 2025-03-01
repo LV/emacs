@@ -37,7 +37,6 @@ Video preview
 #+begin_src emacs-lisp
   (use-package dirvish
     :ensure t
-    :after all-the-icons
     :config
     (dirvish-override-dired-mode) ; Force the use of dirvish instead of dired
     (setq dirvish-attributes

@@ -6,22 +6,6 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
-;; Preload essential packages that cannot be lazily loaded
-;; Without this done beforehand, the config would completely break
-(load (expand-file-name "preload.el" user-emacs-directory))
+(require 'org)
 
-;; Load ~org~
-(use-package org
-  :ensure (:wait t)
-  :config
-  ;; Define org-babel loading function
-  (defun lv/org-babel-load-file (file-path)
-	"Load an org-babel file from the root emacs config directory."
-	(org-babel-load-file
-	  (expand-file-name
-		(concat user-emacs-directory file-path)))))
-
-;; Load literate config after essential packages have already loaded
-(add-hook 'elpaca-after-init-hook
-		  (lambda ()
-			(lv/org-babel-load-file "src/main.org")))
+(org-babel-load-file (expand-file-name "src/main.org" user-emacs-directory))
