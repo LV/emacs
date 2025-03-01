@@ -103,7 +103,7 @@ Use Vim keybindings.
 
 ** Modify/Enhance Emacs Behaviors and Core Functionality
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/core.org")
+  (lv/org-babel-load-file "src/core/core.org")
 #+end_src
 
 ** Modify/Enhance Editor

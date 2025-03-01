@@ -51,12 +51,12 @@ When performing an invalid action (e.g. backspacing on first character of docume
 
 ** Better Help Messages
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/helpful.org")
+  (lv/org-babel-load-file "src/core/helpful.org")
 #+end_src
 
 * Completion Frameworks
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/modules/ivy.org")
+  (lv/org-babel-load-file "src/core/ivy.org")
 #+end_src
 
 * ~ESC~ Behaviors
