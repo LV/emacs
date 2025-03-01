@@ -127,7 +127,7 @@ Modifies default settings and extends editor functionality.
 LSP and language specific settings.
 
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/programming.org")
+  (lv/org-babel-load-file "src/programming/programming.org")
 #+end_src
 
 
