@@ -120,7 +120,7 @@ Modifies default settings and extends editor functionality.
 
 ** Git
 #+begin_src emacs-lisp
-  (lv/org-babel-load-file "src/git.org")
+  (lv/org-babel-load-file "src/git/git.org")
 #+end_src
 
 ** Programming
