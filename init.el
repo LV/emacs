@@ -1,3 +1,5 @@
+(setq package-check-signature nil)
+
 ;; Show better error messages upon configuration error
 (setq debug-on-error nil)
 
@@ -6,6 +8,27 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
-(require 'org)
+;; Use package
+(require 'package)
 
+(setq package-archives '(("melpa"  . "https://melpa.org/packages/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")
+                         ("gnu"    . "https://elpa.gnu.org/packages/")
+                         ("elpa"   . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+
+(setq use-package-always-ensure t)
+
+(unless package-archive-contents
+  (package-refresh-contents))
+
+
+;; Use literate config
+(require 'org)
 (org-babel-load-file (expand-file-name "src/main.org" user-emacs-directory))
