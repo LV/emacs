@@ -6,20 +6,15 @@ Command interpreter that is heavily integrated into the Emacs ecosystem.
 
 /NOTE/: To have multiple instances, rename the ~*eshell*~ buffer to something else first.
 
-* Settings
-** Launch on Startup
-#+begin_src emacs-lisp
-  (add-hook 'emacs-startup-hook 'eshell)
-#+end_src
-
-** Remove Line Numbers
+** Settings
+*** Remove Line Numbers
 #+begin_src emacs-lisp
   (dolist (mode '(eshell-mode-hook))
     (add-hook mode (lambda ()
                      (display-line-numbers-mode 0))))
 #+end_src
 
-** Start in Evil Normal Mode
+*** Start in Evil Normal Mode
 Without the delay, this will not work.
 
 #+begin_src emacs-lisp
@@ -31,22 +26,23 @@ Without the delay, this will not work.
   (add-hook 'eshell-mode-hook 'lv/switch-to-normal-after-eshell-delay)
 #+end_src
 
-* Aliases & Functions
-** ~find-file~
+
+** Aliases & Functions
+*** ~find-file~
 #+begin_src emacs-lisp
   (defun eshell/e (&rest args)
     "Open a file/directory in an Emacs buffer from eshell."
     (apply #'find-file args))
 #+end_src
 
-** ~gg~
+*** ~gg~
 #+begin_src emacs-lisp
   (defun eshell/gg ()
       "Invoke magit from eshell."
       (magit))
 #+end_src
 
-** ~mkcdir~
+*** ~mkcdir~
 #+begin_src emacs-lisp
   (defun eshell/mkcdir (dir)
     "Create a directory and ~cd~ into it from eshell."

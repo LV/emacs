@@ -2,13 +2,6 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-* Start with Blank Buffer
-Instead of the welcome message.
-
-#+begin_src emacs-lisp
-  (setq inhibit-startup-message t)
-#+end_src
-
 * File Handling
 ** Remove Backup Files
 Stop Emacs from creating =foo.bar~= and =#foo.bar#= files while open in a buffer.

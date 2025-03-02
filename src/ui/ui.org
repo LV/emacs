@@ -85,6 +85,11 @@ Enable icons through specialized fonts.
   (lv/org-babel-load-file "src/ui/rainbow-delimiters.org")
 #+end_src
 
+*** Dashboard
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/ui/dashboard.org")
+#+end_src
+
 
 
 ** Layout and Margins
