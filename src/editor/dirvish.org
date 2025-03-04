@@ -6,34 +6,37 @@ File directory management.
 
 [[https://github.com/alexluigit/dirvish/blob/main/docs/CUSTOMIZING.org][Link to documentation]].
 
-* Pre-requisites
-** ~fd~
-*** MacOS
+** Pre-requisites
+*** ~fd~
+**** MacOS
 #+begin_src sh :tangle no
   brew install fd
 #+end_src
 
-** ~ffmpegthumbnailer~
+
+*** ~ffmpegthumbnailer~
 Video preview
 
-*** MacOS
+**** MacOS
 #+begin_src sh :tangle no
   brew install ffmpegthumbnailer
 #+end_src
 
-** ~gls~
-*** MacOS
+
+*** ~gls~
+**** MacOS
 #+begin_src sh :tangle no
   brew install g-ls
 #+end_src
 
-** ~mediainfo~
-*** MacOS
+
+*** ~mediainfo~
+**** MacOS
 #+begin_src sh :tangle no
   brew install --cask mediainfo
 #+end_src
 
-* Installation
+** Installation
 #+begin_src emacs-lisp
   (use-package dirvish
     :ensure t
@@ -49,7 +52,7 @@ Video preview
 I also don't really see the need for ~dired-toggle-read-only~, whereas I keep performing ~dired-create-empty-file~, thus I change the keybinding for this
 
 #+begin_src emacs-lisp
-(with-eval-after-load 'evil
-  (with-eval-after-load 'dirvish
-    (evil-define-key 'normal dirvish-mode-map (kbd "i") 'dired-create-empty-file)))
+  (with-eval-after-load 'evil
+    (with-eval-after-load 'dirvish
+      (evil-define-key 'normal dirvish-mode-map (kbd "i") 'dired-create-empty-file)))
 #+end_src
