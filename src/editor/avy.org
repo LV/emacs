@@ -1,0 +1,18 @@
+#+TITLE: Avy Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+Jump to a specific text character in a buffer.
+
+** Intallation
+#+begin_src emacs-lisp
+  (use-package avy
+    :ensure t)
+#+end_src
+
+
+** Bind to Evil Normal Mode
+#+begin_src emacs-lisp
+  (with-eval-after-load 'evil
+    (define-key evil-normal-state-map (kbd ".") 'avy-goto-char))
+#+end_src
