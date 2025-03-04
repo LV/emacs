@@ -54,5 +54,8 @@ I also don't really see the need for ~dired-toggle-read-only~, whereas I keep pe
 #+begin_src emacs-lisp
   (with-eval-after-load 'evil
     (with-eval-after-load 'dirvish
-      (evil-define-key 'normal dirvish-mode-map (kbd "i") 'dired-create-empty-file)))
+      (evil-define-key 'normal dirvish-mode-map (kbd "DEL") 'dired-up-directory)
+      (evil-define-key 'normal dirvish-mode-map (kbd "i") 'dired-create-empty-file)
+      (evil-define-key 'normal dirvish-mode-map (kbd "r") 'dired-do-rename)
+      ))
 #+end_src
