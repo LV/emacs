@@ -20,6 +20,6 @@
 
 ** Enable LSP
 #+begin_src emacs-lisp
-  (add-hook 'go-ts-mode #'eglot-ensure)
-  (add-hook 'go-mod-ts-mode #'eglot-ensure)
+  (add-hook 'go-ts-mode-hook #'eglot-ensure)
+  (add-hook 'go-mod-ts-mode-hook #'eglot-ensure)
 #+end_src
