@@ -2,24 +2,31 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-* Auto Mode
+* LSP
+** Auto Mode
 #+begin_src emacs-lisp
   (setq auto-mode-alist
         (append
-         '(("\\.cpp\\'" . c++-mode)
-           ("\\.h\\'"   . c++-mode)
-           ("\\.hpp\\'" . c++-mode)
-           ("\\.cxx\\'" . c++-mode)
-           ("\\.hxx\\'" . c++-mode)
-           ("\\.cc\\'"  . c++-mode)
-           ("\\.hh\\'"  . c++-mode))
+         '(("\\.c\\'"   . c-or-c++-ts-mode)
+           ("\\.cc\\'"  . c-or-c++-ts-mode)
+           ("\\.cpp\\'" . c-or-c++-ts-mode)
+           ("\\.cxx\\'" . c-or-c++-ts-mode)
+           ("\\.h\\'"   . c-or-c++-ts-mode)
+           ("\\.hh\\'"  . c-or-c++-ts-mode)
+           ("\\.hpp\\'" . c-or-c++-ts-mode)
+           ("\\.hxx\\'" . c-or-c++-ts-mode))
          auto-mode-alist))
 #+end_src
 
-
-* Tree-sitter
+** Tree-sitter
 #+begin_src emacs-lisp
   (lv/add-treesit-grammar 'cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+#+end_src
+
+
+** Enable LSP
+#+begin_src emacs-lisp
+  (add-hook 'c-or-c++-ts-mode-hook #'eglot-ensure)
 #+end_src
 
 
