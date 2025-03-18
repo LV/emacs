@@ -1,0 +1,9 @@
+#+TITLE: Go Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Tree-sitter
+#+begin_src emacs-lisp
+  (lv/add-treesit-grammar 'go "https://github.com/tree-sitter/tree-sitter-go")
+  (lv/add-treesit-grammar 'gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+#+end_src
