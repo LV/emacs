@@ -2,9 +2,7 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-* Indentation
- 4 Spaces.
-
+* Auto Mode
 #+begin_src emacs-lisp
   (setq auto-mode-alist
         (append
@@ -16,8 +14,12 @@
            ("\\.cc\\'"  . c++-mode)
            ("\\.hh\\'"  . c++-mode))
          auto-mode-alist))
+#+end_src
 
-  ;; Set indentation settings for C++ mode
+* Indentation
+ 4 Spaces.
+
+#+begin_src emacs-lisp
   (defun lv/c++-setup ()
     "Set up C++ indentation preferences."
     (setq c-basic-offset 4)      ; Set indentation to 4 spaces

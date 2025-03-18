@@ -5,6 +5,13 @@
 Configurations for LSP and entrypoint for any language specific settings.
 
 * LSP
+** Auto Mode
+#+begin_src emacs-lisp
+  (defvar auto-mode-alist nil
+    "Alist mapping for auto mode.")
+#+end_src
+
+
 ** Tree-sitter
 Initialize empty source alist.
 
