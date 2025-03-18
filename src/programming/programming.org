@@ -5,9 +5,12 @@
 Configurations for LSP and entrypoint for any language specific settings.
 
 * LSP
-** Enable Eglot
+** Eglot
+/Eglot/ is the built-in LSP module in Emacs.
+
 #+begin_src emacs-lisp
   (require 'eglot)
+  (lv/org-babel-load-file "src/programming/eglot.org")
 #+end_src
 
 

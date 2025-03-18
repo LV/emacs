@@ -1,0 +1,18 @@
+#+TITLE: Eglot Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* Enable Eglot
+#+begin_src emacs-lisp
+  (require 'eglot)
+#+end_src
+
+
+* Additions
+** Floating Boxes
+#+begin_src emacs-lisp
+  (use-package eldoc-box
+    :after eglot
+    :hook (eglot-managed-mode . eldoc-box-hover-mode))
+#+end_src
+
