@@ -5,6 +5,12 @@
 Configurations for LSP and entrypoint for any language specific settings.
 
 * LSP
+** Enable Eglot
+#+begin_src emacs-lisp
+  (require 'eglot)
+#+end_src
+
+
 ** Auto Mode
 #+begin_src emacs-lisp
   (defvar auto-mode-alist nil
