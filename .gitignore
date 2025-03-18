@@ -72,3 +72,4 @@ org-roam.db
 emojis/
 .DS_Store
 recentf
+*.dylib
