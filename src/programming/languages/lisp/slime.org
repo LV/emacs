@@ -8,6 +8,7 @@ The /Superior Lisp Interaction Mode/ for /Emacs/.
 #+begin_src emacs-lisp
   (use-package slime
     :ensure t
+    :hook (lisp-mode . slime-mode)
     :config
     (setq inferior-lisp-program "sbcl")
     (slime-setup '(slime-fancy)))
