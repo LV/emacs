@@ -8,6 +8,8 @@ Configurations for LSP and entrypoint for any language specific settings.
 ** Tree-sitter
 Initialize empty source alist.
 
+[[https://arnesonium.com/2023/08/configuring-emacs-29-1-for-golang][Additional help]] for setting up tree-sitter grammar.
+
 #+begin_src emacs-lisp
   (defvar treesit-language-source-alist nil
     "Alist mapping programming languages to their tree-sitter source repositories.")
