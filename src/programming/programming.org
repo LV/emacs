@@ -5,12 +5,55 @@
 Configurations for LSP and entrypoint for any language specific settings.
 
 * LSP
+** Tree-sitter
+Initialize empty source alist.
+
+#+begin_src emacs-lisp
+  (defvar treesit-language-source-alist nil
+    "Alist mapping programming languages to their tree-sitter source repositories.")
+#+end_src
+
+*** Add to Alist Helper
+#+begin_src emacs-lisp
+  (defun lv/add-treesit-language (lang url &optional branch dir)
+    "Add a tree-sitter language grammar to ~treesit-langauge-source-alist~."
+    (add-to-list 'treesit-language-source-alist
+                 (if (and branch dir)
+                     `(,lang ,url ,branch ,dir)
+                   (if branch
+                       `(,lang ,url ,branch)
+                     `(,lang ,url)))))
+#+end_src
+
+
+*** Grammar Installation Helper
+#+begin_src emacs-lisp
+  (defun lv/ensure-treesit-language-installed (lang)
+    "Ensure the tree-sitter grammer for the given lanugage is installed. If not, it installs it."
+    (unless (treesit-language-available-p lang)
+      (message "Installing tree-sitter grammar for %s..." lang)
+      (treesit-install-language-grammar lang)
+      (message "Installation complete for %s." lang)))
+#+end_src
+
+
+*** Add Grammar to Tree-sitter
+#+begin_src emacs-lisp
+  (defun lv/add-treesit-grammar (lang url &optional branch dir)
+    "Add a tree-sitter language grammar to ~treesit-language-source-alist~ and install it if misisng."
+    (unless (assoc lang treesit-language-source-alist)
+     (lv/add-treesit-language lang url branch dir)
+      (message "Added %s to treesit-language-source-alist" lang))
+    (lv/ensure-treesit-language-installed lang))
+#+end_src
+
 
 * Language Specific Configurations
 Contains any language specific settings for LSP, linting, indentation, etc.
 
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/programming/languages/cpp.org")
+  (lv/org-babel-load-file "src/programming/languages/go.org")
   (lv/org-babel-load-file "src/programming/languages/lisp/lisp.org")
   (lv/org-babel-load-file "src/programming/languages/make.org")
   (lv/org-babel-load-file "src/programming/languages/python.org")
