@@ -2,7 +2,8 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-* Auto Mode
+* LSP
+** Auto Mode
 #+begin_src emacs-lisp
   (setq auto-mode-alist
         (append
@@ -11,9 +12,14 @@
          auto-mode-alist))
 #+end_src
 
-
-* Tree-sitter
+** Tree-sitter
 #+begin_src emacs-lisp
   (lv/add-treesit-grammar 'go "https://github.com/tree-sitter/tree-sitter-go")
   (lv/add-treesit-grammar 'gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+#+end_src
+
+** Enable LSP
+#+begin_src emacs-lisp
+  (add-hook 'go-ts-mode #'eglot-ensure)
+  (add-hook 'go-mod-ts-mode #'eglot-ensure)
 #+end_src

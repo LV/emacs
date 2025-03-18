@@ -2,17 +2,21 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-* Auto Mode
+* LSP
+** Auto Mode
 #+begin_src emacs-lisp
   (add-to-list 'auto-mode-alist
                '("\\.py\\'" . python-ts-mode))
 #+end_src
 
-
-* Tree-sitter
-
+** Tree-sitter
 #+begin_src emacs-lisp
   (lv/add-treesit-grammar 'python "https://github.com/tree-sitter/tree-sitter-python")
+#+end_src
+
+** Enable LSP
+#+begin_src emacs-lisp
+  (add-hook 'python-ts-mode-hook #'eglot-ensure)
 #+end_src
 
 
