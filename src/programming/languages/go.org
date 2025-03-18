@@ -2,13 +2,17 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
+* Pre-requisites
+- ~gopls~ LSP
+
+
 * LSP
 ** Auto Mode
 #+begin_src emacs-lisp
   (setq auto-mode-alist
         (append
-         '(("\\.go\\'"  . go-ts-mode)
-           ("go\\.mod\\'"  . go-mod-ts-mode))
+         '(("\\.go\\'"    . go-ts-mode)
+           ("go\\.mod\\'" . go-mod-ts-mode))
          auto-mode-alist))
 #+end_src
 

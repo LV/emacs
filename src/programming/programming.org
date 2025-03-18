@@ -6,13 +6,28 @@ Configurations for LSP and entrypoint for any language specific settings.
 
 * LSP
 ** Eglot
-/Eglot/ is the built-in LSP module in Emacs.
-
 #+begin_src emacs-lisp
   (require 'eglot)
-  (lv/org-babel-load-file "src/programming/eglot.org")
 #+end_src
 
+*** Additions
+**** Floating Boxes
+#+begin_src emacs-lisp
+  (use-package eldoc-box
+    :after eglot
+    :hook (eglot-managed-mode . eldoc-box-hover-mode))
+#+end_src
+
+**** Auto-complete Popups
+#+begin_src emacs-lisp
+  (use-package company
+    :ensure t
+    :hook (prog-mode . company-mode)
+    :config
+    (setq company-idle-delay 0.2
+          company-minimum-prefix-length 1
+          compaqny-tooltip-align-annotations t))
+#+end_src
 
 ** Auto Mode
 #+begin_src emacs-lisp
