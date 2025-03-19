@@ -435,11 +435,6 @@ We have templates that we have defined in ~org-capture~. While we could just inv
 
 I also want dedicated keybindings.
 
-#+begin_src emacs-lisp
-  (defun lv/open-agenda-file ()
-    (interactive)
-    (find-file lv/org-agenda-path))
-#+end_src
 
 #+begin_src emacs-lisp
   (defun lv/org-roam-capture ()
@@ -460,7 +455,7 @@ I also want dedicated keybindings.
 #+begin_src emacs-lisp
   (lv/leader-keys
     "o"   '(:ignore o                      :which-key "org")
-    "oa"  '(lv/open-agenda-file            :which-key "open agenda")
+    "oa"  '(org-agenda                     :which-key "agenda")
     "oc"  '(:ignore oc                     :which-key "calendar")
     "oce" '(lv/capture-calendar-note       :which-key "entry")
     "occ" '(cfw:open-org-calendar          :which-key "open calendar")
