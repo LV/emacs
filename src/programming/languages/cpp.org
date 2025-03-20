@@ -20,6 +20,7 @@
 
 ** Tree-sitter
 #+begin_src emacs-lisp
+  (lv/add-treesit-grammar 'c "https://github.com/tree-sitter/tree-sitter-c")
   (lv/add-treesit-grammar 'cpp "https://github.com/tree-sitter/tree-sitter-cpp")
 #+end_src
 
