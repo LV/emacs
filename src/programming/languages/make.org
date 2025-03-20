@@ -2,7 +2,24 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
-* TODO LSP
+* LSP
+** Auto-mode
+#+begin_src emacs-lisp
+  (setq auto-mode-alist
+        (append
+         '(("\\(?:[Mm]akefile\\|\\.mk\\)\\'" . makefile-ts-mode))
+         auto-mode-alist))
+#+end_src
+
+** Tree-sitter
+#+begin_src emacs-lisp
+  (lv/add-treesit-grammar 'make "https://github.com/alemuller/tree-sitter-make")
+#+end_src
+
+** Enable LSP
+#+begin_src emacs-lisp
+  (add-hook 'makefile-ts-mode-hook #'eglot-ensure)
+#+end_src
 
 * Indentation
 Tabs.
