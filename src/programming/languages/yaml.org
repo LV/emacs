@@ -1,0 +1,23 @@
+#+TITLE: YAML Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* LSP
+** Auto Mode
+#+begin_src emacs-lisp
+  (setq auto-mode-alist
+        (append
+         '(("\\.yaml\\'" . yaml-ts-mode)
+           ("\\.yml\\'"  . yaml-ts-mode))
+         auto-mode-alist))
+#+end_src
+
+** Tree-sitter
+#+begin_src emacs-lisp
+  (lv/add-treesit-grammar 'yaml "https://github.com/ikatyang/tree-sitter-yaml")
+#+end_src
+
+** Enable LSP
+#+begin_src emacs-lisp
+  (add-hook 'yaml-ts-mode-hook #'eglot-ensure)
+#+end_src
