@@ -45,10 +45,9 @@ Video preview
     (setq dirvish-attributes
           '(vc-state subtree-state all-the-icons file-time file-size))
     (setq dired-auto-revert-buffer t))
-
-  ; TODO: Add a keybinding for inserting an empty file
 #+end_src
 
+** Keybindings
 I also don't really see the need for ~dired-toggle-read-only~, whereas I keep performing ~dired-create-empty-file~, thus I change the keybinding for this
 
 #+begin_src emacs-lisp
@@ -58,4 +57,21 @@ I also don't really see the need for ~dired-toggle-read-only~, whereas I keep pe
       (evil-define-key 'normal dirvish-mode-map (kbd "i") 'dired-create-empty-file)
       (evil-define-key 'normal dirvish-mode-map (kbd "r") 'dired-do-rename)
       ))
+#+end_src
+
+** Bugfixes
+*** New items not showing up after creation
+After creating a new file or directory, ~dirvish~ doesn't show the changes unless you manually leave and return to the same folder.
+
+#+begin_src emacs-lisp
+  (defun lv/dirvish-refresh-after-operation (&rest _)
+    "Refresh the dirvish buffer after operations that modify the filesystem."
+    (when (derived-mode-p 'dired-mode)
+      (revert-buffer)))
+#+end_src
+
+#+begin_src emacs-lisp
+  (advice-add 'dired-create-empty-file :after #'lv/dirvish-refresh-after-operation)
+  (advice-add 'dired-create-directory :after #'lv/dirvish-refresh-after-operation)
+  (advice-add 'dired-do-rename :after #'lv/dirvish-refresh-after-operation)
 #+end_src
