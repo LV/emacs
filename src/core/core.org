@@ -15,7 +15,7 @@ Stop Emacs from creating =foo.bar~= and =#foo.bar#= files while open in a buffer
 Force every file to terminate with a ~\n~.
 
 #+begin_src emacs-lisp
-  (setq mode-require-final-newline t)
+  (setq require-final-newline t)
 #+end_src
 
 * Prompts and Feedback
