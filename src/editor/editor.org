@@ -51,8 +51,16 @@ Add snippets.
 
 
 ** Avy
-Jump to a specific texzt character in a buffer.
+Jump to a specific text character in a buffer.
 
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/editor/avy.org")
+#+end_src
+
+
+** fzf
+Fuzzy find files by name.
+
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/editor/fzf.org")
 #+end_src
