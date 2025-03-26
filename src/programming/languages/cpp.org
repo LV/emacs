@@ -1,4 +1,4 @@
-#+TITLE: C++ Configuration
+#+TITLE: C/C++ Configuration
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
@@ -39,7 +39,20 @@
     "Set up C++ indentation preferences."
     (setq c-basic-offset 4)      ; Set indentation to 4 spaces
     (setq tab-width 4)           ; Set tab width to 4
-    (setq indent-tabs-mode nil)) ; Use spaces instead of tabs
+    (setq indent-tabs-mode nil)  ; Use spaces instead of tabs
+    (c-set-style "stroustrup")   ; A style that works well with 4-space indentation
+    (setq c-basic-offset 4))     ; Reinforce the 4-space setting after style
 
-  (add-hook 'c++-mode-hook 'lv/c++-setup)
+  (add-hook 'c-ts-mode-hook 'lv/c-c++-setup)
+  (add-hook 'c++-ts-mode-hook 'lv/c-c++-setup)
 #+end_src
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'c++-ts-mode
+    (setq c++-ts-mode-indent-offset 4))
+
+  ;; For tree-sitter specific modes
+  (setq c-ts-mode-indent-offset 4)
+  (setq c++-ts-mode-indent-offset 4)
+#+end_src
+
