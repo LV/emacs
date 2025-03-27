@@ -473,10 +473,10 @@ I also want dedicated keybindings.
     "orf" '(org-roam-node-find             :which-key "find node")
     "ori" '(org-roam-node-insert           :which-key "insert node")
     "oru" '(org-roam-ui-mode               :which-key "UI")
-    "oT"  '(:ignore oT                     :which-key "toggle")
-    "oTi" '(org-toggle-inline-images       :which-key "image")
-    "oTl" '(org-latex-preview              :which-key "latex")
-    "oTr" '(org-roam-buffer-toggle         :which-key "roam buffer")
+    "ot"  '(:ignore oT                     :which-key "toggle")
+    "oti" '(org-toggle-inline-images       :which-key "image")
+    "otl" '(org-latex-preview '(16)        :which-key "latex")
+    "otr" '(org-roam-buffer-toggle         :which-key "roam buffer")
     "ox"  '(org-ctrl-c-ctrl-c              :which-key "execute"))
 #+end_src
 

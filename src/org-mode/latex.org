@@ -14,19 +14,8 @@ We first need to check if $LaTeX$ packages are installed. We want to be robust a
 Run the auto-rendering if the package is found
 
 #+begin_src emacs-lisp
-  (when (and (lv/latex-packages-installed-p)
+  (if (and (lv/latex-packages-installed-p)
              (display-graphic-p))
-    (defun lv/org-latex-preview-auto ()
-      "Automatically refresh LaTeX fragments in the current buffer."
-      (when (derived-mode-p 'org-mode)
-        (org-latex-preview '(16))))
-
-    ;; Add hooks to automatically render LaTeX
-    (add-hook 'org-mode-hook 'lv/org-latex-preview-auto)
-    (add-hook 'after-save-hook 'lv/org-latex-preview-auto)
-    (add-hook 'after-change-functions
-              (lambda (_beg _end _len)
-                (lv/org-latex-preview-auto)))
 
     ;; Scale LaTeX font
     (setq org-format-latex-options (plist-put org-format-latex-options :scale 1.5)))
