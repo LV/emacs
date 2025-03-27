@@ -433,8 +433,12 @@ We have templates that we have defined in ~org-capture~. While we could just inv
     (org-capture nil "c"))
 #+end_src
 
-I also want dedicated keybindings.
-
+#+begin_src emacs-lisp
+(defun lv/org-latex-enable-preview-buffer ()
+  "Enable LaTeX preview for all fragments in the current buffer."
+  (interactive)
+  (org-latex-preview '(16)))   ;; Force full redraw
+#+end_src
 
 #+begin_src emacs-lisp
   (defun lv/org-roam-capture ()
@@ -454,30 +458,32 @@ I also want dedicated keybindings.
 
 #+begin_src emacs-lisp
   (lv/leader-keys
-    "o"   '(:ignore o                      :which-key "org")
-    "oa"  '(org-agenda                     :which-key "agenda")
-    "oc"  '(:ignore oc                     :which-key "calendar")
-    "oce" '(lv/capture-calendar-note       :which-key "entry")
-    "occ" '(cfw:open-org-calendar          :which-key "open calendar")
-    "od"  '(lv/org-roam-dailies-goto-today :which-key "view daily entries")
-    "oe"  '(org-edit-special               :which-key "edit special")
-    "oi"  '(:ignore oi                     :which-key "insert")
-    "oic" '(org-cite-insert                :which-key "citation")
-    "oii" '(org-id-get-create              :which-key "id")
-    "oit" '(org-insert-structure-template  :which-key "template")
-    "on"  '(:ignore on                     :which-key "new")
-    "ona" '(lv/org-roam-capture            :which-key "atomic note")
-    "onf" '(org-roam-dailies-capture-today :which-key "daily/fleeting note")
-    "or"  '(:ignore or                     :which-key "roam")
-    "ora" '(org-roam-alias-add             :which-key "add alias")
-    "orf" '(org-roam-node-find             :which-key "find node")
-    "ori" '(org-roam-node-insert           :which-key "insert node")
-    "oru" '(org-roam-ui-mode               :which-key "UI")
-    "ot"  '(:ignore oT                     :which-key "toggle")
-    "oti" '(org-toggle-inline-images       :which-key "image")
-    "otl" '(org-latex-preview '(16)        :which-key "latex")
-    "otr" '(org-roam-buffer-toggle         :which-key "roam buffer")
-    "ox"  '(org-ctrl-c-ctrl-c              :which-key "execute"))
+    "o"    '(:ignore o                          :which-key "org")
+    "oa"   '(org-agenda                         :which-key "agenda")
+    "oc"   '(:ignore oc                         :which-key "calendar")
+    "oce"  '(lv/capture-calendar-note           :which-key "entry")
+    "occ"  '(cfw:open-org-calendar              :which-key "open calendar")
+    "od"   '(lv/org-roam-dailies-goto-today     :which-key "view daily entries")
+    "oe"   '(org-edit-special                   :which-key "edit special")
+    "oi"   '(:ignore oi                         :which-key "insert")
+    "oic"  '(org-cite-insert                    :which-key "citation")
+    "oii"  '(org-id-get-create                  :which-key "id")
+    "oit"  '(org-insert-structure-template      :which-key "template")
+    "on"   '(:ignore on                         :which-key "new")
+    "ona"  '(lv/org-roam-capture                :which-key "atomic note")
+    "onf"  '(org-roam-dailies-capture-today     :which-key "daily/fleeting note")
+    "or"   '(:ignore or                         :which-key "roam")
+    "ora"  '(org-roam-alias-add                 :which-key "add alias")
+    "orf"  '(org-roam-node-find                 :which-key "find node")
+    "ori"  '(org-roam-node-insert               :which-key "insert node")
+    "oru"  '(org-roam-ui-mode                   :which-key "UI")
+    "ot"   '(:ignore ot                         :which-key "toggle")
+    "oti"  '(org-toggle-inline-images           :which-key "image")
+    "otl"  '(:ignore otl                        :which-key "latex")
+    "otlb" '(lv/org-latex-enable-preview-buffer :which-key "buffer")
+    "otll" '(org-latex-preview                  :which-key "line")
+    "otr"  '(org-roam-buffer-toggle             :which-key "roam buffer")
+    "ox"   '(org-ctrl-c-ctrl-c                  :which-key "execute"))
 #+end_src
 
 
