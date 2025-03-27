@@ -241,9 +241,9 @@ Disables highlighting the line where the cursor is currently on.
         org-pretty-entities t
         org-hide-emphasis-markers nil
         org-agenda-block-separator ""
-        org-fontify-whole-heading-line t
-        org-fontify-done-headline t
-        org-fontify-quote-and-verse-blocks t)
+        org-fontify-whole-heading-line nil
+        org-fontify-done-headline nil
+        org-fontify-quote-and-verse-blocks nil)
 #+end_src
 
 * Evil Mode
