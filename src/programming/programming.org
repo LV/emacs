@@ -89,6 +89,7 @@ Contains any language specific settings for LSP, linting, indentation, etc.
   (lv/org-babel-load-file "src/programming/languages/go.org")
   (lv/org-babel-load-file "src/programming/languages/lisp/lisp.org")
   (lv/org-babel-load-file "src/programming/languages/make.org")
+  (lv/org-babel-load-file "src/programming/languages/nix.org")
   (lv/org-babel-load-file "src/programming/languages/python.org")
   (lv/org-babel-load-file "src/programming/languages/yaml.org")
 #+end_src
