@@ -2,6 +2,13 @@
 #+AUTHOR: Luis Victoria
 #+PROPERTY: header-args :tangle yes
 
+** Install Tree sitter
+#+begin_src emacs-lisp
+  (when (and (fboundp 'treesit-install-language-grammar)
+             (not (treesit-language-available-p 'nix)))
+    (treesit-install-language-grammar 'nix))
+#+end_src
+
 ** Auto Mode & Tree Sitter Support
 #+begin_src emacs-lisp
   (use-package nix-ts-mode
