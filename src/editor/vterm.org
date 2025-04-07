@@ -1,0 +1,20 @@
+#+TITLE: Vterm Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+** Installation
+#+begin_src emacs-lisp
+  (use-package vterm
+    :ensure t
+    :commands (vterm)
+    :config
+    (setq vterm-shell "/bin/zsh"))
+#+end_src
+
+** Settings
+*** Remove Line Number:vt
+#+begin_src emacs-lisp
+  (dolist (mode '(vterm-mode-hook))
+    (add-hook mode (lambda ()
+                     (display-line-numbers-mode 0))))
+#+end_src

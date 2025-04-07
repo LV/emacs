@@ -8,6 +8,12 @@
 #+end_src
 
 
+** Vterm
+#+begin_src emacs-lisp
+  (lv/org-babel-load-file "src/editor/vterm.org")
+#+end_src
+
+
 ** Undo Tree
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/editor/undo-tree.org")
