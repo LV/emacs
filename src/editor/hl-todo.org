@@ -8,7 +8,7 @@ Highlight TODOs, FIXMEs, NOTEs, etc.
 #+begin_src emacs-lisp
   (use-package hl-todo
     :ensure t
-    :hook (prog-mode . hl-todo-mode)
+    :hook ((org-mode prog-mode) . hl-todo-mode)
     :config
     (setq hl-todo-keyword-faces
           '(("TODO"   . "#FFFF00")
