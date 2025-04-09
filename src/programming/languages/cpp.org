@@ -32,6 +32,29 @@
 #+end_src
 
 
+* Add-ons
+** Highlight Doxygen Tags
+#+begin_src emacs-lisp
+  (defface lv/doxygen-tag-face
+    '((t (:foreground "orange" :weight bold)))
+    "Face for highlighting Doxygen tags like @param, @return, etc.")
+#+end_src
+
+#+begin_src emacs-lisp
+  (defun lv/c++-doxygen-highlight-tags ()
+    "Highlight Doxygen tags (e.g., @param) within comments."
+    (font-lock-add-keywords
+     nil
+     '(("\\([@\\\\]\\(brief\\|param\\|return\\|file\\|author\\|warning\\|note\\|tparam\\|todo\\|see\\|code\\|endcode\\)\\)"
+        1 'lv/doxygen-tag-face t))))
+#+end_src
+
+#+begin_src emacs-lisp
+  (add-hook 'c-ts-mode-hook #'lv/c++-doxygen-highlight-tags)
+  (add-hook 'c++-ts-mode-hook #'lv/c++-doxygen-highlight-tags)
+#+end_src
+
+
 * Indentation
  4 Spaces.
 
