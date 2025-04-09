@@ -1,0 +1,22 @@
+#+TITLE: Dockerfile Configuration
+#+AUTHOR: Luis Victoria
+#+PROPERTY: header-args :tangle yes
+
+* LSP
+** Auto Mode
+#+begin_src emacs-lisp
+  (setq auto-mode-alist
+        (append
+         '(("/Dockerfile\\'" . dockerfile-ts-mode))
+         auto-mode-alist))
+#+end_src
+
+** Tree-sitter
+#+begin_src emacs-lisp
+  (lv/add-treesit-grammar 'dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+#+end_src
+
+** Enable LSP
+#+begin_src emacs-lisp
+  (add-hook 'dockerfile-ts-mode-hook #'eglot-ensure)
+#+end_src

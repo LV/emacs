@@ -87,6 +87,7 @@ Contains any language specific settings for LSP, linting, indentation, etc.
 #+begin_src emacs-lisp
   (lv/org-babel-load-file "src/programming/languages/cmake.org")
   (lv/org-babel-load-file "src/programming/languages/cpp.org")
+  (lv/org-babel-load-file "src/programming/languages/dockerfile.org")
   (lv/org-babel-load-file "src/programming/languages/go.org")
   (lv/org-babel-load-file "src/programming/languages/lisp/lisp.org")
   (lv/org-babel-load-file "src/programming/languages/make.org")
