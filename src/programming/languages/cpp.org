@@ -26,6 +26,17 @@
 
 
 ** Enable LSP
+*** Override LSP Server (for MacOS)
+- Pre-req: ~brew install llvm~
+
+#+begin_src emacs-lisp
+  (when (eq system-type 'darwin)
+    (with-eval-after-load 'eglot
+      (add-to-list 'eglot-server-programs
+                   `((c++-ts-mode c-ts-mode) . ("/opt/homebrew/opt/llvm/bin/clangd")))))
+#+end_src
+
+*** Hooks
 #+begin_src emacs-lisp
   (add-hook 'c-ts-mode-hook #'eglot-ensure)
   (add-hook 'c++-ts-mode-hook #'eglot-ensure)
