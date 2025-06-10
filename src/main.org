@@ -84,7 +84,6 @@ LSP and language specific settings.
 * TODO Future Features to add
 - Maybe add workspaces (on top of tabs)
 - Replicate /oil.nvim/
-- Migrate away from /lsp-mode/ to something like /lsp-bridge/
 
 * TODO Non-obvious things to fix
 - Pressing the tab character in terminal emacs does not result in an indent behavior
